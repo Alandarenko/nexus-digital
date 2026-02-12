@@ -898,9 +898,46 @@
                 font-size: 28px;
             }
             .services-grid,
-            .advantages-grid,
             .materials-grid {
                 grid-template-columns: 1fr;
+            }
+            .advantages-grid {
+                grid-template-columns: 1fr;
+                gap: 0;
+                margin-top: 40px;
+            }
+            .advantage-card {
+                background: transparent;
+                border: none;
+                border-bottom: 1px solid var(--border);
+                border-radius: 0;
+                padding: 16px 0;
+                text-align: left;
+                display: flex;
+                align-items: flex-start;
+                gap: 16px;
+            }
+            .advantage-card:last-child {
+                border-bottom: none;
+            }
+            .advantage-card:hover {
+                border-color: var(--border);
+                transform: none;
+            }
+            .advantage-icon {
+                width: 40px;
+                height: 40px;
+                min-width: 40px;
+                font-size: 16px;
+                margin: 0;
+                border-radius: 10px;
+            }
+            .advantage-card h3 {
+                font-size: 16px;
+                margin-bottom: 4px;
+            }
+            .advantage-card p {
+                font-size: 13px;
             }
             .services-grid {
                 gap: 8px;
@@ -983,24 +1020,26 @@
                 display: none;
             }
             .pricing-row {
-                grid-template-columns: 1fr;
-                padding: 16px 20px;
-                gap: 4px;
+                grid-template-columns: 1fr auto;
+                padding: 14px 20px;
+                gap: 0;
+                align-items: center;
             }
             .pricing-row > div {
-                padding: 4px 0;
+                padding: 0;
                 font-size: 14px;
             }
             .pricing-row .service-name {
-                font-size: 16px;
-                margin-bottom: 4px;
+                font-size: 15px;
+                margin-bottom: 0;
             }
-            .pricing-row .service-name::before {
-                display: none;
+            .pricing-row > div:nth-child(2) {
+                font-size: 14px;
+                white-space: nowrap;
             }
             .pricing-row > div:nth-child(3),
             .pricing-row > div:last-child {
-                display: flex;
+                display: none;
             }
             .service-card {
                 padding: 28px;
