@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 — Страница не найдена | NEXUS Digital</title>
+    <meta name="robots" content="noindex">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg-primary: #0a0a0f;
+            --accent: #6366f1;
+            --accent-light: #818cf8;
+            --text-primary: #f1f1f4;
+            --text-secondary: #9ca3af;
+            --gradient-1: linear-gradient(135deg, #6366f1, #8b5cf6);
+            --gradient-2: linear-gradient(135deg, #6366f1, #06b6d4);
+        }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+        }
+        .code {
+            font-size: clamp(80px, 15vw, 160px);
+            font-weight: 800;
+            background: var(--gradient-2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+            margin-bottom: 16px;
+        }
+        h1 {
+            font-size: clamp(20px, 4vw, 32px);
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+        p {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+            max-width: 400px;
+        }
+        a {
+            display: inline-block;
+            padding: 14px 36px;
+            background: var(--gradient-1);
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 600;
+            border-radius: 12px;
+            transition: all 0.3s;
+        }
+        a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(99, 102, 241, 0.3);
+        }
+        *:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="code">404</div>
+    <h1>Страница не найдена</h1>
+    <p>Возможно, она была перемещена или удалена. Вернитесь на главную.</p>
+    <a href="/">На главную</a>
+</body>
+</html>

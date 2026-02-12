@@ -2,26 +2,38 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
         <loc>https://nexus-digital-lovat.vercel.app/</loc>
-        <lastmod>2026-02-12</lastmod>
+        <lastmod>2026-02-13</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>https://nexus-digital-lovat.vercel.app/market.html</loc>
-        <lastmod>2026-02-12</lastmod>
+        <lastmod>2026-02-13</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://nexus-digital-lovat.vercel.app/trends.html</loc>
-        <lastmod>2026-02-12</lastmod>
+        <lastmod>2026-02-13</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://nexus-digital-lovat.vercel.app/tech.html</loc>
-        <lastmod>2026-02-12</lastmod>
+        <lastmod>2026-02-13</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://nexus-digital-lovat.vercel.app/brief.html</loc>
+        <lastmod>2026-02-13</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://nexus-digital-lovat.vercel.app/privacy.html</loc>
+        <lastmod>2026-02-13</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
     </url>
 </urlset>

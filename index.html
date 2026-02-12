@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NEXUS Digital — Технологичная веб-студия | Разработка сайтов, AI-интеграции</title>
     <meta name="description" content="NEXUS Digital — веб-студия полного цикла. Разработка сайтов, мобильных приложений, Telegram-ботов, AI-интеграции. Современный стек, прозрачные цены, запуск от 3 дней.">
-    <meta name="keywords" content="веб-студия, разработка сайтов, создание сайтов, мобильные приложения, Telegram боты, AI интеграции, YandexGPT, 1С-Битрикс, SEO продвижение, веб-разработка Россия">
     <link rel="canonical" href="https://nexus-digital-lovat.vercel.app/">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 
     <!-- Open Graph -->
     <meta property="og:type" content="website">
@@ -14,12 +14,14 @@
     <meta property="og:title" content="NEXUS Digital — Технологичная веб-студия">
     <meta property="og:description" content="Разработка сайтов, мобильных приложений, Telegram-ботов и AI-интеграции. Современный стек, прозрачные цены, запуск от 3 дней.">
     <meta property="og:url" content="https://nexus-digital-lovat.vercel.app/">
+    <meta property="og:image" content="https://nexus-digital-lovat.vercel.app/og-image.png">
     <meta property="og:locale" content="ru_RU">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="NEXUS Digital — Технологичная веб-студия">
     <meta name="twitter:description" content="Разработка сайтов, мобильных приложений, Telegram-ботов и AI-интеграции. Современный стек, прозрачные цены.">
+    <meta name="twitter:image" content="https://nexus-digital-lovat.vercel.app/og-image.png">
 
     <!-- Schema.org -->
     <script type="application/ld+json">
@@ -68,8 +70,9 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.gstatic.com/s/inter/v18/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfMZhrib2Bg-4.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
         * {
             margin: 0;
@@ -87,7 +90,7 @@
             --accent-glow: rgba(99, 102, 241, 0.15);
             --text-primary: #f1f1f4;
             --text-secondary: #9ca3af;
-            --text-muted: #6b7280;
+            --text-muted: #7c8595;
             --border: #2a2a3a;
             --gradient-1: linear-gradient(135deg, #6366f1, #8b5cf6);
             --gradient-2: linear-gradient(135deg, #6366f1, #06b6d4);
@@ -144,6 +147,7 @@
             font-size: 14px;
             font-weight: 500;
             transition: color 0.3s;
+            padding: 12px 4px;
         }
 
         .nav-links a:hover {
@@ -159,7 +163,7 @@
             outline: none;
             -webkit-tap-highlight-color: transparent;
             cursor: pointer;
-            padding: 8px;
+            padding: 12px;
             z-index: 102;
         }
         .burger span {
@@ -299,6 +303,7 @@
             margin-top: 80px;
             padding-top: 40px;
             border-top: 1px solid var(--border);
+            max-width: 700px;
         }
 
         .stat-item .stat-number {
@@ -1171,10 +1176,11 @@
                 display: none;
             }
             .pricing-row {
-                grid-template-columns: 1fr auto;
-                padding: 14px 20px;
-                gap: 0;
-                align-items: center;
+                display: grid;
+                grid-template-columns: 1fr;
+                grid-template-rows: auto auto;
+                padding: 16px 20px;
+                gap: 4px;
             }
             .pricing-row > div {
                 padding: 0;
@@ -1183,14 +1189,30 @@
             .pricing-row .service-name {
                 font-size: 15px;
                 margin-bottom: 0;
+                grid-column: 1;
             }
-            .pricing-row > div:nth-child(2) {
-                font-size: 14px;
-                white-space: nowrap;
-            }
-            .pricing-row > div:nth-child(3),
-            .pricing-row > div:last-child {
+            .pricing-row .timeline {
+                grid-column: 1;
+                grid-row: 1;
+                font-size: 12px;
+                order: -1;
+                color: var(--text-muted);
                 display: none;
+            }
+            .pricing-row .price:nth-child(2) {
+                grid-column: 1;
+                font-size: 14px;
+            }
+            .pricing-row .price:nth-child(3) {
+                display: none;
+            }
+            .pricing-row .service-name::after {
+                content: attr(data-timeline);
+                display: block;
+                font-size: 12px;
+                font-weight: 400;
+                color: var(--text-muted);
+                margin-top: 2px;
             }
             .cta-contacts {
                 flex-direction: column;
@@ -1218,7 +1240,7 @@
                 margin-top: 36px;
             }
             .b-chk label {
-                padding: 10px 14px;
+                padding: 14px 18px;
                 font-size: 13px;
             }
         }
@@ -1233,9 +1255,75 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        .skip-nav {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            z-index: 200;
+            padding: 8px 16px;
+            background: var(--accent);
+            color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 0 0 8px 0;
+            transition: top 0.2s;
+        }
+        .skip-nav:focus {
+            top: 0;
+        }
+
+        *:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        .pricing-note { margin-top: 24px; font-size: 14px; color: var(--text-muted); }
+        .cta-subtitle { margin: 0 auto 16px; }
+        .cta-or { margin-top: 16px; font-size: 15px; color: var(--text-secondary); }
+        .modal-header-left { display: flex; align-items: center; gap: 16px; }
+        .b-send-status { margin-bottom: 16px; }
+        .b-consent { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 20px; font-size: 13px; color: var(--text-secondary); cursor: pointer; line-height: 1.5; }
+        .b-consent input { margin-top: 3px; accent-color: var(--accent); min-width: 16px; }
+        .b-consent a { color: var(--accent-light); }
+
+        @media print {
+            body { background: #fff; color: #000; }
+            nav, .burger, .mobile-menu, .mobile-overlay, .skip-nav, .scroll-top { display: none !important; }
+            section { padding: 20px 0; }
+            .service-card, .pricing-table, .trend-card { break-inside: avoid; border: 1px solid #ccc; }
+            a { color: #000; text-decoration: underline; }
+            .section-title, h2, h3 { color: #000; }
+            .hero-title, .logo { background: none; -webkit-text-fill-color: #000; color: #000; }
+            footer { border-top: 1px solid #ccc; }
+        }
+
+        .scroll-top {
+            position: fixed; bottom: 32px; right: 32px; z-index: 90;
+            width: 44px; height: 44px; border-radius: 50%;
+            background: var(--accent); border: none; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0; visibility: hidden; transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+        .scroll-top.visible { opacity: 1; visibility: visible; }
+        .scroll-top:hover { transform: translateY(-2px); }
+        .scroll-top svg { width: 20px; height: 20px; stroke: #fff; fill: none; stroke-width: 2; }
     </style>
 </head>
 <body>
+
+    <a href="#main-content" class="skip-nav">Перейти к содержимому</a>
 
     <nav>
         <a href="#" class="logo" onclick="event.preventDefault();window.scrollTo({top:0,behavior:'smooth'})">NEXUS Digital</a>
@@ -1244,7 +1332,7 @@
             <li><a href="#pricing">Цены</a></li>
             <li><a href="#advantages">Преимущества</a></li>
             <li><a href="#contact">Контакты</a></li>
-            <li><button class="nav-cta" onclick="openBrief()">Оставить заявку</button></li>
+            <li><a href="#contact" class="nav-cta" role="button" onclick="event.preventDefault();openBrief()">Оставить заявку</a></li>
         </ul>
         <button class="burger" onclick="toggleMenu()" aria-label="Меню">
             <span></span><span></span><span></span>
@@ -1259,6 +1347,8 @@
         <button class="nav-cta" onclick="closeMenu();openBrief()">Оставить заявку</button>
     </div>
     <div class="mobile-overlay" id="mobileOverlay" onclick="closeMenu()"></div>
+
+    <main id="main-content">
 
     <section class="hero">
         <div class="section-label">Технологичная студия разработки</div>
@@ -1295,7 +1385,7 @@
         </p>
 
         <div class="services-grid">
-            <div class="service-card" onclick="toggleService(this)">
+            <div class="service-card" role="button" tabindex="0" onclick="toggleService(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleService(this)}">
                 <div class="svc-header">
                     <div class="service-icon">01</div>
                     <h3>Веб-разработка</h3>
@@ -1312,7 +1402,7 @@
                     </div>
                 </div>
             </div>
-            <div class="service-card" onclick="toggleService(this)">
+            <div class="service-card" role="button" tabindex="0" onclick="toggleService(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleService(this)}">
                 <div class="svc-header">
                     <div class="service-icon">02</div>
                     <h3>UI/UX Дизайн</h3>
@@ -1328,7 +1418,7 @@
                     </div>
                 </div>
             </div>
-            <div class="service-card" onclick="toggleService(this)">
+            <div class="service-card" role="button" tabindex="0" onclick="toggleService(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleService(this)}">
                 <div class="svc-header">
                     <div class="service-icon">03</div>
                     <h3>AI-интеграции</h3>
@@ -1345,7 +1435,7 @@
                     </div>
                 </div>
             </div>
-            <div class="service-card" onclick="toggleService(this)">
+            <div class="service-card" role="button" tabindex="0" onclick="toggleService(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleService(this)}">
                 <div class="svc-header">
                     <div class="service-icon">04</div>
                     <h3>Мобильные приложения</h3>
@@ -1361,7 +1451,7 @@
                     </div>
                 </div>
             </div>
-            <div class="service-card" onclick="toggleService(this)">
+            <div class="service-card" role="button" tabindex="0" onclick="toggleService(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleService(this)}">
                 <div class="svc-header">
                     <div class="service-icon">05</div>
                     <h3>Telegram и чат-боты</h3>
@@ -1377,7 +1467,7 @@
                     </div>
                 </div>
             </div>
-            <div class="service-card" onclick="toggleService(this)">
+            <div class="service-card" role="button" tabindex="0" onclick="toggleService(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleService(this)}">
                 <div class="svc-header">
                     <div class="service-icon">06</div>
                     <h3>SEO и маркетинг</h3>
@@ -1393,7 +1483,7 @@
                     </div>
                 </div>
             </div>
-            <div class="service-card" onclick="toggleService(this)">
+            <div class="service-card" role="button" tabindex="0" onclick="toggleService(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleService(this)}">
                 <div class="svc-header">
                     <div class="service-icon">07</div>
                     <h3>Поддержка и развитие</h3>
@@ -1409,7 +1499,7 @@
                     </div>
                 </div>
             </div>
-            <div class="service-card" onclick="toggleService(this)">
+            <div class="service-card" role="button" tabindex="0" onclick="toggleService(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleService(this)}">
                 <div class="svc-header">
                     <div class="service-icon">08</div>
                     <h3>Импортозамещение</h3>
@@ -1446,68 +1536,68 @@
             </div>
 
             <div class="pricing-row">
-                <div class="service-name">Лендинг</div>
+                <div class="service-name" data-timeline="3-7 дней">Лендинг</div>
                 <div class="price">от 40 000 ₽</div>
                 <div class="price">до 150 000 ₽</div>
                 <div class="timeline">3-7 дней</div>
             </div>
             <div class="pricing-row">
-                <div class="service-name">Корпоративный сайт</div>
+                <div class="service-name" data-timeline="2-6 нед.">Корпоративный сайт</div>
                 <div class="price">от 100 000 ₽</div>
                 <div class="price">до 800 000 ₽</div>
                 <div class="timeline">2-6 нед.</div>
             </div>
             <div class="pricing-row">
-                <div class="service-name">Интернет-магазин</div>
+                <div class="service-name" data-timeline="1-3 мес.">Интернет-магазин</div>
                 <div class="price">от 150 000 ₽</div>
                 <div class="price">до 2 500 000 ₽</div>
                 <div class="timeline">1-3 мес.</div>
             </div>
             <div class="pricing-row">
-                <div class="service-name">Веб-приложение / SaaS</div>
+                <div class="service-name" data-timeline="1.5-6 мес.">Веб-приложение / SaaS</div>
                 <div class="price">от 400 000 ₽</div>
                 <div class="price">до 5 000 000 ₽</div>
                 <div class="timeline">1.5-6 мес.</div>
             </div>
             <div class="pricing-row">
-                <div class="service-name">Мобильное приложение</div>
+                <div class="service-name" data-timeline="2-6 мес.">Мобильное приложение</div>
                 <div class="price">от 300 000 ₽</div>
                 <div class="price">до 5 000 000 ₽</div>
                 <div class="timeline">2-6 мес.</div>
             </div>
             <div class="pricing-row">
-                <div class="service-name">Telegram / чат-бот</div>
+                <div class="service-name" data-timeline="1-4 нед.">Telegram / чат-бот</div>
                 <div class="price">от 25 000 ₽</div>
                 <div class="price">до 300 000 ₽</div>
                 <div class="timeline">1-4 нед.</div>
             </div>
             <div class="pricing-row">
-                <div class="service-name">UI/UX Дизайн</div>
+                <div class="service-name" data-timeline="3 дня — 4 нед.">UI/UX Дизайн</div>
                 <div class="price">от 25 000 ₽</div>
                 <div class="price">до 400 000 ₽</div>
                 <div class="timeline">3 дня — 4 нед.</div>
             </div>
             <div class="pricing-row">
-                <div class="service-name">SEO-продвижение</div>
+                <div class="service-name" data-timeline="от 2 мес.">SEO-продвижение</div>
                 <div class="price">от 15 000 ₽/мес</div>
                 <div class="price">до 80 000 ₽/мес</div>
                 <div class="timeline">от 2 мес.</div>
             </div>
             <div class="pricing-row">
-                <div class="service-name">AI-интеграция (чат-бот)</div>
+                <div class="service-name" data-timeline="1-4 нед.">AI-интеграция (чат-бот)</div>
                 <div class="price">от 35 000 ₽</div>
                 <div class="price">до 500 000 ₽</div>
                 <div class="timeline">1-4 нед.</div>
             </div>
             <div class="pricing-row">
-                <div class="service-name">Поддержка и обслуживание</div>
-                <div class="price">от 5 000 ₽/мес</div>
+                <div class="service-name" data-timeline="постоянно">Поддержка и обслуживание</div>
+                <div class="price">от 5 000 ₽</div>
                 <div class="price">до 100 000 ₽/мес</div>
                 <div class="timeline">постоянно</div>
             </div>
         </div>
 
-        <p style="margin-top: 24px; font-size: 14px; color: var(--text-muted);">
+        <p class="pricing-note">
             * Часовая ставка разработчика: от 1 800 до 4 500 ₽/час в зависимости от уровня специалиста. Цены актуальны на 2025-2026 гг.
         </p>
     </section>
@@ -1631,11 +1721,11 @@
     <section id="contact" class="cta-section fade-in">
         <div class="section-label">Начать проект</div>
         <h2 class="section-title">Готовы обсудить ваш проект?</h2>
-        <p class="section-subtitle" style="margin: 0 auto 16px;">
+        <p class="section-subtitle cta-subtitle">
             Бесплатная консультация, оценка сроков и стоимости. Расскажите о вашей задаче — мы предложим решение.
         </p>
         <button class="cta-button" onclick="openBrief()">Оставить заявку</button>
-        <p style="margin-top: 16px; font-size: 15px; color: var(--text-secondary);">или напишите нам напрямую</p>
+        <p class="cta-or">или напишите нам напрямую</p>
         <div class="cta-contacts">
             <a href="mailto:nikita.alandarenko@gmail.com">nikita.alandarenko@gmail.com</a>
             <span class="cta-divider">|</span>
@@ -1643,13 +1733,16 @@
         </div>
     </section>
 
+    </main>
+
     <footer>
         <p>NEXUS Digital &copy; 2025-2026</p>
+        <p style="margin-top: 8px;"><a href="/privacy.html" style="color: var(--text-muted); font-size: 13px;">Политика конфиденциальности</a></p>
     </footer>
 
     <div class="modal-overlay" id="briefModal">
         <div class="modal-header">
-            <div style="display:flex;align-items:center;gap:16px;">
+            <div class="modal-header-left">
                 <div class="logo" onclick="tryCloseBrief()">NEXUS Digital</div>
                 <button class="modal-back" onclick="tryCloseBrief()">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5m0 0l7 7m-7-7l7-7"/></svg>
@@ -1718,7 +1811,8 @@
                 <div class="b-head"><div class="b-num">Готово</div><h3>Сводка по заявке</h3><p>Проверьте и отправьте</p></div>
                 <div id="bResContent"></div>
                 <div id="bResWarnings" class="b-warnings"></div>
-                <div id="bSendStatus" style="margin-bottom: 16px;"></div>
+                <div id="bSendStatus" class="b-send-status"></div>
+                <label class="b-consent"><input type="checkbox" id="bConsent"><span>Я соглашаюсь с <a href="/privacy.html" target="_blank">политикой конфиденциальности</a> и даю согласие на обработку персональных данных</span></label>
                 <div class="b-nav"><button class="b-btn b-btn-sec" onclick="bGo(0)">Редактировать</button><button class="b-btn b-btn-ok" id="bSendBtn" onclick="bSendTg()">Отправить заявку</button></div>
             </div>
         </div>
@@ -1737,7 +1831,7 @@
 
     <script>
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+            entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } });
         }, { threshold: 0.1 });
         document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
@@ -1824,7 +1918,7 @@
 
         function bSoftValidate(sec) {
             const email = sec.querySelector('[name="b_email"]');
-            if (email && email.value.trim() && !email.value.includes('@')) {
+            if (email && email.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) {
                 const f = email.closest('.b-field');
                 f.classList.remove('has-error');
                 f.classList.add('soft-warn');
@@ -1937,13 +2031,18 @@
                 { t: 'О проекте', r: [['Тип проекта', bC('b_stype')],['Задача', bV('b_desc')],['Бюджет', bC('b_bud')],['Сроки', bC('b_time')],['Комментарии', bV('b_comments')]] },
             ];
             let h = '';
-            secs.forEach(s => { h += `<div class="b-result"><h4>${s.t}</h4>`; s.r.forEach(([l, v]) => { h += `<div class="b-rrow"><span class="b-rlbl">${l}</span><span class="b-rval">${v}</span></div>`; }); h += '</div>'; });
+            secs.forEach(s => { h += `<div class="b-result"><h4>${s.t}</h4>`; s.r.forEach(([l, v]) => { h += `<div class="b-rrow"><span class="b-rlbl">${l}</span><span class="b-rval">${escHtml(v)}</span></div>`; }); h += '</div>'; });
             document.getElementById('bResContent').innerHTML = h;
             document.getElementById('bResWarnings').innerHTML = '';
             document.getElementById('briefModal').scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function bSendTg() {
+            if (!document.getElementById('bConsent').checked) {
+                const status = document.getElementById('bSendStatus');
+                status.innerHTML = '<div class="b-val-summary"><p>Необходимо согласие на обработку персональных данных</p></div>';
+                return;
+            }
             const missing = bValidateAll();
             if (missing.length > 0) {
                 const status = document.getElementById('bSendStatus');
@@ -1964,7 +2063,8 @@
             btn.textContent = 'Отправка...';
             status.innerHTML = '';
 
-            const esc = s => s.replace(/([_*`\[])/g, '\\$1');
+            const escHtml = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+        const esc = s => s.replace(/([_*`\[])/g, '\\$1');
             let msg = '📋 *Новая заявка с сайта NEXUS Digital*\n\n';
             const fields = [
                 ['👤 Имя', bV('b_name')], ['📞 Телефон', bV('b_phone')],
@@ -2018,6 +2118,16 @@
                 }
             }
         });
+    </script>
+
+    <button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Наверх">
+        <svg viewBox="0 0 24 24"><path d="M12 19V5m0 0l-7 7m7-7l7 7"/></svg>
+    </button>
+    <script>
+        const scrollBtn = document.getElementById('scrollTop');
+        window.addEventListener('scroll', () => {
+            scrollBtn.classList.toggle('visible', window.scrollY > 600);
+        }, { passive: true });
     </script>
 
 </body>
