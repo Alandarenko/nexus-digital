@@ -63,6 +63,8 @@
             background: var(--gradient-1);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            text-decoration: none;
+            cursor: pointer;
         }
 
         .nav-links {
@@ -949,7 +951,7 @@
 <body>
 
     <nav>
-        <div class="logo">NEXUS Digital</div>
+        <a href="#" class="logo" onclick="event.preventDefault();window.scrollTo({top:0,behavior:'smooth'})">NEXUS Digital</a>
         <ul class="nav-links">
             <li><a href="#market">Рынок</a></li>
             <li><a href="#services">Услуги</a></li>
@@ -1262,7 +1264,7 @@
         </div>
 
         <p style="margin-top: 24px; font-size: 14px; color: var(--text-muted);">
-            * Часовая ставка разработчика: от 1 200 до 3 000 ₽/час в зависимости от уровня специалиста. Цены актуальны на 2025-2026 гг.
+            * Часовая ставка разработчика: от 1 800 до 4 500 ₽/час в зависимости от уровня специалиста. Цены актуальны на 2025-2026 гг.
         </p>
     </section>
 
