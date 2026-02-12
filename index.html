@@ -909,9 +909,57 @@
             .stat-item .stat-number {
                 font-size: 28px;
             }
-            .services-grid,
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
             .materials-grid {
                 grid-template-columns: 1fr;
+                gap: 0;
+                margin-top: 32px;
+            }
+            .material-card {
+                background: transparent;
+                border: none;
+                border-bottom: 1px solid var(--border);
+                border-radius: 0;
+                padding: 16px 0;
+                flex-direction: row;
+                align-items: center;
+                gap: 16px;
+                text-decoration: none;
+            }
+            .material-card:hover {
+                background: transparent;
+                transform: none;
+                border-color: var(--border);
+            }
+            .material-icon {
+                width: 40px;
+                height: 40px;
+                min-width: 40px;
+                border-radius: 10px;
+                margin-bottom: 0;
+            }
+            .material-icon svg {
+                width: 18px;
+                height: 18px;
+            }
+            .material-card h3 {
+                font-size: 15px;
+                margin-bottom: 2px;
+            }
+            .material-card p {
+                font-size: 13px;
+                flex: unset;
+            }
+            .material-arrow {
+                margin-top: 0;
+                margin-left: auto;
+                font-size: 18px;
+            }
+            .material-text {
+                flex: 1;
+                min-width: 0;
             }
             .advantages-grid {
                 grid-template-columns: 1fr;
@@ -1459,20 +1507,26 @@
         <div class="materials-grid">
             <a href="market.html" class="material-card">
                 <div class="material-icon"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 16l4-8 4 4 6-9"/></svg></div>
-                <h3>Рынок и конкуренция</h3>
-                <p>Аналитика российского IT-рынка, объёмы, рост, конкурентный ландшафт</p>
+                <div class="material-text">
+                    <h3>Рынок и конкуренция</h3>
+                    <p>Аналитика российского IT-рынка, объёмы, рост, конкурентный ландшафт</p>
+                </div>
                 <span class="material-arrow">&rarr;</span>
             </a>
             <a href="trends.html" class="material-card">
                 <div class="material-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
-                <h3>Тренды 2025-2026</h3>
-                <p>AI, импортозамещение, e-commerce, облака, кибербезопасность</p>
+                <div class="material-text">
+                    <h3>Тренды 2025-2026</h3>
+                    <p>AI, импортозамещение, e-commerce, облака, кибербезопасность</p>
+                </div>
                 <span class="material-arrow">&rarr;</span>
             </a>
             <a href="tech.html" class="material-card">
                 <div class="material-icon"><svg viewBox="0 0 24 24"><path d="M16 18l2-2 4 4"/><path d="M15 3h6v6"/><path d="M21 3l-8.5 8.5"/><path d="M3 12a9 9 0 1 0 9-9"/></svg></div>
-                <h3>Технологии</h3>
-                <p>Наш стек: frontend, backend, mobile, AI и инфраструктура</p>
+                <div class="material-text">
+                    <h3>Технологии</h3>
+                    <p>Наш стек: frontend, backend, mobile, AI и инфраструктура</p>
+                </div>
                 <span class="material-arrow">&rarr;</span>
             </a>
         </div>
