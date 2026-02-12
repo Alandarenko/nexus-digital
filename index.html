@@ -783,6 +783,22 @@
         .b-tip { display: flex; gap: 10px; padding: 10px 14px; background: rgba(34,197,94,0.08); border: 1px solid rgba(34,197,94,0.2); border-radius: 10px; margin-bottom: 6px; font-size: 13px; color: var(--text-secondary); }
         .b-tip-i { color: #22c55e; flex-shrink: 0; }
 
+        .b-field.has-error .b-input,
+        .b-field.has-error .b-select,
+        .b-field.has-error .b-textarea { border-color: #ef4444; box-shadow: 0 0 0 3px rgba(239,68,68,0.12); }
+        .b-field.has-error .b-checks { outline: 1px solid #ef4444; outline-offset: 4px; border-radius: 10px; }
+        .b-field.has-error label { color: #ef4444; }
+        .b-field .b-err { display: none; font-size: 12px; color: #ef4444; margin-top: 6px; }
+        .b-field.has-error .b-err { display: block; }
+        .b-field.soft-warn .b-input { border-color: #eab308; box-shadow: 0 0 0 3px rgba(234,179,8,0.1); }
+        .b-field.soft-warn .b-swarn { display: block; }
+        .b-field .b-swarn { display: none; font-size: 12px; color: #eab308; margin-top: 6px; }
+        .b-step.has-missing { border-color: #ef4444; color: #ef4444; }
+        .b-val-summary { background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.2); border-radius: 12px; padding: 16px 20px; margin-bottom: 20px; }
+        .b-val-summary p { font-size: 14px; font-weight: 600; color: #ef4444; margin-bottom: 10px; }
+        .b-val-link { display: inline-block; padding: 4px 12px; margin: 3px; background: var(--bg-card); border: 1px solid rgba(239,68,68,0.3); border-radius: 8px; color: #ef4444; font-size: 13px; cursor: pointer; transition: all 0.2s; text-decoration: none; }
+        .b-val-link:hover { background: rgba(239,68,68,0.1); }
+
         @media (max-width: 768px) {
             .modal-header { padding: 12px 16px; }
             .modal-progress { width: 100px; }
@@ -1735,6 +1751,107 @@
         function hideConfirm() { document.getElementById('confirmLeave').classList.remove('open'); }
         function forceCloseBrief() { hideConfirm(); closeBrief(); }
 
+        const bReq = {
+            0: [
+                { name: 'b_name', type: 'input', label: 'Имя' },
+                { name: 'b_company', type: 'input', label: 'Компания' },
+                { name: 'b_phone', type: 'input', label: 'Телефон' },
+                { name: 'b_email', type: 'input', label: 'Email' }
+            ],
+            1: [
+                { name: 'b_desc', type: 'input', label: 'Описание бизнеса' },
+                { name: 'b_industry', type: 'select', label: 'Сфера' },
+                { name: 'b_geo', type: 'check', label: 'География' }
+            ],
+            2: [{ name: 'b_type', type: 'radio', label: 'Тип клиентов' }],
+            3: [
+                { name: 'b_goal', type: 'radio', label: 'Цель сайта' },
+                { name: 'b_act', type: 'check', label: 'Целевое действие' }
+            ],
+            4: [{ name: 'b_stype', type: 'radio', label: 'Тип сайта' }],
+            5: [{ name: 'b_style', type: 'radio', label: 'Стиль' }],
+            6: [{ name: 'b_txt', type: 'radio', label: 'Тексты' }],
+            7: [{ name: 'b_bud', type: 'radio', label: 'Бюджет' }]
+        };
+
+        function bValidateStep(step) {
+            const rules = bReq[step] || [];
+            let ok = true;
+            const sec = document.getElementById('bs' + step);
+            sec.querySelectorAll('.b-field').forEach(f => f.classList.remove('has-error', 'soft-warn'));
+
+            rules.forEach(r => {
+                let valid = false;
+                if (r.type === 'input') {
+                    const el = sec.querySelector(`[name="${r.name}"]`);
+                    if (el && el.value.trim()) valid = true;
+                } else if (r.type === 'select') {
+                    const el = sec.querySelector(`[name="${r.name}"]`);
+                    if (el && el.value) valid = true;
+                } else if (r.type === 'radio') {
+                    valid = !!sec.querySelector(`[name="${r.name}"]:checked`);
+                } else if (r.type === 'check') {
+                    valid = sec.querySelectorAll(`[name="${r.name}"]:checked`).length > 0;
+                }
+                if (!valid) {
+                    ok = false;
+                    const el = sec.querySelector(`[name="${r.name}"]`);
+                    if (el) {
+                        const field = el.closest('.b-field');
+                        if (field) field.classList.add('has-error');
+                    }
+                }
+            });
+
+            bSoftValidate(sec);
+            return ok;
+        }
+
+        function bSoftValidate(sec) {
+            const email = sec.querySelector('[name="b_email"]');
+            if (email && email.value.trim() && !email.value.includes('@')) {
+                const f = email.closest('.b-field');
+                f.classList.remove('has-error');
+                f.classList.add('soft-warn');
+            }
+            const phone = sec.querySelector('[name="b_phone"]');
+            if (phone && phone.value.trim() && phone.value.replace(/\D/g, '').length < 7) {
+                const f = phone.closest('.b-field');
+                f.classList.remove('has-error');
+                f.classList.add('soft-warn');
+            }
+        }
+
+        function bValidateAll() {
+            let missing = [];
+            for (let s = 0; s < 8; s++) {
+                const rules = bReq[s] || [];
+                const sec = document.getElementById('bs' + s);
+                rules.forEach(r => {
+                    let valid = false;
+                    if (r.type === 'input') { const el = sec.querySelector(`[name="${r.name}"]`); valid = el && el.value.trim(); }
+                    else if (r.type === 'select') { const el = sec.querySelector(`[name="${r.name}"]`); valid = el && el.value; }
+                    else if (r.type === 'radio') { valid = !!sec.querySelector(`[name="${r.name}"]:checked`); }
+                    else if (r.type === 'check') { valid = sec.querySelectorAll(`[name="${r.name}"]:checked`).length > 0; }
+                    if (!valid) missing.push({ step: s, label: r.label });
+                });
+            }
+            const btns = document.querySelectorAll('.b-step');
+            btns.forEach(b => b.classList.remove('has-missing'));
+            const missingSteps = [...new Set(missing.map(m => m.step))];
+            missingSteps.forEach(s => { if (btns[s]) btns[s].classList.add('has-missing'); });
+            return missing;
+        }
+
+        document.getElementById('briefModal').addEventListener('input', e => {
+            const field = e.target.closest('.b-field');
+            if (field) field.classList.remove('has-error', 'soft-warn');
+        });
+        document.getElementById('briefModal').addEventListener('change', e => {
+            const field = e.target.closest('.b-field');
+            if (field) field.classList.remove('has-error', 'soft-warn');
+        });
+
         let bCur = 0;
         function bGo(n) {
             document.querySelectorAll('.b-section').forEach(s => s.classList.remove('active'));
@@ -1745,7 +1862,17 @@
             bUpdProg();
             document.getElementById('briefModal').scrollTo({ top: 0, behavior: 'smooth' });
         }
-        function bNext() { if (bCur < 7) { bGo(bCur + 1); bMarkDone(bCur - 1); } }
+        function bNext() {
+            if (bCur < 7) {
+                if (bValidateStep(bCur)) {
+                    bMarkDone(bCur);
+                    bGo(bCur + 1);
+                } else {
+                    const firstErr = document.querySelector('#bs' + bCur + ' .has-error');
+                    if (firstErr) firstErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }
+        }
         function bPrev() { if (bCur > 0) bGo(bCur - 1); }
         function bMarkDone(i) { const b = document.querySelectorAll('.b-step'); if (b[i]) b[i].classList.add('done'); }
 
@@ -1773,6 +1900,28 @@
         function bU(id) { const ins = document.querySelectorAll('#' + id + ' input'); const u = Array.from(ins).map(i => i.value.trim()).filter(Boolean); return u.length ? u.join(', ') : '—'; }
 
         function bShowResults() {
+            if (!bValidateStep(bCur)) {
+                const firstErr = document.querySelector('#bs' + bCur + ' .has-error');
+                if (firstErr) firstErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                return;
+            }
+            const missing = bValidateAll();
+            if (missing.length > 0) {
+                let html = '<div class="b-val-summary"><p>Не заполнены обязательные поля:</p>';
+                const grouped = {};
+                missing.forEach(m => { if (!grouped[m.step]) grouped[m.step] = []; grouped[m.step].push(m.label); });
+                const stepNames = ['Контакты','Бизнес','Аудитория','Цели','Функционал','Дизайн','Контент','Бюджет'];
+                Object.keys(grouped).forEach(s => {
+                    html += `<span class="b-val-link" onclick="bGo(${s})">Шаг ${+s+1}. ${stepNames[s]}: ${grouped[s].join(', ')}</span>`;
+                });
+                html += '</div>';
+                document.getElementById('bResWarnings').innerHTML = html;
+                document.querySelectorAll('.b-section').forEach(s => s.classList.remove('active'));
+                document.getElementById('bResults').classList.add('active');
+                document.getElementById('bResContent').innerHTML = '';
+                document.getElementById('briefModal').scrollTo({ top: 0, behavior: 'smooth' });
+                return;
+            }
             document.querySelectorAll('.b-section').forEach(s => s.classList.remove('active'));
             document.getElementById('bResults').classList.add('active');
             bMarkDone(7);
@@ -1808,6 +1957,20 @@
         }
 
         function bSendTg() {
+            const missing = bValidateAll();
+            if (missing.length > 0) {
+                const status = document.getElementById('bSendStatus');
+                let html = '<div class="b-val-summary"><p>Заполните обязательные поля перед отправкой:</p>';
+                const grouped = {};
+                missing.forEach(m => { if (!grouped[m.step]) grouped[m.step] = []; grouped[m.step].push(m.label); });
+                const stepNames = ['Контакты','Бизнес','Аудитория','Цели','Функционал','Дизайн','Контент','Бюджет'];
+                Object.keys(grouped).forEach(s => {
+                    html += `<span class="b-val-link" onclick="bGo(${s})">Шаг ${+s+1}. ${stepNames[s]}: ${grouped[s].join(', ')}</span>`;
+                });
+                html += '</div>';
+                status.innerHTML = html;
+                return;
+            }
             const btn = document.getElementById('bSendBtn');
             const status = document.getElementById('bSendStatus');
             btn.disabled = true;
