@@ -1964,6 +1964,7 @@
             btn.textContent = 'Отправка...';
             status.innerHTML = '';
 
+            const esc = s => s.replace(/([_*`\[])/g, '\\$1');
             let msg = '📋 *Новая заявка с сайта NEXUS Digital*\n\n';
             const fields = [
                 ['👤 Имя', bV('b_name')], ['📞 Телефон', bV('b_phone')],
@@ -1972,7 +1973,7 @@
                 ['💳 Бюджет', bC('b_bud')], ['⏰ Сроки', bC('b_time')],
                 ['💬 Комментарии', bV('b_comments')]
             ];
-            fields.forEach(([l, v]) => { if (v && v !== '—') msg += `${l}: ${v}\n`; });
+            fields.forEach(([l, v]) => { if (v && v !== '—') msg += `${l}: ${esc(v)}\n`; });
 
             fetch('/api/send', {
                 method: 'POST',
