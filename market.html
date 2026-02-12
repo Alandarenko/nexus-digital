@@ -106,6 +106,18 @@
             font-size: 18px; color: var(--text-secondary); max-width: 640px; line-height: 1.7;
         }
 
+        .hero-stats {
+            display: flex; gap: 64px; margin-top: 40px; padding-top: 32px;
+            border-top: 1px solid var(--border);
+        }
+        .stat-item .stat-number {
+            font-size: 36px; font-weight: 800;
+            background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .stat-item .stat-label {
+            font-size: 14px; color: var(--text-muted); margin-top: 4px;
+        }
+
         .market-grid {
             display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 60px;
         }
@@ -165,6 +177,14 @@
             .page-hero { padding-top: 100px; }
             .section-title { font-size: 32px; }
             .section-subtitle { font-size: 16px; }
+            .hero-stats {
+                flex-direction: column; gap: 0; padding-top: 0; border-top: none; margin-top: 32px;
+            }
+            .stat-item {
+                padding: 16px 0; border-bottom: 1px solid var(--border);
+            }
+            .stat-item:first-child { border-top: 1px solid var(--border); }
+            .stat-item .stat-number { font-size: 28px; }
             .market-grid, .competition-grid { grid-template-columns: 1fr; gap: 12px; }
             .market-card { padding: 20px; }
             .market-card .card-value { font-size: 24px; }
@@ -208,6 +228,21 @@
         <p class="section-subtitle">
             Российский рынок IT демонстрирует устойчивый рост благодаря импортозамещению, цифровизации госуслуг и взрывному росту e-commerce.
         </p>
+
+        <div class="hero-stats">
+            <div class="stat-item">
+                <div class="stat-number">60-120</div>
+                <div class="stat-label">млрд руб. — объём рынка digital-разработки</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">+25%</div>
+                <div class="stat-label">средний ежегодный рост рынка</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">5 000+</div>
+                <div class="stat-label">digital-агентств в России</div>
+            </div>
+        </div>
 
         <div class="market-grid">
             <div class="market-card">
