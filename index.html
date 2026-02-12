@@ -294,6 +294,10 @@
             line-height: 1.7;
         }
 
+        .svc-chevron {
+            display: none;
+        }
+
         .service-tags {
             display: flex;
             flex-wrap: wrap;
@@ -898,6 +902,52 @@
             .materials-grid {
                 grid-template-columns: 1fr;
             }
+            .services-grid {
+                gap: 8px;
+                margin-top: 40px;
+            }
+            .service-card {
+                padding: 20px;
+                cursor: pointer;
+            }
+            .service-card .service-icon {
+                width: 36px;
+                height: 36px;
+                font-size: 16px;
+                margin-bottom: 0;
+                border-radius: 10px;
+                display: inline-flex;
+            }
+            .service-card .svc-header {
+                display: flex;
+                align-items: center;
+                gap: 14px;
+            }
+            .service-card h3 {
+                font-size: 16px;
+                margin-bottom: 0;
+            }
+            .service-card .svc-chevron {
+                display: block;
+                margin-left: auto;
+                color: var(--text-muted);
+                transition: transform 0.3s;
+                flex-shrink: 0;
+            }
+            .service-card.open .svc-chevron {
+                transform: rotate(180deg);
+            }
+            .service-card .svc-body {
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+            }
+            .service-card.open .svc-body {
+                max-height: 500px;
+            }
+            .service-card .svc-body p {
+                padding-top: 16px;
+            }
             .process-steps {
                 grid-template-columns: 1fr;
                 gap: 0;
@@ -1051,94 +1101,134 @@
         </p>
 
         <div class="services-grid">
-            <div class="service-card">
-                <div class="service-icon">01</div>
-                <h3>Веб-разработка</h3>
-                <p>Лендинги, корпоративные сайты, интернет-магазины, веб-приложения. Чистый код, быстрая загрузка, адаптивный дизайн. Работаем на российских CMS и современных фреймворках.</p>
-                <div class="service-tags">
-                    <span class="tag">Лендинги</span>
-                    <span class="tag">Корпоративные сайты</span>
-                    <span class="tag">E-commerce</span>
-                    <span class="tag">Порталы</span>
-                    <span class="tag">SaaS</span>
+            <div class="service-card" onclick="toggleService(this)">
+                <div class="svc-header">
+                    <div class="service-icon">01</div>
+                    <h3>Веб-разработка</h3>
+                    <svg class="svc-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                </div>
+                <div class="svc-body">
+                    <p>Лендинги, корпоративные сайты, интернет-магазины, веб-приложения. Чистый код, быстрая загрузка, адаптивный дизайн. Работаем на российских CMS и современных фреймворках.</p>
+                    <div class="service-tags">
+                        <span class="tag">Лендинги</span>
+                        <span class="tag">Корпоративные сайты</span>
+                        <span class="tag">E-commerce</span>
+                        <span class="tag">Порталы</span>
+                        <span class="tag">SaaS</span>
+                    </div>
                 </div>
             </div>
-            <div class="service-card">
-                <div class="service-icon">02</div>
-                <h3>UI/UX Дизайн</h3>
-                <p>Исследование аудитории, прототипирование, визуальный дизайн. Создаём интерфейсы, которые конвертируют посетителей в клиентов. UX-аудит существующих сайтов.</p>
-                <div class="service-tags">
-                    <span class="tag">UX-исследования</span>
-                    <span class="tag">Прототипы</span>
-                    <span class="tag">UI-дизайн</span>
-                    <span class="tag">Дизайн-системы</span>
+            <div class="service-card" onclick="toggleService(this)">
+                <div class="svc-header">
+                    <div class="service-icon">02</div>
+                    <h3>UI/UX Дизайн</h3>
+                    <svg class="svc-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                </div>
+                <div class="svc-body">
+                    <p>Исследование аудитории, прототипирование, визуальный дизайн. Создаём интерфейсы, которые конвертируют посетителей в клиентов. UX-аудит существующих сайтов.</p>
+                    <div class="service-tags">
+                        <span class="tag">UX-исследования</span>
+                        <span class="tag">Прототипы</span>
+                        <span class="tag">UI-дизайн</span>
+                        <span class="tag">Дизайн-системы</span>
+                    </div>
                 </div>
             </div>
-            <div class="service-card">
-                <div class="service-icon">03</div>
-                <h3>AI-интеграции</h3>
-                <p>Внедряем искусственный интеллект: чат-боты на YandexGPT/GigaChat, рекомендательные системы, автоматизация контента, персонализация UX, AI-аналитика.</p>
-                <div class="service-tags">
-                    <span class="tag">Чат-боты</span>
-                    <span class="tag">YandexGPT</span>
-                    <span class="tag">GigaChat</span>
-                    <span class="tag">Автоматизация</span>
-                    <span class="tag">Рекомендации</span>
+            <div class="service-card" onclick="toggleService(this)">
+                <div class="svc-header">
+                    <div class="service-icon">03</div>
+                    <h3>AI-интеграции</h3>
+                    <svg class="svc-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                </div>
+                <div class="svc-body">
+                    <p>Внедряем искусственный интеллект: чат-боты на YandexGPT/GigaChat, рекомендательные системы, автоматизация контента, персонализация UX, AI-аналитика.</p>
+                    <div class="service-tags">
+                        <span class="tag">Чат-боты</span>
+                        <span class="tag">YandexGPT</span>
+                        <span class="tag">GigaChat</span>
+                        <span class="tag">Автоматизация</span>
+                        <span class="tag">Рекомендации</span>
+                    </div>
                 </div>
             </div>
-            <div class="service-card">
-                <div class="service-icon">04</div>
-                <h3>Мобильные приложения</h3>
-                <p>iOS и Android приложения на React Native и Flutter. Кроссплатформенная разработка — один код для двух платформ. Публикация в App Store и Google Play.</p>
-                <div class="service-tags">
-                    <span class="tag">iOS</span>
-                    <span class="tag">Android</span>
-                    <span class="tag">React Native</span>
-                    <span class="tag">Flutter</span>
+            <div class="service-card" onclick="toggleService(this)">
+                <div class="svc-header">
+                    <div class="service-icon">04</div>
+                    <h3>Мобильные приложения</h3>
+                    <svg class="svc-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                </div>
+                <div class="svc-body">
+                    <p>iOS и Android приложения на React Native и Flutter. Кроссплатформенная разработка — один код для двух платформ. Публикация в App Store и Google Play.</p>
+                    <div class="service-tags">
+                        <span class="tag">iOS</span>
+                        <span class="tag">Android</span>
+                        <span class="tag">React Native</span>
+                        <span class="tag">Flutter</span>
+                    </div>
                 </div>
             </div>
-            <div class="service-card">
-                <div class="service-icon">05</div>
-                <h3>Telegram и чат-боты</h3>
-                <p>Боты для Telegram, WhatsApp, ВКонтакте. Автоматизация продаж, приём заявок, рассылки, интеграция с CRM. Умные боты на базе AI.</p>
-                <div class="service-tags">
-                    <span class="tag">Telegram</span>
-                    <span class="tag">WhatsApp</span>
-                    <span class="tag">ВКонтакте</span>
-                    <span class="tag">AI-боты</span>
+            <div class="service-card" onclick="toggleService(this)">
+                <div class="svc-header">
+                    <div class="service-icon">05</div>
+                    <h3>Telegram и чат-боты</h3>
+                    <svg class="svc-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                </div>
+                <div class="svc-body">
+                    <p>Боты для Telegram, WhatsApp, ВКонтакте. Автоматизация продаж, приём заявок, рассылки, интеграция с CRM. Умные боты на базе AI.</p>
+                    <div class="service-tags">
+                        <span class="tag">Telegram</span>
+                        <span class="tag">WhatsApp</span>
+                        <span class="tag">ВКонтакте</span>
+                        <span class="tag">AI-боты</span>
+                    </div>
                 </div>
             </div>
-            <div class="service-card">
-                <div class="service-icon">06</div>
-                <h3>SEO и маркетинг</h3>
-                <p>Поисковая оптимизация для Яндекс и Google, контекстная реклама, аналитика, конверсионная оптимизация. Стратегия продвижения с измеримыми результатами.</p>
-                <div class="service-tags">
-                    <span class="tag">SEO</span>
-                    <span class="tag">Яндекс.Директ</span>
-                    <span class="tag">Аналитика</span>
-                    <span class="tag">CRO</span>
+            <div class="service-card" onclick="toggleService(this)">
+                <div class="svc-header">
+                    <div class="service-icon">06</div>
+                    <h3>SEO и маркетинг</h3>
+                    <svg class="svc-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                </div>
+                <div class="svc-body">
+                    <p>Поисковая оптимизация для Яндекс и Google, контекстная реклама, аналитика, конверсионная оптимизация. Стратегия продвижения с измеримыми результатами.</p>
+                    <div class="service-tags">
+                        <span class="tag">SEO</span>
+                        <span class="tag">Яндекс.Директ</span>
+                        <span class="tag">Аналитика</span>
+                        <span class="tag">CRO</span>
+                    </div>
                 </div>
             </div>
-            <div class="service-card">
-                <div class="service-icon">07</div>
-                <h3>Поддержка и развитие</h3>
-                <p>Техническая поддержка, обновления безопасности, мониторинг работоспособности, доработки функциональности. Быстрая реакция на инциденты, регулярные отчёты.</p>
-                <div class="service-tags">
-                    <span class="tag">Мониторинг</span>
-                    <span class="tag">Обновления</span>
-                    <span class="tag">SLA</span>
-                    <span class="tag">Хостинг</span>
+            <div class="service-card" onclick="toggleService(this)">
+                <div class="svc-header">
+                    <div class="service-icon">07</div>
+                    <h3>Поддержка и развитие</h3>
+                    <svg class="svc-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                </div>
+                <div class="svc-body">
+                    <p>Техническая поддержка, обновления безопасности, мониторинг работоспособности, доработки функциональности. Быстрая реакция на инциденты, регулярные отчёты.</p>
+                    <div class="service-tags">
+                        <span class="tag">Мониторинг</span>
+                        <span class="tag">Обновления</span>
+                        <span class="tag">SLA</span>
+                        <span class="tag">Хостинг</span>
+                    </div>
                 </div>
             </div>
-            <div class="service-card">
-                <div class="service-icon">08</div>
-                <h3>Импортозамещение</h3>
-                <p>Миграция с западных платформ на российские аналоги: с WordPress на 1С-Битрикс, с AWS на Yandex.Cloud, переход на отечественные CRM и инструменты.</p>
-                <div class="service-tags">
-                    <span class="tag">1С-Битрикс</span>
-                    <span class="tag">Yandex.Cloud</span>
-                    <span class="tag">Миграция</span>
-                    <span class="tag">Битрикс24</span>
+            <div class="service-card" onclick="toggleService(this)">
+                <div class="svc-header">
+                    <div class="service-icon">08</div>
+                    <h3>Импортозамещение</h3>
+                    <svg class="svc-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                </div>
+                <div class="svc-body">
+                    <p>Миграция с западных платформ на российские аналоги: с WordPress на 1С-Битрикс, с AWS на Yandex.Cloud, переход на отечественные CRM и инструменты.</p>
+                    <div class="service-tags">
+                        <span class="tag">1С-Битрикс</span>
+                        <span class="tag">Yandex.Cloud</span>
+                        <span class="tag">Миграция</span>
+                        <span class="tag">Битрикс24</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1669,6 +1759,11 @@
             document.querySelector('.burger').classList.remove('open');
             document.getElementById('mobileMenu').classList.remove('open');
             document.body.style.overflow = '';
+        }
+
+        function toggleService(card) {
+            if (window.innerWidth > 768) return;
+            card.classList.toggle('open');
         }
 
         function openBrief() { closeMenu(); document.getElementById('briefModal').classList.add('open'); document.body.style.overflow = 'hidden'; }
