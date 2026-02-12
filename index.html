@@ -735,7 +735,7 @@
         .modal-hero p { font-size: 16px; color: var(--text-secondary); max-width: 520px; margin: 0 auto; line-height: 1.7; }
 
         .b-steps {
-            display: grid; grid-template-columns: repeat(8, 1fr); gap: 4px; margin-bottom: 40px;
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: 4px; margin-bottom: 40px;
         }
         .b-step {
             padding: 10px 4px; background: var(--bg-card); border: 1px solid var(--border);
@@ -789,22 +789,6 @@
         .b-chk input:checked + label { background: rgba(99,102,241,0.12); border-color: var(--accent); color: var(--accent-light); }
         .b-chk label:hover { border-color: var(--accent); }
 
-        .b-urls { display: flex; flex-direction: column; gap: 8px; }
-        .b-url-row { display: flex; gap: 8px; align-items: center; }
-        .b-url-row input { flex: 1; }
-        .b-add {
-            padding: 7px 14px; background: var(--bg-card); border: 1px dashed var(--border);
-            border-radius: 8px; color: var(--text-muted); font-size: 13px; cursor: pointer;
-            font-family: inherit; transition: all 0.2s; margin-top: 4px;
-        }
-        .b-add:hover { border-color: var(--accent); color: var(--accent-light); }
-        .b-rm {
-            width: 36px; height: 36px; background: transparent; border: 1px solid var(--border);
-            border-radius: 8px; color: var(--text-muted); font-size: 18px; cursor: pointer;
-            display: flex; align-items: center; justify-content: center; transition: all 0.2s;
-        }
-        .b-rm:hover { border-color: #ef4444; color: #ef4444; }
-
         .b-nav { display: flex; justify-content: space-between; margin-top: 40px; padding-top: 28px; border-top: 1px solid var(--border); }
         .b-btn {
             padding: 13px 28px; border: none; border-radius: 10px; font-family: inherit;
@@ -850,8 +834,7 @@
             .modal-header { padding: 12px 16px; }
             .modal-progress { width: 100px; }
             .modal-back span { display: none; }
-            .b-steps { grid-template-columns: repeat(4, 1fr); gap: 4px; }
-            .b-step { font-size: 11px; padding: 8px 2px; }
+            .b-step { font-size: 13px; padding: 10px 4px; }
             .b-row { grid-template-columns: 1fr; }
             .modal-hero h2 { font-size: 26px; }
             .modal-hero p { font-size: 14px; }
@@ -859,8 +842,6 @@
             .b-head h3 { font-size: 22px; }
         }
         @media (max-width: 480px) {
-            .b-steps { grid-template-columns: repeat(4, 1fr); gap: 3px; }
-            .b-step { font-size: 10px; padding: 6px 2px; }
             .modal-hero h2 { font-size: 22px; }
             .modal-confirm { padding: 24px; }
             .modal-confirm-btns { flex-direction: column; }
@@ -1195,7 +1176,7 @@
             <li><a href="#pricing">Цены</a></li>
             <li><a href="#advantages">Преимущества</a></li>
             <li><a href="#contact">Контакты</a></li>
-            <li><button class="nav-cta" onclick="openBrief()">Заполнить бриф</button></li>
+            <li><button class="nav-cta" onclick="openBrief()">Оставить заявку</button></li>
         </ul>
         <button class="burger" onclick="toggleMenu()" aria-label="Меню">
             <span></span><span></span><span></span>
@@ -1207,7 +1188,7 @@
         <a href="#pricing" onclick="closeMenu()">Цены</a>
         <a href="#advantages" onclick="closeMenu()">Преимущества</a>
         <a href="#contact" onclick="closeMenu()">Контакты</a>
-        <button class="nav-cta" onclick="closeMenu();openBrief()">Заполнить бриф</button>
+        <button class="nav-cta" onclick="closeMenu();openBrief()">Оставить заявку</button>
     </div>
     <div class="mobile-overlay" id="mobileOverlay" onclick="closeMenu()"></div>
 
@@ -1219,7 +1200,7 @@
         <p class="hero-subtitle">
             Сайты, мобильные приложения, Telegram-боты и AI-интеграции. Полный цикл разработки: от дизайна до запуска. Современный стек, российские технологии.
         </p>
-        <button class="hero-cta" onclick="openBrief()">Заполнить бриф</button>
+        <button class="hero-cta" onclick="openBrief()">Оставить заявку</button>
         <div class="hero-stats">
             <div class="stat-item">
                 <div class="stat-number">3 дня</div>
@@ -1585,7 +1566,7 @@
         <p class="section-subtitle" style="margin: 0 auto 16px;">
             Бесплатная консультация, оценка сроков и стоимости. Расскажите о вашей задаче — мы предложим решение.
         </p>
-        <button class="cta-button" onclick="openBrief()">Заполнить бриф</button>
+        <button class="cta-button" onclick="openBrief()">Оставить заявку</button>
         <p style="margin-top: 16px; font-size: 15px; color: var(--text-secondary);">или напишите нам напрямую</p>
         <div class="cta-contacts">
             <a href="mailto:nikita.alandarenko@gmail.com">nikita.alandarenko@gmail.com</a>
@@ -1615,271 +1596,63 @@
         </div>
         <div class="modal-body">
             <div class="modal-hero">
-                <div class="m-label">Бриф на разработку</div>
+                <div class="m-label">Заявка</div>
                 <h2>Расскажите о <span>вашем проекте</span></h2>
-                <p>Заполните бриф — мы оценим сроки, стоимость и предложим оптимальное решение.</p>
+                <p>Оставьте контакты и опишите задачу — мы свяжемся и обсудим детали.</p>
             </div>
 
             <div class="b-steps" id="bSteps">
                 <button class="b-step active" onclick="bGo(0)">1. Контакты</button>
-                <button class="b-step" onclick="bGo(1)">2. Бизнес</button>
-                <button class="b-step" onclick="bGo(2)">3. Аудитория</button>
-                <button class="b-step" onclick="bGo(3)">4. Цели</button>
-                <button class="b-step" onclick="bGo(4)">5. Функционал</button>
-                <button class="b-step" onclick="bGo(5)">6. Дизайн</button>
-                <button class="b-step" onclick="bGo(6)">7. Контент</button>
-                <button class="b-step" onclick="bGo(7)">8. Бюджет</button>
+                <button class="b-step" onclick="bGo(1)">2. О проекте</button>
             </div>
 
             <div class="b-section active" id="bs0">
-                <div class="b-head"><div class="b-num">Шаг 1 из 8</div><h3>Контактная информация</h3><p>Как с вами связаться</p></div>
+                <div class="b-head"><div class="b-num">Шаг 1 из 2</div><h3>Контактная информация</h3><p>Как с вами связаться</p></div>
                 <div class="b-row">
-                    <div class="b-field"><label>Имя и фамилия <span class="req">*</span></label><input class="b-input" name="b_name" placeholder="Иван Петров"></div>
-                    <div class="b-field"><label>Компания <span class="req">*</span></label><input class="b-input" name="b_company" placeholder="ООО «Ромашка»"></div>
-                </div>
-                <div class="b-row">
-                    <div class="b-field"><label>Должность</label><input class="b-input" name="b_position" placeholder="Директор по маркетингу"></div>
+                    <div class="b-field"><label>Имя <span class="req">*</span></label><input class="b-input" name="b_name" placeholder="Иван Петров"></div>
                     <div class="b-field"><label>Телефон <span class="req">*</span></label><input class="b-input" name="b_phone" placeholder="+7 (999) 123-45-67"></div>
                 </div>
                 <div class="b-row">
                     <div class="b-field"><label>Email <span class="req">*</span></label><input class="b-input" name="b_email" placeholder="ivan@company.ru"></div>
                     <div class="b-field"><label>Telegram <span class="opt">необязательно</span></label><input class="b-input" name="b_tg" placeholder="@username"></div>
                 </div>
-                <div class="b-field">
-                    <label>Кто принимает финальное решение?</label>
-                    <select class="b-select" name="b_lpr"><option value="">Выберите</option><option>Я сам(а)</option><option>Генеральный директор</option><option>Коллегиальное решение</option><option>Другой человек</option></select>
-                </div>
                 <div class="b-nav"><div></div><button class="b-btn b-btn-pri" onclick="bNext()">Далее</button></div>
             </div>
 
             <div class="b-section" id="bs1">
-                <div class="b-head"><div class="b-num">Шаг 2 из 8</div><h3>О вашем бизнесе</h3><p>Поможет погрузиться в специфику</p></div>
-                <div class="b-field"><label>Чем занимается компания? <span class="req">*</span></label><textarea class="b-textarea" name="b_desc" placeholder="Основной вид деятельности, продукты, услуги..."></textarea></div>
-                <div class="b-row">
-                    <div class="b-field"><label>Сфера <span class="req">*</span></label><select class="b-select" name="b_industry"><option value="">Выберите отрасль</option><option>Интернет-торговля</option><option>Услуги (B2C)</option><option>B2B / Промышленность</option><option>IT / SaaS</option><option>Медицина</option><option>Образование</option><option>Недвижимость</option><option>HoReCa / Еда</option><option>Финансы</option><option>Строительство</option><option>Красота / Здоровье</option><option>Авто</option><option>Туризм</option><option>Госсектор</option><option>Другое</option></select></div>
-                    <div class="b-field"><label>Лет на рынке</label><select class="b-select" name="b_years"><option value="">Выберите</option><option>Стартап</option><option>1-3 года</option><option>3-10 лет</option><option>Более 10 лет</option></select></div>
-                </div>
-                <div class="b-field"><label>География <span class="req">*</span></label><div class="b-checks">
-                    <div class="b-chk"><input type="checkbox" id="bg1" name="b_geo" value="Один город"><label for="bg1">Один город</label></div>
-                    <div class="b-chk"><input type="checkbox" id="bg2" name="b_geo" value="Регион"><label for="bg2">Регион</label></div>
-                    <div class="b-chk"><input type="checkbox" id="bg3" name="b_geo" value="Вся Россия"><label for="bg3">Вся Россия</label></div>
-                    <div class="b-chk"><input type="checkbox" id="bg4" name="b_geo" value="СНГ"><label for="bg4">СНГ</label></div>
-                    <div class="b-chk"><input type="checkbox" id="bg5" name="b_geo" value="Весь мир"><label for="bg5">Весь мир</label></div>
-                </div></div>
-                <div class="b-field"><label>УТП — чем отличаетесь от конкурентов?</label><textarea class="b-textarea" name="b_utp" placeholder="Почему клиенты выбирают вас?"></textarea></div>
-                <div class="b-field"><label>Сайты конкурентов</label><div class="b-urls" id="bComp"><div class="b-url-row"><input class="b-input" placeholder="https://competitor1.ru"></div><div class="b-url-row"><input class="b-input" placeholder="https://competitor2.ru"></div></div><button class="b-add" onclick="bAddUrl('bComp')">+ Добавить</button></div>
-                <div class="b-field"><label>Текущий сайт <span class="opt">если есть</span></label><input class="b-input" name="b_cursite" placeholder="https://yoursite.ru"></div>
-                <div class="b-field"><label>Что не устраивает?</label><div class="b-checks">
-                    <div class="b-chk"><input type="checkbox" id="bp1" name="b_prob" value="Устаревший дизайн"><label for="bp1">Устаревший дизайн</label></div>
-                    <div class="b-chk"><input type="checkbox" id="bp2" name="b_prob" value="Не адаптивный"><label for="bp2">Не адаптивный</label></div>
-                    <div class="b-chk"><input type="checkbox" id="bp3" name="b_prob" value="Медленный"><label for="bp3">Медленный</label></div>
-                    <div class="b-chk"><input type="checkbox" id="bp4" name="b_prob" value="Плохо в поиске"><label for="bp4">Плохо в поиске</label></div>
-                    <div class="b-chk"><input type="checkbox" id="bp5" name="b_prob" value="Сложно редактировать"><label for="bp5">Сложно редактировать</label></div>
-                    <div class="b-chk"><input type="checkbox" id="bp6" name="b_prob" value="Мало заявок"><label for="bp6">Мало заявок</label></div>
-                    <div class="b-chk"><input type="checkbox" id="bp7" name="b_prob" value="Сайта нет"><label for="bp7">Сайта нет</label></div>
-                </div></div>
-                <div class="b-nav"><button class="b-btn b-btn-sec" onclick="bPrev()">Назад</button><button class="b-btn b-btn-pri" onclick="bNext()">Далее</button></div>
-            </div>
-
-            <div class="b-section" id="bs2">
-                <div class="b-head"><div class="b-num">Шаг 3 из 8</div><h3>Целевая аудитория</h3><p>Для кого делаем сайт</p></div>
-                <div class="b-field"><label>Тип клиентов <span class="req">*</span></label><div class="b-checks">
-                    <div class="b-chk"><input type="radio" id="bt1" name="b_type" value="B2C"><label for="bt1">B2C (физлица)</label></div>
-                    <div class="b-chk"><input type="radio" id="bt2" name="b_type" value="B2B"><label for="bt2">B2B (компании)</label></div>
-                    <div class="b-chk"><input type="radio" id="bt3" name="b_type" value="Оба"><label for="bt3">Оба типа</label></div>
-                </div></div>
-                <div class="b-row">
-                    <div class="b-field"><label>Возраст</label><div class="b-checks">
-                        <div class="b-chk"><input type="checkbox" id="ba1" name="b_age" value="18-25"><label for="ba1">18-25</label></div>
-                        <div class="b-chk"><input type="checkbox" id="ba2" name="b_age" value="25-35"><label for="ba2">25-35</label></div>
-                        <div class="b-chk"><input type="checkbox" id="ba3" name="b_age" value="35-50"><label for="ba3">35-50</label></div>
-                        <div class="b-chk"><input type="checkbox" id="ba4" name="b_age" value="50+"><label for="ba4">50+</label></div>
-                    </div></div>
-                    <div class="b-field"><label>Доход</label><select class="b-select" name="b_income"><option value="">Выберите</option><option>Эконом</option><option>Средний</option><option>Выше среднего</option><option>Премиум</option><option>Смешанный</option></select></div>
-                </div>
-                <div class="b-field"><label>Откуда приходят клиенты?</label><div class="b-checks">
-                    <div class="b-chk"><input type="checkbox" id="bs_1" name="b_src" value="Поиск"><label for="bs_1">Поиск</label></div>
-                    <div class="b-chk"><input type="checkbox" id="bs_2" name="b_src" value="Соцсети"><label for="bs_2">Соцсети</label></div>
-                    <div class="b-chk"><input type="checkbox" id="bs_3" name="b_src" value="Реклама"><label for="bs_3">Реклама</label></div>
-                    <div class="b-chk"><input type="checkbox" id="bs_4" name="b_src" value="Сарафан"><label for="bs_4">Сарафанное радио</label></div>
-                    <div class="b-chk"><input type="checkbox" id="bs_5" name="b_src" value="Офлайн"><label for="bs_5">Офлайн</label></div>
-                    <div class="b-chk"><input type="checkbox" id="bs_6" name="b_src" value="Маркетплейсы"><label for="bs_6">Маркетплейсы</label></div>
-                </div></div>
-                <div class="b-field"><label>Устройства</label><div class="b-checks">
-                    <div class="b-chk"><input type="radio" id="bd1" name="b_dev" value="Телефон"><label for="bd1">Телефон</label></div>
-                    <div class="b-chk"><input type="radio" id="bd2" name="b_dev" value="Десктоп"><label for="bd2">Десктоп</label></div>
-                    <div class="b-chk"><input type="radio" id="bd3" name="b_dev" value="Поровну"><label for="bd3">Поровну</label></div>
-                    <div class="b-chk"><input type="radio" id="bd4" name="b_dev" value="Не знаю"><label for="bd4">Не знаю</label></div>
-                </div></div>
-                <div class="b-field"><label>Боли клиентов перед покупкой</label><textarea class="b-textarea" name="b_pains" placeholder="Что останавливает? Какие сомнения?"></textarea></div>
-                <div class="b-nav"><button class="b-btn b-btn-sec" onclick="bPrev()">Назад</button><button class="b-btn b-btn-pri" onclick="bNext()">Далее</button></div>
-            </div>
-
-            <div class="b-section" id="bs3">
-                <div class="b-head"><div class="b-num">Шаг 4 из 8</div><h3>Цели и задачи сайта</h3><p>Что сайт должен делать для бизнеса</p></div>
-                <div class="b-field"><label>Главная цель <span class="req">*</span></label><div class="b-checks">
-                    <div class="b-chk"><input type="radio" id="bgl1" name="b_goal" value="Заявки"><label for="bgl1">Сбор заявок</label></div>
-                    <div class="b-chk"><input type="radio" id="bgl2" name="b_goal" value="Продажи"><label for="bgl2">Онлайн-продажи</label></div>
-                    <div class="b-chk"><input type="radio" id="bgl3" name="b_goal" value="Имидж"><label for="bgl3">Имидж</label></div>
-                    <div class="b-chk"><input type="radio" id="bgl4" name="b_goal" value="Инфо"><label for="bgl4">Информирование</label></div>
-                </div></div>
-                <div class="b-field"><label>Целевое действие <span class="req">*</span></label><div class="b-checks">
-                    <div class="b-chk"><input type="checkbox" id="bac1" name="b_act" value="Заявка"><label for="bac1">Оставить заявку</label></div>
-                    <div class="b-chk"><input type="checkbox" id="bac2" name="b_act" value="Звонок"><label for="bac2">Позвонить</label></div>
-                    <div class="b-chk"><input type="checkbox" id="bac3" name="b_act" value="Купить"><label for="bac3">Купить</label></div>
-                    <div class="b-chk"><input type="checkbox" id="bac4" name="b_act" value="Регистрация"><label for="bac4">Зарегистрироваться</label></div>
-                    <div class="b-chk"><input type="checkbox" id="bac5" name="b_act" value="Чат"><label for="bac5">Написать в чат</label></div>
-                    <div class="b-chk"><input type="checkbox" id="bac6" name="b_act" value="Скачать"><label for="bac6">Скачать материал</label></div>
-                </div></div>
-                <div class="b-row">
-                    <div class="b-field"><label>Цель по заявкам/мес</label><input class="b-input" name="b_target" placeholder="50 заявок или 200 заказов"></div>
-                    <div class="b-field"><label>Средний чек</label><input class="b-input" name="b_check" placeholder="15 000 ₽"></div>
-                </div>
-                <div class="b-field"><label>Продвижение после запуска</label><div class="b-checks">
-                    <div class="b-chk"><input type="checkbox" id="bpr1" name="b_promo" value="SEO"><label for="bpr1">SEO</label></div>
-                    <div class="b-chk"><input type="checkbox" id="bpr2" name="b_promo" value="Директ"><label for="bpr2">Яндекс.Директ</label></div>
-                    <div class="b-chk"><input type="checkbox" id="bpr3" name="b_promo" value="SMM"><label for="bpr3">Соцсети / SMM</label></div>
-                    <div class="b-chk"><input type="checkbox" id="bpr4" name="b_promo" value="Нет"><label for="bpr4">Не планирую</label></div>
-                </div></div>
-                <div class="b-nav"><button class="b-btn b-btn-sec" onclick="bPrev()">Назад</button><button class="b-btn b-btn-pri" onclick="bNext()">Далее</button></div>
-            </div>
-
-            <div class="b-section" id="bs4">
-                <div class="b-head"><div class="b-num">Шаг 5 из 8</div><h3>Функциональность</h3><p>Что должно быть в проекте</p></div>
+                <div class="b-head"><div class="b-num">Шаг 2 из 2</div><h3>О проекте</h3><p>Расскажите что нужно сделать</p></div>
                 <div class="b-field"><label>Тип проекта <span class="req">*</span></label><div class="b-checks">
                     <div class="b-chk"><input type="radio" id="bst1" name="b_stype" value="Лендинг"><label for="bst1">Лендинг</label></div>
-                    <div class="b-chk"><input type="radio" id="bst2" name="b_stype" value="Корпоративный"><label for="bst2">Корпоративный</label></div>
-                    <div class="b-chk"><input type="radio" id="bst3" name="b_stype" value="Магазин"><label for="bst3">Интернет-магазин</label></div>
-                    <div class="b-chk"><input type="radio" id="bst4" name="b_stype" value="Портал"><label for="bst4">Портал / Сервис</label></div>
-                    <div class="b-chk"><input type="radio" id="bst5" name="b_stype" value="Мобильное приложение"><label for="bst5">Мобильное приложение</label></div>
-                    <div class="b-chk"><input type="radio" id="bst6" name="b_stype" value="Telegram/чат-бот"><label for="bst6">Telegram / чат-бот</label></div>
+                    <div class="b-chk"><input type="radio" id="bst2" name="b_stype" value="Корпоративный сайт"><label for="bst2">Корпоративный сайт</label></div>
+                    <div class="b-chk"><input type="radio" id="bst3" name="b_stype" value="Интернет-магазин"><label for="bst3">Интернет-магазин</label></div>
+                    <div class="b-chk"><input type="radio" id="bst4" name="b_stype" value="Мобильное приложение"><label for="bst4">Приложение</label></div>
+                    <div class="b-chk"><input type="radio" id="bst5" name="b_stype" value="Telegram-бот"><label for="bst5">Telegram-бот</label></div>
+                    <div class="b-chk"><input type="radio" id="bst6" name="b_stype" value="Другое"><label for="bst6">Другое</label></div>
                 </div></div>
-                <div class="b-field"><label>Разделы</label><div class="b-checks">
-                    <div class="b-chk"><input type="checkbox" id="bse1" name="b_sec" value="О компании"><label for="bse1">О компании</label></div>
-                    <div class="b-chk"><input type="checkbox" id="bse2" name="b_sec" value="Услуги"><label for="bse2">Услуги</label></div>
-                    <div class="b-chk"><input type="checkbox" id="bse3" name="b_sec" value="Каталог"><label for="bse3">Каталог</label></div>
-                    <div class="b-chk"><input type="checkbox" id="bse4" name="b_sec" value="Портфолио"><label for="bse4">Портфолио</label></div>
-                    <div class="b-chk"><input type="checkbox" id="bse5" name="b_sec" value="Блог"><label for="bse5">Блог</label></div>
-                    <div class="b-chk"><input type="checkbox" id="bse6" name="b_sec" value="Контакты"><label for="bse6">Контакты</label></div>
-                    <div class="b-chk"><input type="checkbox" id="bse7" name="b_sec" value="FAQ"><label for="bse7">FAQ</label></div>
-                    <div class="b-chk"><input type="checkbox" id="bse8" name="b_sec" value="Отзывы"><label for="bse8">Отзывы</label></div>
-                </div></div>
-                <div class="b-field"><label>Функции</label><div class="b-checks">
-                    <div class="b-chk"><input type="checkbox" id="bf1" name="b_fn" value="Корзина"><label for="bf1">Корзина / оплата</label></div>
-                    <div class="b-chk"><input type="checkbox" id="bf2" name="b_fn" value="Личный кабинет"><label for="bf2">Личный кабинет</label></div>
-                    <div class="b-chk"><input type="checkbox" id="bf3" name="b_fn" value="Калькулятор"><label for="bf3">Калькулятор</label></div>
-                    <div class="b-chk"><input type="checkbox" id="bf4" name="b_fn" value="AI чат-бот"><label for="bf4">AI чат-бот</label></div>
-                    <div class="b-chk"><input type="checkbox" id="bf5" name="b_fn" value="Фильтры"><label for="bf5">Фильтры / поиск</label></div>
-                    <div class="b-chk"><input type="checkbox" id="bf6" name="b_fn" value="Карта"><label for="bf6">Карта</label></div>
-                    <div class="b-chk"><input type="checkbox" id="bf7" name="b_fn" value="Мультиязычность"><label for="bf7">Мультиязычность</label></div>
-                    <div class="b-chk"><input type="checkbox" id="bf8" name="b_fn" value="Бронирование"><label for="bf8">Бронирование</label></div>
-                </div></div>
-                <div class="b-field"><label>Интеграции</label><div class="b-checks">
-                    <div class="b-chk"><input type="checkbox" id="bi1" name="b_int" value="CRM"><label for="bi1">CRM</label></div>
-                    <div class="b-chk"><input type="checkbox" id="bi2" name="b_int" value="1С"><label for="bi2">1С</label></div>
-                    <div class="b-chk"><input type="checkbox" id="bi3" name="b_int" value="Оплата"><label for="bi3">Оплата</label></div>
-                    <div class="b-chk"><input type="checkbox" id="bi4" name="b_int" value="Доставка"><label for="bi4">Доставка</label></div>
-                    <div class="b-chk"><input type="checkbox" id="bi5" name="b_int" value="Телефония"><label for="bi5">Телефония</label></div>
-                    <div class="b-chk"><input type="checkbox" id="bi6" name="b_int" value="Аналитика"><label for="bi6">Аналитика</label></div>
-                    <div class="b-chk"><input type="checkbox" id="bi7" name="b_int" value="Рассылки"><label for="bi7">Рассылки</label></div>
-                </div></div>
-                <div class="b-field"><label>Размер каталога</label><select class="b-select" name="b_catsize"><option value="">Выберите</option><option>Нет каталога</option><option>До 50</option><option>50-500</option><option>500-5000</option><option>Более 5000</option></select></div>
-                <div class="b-field"><label>CMS / Платформа</label><div class="b-checks">
-                    <div class="b-chk"><input type="radio" id="bc1" name="b_cms" value="1С-Битрикс"><label for="bc1">1С-Битрикс</label></div>
-                    <div class="b-chk"><input type="radio" id="bc2" name="b_cms" value="Tilda"><label for="bc2">Tilda</label></div>
-                    <div class="b-chk"><input type="radio" id="bc3" name="b_cms" value="WordPress"><label for="bc3">WordPress</label></div>
-                    <div class="b-chk"><input type="radio" id="bc4" name="b_cms" value="Кастом"><label for="bc4">Кастом</label></div>
-                    <div class="b-chk"><input type="radio" id="bc5" name="b_cms" value="На усмотрение"><label for="bc5">На ваше усмотрение</label></div>
-                </div></div>
-                <div class="b-nav"><button class="b-btn b-btn-sec" onclick="bPrev()">Назад</button><button class="b-btn b-btn-pri" onclick="bNext()">Далее</button></div>
-            </div>
-
-            <div class="b-section" id="bs5">
-                <div class="b-head"><div class="b-num">Шаг 6 из 8</div><h3>Дизайн и визуал</h3><p>Какое впечатление должен производить сайт</p></div>
-                <div class="b-field"><label>Фирменный стиль</label><div class="b-checks">
-                    <div class="b-chk"><input type="radio" id="bbr1" name="b_brand" value="Брендбук"><label for="bbr1">Полный брендбук</label></div>
-                    <div class="b-chk"><input type="radio" id="bbr2" name="b_brand" value="Лого+цвета"><label for="bbr2">Логотип и цвета</label></div>
-                    <div class="b-chk"><input type="radio" id="bbr3" name="b_brand" value="Нет"><label for="bbr3">Нужно разработать</label></div>
-                </div></div>
-                <div class="b-field"><label>Стиль <span class="req">*</span></label><div class="b-checks">
-                    <div class="b-chk"><input type="radio" id="bsy1" name="b_style" value="Минимализм"><label for="bsy1">Минимализм</label></div>
-                    <div class="b-chk"><input type="radio" id="bsy2" name="b_style" value="Деловой"><label for="bsy2">Деловой</label></div>
-                    <div class="b-chk"><input type="radio" id="bsy3" name="b_style" value="Яркий"><label for="bsy3">Современный</label></div>
-                    <div class="b-chk"><input type="radio" id="bsy4" name="b_style" value="Премиум"><label for="bsy4">Премиальный</label></div>
-                    <div class="b-chk"><input type="radio" id="bsy5" name="b_style" value="Креатив"><label for="bsy5">Креативный</label></div>
-                </div></div>
-                <div class="b-field"><label>Сайты, которые нравятся</label><div class="b-urls" id="bLike"><div class="b-url-row"><input class="b-input" placeholder="https://example.com"></div><div class="b-url-row"><input class="b-input" placeholder="https://example2.com"></div></div><button class="b-add" onclick="bAddUrl('bLike')">+ Добавить</button></div>
-                <div class="b-field"><label>Что нравится?</label><textarea class="b-textarea" name="b_like_why" placeholder="Дизайн, анимации, структура..."></textarea></div>
-                <div class="b-field"><label>Сайты, которые НЕ нравятся <span class="opt">необязательно</span></label><div class="b-urls" id="bDislike"><div class="b-url-row"><input class="b-input" placeholder="https://bad-example.com"></div></div><button class="b-add" onclick="bAddUrl('bDislike')">+ Добавить</button></div>
-                <div class="b-field"><label>Что не нравится?</label><textarea class="b-textarea" name="b_dislike_why" placeholder="Что раздражает?"></textarea></div>
-                <div class="b-nav"><button class="b-btn b-btn-sec" onclick="bPrev()">Назад</button><button class="b-btn b-btn-pri" onclick="bNext()">Далее</button></div>
-            </div>
-
-            <div class="b-section" id="bs6">
-                <div class="b-head"><div class="b-num">Шаг 7 из 8</div><h3>Контент</h3><p>Тексты, фото, видео</p></div>
-                <div class="b-field"><label>Тексты <span class="req">*</span></label><div class="b-checks">
-                    <div class="b-chk"><input type="radio" id="btx1" name="b_txt" value="Клиент"><label for="btx1">Предоставим сами</label></div>
-                    <div class="b-chk"><input type="radio" id="btx2" name="b_txt" value="Студия"><label for="btx2">Поручим студии</label></div>
-                    <div class="b-chk"><input type="radio" id="btx3" name="b_txt" value="Совместно"><label for="btx3">Совместно</label></div>
-                </div></div>
-                <div class="b-field"><label>Готовые материалы</label><div class="b-checks">
-                    <div class="b-chk"><input type="checkbox" id="bm1" name="b_mat" value="Фото продукции"><label for="bm1">Фото продукции</label></div>
-                    <div class="b-chk"><input type="checkbox" id="bm2" name="b_mat" value="Фото команды"><label for="bm2">Фото команды</label></div>
-                    <div class="b-chk"><input type="checkbox" id="bm3" name="b_mat" value="Видео"><label for="bm3">Видео</label></div>
-                    <div class="b-chk"><input type="checkbox" id="bm4" name="b_mat" value="Тексты"><label for="bm4">Тексты</label></div>
-                    <div class="b-chk"><input type="checkbox" id="bm5" name="b_mat" value="Каталог"><label for="bm5">Каталог (Excel/1С)</label></div>
-                    <div class="b-chk"><input type="checkbox" id="bm6" name="b_mat" value="Ничего"><label for="bm6">Ничего нет</label></div>
-                </div></div>
-                <div class="b-field"><label>Кто обновляет после запуска?</label><div class="b-checks">
-                    <div class="b-chk"><input type="radio" id="bu1" name="b_upd" value="Клиент"><label for="bu1">Наш сотрудник</label></div>
-                    <div class="b-chk"><input type="radio" id="bu2" name="b_upd" value="Студия"><label for="bu2">Студия</label></div>
-                    <div class="b-chk"><input type="radio" id="bu3" name="b_upd" value="Совместно"><label for="bu3">Совместно</label></div>
-                </div></div>
-                <div class="b-field"><label>Фото/видеосъёмка</label><div class="b-checks">
-                    <div class="b-chk"><input type="radio" id="bph1" name="b_photo" value="Нужна"><label for="bph1">Нужна</label></div>
-                    <div class="b-chk"><input type="radio" id="bph2" name="b_photo" value="Есть свои"><label for="bph2">Есть свои</label></div>
-                    <div class="b-chk"><input type="radio" id="bph3" name="b_photo" value="Сток"><label for="bph3">Стоковые фото</label></div>
-                </div></div>
-                <div class="b-nav"><button class="b-btn b-btn-sec" onclick="bPrev()">Назад</button><button class="b-btn b-btn-pri" onclick="bNext()">Далее</button></div>
-            </div>
-
-            <div class="b-section" id="bs7">
-                <div class="b-head"><div class="b-num">Шаг 8 из 8</div><h3>Бюджет и сроки</h3><p>Поможет подобрать решение</p></div>
+                <div class="b-field"><label>Опишите задачу <span class="req">*</span></label><textarea class="b-textarea" name="b_desc" placeholder="Что нужно сделать? Какую проблему решить?"></textarea></div>
                 <div class="b-field"><label>Бюджет <span class="req">*</span></label><div class="b-checks">
-                    <div class="b-chk"><input type="radio" id="bbu1" name="b_bud" value="50-150K"><label for="bbu1">50-150 тыс. ₽</label></div>
-                    <div class="b-chk"><input type="radio" id="bbu2" name="b_bud" value="150-500K"><label for="bbu2">150-500 тыс. ₽</label></div>
-                    <div class="b-chk"><input type="radio" id="bbu3" name="b_bud" value="500K-1.5M"><label for="bbu3">500K-1.5 млн ₽</label></div>
-                    <div class="b-chk"><input type="radio" id="bbu4" name="b_bud" value="1.5M+"><label for="bbu4">Более 1.5 млн ₽</label></div>
+                    <div class="b-chk"><input type="radio" id="bbu1" name="b_bud" value="до 100K"><label for="bbu1">до 100 тыс. ₽</label></div>
+                    <div class="b-chk"><input type="radio" id="bbu2" name="b_bud" value="100-300K"><label for="bbu2">100-300 тыс. ₽</label></div>
+                    <div class="b-chk"><input type="radio" id="bbu3" name="b_bud" value="300K-1M"><label for="bbu3">300K — 1 млн ₽</label></div>
+                    <div class="b-chk"><input type="radio" id="bbu4" name="b_bud" value="1M+"><label for="bbu4">Более 1 млн ₽</label></div>
                     <div class="b-chk"><input type="radio" id="bbu5" name="b_bud" value="Обсудим"><label for="bbu5">Обсудим</label></div>
                 </div></div>
                 <div class="b-field"><label>Сроки</label><div class="b-checks">
-                    <div class="b-chk"><input type="radio" id="btm1" name="b_time" value="ASAP"><label for="btm1">Как можно скорее</label></div>
+                    <div class="b-chk"><input type="radio" id="btm1" name="b_time" value="Срочно"><label for="btm1">Срочно</label></div>
                     <div class="b-chk"><input type="radio" id="btm2" name="b_time" value="1 мес"><label for="btm2">1 месяц</label></div>
                     <div class="b-chk"><input type="radio" id="btm3" name="b_time" value="2-3 мес"><label for="btm3">2-3 месяца</label></div>
-                    <div class="b-chk"><input type="radio" id="btm4" name="b_time" value="Гибко"><label for="btm4">Без жёстких сроков</label></div>
+                    <div class="b-chk"><input type="radio" id="btm4" name="b_time" value="Не горит"><label for="btm4">Не горит</label></div>
                 </div></div>
-                <div class="b-field"><label>Дедлайн <span class="opt">если есть</span></label><input class="b-input" name="b_dead" placeholder="1 сентября — к началу сезона"></div>
-                <div class="b-field"><label>Оплата</label><div class="b-checks">
-                    <div class="b-chk"><input type="radio" id="bpy1" name="b_pay" value="Поэтапно"><label for="bpy1">Поэтапно (50/25/25)</label></div>
-                    <div class="b-chk"><input type="radio" id="bpy2" name="b_pay" value="Ежемесячно"><label for="bpy2">Ежемесячно</label></div>
-                    <div class="b-chk"><input type="radio" id="bpy3" name="b_pay" value="100%"><label for="bpy3">100% предоплата</label></div>
-                    <div class="b-chk"><input type="radio" id="bpy4" name="b_pay" value="Обсудим"><label for="bpy4">Обсудим</label></div>
-                </div></div>
-                <div class="b-field"><label>Поддержка после запуска</label><div class="b-checks">
-                    <div class="b-chk"><input type="radio" id="bsp1" name="b_sup" value="Да"><label for="bsp1">Да</label></div>
-                    <div class="b-chk"><input type="radio" id="bsp2" name="b_sup" value="Возможно"><label for="bsp2">Возможно</label></div>
-                    <div class="b-chk"><input type="radio" id="bsp3" name="b_sup" value="Нет"><label for="bsp3">Нет</label></div>
-                </div></div>
-                <div class="b-field"><label>Комментарии <span class="opt">необязательно</span></label><textarea class="b-textarea" name="b_comments" placeholder="Что ещё важно?"></textarea></div>
-                <div class="b-nav"><button class="b-btn b-btn-sec" onclick="bPrev()">Назад</button><button class="b-btn b-btn-ok" onclick="bShowResults()">Сформировать сводку</button></div>
+                <div class="b-field"><label>Комментарии <span class="opt">необязательно</span></label><textarea class="b-textarea" name="b_comments" placeholder="Ссылки на примеры, пожелания, детали..."></textarea></div>
+                <div class="b-nav"><button class="b-btn b-btn-sec" onclick="bPrev()">Назад</button><button class="b-btn b-btn-ok" onclick="bShowResults()">Проверить и отправить</button></div>
             </div>
 
             <div class="b-section" id="bResults">
-                <div class="b-head"><div class="b-num">Готово</div><h3>Сводка по брифу</h3><p>Проверьте и отправьте</p></div>
+                <div class="b-head"><div class="b-num">Готово</div><h3>Сводка по заявке</h3><p>Проверьте и отправьте</p></div>
                 <div id="bResContent"></div>
                 <div id="bResWarnings" class="b-warnings"></div>
                 <div id="bSendStatus" style="margin-bottom: 16px;"></div>
-                <div class="b-nav"><button class="b-btn b-btn-sec" onclick="bGo(0)">Редактировать</button><button class="b-btn b-btn-ok" id="bSendBtn" onclick="bSendTg()">Отправить бриф</button><button class="b-btn b-btn-pri" onclick="window.print()">PDF</button></div>
+                <div class="b-nav"><button class="b-btn b-btn-sec" onclick="bGo(0)">Редактировать</button><button class="b-btn b-btn-ok" id="bSendBtn" onclick="bSendTg()">Отправить заявку</button></div>
             </div>
         </div>
     </div>
@@ -1939,24 +1712,14 @@
         const bReq = {
             0: [
                 { name: 'b_name', type: 'input', label: 'Имя' },
-                { name: 'b_company', type: 'input', label: 'Компания' },
                 { name: 'b_phone', type: 'input', label: 'Телефон' },
                 { name: 'b_email', type: 'input', label: 'Email' }
             ],
             1: [
-                { name: 'b_desc', type: 'input', label: 'Описание бизнеса' },
-                { name: 'b_industry', type: 'select', label: 'Сфера' },
-                { name: 'b_geo', type: 'check', label: 'География' }
-            ],
-            2: [{ name: 'b_type', type: 'radio', label: 'Тип клиентов' }],
-            3: [
-                { name: 'b_goal', type: 'radio', label: 'Цель сайта' },
-                { name: 'b_act', type: 'check', label: 'Целевое действие' }
-            ],
-            4: [{ name: 'b_stype', type: 'radio', label: 'Тип проекта' }],
-            5: [{ name: 'b_style', type: 'radio', label: 'Стиль' }],
-            6: [{ name: 'b_txt', type: 'radio', label: 'Тексты' }],
-            7: [{ name: 'b_bud', type: 'radio', label: 'Бюджет' }]
+                { name: 'b_stype', type: 'radio', label: 'Тип проекта' },
+                { name: 'b_desc', type: 'input', label: 'Описание задачи' },
+                { name: 'b_bud', type: 'radio', label: 'Бюджет' }
+            ]
         };
 
         function bValidateStep(step) {
@@ -2009,7 +1772,7 @@
 
         function bValidateAll() {
             let missing = [];
-            for (let s = 0; s < 8; s++) {
+            for (let s = 0; s < 2; s++) {
                 const rules = bReq[s] || [];
                 const sec = document.getElementById('bs' + s);
                 rules.forEach(r => {
@@ -2048,7 +1811,7 @@
             document.getElementById('briefModal').scrollTo({ top: 0, behavior: 'smooth' });
         }
         function bNext() {
-            if (bCur < 7) {
+            if (bCur < 1) {
                 if (bValidateStep(bCur)) {
                     bMarkDone(bCur);
                     bGo(bCur + 1);
@@ -2073,16 +1836,8 @@
         document.getElementById('briefModal').addEventListener('input', bUpdProg);
         document.getElementById('briefModal').addEventListener('change', bUpdProg);
 
-        function bAddUrl(id) {
-            const c = document.getElementById(id);
-            const r = document.createElement('div'); r.className = 'b-url-row';
-            r.innerHTML = '<input class="b-input" placeholder="https://..."><button class="b-rm" onclick="this.parentElement.remove()">&times;</button>';
-            c.appendChild(r);
-        }
-
         function bV(n) { const e = document.querySelector(`#briefModal [name="${n}"]`); if (!e) return '—'; if (e.type === 'radio') { const c = document.querySelector(`#briefModal [name="${n}"]:checked`); return c ? c.value : '—'; } return e.value || '—'; }
         function bC(n) { const items = document.querySelectorAll(`#briefModal [name="${n}"]:checked`); return items.length ? Array.from(items).map(e => e.value).join(', ') : '—'; }
-        function bU(id) { const ins = document.querySelectorAll('#' + id + ' input'); const u = Array.from(ins).map(i => i.value.trim()).filter(Boolean); return u.length ? u.join(', ') : '—'; }
 
         function bShowResults() {
             if (!bValidateStep(bCur)) {
@@ -2095,7 +1850,7 @@
                 let html = '<div class="b-val-summary"><p>Не заполнены обязательные поля:</p>';
                 const grouped = {};
                 missing.forEach(m => { if (!grouped[m.step]) grouped[m.step] = []; grouped[m.step].push(m.label); });
-                const stepNames = ['Контакты','Бизнес','Аудитория','Цели','Функционал','Дизайн','Контент','Бюджет'];
+                const stepNames = ['Контакты','О проекте'];
                 Object.keys(grouped).forEach(s => {
                     html += `<span class="b-val-link" onclick="bGo(${s})">Шаг ${+s+1}. ${stepNames[s]}: ${grouped[s].join(', ')}</span>`;
                 });
@@ -2109,35 +1864,15 @@
             }
             document.querySelectorAll('.b-section').forEach(s => s.classList.remove('active'));
             document.getElementById('bResults').classList.add('active');
-            bMarkDone(7);
+            bMarkDone(1);
             const secs = [
-                { t: 'Контакты', r: [['Имя', bV('b_name')],['Компания', bV('b_company')],['Должность', bV('b_position')],['Телефон', bV('b_phone')],['Email', bV('b_email')],['Telegram', bV('b_tg')],['ЛПР', bV('b_lpr')]] },
-                { t: 'Бизнес', r: [['Описание', bV('b_desc')],['Сфера', bV('b_industry')],['Лет', bV('b_years')],['География', bC('b_geo')],['УТП', bV('b_utp')],['Конкуренты', bU('bComp')],['Текущий сайт', bV('b_cursite')],['Проблемы', bC('b_prob')]] },
-                { t: 'Аудитория', r: [['Тип', bC('b_type')],['Возраст', bC('b_age')],['Доход', bV('b_income')],['Источники', bC('b_src')],['Устройства', bC('b_dev')],['Боли', bV('b_pains')]] },
-                { t: 'Цели', r: [['Цель', bC('b_goal')],['Действие', bC('b_act')],['План', bV('b_target')],['Чек', bV('b_check')],['Продвижение', bC('b_promo')]] },
-                { t: 'Функционал', r: [['Тип проекта', bC('b_stype')],['Разделы', bC('b_sec')],['Функции', bC('b_fn')],['Интеграции', bC('b_int')],['Каталог', bV('b_catsize')],['CMS', bC('b_cms')]] },
-                { t: 'Дизайн', r: [['Бренд', bC('b_brand')],['Стиль', bC('b_style')],['Нравятся', bU('bLike')],['Что нравится', bV('b_like_why')],['Не нравятся', bU('bDislike')],['Что не нравится', bV('b_dislike_why')]] },
-                { t: 'Контент', r: [['Тексты', bC('b_txt')],['Материалы', bC('b_mat')],['Обновление', bC('b_upd')],['Съёмка', bC('b_photo')]] },
-                { t: 'Бюджет', r: [['Бюджет', bC('b_bud')],['Сроки', bC('b_time')],['Дедлайн', bV('b_dead')],['Оплата', bC('b_pay')],['Поддержка', bC('b_sup')],['Комментарии', bV('b_comments')]] },
+                { t: 'Контакты', r: [['Имя', bV('b_name')],['Телефон', bV('b_phone')],['Email', bV('b_email')],['Telegram', bV('b_tg')]] },
+                { t: 'О проекте', r: [['Тип проекта', bC('b_stype')],['Задача', bV('b_desc')],['Бюджет', bC('b_bud')],['Сроки', bC('b_time')],['Комментарии', bV('b_comments')]] },
             ];
             let h = '';
             secs.forEach(s => { h += `<div class="b-result"><h4>${s.t}</h4>`; s.r.forEach(([l, v]) => { h += `<div class="b-rrow"><span class="b-rlbl">${l}</span><span class="b-rval">${v}</span></div>`; }); h += '</div>'; });
             document.getElementById('bResContent').innerHTML = h;
-
-            let w = [], tips = [];
-            if (bV('b_name') === '—') w.push('Не указано имя');
-            if (bV('b_phone') === '—') w.push('Не указан телефон');
-            if (bC('b_goal') === '—') w.push('Не выбрана цель сайта');
-            if (bC('b_bud') === '—') w.push('Не указан бюджет');
-            if (bC('b_bud') === '50-150K' && bC('b_stype') === 'Магазин') w.push('Бюджет 50-150K может быть мал для магазина');
-            if (bC('b_fn').includes('AI чат-бот')) tips.push('Запрос на AI — предложить расширенное решение');
-            if (bC('b_sup') === 'Да') tips.push('Клиент хочет поддержку — долгосрочный контракт');
-            if (bC('b_promo').includes('SEO')) tips.push('Планирует SEO — учесть техтребования');
-
-            let wh = '';
-            w.forEach(x => { wh += `<div class="b-warn"><span class="b-warn-i">!</span><span>${x}</span></div>`; });
-            tips.forEach(x => { wh += `<div class="b-tip"><span class="b-tip-i">+</span><span>${x}</span></div>`; });
-            document.getElementById('bResWarnings').innerHTML = wh;
+            document.getElementById('bResWarnings').innerHTML = '';
             document.getElementById('briefModal').scrollTo({ top: 0, behavior: 'smooth' });
         }
 
@@ -2148,7 +1883,7 @@
                 let html = '<div class="b-val-summary"><p>Заполните обязательные поля перед отправкой:</p>';
                 const grouped = {};
                 missing.forEach(m => { if (!grouped[m.step]) grouped[m.step] = []; grouped[m.step].push(m.label); });
-                const stepNames = ['Контакты','Бизнес','Аудитория','Цели','Функционал','Дизайн','Контент','Бюджет'];
+                const stepNames = ['Контакты','О проекте'];
                 Object.keys(grouped).forEach(s => {
                     html += `<span class="b-val-link" onclick="bGo(${s})">Шаг ${+s+1}. ${stepNames[s]}: ${grouped[s].join(', ')}</span>`;
                 });
@@ -2162,23 +1897,13 @@
             btn.textContent = 'Отправка...';
             status.innerHTML = '';
 
-            let msg = '📋 *Новый бриф с сайта NEXUS Digital*\n\n';
+            let msg = '📋 *Новая заявка с сайта NEXUS Digital*\n\n';
             const fields = [
-                ['👤 Имя', bV('b_name')], ['🏢 Компания', bV('b_company')], ['💼 Должность', bV('b_position')],
-                ['📞 Телефон', bV('b_phone')], ['📧 Email', bV('b_email')], ['✈️ Telegram', bV('b_tg')],
-                ['🔑 ЛПР', bV('b_lpr')], ['📝 Бизнес', bV('b_desc')], ['🏭 Сфера', bV('b_industry')],
-                ['📅 Лет на рынке', bV('b_years')], ['🌍 География', bC('b_geo')], ['⭐ УТП', bV('b_utp')],
-                ['🌐 Текущий сайт', bV('b_cursite')], ['⚠️ Проблемы', bC('b_prob')],
-                ['👥 Тип клиентов', bC('b_type')], ['🎂 Возраст', bC('b_age')], ['💰 Доход', bV('b_income')],
-                ['📊 Источники', bC('b_src')], ['📱 Устройства', bC('b_dev')],
-                ['🎯 Цель', bC('b_goal')], ['🖱 Действие', bC('b_act')], ['📈 План', bV('b_target')],
-                ['💵 Чек', bV('b_check')], ['📢 Продвижение', bC('b_promo')],
-                ['🔧 Тип проекта', bC('b_stype')], ['📂 Разделы', bC('b_sec')], ['⚙️ Функции', bC('b_fn')],
-                ['🔗 Интеграции', bC('b_int')], ['📦 Каталог', bV('b_catsize')], ['🖥 CMS', bC('b_cms')],
-                ['🎨 Бренд', bC('b_brand')], ['✨ Стиль', bC('b_style')],
-                ['📝 Тексты', bC('b_txt')], ['📸 Материалы', bC('b_mat')],
-                ['💳 Бюджет', bC('b_bud')], ['⏰ Сроки', bC('b_time')], ['📅 Дедлайн', bV('b_dead')],
-                ['💵 Оплата', bC('b_pay')], ['🛠 Поддержка', bC('b_sup')], ['💬 Комментарии', bV('b_comments')]
+                ['👤 Имя', bV('b_name')], ['📞 Телефон', bV('b_phone')],
+                ['📧 Email', bV('b_email')], ['✈️ Telegram', bV('b_tg')],
+                ['🔧 Тип проекта', bC('b_stype')], ['📝 Задача', bV('b_desc')],
+                ['💳 Бюджет', bC('b_bud')], ['⏰ Сроки', bC('b_time')],
+                ['💬 Комментарии', bV('b_comments')]
             ];
             fields.forEach(([l, v]) => { if (v && v !== '—') msg += `${l}: ${v}\n`; });
 
