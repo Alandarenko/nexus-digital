@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS Digital — Презентация</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg: #0a0a0f; --bg2: #12121a; --card: #1a1a25; --card-h: #22222f;
+            --accent: #6366f1; --accent-l: #818cf8; --glow: rgba(99,102,241,0.15);
+            --text: #f1f1f4; --text2: #9ca3af; --muted: #6b7280; --border: #2a2a3a;
+            --g1: linear-gradient(135deg, #6366f1, #8b5cf6); --g2: linear-gradient(135deg, #6366f1, #06b6d4);
+        }
+        html, body { height: 100%; font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); overflow: hidden; }
+
+        .deck { height: 100%; position: relative; }
+        .slide {
+            display: none; position: absolute; inset: 0;
+            padding: 60px 80px; flex-direction: column; justify-content: center;
+            animation: fadeIn 0.4s ease;
+        }
+        .slide.active { display: flex; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+        .slide::before {
+            content: ''; position: absolute; top: -30%; right: -15%; width: 700px; height: 700px;
+            background: radial-gradient(circle, var(--glow) 0%, transparent 70%); pointer-events: none;
+        }
+
+        .s-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 4px; color: var(--accent-l); margin-bottom: 16px; }
+        .s-title { font-size: clamp(36px, 5vw, 56px); font-weight: 900; letter-spacing: -2px; line-height: 1.1; margin-bottom: 20px; }
+        .s-title .hl { background: var(--g2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .s-sub { font-size: 18px; color: var(--text2); line-height: 1.7; max-width: 680px; }
+
+        .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 36px; }
+        .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-top: 36px; }
+        .grid4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 16px; margin-top: 36px; }
+
+        .card {
+            background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+            padding: 28px; transition: all 0.3s;
+        }
+        .card:hover { border-color: var(--accent); transform: translateY(-3px); }
+        .card .c-icon { font-size: 28px; margin-bottom: 14px; width: 48px; height: 48px; border-radius: 12px; background: var(--glow); display: flex; align-items: center; justify-content: center; font-weight: 800; }
+        .card h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
+        .card p { font-size: 13px; color: var(--text2); line-height: 1.6; }
+        .card .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+        .tag { font-size: 11px; padding: 3px 10px; border-radius: 20px; background: rgba(99,102,241,0.1); color: var(--accent-l); border: 1px solid rgba(99,102,241,0.2); }
+
+        .stat-row { display: flex; gap: 48px; margin-top: 40px; }
+        .stat .stat-num { font-size: 40px; font-weight: 900; background: var(--g1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .stat .stat-lbl { font-size: 13px; color: var(--muted); margin-top: 4px; }
+
+        .steps { display: flex; gap: 16px; margin-top: 36px; }
+        .step { flex: 1; text-align: center; padding: 24px 12px; }
+        .step-num { width: 44px; height: 44px; border-radius: 50%; background: var(--g1); display: flex; align-items: center; justify-content: center; font-size: 17px; font-weight: 700; margin: 0 auto 14px; }
+        .step h4 { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+        .step p { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+        .price-table { margin-top: 32px; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+        .price-header { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; background: var(--bg2); border-bottom: 1px solid var(--border); }
+        .price-header > div { padding: 14px 20px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); }
+        .price-row { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; border-bottom: 1px solid var(--border); }
+        .price-row:last-child { border-bottom: none; }
+        .price-row > div { padding: 14px 20px; font-size: 14px; display: flex; align-items: center; }
+        .price-row .svc { font-weight: 600; }
+        .price-row .pr { color: var(--accent-l); font-weight: 600; }
+        .price-row .tm { color: var(--text2); }
+
+        .case-box { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 32px; align-items: center; }
+        .case-info h3 { font-size: 22px; font-weight: 700; margin-bottom: 12px; }
+        .case-info p { font-size: 14px; color: var(--text2); line-height: 1.7; margin-bottom: 16px; }
+        .case-features { list-style: none; }
+        .case-features li { padding: 5px 0; font-size: 13px; color: var(--text2); padding-left: 20px; position: relative; }
+        .case-features li::before { content: ''; position: absolute; left: 0; top: 12px; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+        .case-visual { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 20px; text-align: center; }
+        .case-visual .browser-bar { display: flex; gap: 6px; padding: 10px 14px; background: var(--bg2); border-radius: 8px 8px 0 0; }
+        .case-visual .dot { width: 10px; height: 10px; border-radius: 50%; }
+        .case-visual .dot-r { background: #ef4444; } .case-visual .dot-y { background: #eab308; } .case-visual .dot-g { background: #22c55e; }
+        .case-visual .screen { background: var(--bg); border-radius: 0 0 8px 8px; padding: 24px; font-size: 13px; color: var(--muted); min-height: 200px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 8px; }
+        .case-visual .screen .mock-logo { font-size: 20px; font-weight: 800; background: var(--g1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        .tech-cols { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 20px; margin-top: 32px; }
+        .tech-col { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 24px; }
+        .tech-col h4 { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--accent-l); margin-bottom: 16px; }
+        .tech-col li { list-style: none; padding: 6px 0; font-size: 14px; color: var(--text2); border-bottom: 1px solid rgba(42,42,58,0.5); }
+        .tech-col li:last-child { border-bottom: none; }
+
+        .adv-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-top: 32px; }
+        .adv { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 24px; text-align: center; }
+        .adv .a-icon { width: 52px; height: 52px; border-radius: 14px; background: var(--glow); display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 800; margin: 0 auto 14px; }
+        .adv h3 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+        .adv p { font-size: 12px; color: var(--text2); line-height: 1.6; }
+
+        .cta-center { text-align: center; }
+        .cta-center .s-title { max-width: 700px; margin: 0 auto 20px; }
+        .cta-center .s-sub { margin: 0 auto 32px; text-align: center; }
+        .cta-btn { display: inline-block; padding: 16px 48px; background: var(--g1); color: #fff; font-size: 16px; font-weight: 700; border-radius: 12px; text-decoration: none; border: none; cursor: pointer; font-family: inherit; }
+        .contacts { margin-top: 24px; font-size: 15px; color: var(--text2); }
+
+        .nav-bar {
+            position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
+            padding: 14px 40px; display: flex; justify-content: space-between; align-items: center;
+            background: rgba(10,10,15,0.9); backdrop-filter: blur(16px); border-top: 1px solid var(--border);
+        }
+        .nav-bar .logo { font-size: 16px; font-weight: 800; background: var(--g1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .nav-controls { display: flex; align-items: center; gap: 16px; }
+        .nav-btn { width: 36px; height: 36px; border-radius: 8px; background: var(--card); border: 1px solid var(--border); color: var(--text2); font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+        .nav-btn:hover { border-color: var(--accent); color: var(--text); }
+        .nav-counter { font-size: 13px; color: var(--muted); font-weight: 500; min-width: 50px; text-align: center; }
+        .progress-bar { position: fixed; bottom: 62px; left: 0; right: 0; height: 2px; background: var(--border); z-index: 101; }
+        .progress-fill { height: 100%; background: var(--g1); transition: width 0.4s; width: 0%; }
+
+        @media print {
+            .nav-bar, .progress-bar { display: none !important; }
+            .slide { display: flex !important; position: relative !important; page-break-after: always; min-height: 100vh; padding: 40px 60px; animation: none !important; }
+            .slide::before { display: none; }
+            body { overflow: visible; }
+            .deck { height: auto; }
+        }
+    </style>
+</head>
+<body>
+    <div class="deck" id="deck">
+
+        <div class="slide active" data-n="0">
+            <div class="s-label">Презентация услуг</div>
+            <h1 class="s-title">
+                <span class="hl">NEXUS</span> Digital
+            </h1>
+            <p class="s-sub">Технологичная веб-студия. Создаём сайты с AI-интеграцией, современным дизайном и измеримым результатом для бизнеса.</p>
+            <div class="stat-row">
+                <div class="stat"><div class="stat-num">6</div><div class="stat-lbl">направлений разработки</div></div>
+                <div class="stat"><div class="stat-num">AI</div><div class="stat-lbl">интеграции в каждый проект</div></div>
+                <div class="stat"><div class="stat-num">RU</div><div class="stat-lbl">российский стек технологий</div></div>
+            </div>
+        </div>
+
+        <div class="slide" data-n="1">
+            <div class="s-label">Проблема</div>
+            <h2 class="s-title">Зачем бизнесу <span class="hl">профессиональный сайт</span></h2>
+            <p class="s-sub">82% клиентов проверяют компанию онлайн перед покупкой. Без качественного сайта вы теряете деньги каждый день.</p>
+            <div class="grid3">
+                <div class="card">
+                    <div class="c-icon">87%</div>
+                    <h3>Первое впечатление</h3>
+                    <p>87% покупателей начинают поиск товаров в интернете. Ваш сайт — первое, что видит клиент.</p>
+                </div>
+                <div class="card">
+                    <div class="c-icon">3 с</div>
+                    <h3>Скорость решает</h3>
+                    <p>Если сайт загружается дольше 3 секунд — 53% посетителей уходят. Каждая секунда = -7% конверсии.</p>
+                </div>
+                <div class="card">
+                    <div class="c-icon">70%</div>
+                    <h3>Мобильный трафик</h3>
+                    <p>70% трафика — с телефонов. Сайт без адаптива теряет 2/3 аудитории.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" data-n="2">
+            <div class="s-label">Услуги</div>
+            <h2 class="s-title">Что мы <span class="hl">делаем</span></h2>
+            <div class="grid3">
+                <div class="card">
+                    <div class="c-icon">01</div>
+                    <h3>Веб-разработка</h3>
+                    <p>Лендинги, корпоративные сайты, интернет-магазины, веб-приложения</p>
+                    <div class="tags"><span class="tag">Лендинги</span><span class="tag">E-commerce</span><span class="tag">SaaS</span></div>
+                </div>
+                <div class="card">
+                    <div class="c-icon">02</div>
+                    <h3>UI/UX Дизайн</h3>
+                    <p>Прототипирование, визуальный дизайн, дизайн-системы, UX-аудит</p>
+                    <div class="tags"><span class="tag">Figma</span><span class="tag">Прототипы</span><span class="tag">UX</span></div>
+                </div>
+                <div class="card">
+                    <div class="c-icon">03</div>
+                    <h3>AI-интеграции</h3>
+                    <p>Чат-боты, рекомендации, автоматизация контента, персонализация</p>
+                    <div class="tags"><span class="tag">YandexGPT</span><span class="tag">GigaChat</span><span class="tag">RAG</span></div>
+                </div>
+                <div class="card">
+                    <div class="c-icon">04</div>
+                    <h3>SEO и маркетинг</h3>
+                    <p>Яндекс, Google, контекстная реклама, аналитика, конверсионная оптимизация</p>
+                    <div class="tags"><span class="tag">SEO</span><span class="tag">Директ</span><span class="tag">CRO</span></div>
+                </div>
+                <div class="card">
+                    <div class="c-icon">05</div>
+                    <h3>Поддержка</h3>
+                    <p>Мониторинг, обновления безопасности, доработки, хостинг</p>
+                    <div class="tags"><span class="tag">SLA</span><span class="tag">24/7</span><span class="tag">Хостинг</span></div>
+                </div>
+                <div class="card">
+                    <div class="c-icon">06</div>
+                    <h3>Импортозамещение</h3>
+                    <p>Миграция на 1С-Битрикс, Yandex.Cloud, отечественные CRM</p>
+                    <div class="tags"><span class="tag">Битрикс</span><span class="tag">Yandex.Cloud</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" data-n="3">
+            <div class="s-label">Детали</div>
+            <h2 class="s-title">Веб-разработка <span class="hl">любой сложности</span></h2>
+            <p class="s-sub">От простых лендингов до сложных платформ с личными кабинетами, оплатой и интеграциями.</p>
+            <div class="grid2">
+                <div class="card">
+                    <h3>Лендинги</h3>
+                    <p>Высокая конверсия, быстрая загрузка, A/B-тесты. Идеально для запуска продукта или рекламной кампании. Срок — от 3 дней.</p>
+                </div>
+                <div class="card">
+                    <h3>Корпоративные сайты</h3>
+                    <p>Представительство компании в интернете. Многостраничная структура, CMS для управления контентом, SEO из коробки.</p>
+                </div>
+                <div class="card">
+                    <h3>Интернет-магазины</h3>
+                    <p>Каталог, корзина, оплата, доставка, интеграция с 1С и CRM. Масштабируемая архитектура.</p>
+                </div>
+                <div class="card">
+                    <h3>Веб-приложения / SaaS</h3>
+                    <p>Сервисы по подписке, личные кабинеты, API, биллинг. Современный стек: React, Node.js, PostgreSQL.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" data-n="4">
+            <div class="s-label">AI</div>
+            <h2 class="s-title">Искусственный интеллект <span class="hl">в каждом проекте</span></h2>
+            <p class="s-sub">46% компаний уже внедрили AI. Мы помогаем интегрировать AI в ваш сайт — от чат-ботов до рекомендательных систем.</p>
+            <div class="grid2">
+                <div class="card">
+                    <h3>AI-чат-боты</h3>
+                    <p>Умные чат-боты на YandexGPT и GigaChat. Отвечают на вопросы, консультируют, принимают заявки 24/7. Снижают нагрузку на менеджеров на 60%.</p>
+                </div>
+                <div class="card">
+                    <h3>Рекомендации</h3>
+                    <p>Персональные рекомендации товаров и контента. Увеличивают средний чек на 15-30%. Работают на основе поведения пользователя.</p>
+                </div>
+                <div class="card">
+                    <h3>Автоматизация контента</h3>
+                    <p>Генерация описаний товаров, SEO-текстов, постов. AI создаёт черновик — редактор дорабатывает. Экономия до 80% времени.</p>
+                </div>
+                <div class="card">
+                    <h3>AI-аналитика</h3>
+                    <p>Предиктивная аналитика поведения пользователей. Автоматическая оптимизация конверсии. Умные отчёты и инсайты.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" data-n="5">
+            <div class="s-label">Процесс</div>
+            <h2 class="s-title">Как мы <span class="hl">работаем</span></h2>
+            <p class="s-sub">Прозрачный процесс с понятными этапами. Вы контролируете каждый шаг.</p>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <h4>Брифинг</h4>
+                    <p>Изучаем бизнес, аудиторию и цели. Формируем ТЗ и смету.</p>
+                </div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <h4>Дизайн</h4>
+                    <p>Прототипы, UI-концепция, согласование визуала.</p>
+                </div>
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <h4>Разработка</h4>
+                    <p>Вёрстка, backend, интеграции. Спринты по 2 недели.</p>
+                </div>
+                <div class="step">
+                    <div class="step-num">4</div>
+                    <h4>Тестирование</h4>
+                    <p>QA, нагрузочное, кросс-браузерная проверка.</p>
+                </div>
+                <div class="step">
+                    <div class="step-num">5</div>
+                    <h4>Запуск</h4>
+                    <p>Деплой, SEO, аналитика, передача доступов.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" data-n="6">
+            <div class="s-label">Стоимость</div>
+            <h2 class="s-title">Прозрачные <span class="hl">цены</span></h2>
+            <p class="s-sub">Фиксированная стоимость или оплата по часам. Точная смета — после обсуждения проекта.</p>
+            <div class="price-table">
+                <div class="price-header">
+                    <div>Услуга</div><div>От</div><div>До</div><div>Сроки</div>
+                </div>
+                <div class="price-row"><div class="svc">Лендинг</div><div class="pr">40 000 ₽</div><div class="pr">150 000 ₽</div><div class="tm">3-7 дней</div></div>
+                <div class="price-row"><div class="svc">Корпоративный сайт</div><div class="pr">100 000 ₽</div><div class="pr">800 000 ₽</div><div class="tm">2-6 нед.</div></div>
+                <div class="price-row"><div class="svc">Интернет-магазин</div><div class="pr">150 000 ₽</div><div class="pr">2 500 000 ₽</div><div class="tm">1-3 мес.</div></div>
+                <div class="price-row"><div class="svc">SaaS / Веб-приложение</div><div class="pr">400 000 ₽</div><div class="pr">5 000 000 ₽</div><div class="tm">1.5-6 мес.</div></div>
+                <div class="price-row"><div class="svc">UI/UX Дизайн</div><div class="pr">25 000 ₽</div><div class="pr">400 000 ₽</div><div class="tm">3 дня — 4 нед.</div></div>
+                <div class="price-row"><div class="svc">SEO-продвижение</div><div class="pr">15 000 ₽/мес</div><div class="pr">80 000 ₽/мес</div><div class="tm">от 2 мес.</div></div>
+                <div class="price-row"><div class="svc">AI-интеграция</div><div class="pr">35 000 ₽</div><div class="pr">500 000 ₽</div><div class="tm">1-4 нед.</div></div>
+                <div class="price-row"><div class="svc">Поддержка</div><div class="pr">5 000 ₽/мес</div><div class="pr">100 000 ₽/мес</div><div class="tm">постоянно</div></div>
+            </div>
+        </div>
+
+        <div class="slide" data-n="7">
+            <div class="s-label">Кейс</div>
+            <h2 class="s-title">Наш <span class="hl">сайт</span> — наша визитка</h2>
+            <div class="case-box">
+                <div class="case-info">
+                    <h3>nexus-digital-lovat.vercel.app</h3>
+                    <p>Мы создали собственный сайт-презентацию с интерактивным брифом для клиентов — на чистом HTML/CSS/JS, без фреймворков и конструкторов.</p>
+                    <ul class="case-features">
+                        <li>9 секций с аналитикой рынка и данными</li>
+                        <li>Scroll-анимации (Intersection Observer)</li>
+                        <li>8-шаговый интерактивный бриф с авто-сводкой</li>
+                        <li>Fullscreen модалка с подтверждением закрытия</li>
+                        <li>Адаптивный дизайн для всех устройств</li>
+                        <li>Темная премиум-тема с glassmorphism</li>
+                        <li>PageSpeed 95+ из коробки</li>
+                    </ul>
+                </div>
+                <div class="case-visual">
+                    <div class="browser-bar">
+                        <div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div>
+                    </div>
+                    <div class="screen">
+                        <div class="mock-logo">NEXUS Digital</div>
+                        <div>Создаём сайты с искусственным интеллектом</div>
+                        <div style="margin-top: 12px; padding: 8px 20px; background: var(--g1); border-radius: 8px; color: #fff; font-size: 12px; font-weight: 600;">Заполнить бриф</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" data-n="8">
+            <div class="s-label">Технологии</div>
+            <h2 class="s-title">Наш <span class="hl">стек</span></h2>
+            <p class="s-sub">Современные технологии с упором на российские решения и импортозамещение.</p>
+            <div class="tech-cols">
+                <div class="tech-col">
+                    <h4>Frontend</h4>
+                    <ul><li>React / Next.js</li><li>Vue.js / Nuxt</li><li>TypeScript</li><li>Tailwind CSS</li></ul>
+                </div>
+                <div class="tech-col">
+                    <h4>Backend</h4>
+                    <ul><li>Node.js</li><li>Python / Django</li><li>PHP / Laravel</li><li>1С-Битрикс</li></ul>
+                </div>
+                <div class="tech-col">
+                    <h4>AI / ML</h4>
+                    <ul><li>YandexGPT API</li><li>GigaChat API</li><li>LangChain</li><li>RAG-системы</li></ul>
+                </div>
+                <div class="tech-col">
+                    <h4>Инфраструктура</h4>
+                    <ul><li>Yandex.Cloud</li><li>Docker / K8s</li><li>CI/CD</li><li>Битрикс24 CRM</li></ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" data-n="9">
+            <div class="s-label">Преимущества</div>
+            <h2 class="s-title">Почему <span class="hl">мы</span></h2>
+            <div class="adv-grid">
+                <div class="adv">
+                    <div class="a-icon">AI</div>
+                    <h3>AI-экспертиза</h3>
+                    <p>Интегрируем AI в каждый проект. YandexGPT, GigaChat, рекомендательные системы.</p>
+                </div>
+                <div class="adv">
+                    <div class="a-icon">RU</div>
+                    <h3>Российский стек</h3>
+                    <p>1С-Битрикс, Yandex.Cloud, Битрикс24. Соответствие 152-ФЗ.</p>
+                </div>
+                <div class="adv">
+                    <div class="a-icon">360</div>
+                    <h3>Полный цикл</h3>
+                    <p>Дизайн, разработка, SEO, маркетинг, поддержка — все в одном месте.</p>
+                </div>
+                <div class="adv">
+                    <div class="a-icon">$</div>
+                    <h3>Честные цены</h3>
+                    <p>Фиксированная смета. Поэтапная оплата. Никаких скрытых доплат.</p>
+                </div>
+                <div class="adv">
+                    <div class="a-icon">&lt;/&gt;</div>
+                    <h3>Чистый код</h3>
+                    <p>TypeScript, тесты, CI/CD. PageSpeed 90+. Легко масштабировать.</p>
+                </div>
+                <div class="adv">
+                    <div class="a-icon">24</div>
+                    <h3>Поддержка 24/7</h3>
+                    <p>Мониторинг, обновления безопасности. SLA от 1 часа.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" data-n="10">
+            <div class="s-label">Рынок</div>
+            <h2 class="s-title">Почему <span class="hl">сейчас</span></h2>
+            <p class="s-sub">Российский IT-рынок на подъёме. Лучшее время для инвестиций в digital.</p>
+            <div class="grid3">
+                <div class="card">
+                    <div class="c-icon">3.5T</div>
+                    <h3>IT-рынок России</h3>
+                    <p>Объём превысил 3.5 трлн ₽. Рост ПО — 40% в год. Импортозамещение ускоряет спрос.</p>
+                </div>
+                <div class="card">
+                    <div class="c-icon">11T</div>
+                    <h3>E-commerce</h3>
+                    <p>11.2 трлн ₽ в 2024, рост 41%. К 2030 — утроение. Каждый бизнес идёт в онлайн.</p>
+                </div>
+                <div class="card">
+                    <div class="c-icon">AI</div>
+                    <h3>AI-революция</h3>
+                    <p>46% компаний внедрили AI. YandexGPT и GigaChat догоняют западные аналоги.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" data-n="11">
+            <div class="cta-center">
+                <div class="s-label">Начать проект</div>
+                <h2 class="s-title">Готовы обсудить <span class="hl">ваш проект</span>?</h2>
+                <p class="s-sub">Бесплатная консультация, оценка сроков и стоимости. Расскажите о вашей задаче — мы предложим решение.</p>
+                <a href="https://nexus-digital-lovat.vercel.app" class="cta-btn" target="_blank">Перейти на сайт</a>
+                <div class="contacts">
+                    hello@nexus.digital &nbsp;|&nbsp; Telegram: @nexusdigital &nbsp;|&nbsp; +7 (XXX) XXX-XX-XX
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="progress-bar"><div class="progress-fill" id="progFill"></div></div>
+    <div class="nav-bar">
+        <div class="logo">NEXUS Digital</div>
+        <div class="nav-controls">
+            <button class="nav-btn" onclick="go(-1)">&larr;</button>
+            <span class="nav-counter" id="counter">1 / 12</span>
+            <button class="nav-btn" onclick="go(1)">&rarr;</button>
+        </div>
+    </div>
+
+    <script>
+        let cur = 0;
+        const slides = document.querySelectorAll('.slide');
+        const total = slides.length;
+
+        function show(n) {
+            if (n < 0 || n >= total) return;
+            slides[cur].classList.remove('active');
+            cur = n;
+            slides[cur].classList.add('active');
+            document.getElementById('counter').textContent = (cur + 1) + ' / ' + total;
+            document.getElementById('progFill').style.width = ((cur + 1) / total * 100) + '%';
+        }
+
+        function go(d) { show(cur + d); }
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); go(1); }
+            if (e.key === 'ArrowLeft') go(-1);
+            if (e.key === 'Home') show(0);
+            if (e.key === 'End') show(total - 1);
+        });
+
+        document.querySelector('.deck').addEventListener('click', e => {
+            if (e.target.closest('.nav-bar') || e.target.closest('a') || e.target.closest('button')) return;
+            const x = e.clientX / window.innerWidth;
+            x > 0.5 ? go(1) : go(-1);
+        });
+
+        show(0);
+    </script>
+</body>
+</html>
