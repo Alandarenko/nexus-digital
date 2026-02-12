@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Рынок веб-разработки — NEXUS Digital</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-card: #1a1a25;
+            --bg-card-hover: #22222f;
+            --accent: #6366f1;
+            --accent-light: #818cf8;
+            --accent-glow: rgba(99, 102, 241, 0.15);
+            --text-primary: #f1f1f4;
+            --text-secondary: #9ca3af;
+            --text-muted: #6b7280;
+            --border: #2a2a3a;
+            --gradient-1: linear-gradient(135deg, #6366f1, #8b5cf6);
+            --gradient-2: linear-gradient(135deg, #6366f1, #06b6d4);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            padding: 20px 40px; display: flex; justify-content: space-between; align-items: center;
+            background: rgba(10, 10, 15, 0.85); backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            font-size: 22px; font-weight: 800; letter-spacing: -0.5px;
+            background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            text-decoration: none; cursor: pointer;
+        }
+
+        .nav-back {
+            display: flex; align-items: center; gap: 8px;
+            padding: 10px 20px; border-radius: 8px;
+            background: var(--bg-card); border: 1px solid var(--border);
+            color: var(--text-secondary); font-size: 14px; font-weight: 500;
+            cursor: pointer; transition: all 0.2s; text-decoration: none;
+        }
+        .nav-back:hover { border-color: var(--accent); color: var(--text-primary); }
+
+        .burger {
+            display: none; flex-direction: column; gap: 5px;
+            background: none; border: none; cursor: pointer; padding: 8px; z-index: 102;
+        }
+        .burger span { display: block; width: 24px; height: 2px; background: var(--text-primary); border-radius: 2px; transition: all 0.3s; }
+        .burger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .burger.open span:nth-child(2) { opacity: 0; }
+        .burger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+        .mobile-menu {
+            display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 101;
+            background: rgba(10, 10, 15, 0.97); backdrop-filter: blur(20px);
+            flex-direction: column; align-items: center; justify-content: center; gap: 24px;
+        }
+        .mobile-menu.open { display: flex; }
+        .mobile-menu a {
+            color: var(--text-primary); text-decoration: none; font-size: 20px; font-weight: 600; transition: color 0.3s;
+        }
+        .mobile-menu a:hover { color: var(--accent-light); }
+
+        section {
+            padding: 120px 40px; max-width: 1280px; margin: 0 auto;
+        }
+
+        .page-hero {
+            padding-top: 140px;
+        }
+
+        .section-label {
+            font-size: 12px; font-weight: 600; text-transform: uppercase;
+            letter-spacing: 3px; color: var(--accent-light); margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: 42px; font-weight: 800; letter-spacing: -1px;
+            line-height: 1.15; margin-bottom: 24px;
+        }
+
+        .section-subtitle {
+            font-size: 18px; color: var(--text-secondary); max-width: 640px; line-height: 1.7;
+        }
+
+        .market-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 60px;
+        }
+
+        .market-card {
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px;
+            padding: 36px; transition: all 0.3s ease;
+        }
+        .market-card:hover { background: var(--bg-card-hover); border-color: var(--accent); transform: translateY(-4px); }
+
+        .market-card .card-value {
+            font-size: 32px; font-weight: 800; margin-bottom: 8px;
+            background: var(--gradient-2); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .market-card .card-title { font-size: 16px; font-weight: 600; margin-bottom: 12px; }
+        .market-card .card-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+
+        .competition-grid {
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 60px;
+        }
+
+        .competition-card {
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px;
+        }
+        .competition-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 16px; color: var(--accent-light); }
+        .competition-card ul { list-style: none; }
+        .competition-card li {
+            padding: 6px 0; font-size: 14px; color: var(--text-secondary);
+            position: relative; padding-left: 20px;
+        }
+        .competition-card li::before {
+            content: ''; position: absolute; left: 0; top: 14px;
+            width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
+        }
+
+        .section-divider {
+            border: none; height: 1px; background: var(--border); max-width: 1280px; margin: 0 auto;
+        }
+
+        footer {
+            border-top: 1px solid var(--border); padding: 40px; text-align: center;
+            color: var(--text-muted); font-size: 14px;
+        }
+
+        .fade-in { opacity: 0; transform: translateY(30px); transition: all 0.6s ease; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 1024px) {
+            .market-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            nav { padding: 16px 20px; }
+            .nav-back span { display: none; }
+            .burger { display: flex; }
+            section { padding: 80px 20px; }
+            .page-hero { padding-top: 100px; }
+            .section-title { font-size: 32px; }
+            .market-grid, .competition-grid { grid-template-columns: 1fr; }
+            .market-card { padding: 28px; }
+            footer { padding: 24px 20px; }
+        }
+
+        @media (max-width: 480px) {
+            .section-title { font-size: 26px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="/" class="logo">NEXUS Digital</a>
+        <a href="/" class="nav-back">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5m0 0l7 7m-7-7l7-7"/></svg>
+            <span>На главную</span>
+        </a>
+        <button class="burger" onclick="toggleMenu()" aria-label="Меню">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="/" onclick="closeMenu()">На главную</a>
+        <a href="trends.html" onclick="closeMenu()">Тренды</a>
+        <a href="tech.html" onclick="closeMenu()">Технологии</a>
+    </div>
+
+    <section class="page-hero fade-in">
+        <div class="section-label">Аналитика</div>
+        <h2 class="section-title">Рынок веб-разработки в России</h2>
+        <p class="section-subtitle">
+            Российский рынок IT демонстрирует устойчивый рост благодаря импортозамещению, цифровизации госуслуг и взрывному росту e-commerce.
+        </p>
+
+        <div class="market-grid">
+            <div class="market-card">
+                <div class="card-value">3.5 трлн</div>
+                <div class="card-title">IT-рынок России (2024)</div>
+                <div class="card-desc">Общий объём российского IT-рынка превысил 3.5 трлн рублей. Рост рынка ПО составил 40% год к году.</div>
+            </div>
+            <div class="market-card">
+                <div class="card-value">11.2 трлн</div>
+                <div class="card-title">E-commerce (2024)</div>
+                <div class="card-desc">Рынок электронной торговли вырос на 41%. К 2030 году ожидается рост до 35 трлн рублей — в 3 раза.</div>
+            </div>
+            <div class="market-card">
+                <div class="card-value">1 трлн</div>
+                <div class="card-title">Рынок AI в России (2025)</div>
+                <div class="card-desc">Потенциал AI для экономики — до 13 трлн руб. к 2030 году. YandexGPT и GigaChat лидируют на рынке.</div>
+            </div>
+            <div class="market-card">
+                <div class="card-value">82%</div>
+                <div class="card-title">Рост за 3 года</div>
+                <div class="card-desc">Российский рынок разработки вырос на 82% с 2022 по 2025 год благодаря импортозамещению и цифровизации.</div>
+            </div>
+            <div class="market-card">
+                <div class="card-value">700K</div>
+                <div class="card-title">Дефицит IT-кадров</div>
+                <div class="card-desc">Острая нехватка специалистов. Средняя зарплата разработчика — 180 000 руб./мес. Спрос превышает предложение.</div>
+            </div>
+            <div class="market-card">
+                <div class="card-value">40.5%</div>
+                <div class="card-title">Москва и ЦФО</div>
+                <div class="card-desc">Крупнейшая концентрация веб-студий — в Центральном федеральном округе. Регионы активно догоняют.</div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="fade-in">
+        <div class="section-label">Конкуренция</div>
+        <h2 class="section-title">Конкурентный ландшафт</h2>
+        <p class="section-subtitle">
+            Рынок фрагментирован: от крупных интеграторов с выручкой в миллиарды до тысяч небольших региональных студий.
+        </p>
+
+        <div class="competition-grid">
+            <div class="competition-card">
+                <h3>Крупные игроки (>1 млрд руб.)</h3>
+                <ul>
+                    <li>AGIMA — 3.1 млрд руб. выручки, 160+ сотрудников, 500+ проектов</li>
+                    <li>Студия Артемия Лебедева — легенда Рунета, брендинг + дизайн</li>
+                    <li>Articul Media — крупный веб-интегратор для корпораций</li>
+                    <li>Студия Олега Чулакова — 231 млн руб., рост +49.6% за год</li>
+                </ul>
+            </div>
+            <div class="competition-card">
+                <h3>Наша ниша и позиционирование</h3>
+                <ul>
+                    <li>Технологичная студия с AI-экспертизой — уникальная ниша</li>
+                    <li>Средний сегмент — доступные цены при высоком качестве</li>
+                    <li>Импортозамещённый стек — 1С-Битрикс, YandexGPT, Yandex.Cloud</li>
+                    <li>Полный цикл — от дизайна до поддержки и продвижения</li>
+                </ul>
+            </div>
+            <div class="competition-card">
+                <h3>Платформы и CMS</h3>
+                <ul>
+                    <li>1С-Битрикс — лидер среди коммерческих CMS в России</li>
+                    <li>Tilda — стандарт для лендингов и малого бизнеса</li>
+                    <li>WordPress — 40% мирового рынка, но тренд на импортозамещение</li>
+                    <li>Bitrix24 CRM — 67% российских компаний, рынок CRM > 32 млрд руб.</li>
+                </ul>
+            </div>
+            <div class="competition-card">
+                <h3>Барьеры входа</h3>
+                <ul>
+                    <li>Дефицит кадров — 500-700K незакрытых вакансий в IT</li>
+                    <li>Рост зарплат — средняя 180K руб./мес., senior от 300K+</li>
+                    <li>Санкции — ограничения на западные инструменты и сервисы</li>
+                    <li>Высокая конкуренция — 5000+ агентств в базе RUWARD</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>NEXUS Digital &copy; 2025-2026. Данные по рынку: РБК, CNews, ComNews, RUWARD, АКИТ, Яков и Партнёры.</p>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        function toggleMenu() {
+            document.querySelector('.burger').classList.toggle('open');
+            document.getElementById('mobileMenu').classList.toggle('open');
+            document.body.style.overflow = document.getElementById('mobileMenu').classList.contains('open') ? 'hidden' : '';
+        }
+        function closeMenu() {
+            document.querySelector('.burger').classList.remove('open');
+            document.getElementById('mobileMenu').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+    </script>
+
+</body>
+</html>

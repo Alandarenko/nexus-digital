@@ -231,48 +231,6 @@
             margin-top: 4px;
         }
 
-        .market-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-            margin-top: 60px;
-        }
-
-        .market-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 36px;
-            transition: all 0.3s ease;
-        }
-
-        .market-card:hover {
-            background: var(--bg-card-hover);
-            border-color: var(--accent);
-            transform: translateY(-4px);
-        }
-
-        .market-card .card-value {
-            font-size: 32px;
-            font-weight: 800;
-            margin-bottom: 8px;
-            background: var(--gradient-2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .market-card .card-title {
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 12px;
-        }
-
-        .market-card .card-desc {
-            font-size: 14px;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
         .services-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -409,83 +367,6 @@
             color: var(--text-secondary);
         }
 
-        .trends-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-            margin-top: 60px;
-        }
-
-        .trend-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 32px;
-            transition: all 0.3s ease;
-        }
-
-        .trend-card:hover {
-            border-color: var(--accent);
-            transform: translateY(-4px);
-        }
-
-        .trend-number {
-            font-size: 14px;
-            font-weight: 700;
-            color: var(--accent);
-            margin-bottom: 12px;
-        }
-
-        .trend-card h3 {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 12px;
-        }
-
-        .trend-card p {
-            font-size: 14px;
-            color: var(--text-secondary);
-            line-height: 1.7;
-        }
-
-        .tech-columns {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 24px;
-            margin-top: 60px;
-        }
-
-        .tech-column {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 32px;
-        }
-
-        .tech-column h3 {
-            font-size: 14px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--accent-light);
-            margin-bottom: 24px;
-        }
-
-        .tech-column ul {
-            list-style: none;
-        }
-
-        .tech-column li {
-            padding: 8px 0;
-            font-size: 15px;
-            color: var(--text-secondary);
-            border-bottom: 1px solid rgba(42, 42, 58, 0.5);
-        }
-
-        .tech-column li:last-child {
-            border-bottom: none;
-        }
-
         .advantages-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -529,6 +410,62 @@
             font-size: 14px;
             color: var(--text-secondary);
             line-height: 1.7;
+        }
+
+        .materials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 60px;
+        }
+
+        .material-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 36px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .material-card:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--accent);
+            transform: translateY(-4px);
+        }
+
+        .material-icon {
+            font-size: 32px;
+            margin-bottom: 16px;
+        }
+
+        .material-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        .material-card p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            flex: 1;
+        }
+
+        .material-arrow {
+            font-size: 20px;
+            color: var(--accent-light);
+            margin-top: 16px;
+            transition: transform 0.3s;
+        }
+
+        .material-card:hover .material-arrow {
+            transform: translateX(6px);
         }
 
         .process-steps {
@@ -889,57 +826,8 @@
             margin: 0 auto;
         }
 
-        .competition-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 24px;
-            margin-top: 60px;
-        }
-
-        .competition-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 32px;
-        }
-
-        .competition-card h3 {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 16px;
-            color: var(--accent-light);
-        }
-
-        .competition-card ul {
-            list-style: none;
-        }
-
-        .competition-card li {
-            padding: 6px 0;
-            font-size: 14px;
-            color: var(--text-secondary);
-            position: relative;
-            padding-left: 20px;
-        }
-
-        .competition-card li::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 14px;
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: var(--accent);
-        }
-
         @media (max-width: 1024px) {
-            .market-grid,
-            .trends-grid,
             .advantages-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .tech-columns {
                 grid-template-columns: repeat(2, 1fr);
             }
             .process-steps {
@@ -988,15 +876,10 @@
             .stat-item .stat-number {
                 font-size: 28px;
             }
-            .market-grid,
             .services-grid,
-            .trends-grid,
             .advantages-grid,
-            .competition-grid {
+            .materials-grid {
                 grid-template-columns: 1fr;
-            }
-            .tech-columns {
-                grid-template-columns: 1fr 1fr;
             }
             .process-steps {
                 grid-template-columns: 1fr 1fr;
@@ -1039,9 +922,6 @@
             .service-card {
                 padding: 28px;
             }
-            .market-card {
-                padding: 28px;
-            }
             .cta-section {
                 padding: 80px 20px;
             }
@@ -1060,9 +940,6 @@
             .hero-stats {
                 gap: 20px;
                 margin-top: 36px;
-            }
-            .tech-columns {
-                grid-template-columns: 1fr;
             }
             .process-steps {
                 grid-template-columns: 1fr;
@@ -1090,11 +967,8 @@
     <nav>
         <a href="#" class="logo" onclick="event.preventDefault();window.scrollTo({top:0,behavior:'smooth'})">NEXUS Digital</a>
         <ul class="nav-links">
-            <li><a href="#market">Рынок</a></li>
             <li><a href="#services">Услуги</a></li>
             <li><a href="#pricing">Цены</a></li>
-            <li><a href="#trends">Тренды</a></li>
-            <li><a href="#tech">Технологии</a></li>
             <li><a href="#advantages">Преимущества</a></li>
             <li><a href="#contact">Контакты</a></li>
             <li><button class="nav-cta" onclick="openBrief()">Заполнить бриф</button></li>
@@ -1105,11 +979,8 @@
     </nav>
 
     <div class="mobile-menu" id="mobileMenu">
-        <a href="#market" onclick="closeMenu()">Рынок</a>
         <a href="#services" onclick="closeMenu()">Услуги</a>
         <a href="#pricing" onclick="closeMenu()">Цены</a>
-        <a href="#trends" onclick="closeMenu()">Тренды</a>
-        <a href="#tech" onclick="closeMenu()">Технологии</a>
         <a href="#advantages" onclick="closeMenu()">Преимущества</a>
         <a href="#contact" onclick="closeMenu()">Контакты</a>
         <button class="nav-cta" onclick="closeMenu();openBrief()">Заполнить бриф</button>
@@ -1136,98 +1007,6 @@
             <div class="stat-item">
                 <div class="stat-number">5 000+</div>
                 <div class="stat-label">digital-агентств зарегистрировано в России</div>
-            </div>
-        </div>
-    </section>
-
-    <hr class="section-divider">
-
-    <section id="market" class="fade-in">
-        <div class="section-label">Аналитика</div>
-        <h2 class="section-title">Рынок веб-разработки в России</h2>
-        <p class="section-subtitle">
-            Российский рынок IT демонстрирует устойчивый рост благодаря импортозамещению, цифровизации госуслуг и взрывному росту e-commerce.
-        </p>
-
-        <div class="market-grid">
-            <div class="market-card">
-                <div class="card-value">3.5 трлн</div>
-                <div class="card-title">IT-рынок России (2024)</div>
-                <div class="card-desc">Общий объём российского IT-рынка превысил 3.5 трлн рублей. Рост рынка ПО составил 40% год к году.</div>
-            </div>
-            <div class="market-card">
-                <div class="card-value">11.2 трлн</div>
-                <div class="card-title">E-commerce (2024)</div>
-                <div class="card-desc">Рынок электронной торговли вырос на 41%. К 2030 году ожидается рост до 35 трлн рублей — в 3 раза.</div>
-            </div>
-            <div class="market-card">
-                <div class="card-value">1 трлн</div>
-                <div class="card-title">Рынок AI в России (2025)</div>
-                <div class="card-desc">Потенциал AI для экономики — до 13 трлн руб. к 2030 году. YandexGPT и GigaChat лидируют на рынке.</div>
-            </div>
-            <div class="market-card">
-                <div class="card-value">82%</div>
-                <div class="card-title">Рост за 3 года</div>
-                <div class="card-desc">Российский рынок разработки вырос на 82% с 2022 по 2025 год благодаря импортозамещению и цифровизации.</div>
-            </div>
-            <div class="market-card">
-                <div class="card-value">700K</div>
-                <div class="card-title">Дефицит IT-кадров</div>
-                <div class="card-desc">Острая нехватка специалистов. Средняя зарплата разработчика — 180 000 руб./мес. Спрос превышает предложение.</div>
-            </div>
-            <div class="market-card">
-                <div class="card-value">40.5%</div>
-                <div class="card-title">Москва и ЦФО</div>
-                <div class="card-desc">Крупнейшая концентрация веб-студий — в Центральном федеральном округе. Регионы активно догоняют.</div>
-            </div>
-        </div>
-    </section>
-
-    <hr class="section-divider">
-
-    <section class="fade-in">
-        <div class="section-label">Конкуренция</div>
-        <h2 class="section-title">Конкурентный ландшафт</h2>
-        <p class="section-subtitle">
-            Рынок фрагментирован: от крупных интеграторов с выручкой в миллиарды до тысяч небольших региональных студий.
-        </p>
-
-        <div class="competition-grid">
-            <div class="competition-card">
-                <h3>Крупные игроки (>1 млрд руб.)</h3>
-                <ul>
-                    <li>AGIMA — 3.1 млрд руб. выручки, 160+ сотрудников, 500+ проектов</li>
-                    <li>Студия Артемия Лебедева — легенда Рунета, брендинг + дизайн</li>
-                    <li>Articul Media — крупный веб-интегратор для корпораций</li>
-                    <li>Студия Олега Чулакова — 231 млн руб., рост +49.6% за год</li>
-                </ul>
-            </div>
-            <div class="competition-card">
-                <h3>Наша ниша и позиционирование</h3>
-                <ul>
-                    <li>Технологичная студия с AI-экспертизой — уникальная ниша</li>
-                    <li>Средний сегмент — доступные цены при высоком качестве</li>
-                    <li>Импортозамещённый стек — 1С-Битрикс, YandexGPT, Yandex.Cloud</li>
-                    <li>Полный цикл — от дизайна до поддержки и продвижения</li>
-                </ul>
-            </div>
-            <div class="competition-card">
-                <h3>Платформы и CMS</h3>
-                <ul>
-                    <li>1С-Битрикс — лидер среди коммерческих CMS в России</li>
-                    <li>Tilda — стандарт для лендингов и малого бизнеса</li>
-                    <li>WordPress — 40% мирового рынка, но тренд на импортозамещение</li>
-                    <li>Bitrix24 CRM — 67% российских компаний, рынок CRM > 32 млрд руб.</li>
-                </ul>
-            </div>
-            <div class="competition-card">
-                <h3>Барьеры входа</h3>
-                <ul>
-                    <li>Дефицит кадров — 500-700K незакрытых вакансий в IT</li>
-                    <li>Рост зарплат — средняя 180K руб./мес., senior от 300K+</li>
-                    <li>Санкции — ограничения на западные инструменты и сервисы</li>
-                    <li>Высокая конкуренция — 5000+ агентств в базе RUWARD</li>
-                </ul>
             </div>
         </div>
     </section>
@@ -1421,98 +1200,6 @@
 
     <hr class="section-divider">
 
-    <section id="trends" class="fade-in">
-        <div class="section-label">Тренды 2025-2026</div>
-        <h2 class="section-title">Куда движется рынок</h2>
-        <p class="section-subtitle">
-            Ключевые тенденции, которые формируют рынок веб-разработки в России прямо сейчас.
-        </p>
-
-        <div class="trends-grid">
-            <div class="trend-card">
-                <div class="trend-number">01</div>
-                <h3>AI в каждом проекте</h3>
-                <p>46% компаний уже внедрили AI-агентов. Чат-боты, персонализация, генерация контента — стандарт для новых сайтов. YandexGPT и GigaChat приближаются к уровню западных аналогов.</p>
-            </div>
-            <div class="trend-card">
-                <div class="trend-number">02</div>
-                <h3>Импортозамещение</h3>
-                <p>Полный запрет иностранного ПО в критической инфраструктуре с 2025 года. 25 000+ программ в реестре отечественного ПО. Миграция на 1С-Битрикс, Yandex.Cloud набирает обороты.</p>
-            </div>
-            <div class="trend-card">
-                <div class="trend-number">03</div>
-                <h3>E-commerce взрыв</h3>
-                <p>Рынок e-commerce — 11.2 трлн руб. в 2024, рост 41%. К 2030 — утроение до 35 трлн. Каждый новый онлайн-бизнес — потенциальный клиент веб-студии.</p>
-            </div>
-            <div class="trend-card">
-                <div class="trend-number">04</div>
-                <h3>No-Code / Low-Code</h3>
-                <p>Tilda и блочные конструкторы снизили порог входа. Но сложные задачи — кастомные интеграции, CRM, e-commerce — по-прежнему требуют профессиональной разработки.</p>
-            </div>
-            <div class="trend-card">
-                <div class="trend-number">05</div>
-                <h3>Облачная миграция</h3>
-                <p>Рынок облаков в России — 165.6 млрд руб. Российские облака (Yandex.Cloud, VK Cloud) стали в 3 раза популярнее за год. Serverless и микросервисы — новый стандарт.</p>
-            </div>
-            <div class="trend-card">
-                <div class="trend-number">06</div>
-                <h3>Кибербезопасность</h3>
-                <p>130 000 кибер-инцидентов в 2024 году — рост в 2.5 раза. Security-first подход при разработке обязателен. 71% IT-компаний ищут специалистов по безопасности.</p>
-            </div>
-        </div>
-    </section>
-
-    <hr class="section-divider">
-
-    <section id="tech" class="fade-in">
-        <div class="section-label">Технологии</div>
-        <h2 class="section-title">Наш стек</h2>
-        <p class="section-subtitle">
-            Работаем на современных технологиях с упором на российские решения и импортозамещение.
-        </p>
-
-        <div class="tech-columns">
-            <div class="tech-column">
-                <h3>Frontend</h3>
-                <ul>
-                    <li>React / Next.js</li>
-                    <li>Vue.js / Nuxt</li>
-                    <li>TypeScript</li>
-                    <li>Tailwind CSS</li>
-                </ul>
-            </div>
-            <div class="tech-column">
-                <h3>Backend</h3>
-                <ul>
-                    <li>Node.js</li>
-                    <li>Python / Django</li>
-                    <li>PHP / Laravel</li>
-                    <li>1С-Битрикс</li>
-                </ul>
-            </div>
-            <div class="tech-column">
-                <h3>Mobile / Боты</h3>
-                <ul>
-                    <li>React Native</li>
-                    <li>Flutter</li>
-                    <li>Telegram Bot API</li>
-                    <li>WhatsApp API</li>
-                </ul>
-            </div>
-            <div class="tech-column">
-                <h3>AI / Инфра</h3>
-                <ul>
-                    <li>YandexGPT / GigaChat</li>
-                    <li>LangChain / RAG</li>
-                    <li>Yandex.Cloud</li>
-                    <li>Docker / CI/CD</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <hr class="section-divider">
-
     <section class="fade-in">
         <div class="section-label">Процесс</div>
         <h2 class="section-title">Как мы работаем</h2>
@@ -1589,6 +1276,33 @@
                 <h3>Поддержка 24/7</h3>
                 <p>Мониторинг, быстрая реакция на инциденты, регулярные обновления безопасности. SLA — от 1 часа реакции для критических задач.</p>
             </div>
+        </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="fade-in">
+        <div class="section-label">Материалы</div>
+        <h2 class="section-title">Полезное</h2>
+        <div class="materials-grid">
+            <a href="market.html" class="material-card">
+                <div class="material-icon">&#128200;</div>
+                <h3>Рынок и конкуренция</h3>
+                <p>Аналитика российского IT-рынка, объёмы, рост, конкурентный ландшафт</p>
+                <span class="material-arrow">&rarr;</span>
+            </a>
+            <a href="trends.html" class="material-card">
+                <div class="material-icon">&#128640;</div>
+                <h3>Тренды 2025-2026</h3>
+                <p>AI, импортозамещение, e-commerce, облака, кибербезопасность</p>
+                <span class="material-arrow">&rarr;</span>
+            </a>
+            <a href="tech.html" class="material-card">
+                <div class="material-icon">&#9881;</div>
+                <h3>Технологии</h3>
+                <p>Наш стек: frontend, backend, mobile, AI и инфраструктура</p>
+                <span class="material-arrow">&rarr;</span>
+            </a>
         </div>
     </section>
 
