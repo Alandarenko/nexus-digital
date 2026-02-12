@@ -596,6 +596,22 @@
             box-shadow: 0 8px 32px rgba(99, 102, 241, 0.3);
         }
 
+        .cta-contacts {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 8px;
+            font-size: 14px;
+        }
+        .cta-contacts a {
+            color: var(--accent-light);
+            text-decoration: none;
+        }
+        .cta-divider {
+            color: var(--text-muted);
+        }
+
         .nav-cta {
             padding: 10px 24px;
             background: var(--gradient-1);
@@ -1110,8 +1126,12 @@
             .pricing-row > div:last-child {
                 display: none;
             }
-            .service-card {
-                padding: 28px;
+            .cta-contacts {
+                flex-direction: column;
+                gap: 6px;
+            }
+            .cta-divider {
+                display: none;
             }
             .cta-section {
                 padding: 80px 20px;
@@ -1129,7 +1149,6 @@
                 font-size: 26px;
             }
             .hero-stats {
-                gap: 20px;
                 margin-top: 36px;
             }
             .b-chk label {
@@ -1551,11 +1570,11 @@
         </p>
         <button class="cta-button" onclick="openBrief()">Заполнить бриф</button>
         <p style="margin-top: 16px; font-size: 15px; color: var(--text-secondary);">или напишите нам напрямую</p>
-        <p style="margin-top: 8px; font-size: 14px; color: var(--text-muted);">
-            <a href="mailto:nikita.alandarenko@gmail.com" style="color: var(--accent-light); text-decoration: none;">nikita.alandarenko@gmail.com</a>
-            &nbsp;&nbsp;|&nbsp;&nbsp;
-            <a href="https://t.me/myway_nikita" style="color: var(--accent-light); text-decoration: none;">Telegram: @myway_nikita</a>
-        </p>
+        <div class="cta-contacts">
+            <a href="mailto:nikita.alandarenko@gmail.com">nikita.alandarenko@gmail.com</a>
+            <span class="cta-divider">|</span>
+            <a href="https://t.me/myway_nikita">Telegram: @myway_nikita</a>
+        </div>
     </section>
 
     <footer>
