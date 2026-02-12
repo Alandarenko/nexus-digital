@@ -1974,10 +1974,23 @@
             ];
             fields.forEach(([l, v]) => { if (v && v !== '—') msg += `${l}: ${v}\n`; });
 
-            fetch('https://api.telegram.org/bot8337809910:AAEBYV_hDmbsNPUTtNTH8s4DUPVILMElGRM/sendMessage', {
+            fetch('/api/send', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ chat_id: 466289031, text: msg, parse_mode: 'Markdown' })
+                body: JSON.stringify({
+                    text: msg,
+                    fields: {
+                        name: bV('b_name'),
+                        phone: bV('b_phone'),
+                        email: bV('b_email'),
+                        tg: bV('b_tg'),
+                        type: bC('b_stype'),
+                        desc: bV('b_desc'),
+                        budget: bC('b_bud'),
+                        timeline: bC('b_time'),
+                        comments: bV('b_comments')
+                    }
+                })
             })
             .then(r => r.json())
             .then(data => {
