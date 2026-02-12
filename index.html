@@ -1693,7 +1693,8 @@
                 <div class="b-head"><div class="b-num">Готово</div><h3>Сводка по брифу</h3><p>Проверьте и отправьте</p></div>
                 <div id="bResContent"></div>
                 <div id="bResWarnings" class="b-warnings"></div>
-                <div class="b-nav"><button class="b-btn b-btn-sec" onclick="bGo(0)">Редактировать</button><button class="b-btn b-btn-pri" onclick="window.print()">Распечатать / PDF</button></div>
+                <div id="bSendStatus" style="margin-bottom: 16px;"></div>
+                <div class="b-nav"><button class="b-btn b-btn-sec" onclick="bGo(0)">Редактировать</button><button class="b-btn b-btn-ok" id="bSendBtn" onclick="bSendTg()">Отправить бриф</button><button class="b-btn b-btn-pri" onclick="window.print()">PDF</button></div>
             </div>
         </div>
     </div>
@@ -1804,6 +1805,54 @@
             tips.forEach(x => { wh += `<div class="b-tip"><span class="b-tip-i">+</span><span>${x}</span></div>`; });
             document.getElementById('bResWarnings').innerHTML = wh;
             document.getElementById('briefModal').scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function bSendTg() {
+            const btn = document.getElementById('bSendBtn');
+            const status = document.getElementById('bSendStatus');
+            btn.disabled = true;
+            btn.textContent = 'Отправка...';
+            status.innerHTML = '';
+
+            let msg = '📋 *Новый бриф с сайта NEXUS Digital*\n\n';
+            const fields = [
+                ['👤 Имя', bV('b_name')], ['🏢 Компания', bV('b_company')], ['💼 Должность', bV('b_position')],
+                ['📞 Телефон', bV('b_phone')], ['📧 Email', bV('b_email')], ['✈️ Telegram', bV('b_tg')],
+                ['🔑 ЛПР', bV('b_lpr')], ['📝 Бизнес', bV('b_desc')], ['🏭 Сфера', bV('b_industry')],
+                ['📅 Лет на рынке', bV('b_years')], ['🌍 География', bC('b_geo')], ['⭐ УТП', bV('b_utp')],
+                ['🌐 Текущий сайт', bV('b_cursite')], ['⚠️ Проблемы', bC('b_prob')],
+                ['👥 Тип клиентов', bC('b_type')], ['🎂 Возраст', bC('b_age')], ['💰 Доход', bV('b_income')],
+                ['📊 Источники', bC('b_src')], ['📱 Устройства', bC('b_dev')],
+                ['🎯 Цель', bC('b_goal')], ['🖱 Действие', bC('b_act')], ['📈 План', bV('b_target')],
+                ['💵 Чек', bV('b_check')], ['📢 Продвижение', bC('b_promo')],
+                ['🔧 Тип сайта', bC('b_stype')], ['📂 Разделы', bC('b_sec')], ['⚙️ Функции', bC('b_fn')],
+                ['🔗 Интеграции', bC('b_int')], ['📦 Каталог', bV('b_catsize')], ['🖥 CMS', bC('b_cms')],
+                ['🎨 Бренд', bC('b_brand')], ['✨ Стиль', bC('b_style')],
+                ['📝 Тексты', bC('b_txt')], ['📸 Материалы', bC('b_mat')],
+                ['💳 Бюджет', bC('b_bud')], ['⏰ Сроки', bC('b_time')], ['📅 Дедлайн', bV('b_dead')],
+                ['💵 Оплата', bC('b_pay')], ['🛠 Поддержка', bC('b_sup')], ['💬 Комментарии', bV('b_comments')]
+            ];
+            fields.forEach(([l, v]) => { if (v && v !== '—') msg += `${l}: ${v}\n`; });
+
+            fetch('https://api.telegram.org/bot8337809910:AAEBYV_hDmbsNPUTtNTH8s4DUPVILMElGRM/sendMessage', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ chat_id: 466289031, text: msg, parse_mode: 'Markdown' })
+            })
+            .then(r => r.json())
+            .then(data => {
+                if (data.ok) {
+                    status.innerHTML = '<div class="b-tip"><span class="b-tip-i">✓</span><span>Бриф отправлен! Мы свяжемся с вами в ближайшее время.</span></div>';
+                    btn.textContent = 'Отправлено ✓';
+                } else {
+                    throw new Error(data.description);
+                }
+            })
+            .catch(() => {
+                status.innerHTML = '<div class="b-warn"><span class="b-warn-i">!</span><span>Ошибка отправки. Напишите нам напрямую в Telegram: @myway_nikita</span></div>';
+                btn.disabled = false;
+                btn.textContent = 'Попробовать снова';
+            });
         }
 
         document.addEventListener('keydown', e => {
