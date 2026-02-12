@@ -120,8 +120,9 @@
             background: var(--bg-secondary);
             border-bottom: 1px solid var(--border);
             flex-direction: column;
-            align-items: stretch;
+            align-items: center;
             padding: 72px 20px 20px;
+            text-align: center;
             transform: translateY(-100%);
             transition: transform 0.3s ease;
             pointer-events: none;
@@ -136,6 +137,7 @@
             padding: 14px 0;
             border-bottom: 1px solid var(--border);
             transition: color 0.3s;
+            width: 100%;
         }
         .mobile-menu a:last-of-type { border-bottom: none; }
         .mobile-menu a:hover { color: var(--accent-light); }
@@ -144,7 +146,7 @@
             padding: 12px 24px;
             font-size: 14px;
             width: auto;
-            align-self: flex-start;
+            align-self: center;
         }
         .mobile-overlay {
             display: none;
@@ -916,11 +918,18 @@
             .section-title {
                 font-size: 32px;
             }
+            .hero {
+                text-align: center;
+                align-items: center;
+            }
             .hero-title {
                 font-size: clamp(32px, 8vw, 48px);
             }
             .hero-subtitle {
                 font-size: 16px;
+            }
+            .stat-item {
+                text-align: center;
             }
             .hero-stats {
                 flex-direction: column;
