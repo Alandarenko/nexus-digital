@@ -883,11 +883,17 @@
         }
 
         @media (max-width: 1024px) {
+            .nav-links {
+                display: none;
+            }
+            .burger {
+                display: flex;
+            }
             .advantages-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
-            .process-steps {
-                grid-template-columns: repeat(3, 1fr);
+            .materials-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
             .process-step::after {
                 display: none;
@@ -900,27 +906,21 @@
             .pricing-row > div:last-child {
                 display: none;
             }
+            .hero {
+                text-align: center;
+                align-items: center;
+            }
         }
 
         @media (max-width: 768px) {
             nav {
                 padding: 16px 20px;
             }
-            .nav-links {
-                display: none;
-            }
-            .burger {
-                display: flex;
-            }
             section {
                 padding: 80px 20px;
             }
             .section-title {
                 font-size: 32px;
-            }
-            .hero {
-                text-align: center;
-                align-items: center;
             }
             .hero-title {
                 font-size: clamp(32px, 8vw, 48px);
