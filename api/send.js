@@ -35,7 +35,10 @@ export default async function handler(req, res) {
         md += `## Задача\n${dash(fields.desc)}\n\n`;
         md += `## Комментарии\n${dash(fields.comments)}\n`;
 
-        const filename = `brief-${date}.md`;
+        const slug = fields.name && fields.name !== '—'
+            ? '-' + fields.name.trim().replace(/\s+/g, '-')
+            : '';
+        const filename = `brief-${date}${slug}.md`;
         const blob = new Blob([md], { type: 'text/markdown' });
 
         const form = new FormData();
