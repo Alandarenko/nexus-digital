@@ -59,7 +59,8 @@
 
         .burger {
             display: none; flex-direction: column; gap: 5px;
-            background: none; border: none; cursor: pointer; padding: 8px; z-index: 102;
+            background: none; border: none; outline: none; -webkit-tap-highlight-color: transparent;
+            cursor: pointer; padding: 8px; z-index: 102;
         }
         .burger span { display: block; width: 24px; height: 2px; background: var(--text-primary); border-radius: 2px; transition: all 0.3s; }
         .burger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
@@ -67,14 +68,14 @@
         .burger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 
         .mobile-menu {
-            position: fixed; top: 0; left: 0; right: 0; z-index: 99;
+            display: flex; position: fixed; top: 0; left: 0; right: 0; z-index: 99;
             background: var(--bg-secondary); border-bottom: 1px solid var(--border);
             flex-direction: column; align-items: stretch; padding: 72px 20px 20px;
             transform: translateY(-100%); transition: transform 0.3s ease; pointer-events: none;
         }
         .mobile-menu.open { transform: translateY(0); pointer-events: auto; }
         .mobile-menu a {
-            color: var(--text-primary); text-decoration: none; font-size: 16px; font-weight: 600;
+            display: block; color: var(--text-primary); text-decoration: none; font-size: 16px; font-weight: 600;
             padding: 14px 0; border-bottom: 1px solid var(--border); transition: color 0.3s;
         }
         .mobile-menu a:last-of-type { border-bottom: none; }

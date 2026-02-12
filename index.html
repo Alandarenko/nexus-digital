@@ -92,6 +92,8 @@
             gap: 5px;
             background: none;
             border: none;
+            outline: none;
+            -webkit-tap-highlight-color: transparent;
             cursor: pointer;
             padding: 8px;
             z-index: 102;
@@ -109,6 +111,7 @@
         .burger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 
         .mobile-menu {
+            display: flex;
             position: fixed;
             top: 0;
             left: 0;
@@ -125,6 +128,7 @@
         }
         .mobile-menu.open { transform: translateY(0); pointer-events: auto; }
         .mobile-menu a {
+            display: block;
             color: var(--text-primary);
             text-decoration: none;
             font-size: 16px;
@@ -136,10 +140,11 @@
         .mobile-menu a:last-of-type { border-bottom: none; }
         .mobile-menu a:hover { color: var(--accent-light); }
         .mobile-menu .nav-cta {
-            margin-top: 12px;
-            padding: 14px 36px;
-            font-size: 15px;
-            width: 100%;
+            margin-top: 16px;
+            padding: 12px 24px;
+            font-size: 14px;
+            width: auto;
+            align-self: flex-start;
         }
         .mobile-overlay {
             display: none;
