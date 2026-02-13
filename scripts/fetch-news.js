@@ -177,6 +177,16 @@ async function main() {
   let relevant = allItems.filter(item => isRelevant(item.title));
   console.log(`Релевантных новостей: ${relevant.length}`);
 
+  // 2.5. Дедупликация по заголовку
+  const seen = new Set();
+  relevant = relevant.filter(item => {
+    const key = item.title.toLowerCase().replace(/\[перевод\]\s*/g, '').trim();
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+  console.log(`После дедупликации: ${relevant.length}`);
+
   // 3. Сортируем по дате (свежие первые) и берём MAX_NEWS
   relevant.sort((a, b) => new Date(b.date) - new Date(a.date));
   relevant = relevant.slice(0, MAX_NEWS);
