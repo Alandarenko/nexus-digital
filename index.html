@@ -1299,6 +1299,10 @@
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('/sw.js').catch(function() {});
     }
+    if (new URLSearchParams(window.location.search).has('brief')) {
+        window.addEventListener('load', function() { setTimeout(openBrief, 500); });
+        history.replaceState(null, '', '/');
+    }
     </script>
 
 </body>
