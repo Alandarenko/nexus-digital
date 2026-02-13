@@ -753,6 +753,7 @@
             .b-step { font-size: 14px; padding: 14px 6px; }
             .b-row { grid-template-columns: 1fr; }
             .b-btn { padding: 14px 20px; font-size: 15px; }
+            .b-textarea { resize: none; }
             .modal-hero h2 { font-size: 32px; }
             .modal-hero p { font-size: 16px; }
             .modal-body { padding: 24px 20px 60px; }
@@ -760,7 +761,11 @@
             .b-field label { font-size: 15px; }
         }
         @media (max-width: 480px) {
+            .modal-hero { padding: 32px 0 36px; }
             .modal-hero h2 { font-size: 26px; }
+            .modal-hero p { font-size: 14px; }
+            .b-steps { gap: 8px; }
+            .b-step { font-size: 13px; padding: 12px 4px; }
             .modal-confirm { padding: 24px; }
             .modal-confirm-btns { flex-direction: column; }
         }
@@ -1057,6 +1062,13 @@
         .cta-or { margin-top: 16px; font-size: 15px; color: var(--text-secondary); }
         .modal-header-left { display: flex; align-items: center; gap: 16px; }
         .b-send-status { margin-bottom: 16px; }
+        .b-btn-ok.loading { pointer-events: none; opacity: 0.7; }
+        .b-btn-ok.loading::after {
+            content: ''; display: inline-block; width: 14px; height: 14px; margin-left: 8px;
+            border: 2px solid rgba(255,255,255,0.3); border-top-color: #fff; border-radius: 50%;
+            animation: spin 0.6s linear infinite; vertical-align: middle;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
         .b-consent { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 20px; font-size: 13px; color: var(--text-secondary); cursor: pointer; line-height: 1.5; }
         .b-consent input { margin-top: 3px; accent-color: var(--accent); min-width: 16px; }
         .b-consent a { color: var(--accent-light); }
@@ -1504,7 +1516,7 @@
         <p style="margin-top: 8px;"><a href="/privacy.html" style="color: var(--text-muted); font-size: 13px;">Политика конфиденциальности</a></p>
     </footer>
 
-    <div class="modal-overlay" id="briefModal">
+    <div class="modal-overlay" id="briefModal" role="dialog" aria-modal="true" aria-label="Форма заявки">
         <div class="modal-header">
             <div class="modal-header-left">
                 <div class="logo" onclick="tryCloseBrief()">NEXUS Digital</div>
@@ -1516,7 +1528,7 @@
             <div class="modal-header-right">
                 <div class="modal-progress"><div class="modal-progress-fill" id="bProg"></div></div>
                 <span class="modal-progress-text" id="bProgTxt">0%</span>
-                <button class="modal-close" onclick="tryCloseBrief()">&times;</button>
+                <button class="modal-close" onclick="tryCloseBrief()" aria-label="Закрыть">&times;</button>
             </div>
         </div>
         <div class="modal-body">
@@ -1534,34 +1546,34 @@
             <div class="b-section active" id="bs0">
                 <div class="b-head"><div class="b-num">Шаг 1 из 2</div><h3>Контактная информация</h3><p>Как с вами связаться</p></div>
                 <div class="b-row">
-                    <div class="b-field"><label>Имя <span class="req">*</span></label><input class="b-input" name="b_name" placeholder="Иван Петров"></div>
-                    <div class="b-field"><label>Телефон <span class="req">*</span></label><input class="b-input" name="b_phone" placeholder="+7 (999) 123-45-67"></div>
+                    <div class="b-field"><label for="b_name">Имя <span class="req">*</span></label><input class="b-input" id="b_name" name="b_name" placeholder="Иван Петров" aria-required="true"><div class="b-err">Укажите ваше имя</div></div>
+                    <div class="b-field"><label for="b_phone">Телефон <span class="req">*</span></label><input class="b-input" id="b_phone" name="b_phone" placeholder="+7 (999) 123-45-67" aria-required="true"><div class="b-err">Укажите номер телефона</div><div class="b-swarn">Проверьте номер — слишком короткий</div></div>
                 </div>
                 <div class="b-row">
-                    <div class="b-field"><label>Email <span class="req">*</span></label><input class="b-input" name="b_email" placeholder="ivan@company.ru"></div>
-                    <div class="b-field"><label>Telegram <span class="opt">необязательно</span></label><input class="b-input" name="b_tg" placeholder="@username"></div>
+                    <div class="b-field"><label for="b_email">Email <span class="req">*</span></label><input class="b-input" id="b_email" name="b_email" placeholder="ivan@company.ru" aria-required="true"><div class="b-err">Укажите email</div><div class="b-swarn">Проверьте формат email</div></div>
+                    <div class="b-field"><label for="b_tg">Telegram <span class="opt">необязательно</span></label><input class="b-input" id="b_tg" name="b_tg" placeholder="@username"></div>
                 </div>
                 <div class="b-nav"><div></div><button class="b-btn b-btn-pri" onclick="bNext()">Далее</button></div>
             </div>
 
             <div class="b-section" id="bs1">
                 <div class="b-head"><div class="b-num">Шаг 2 из 2</div><h3>О проекте</h3><p>Расскажите что нужно сделать</p></div>
-                <div class="b-field"><label>Тип проекта <span class="req">*</span></label><div class="b-checks">
+                <div class="b-field"><label>Тип проекта <span class="req">*</span></label><div class="b-checks" role="radiogroup" aria-label="Тип проекта">
                     <div class="b-chk"><input type="radio" id="bst1" name="b_stype" value="Лендинг"><label for="bst1">Лендинг</label></div>
                     <div class="b-chk"><input type="radio" id="bst2" name="b_stype" value="Корпоративный сайт"><label for="bst2">Корпоративный сайт</label></div>
                     <div class="b-chk"><input type="radio" id="bst3" name="b_stype" value="Интернет-магазин"><label for="bst3">Интернет-магазин</label></div>
                     <div class="b-chk"><input type="radio" id="bst4" name="b_stype" value="Мобильное приложение"><label for="bst4">Приложение</label></div>
                     <div class="b-chk"><input type="radio" id="bst5" name="b_stype" value="Telegram-бот"><label for="bst5">Telegram-бот</label></div>
                     <div class="b-chk"><input type="radio" id="bst6" name="b_stype" value="Другое"><label for="bst6">Другое</label></div>
-                </div></div>
-                <div class="b-field"><label>Опишите задачу <span class="req">*</span></label><textarea class="b-textarea" name="b_desc" placeholder="Что нужно сделать? Какую проблему решить?"></textarea></div>
-                <div class="b-field"><label>Бюджет <span class="req">*</span></label><div class="b-checks">
+                </div><div class="b-err">Выберите тип проекта</div></div>
+                <div class="b-field"><label for="b_desc">Опишите задачу <span class="req">*</span></label><textarea class="b-textarea" id="b_desc" name="b_desc" placeholder="Что нужно сделать? Какую проблему решить?" aria-required="true"></textarea><div class="b-err">Опишите вашу задачу</div></div>
+                <div class="b-field"><label>Бюджет <span class="req">*</span></label><div class="b-checks" role="radiogroup" aria-label="Бюджет">
                     <div class="b-chk"><input type="radio" id="bbu1" name="b_bud" value="до 100K"><label for="bbu1">до 100 тыс. ₽</label></div>
                     <div class="b-chk"><input type="radio" id="bbu2" name="b_bud" value="100-300K"><label for="bbu2">100-300 тыс. ₽</label></div>
                     <div class="b-chk"><input type="radio" id="bbu3" name="b_bud" value="300K-1M"><label for="bbu3">300K — 1 млн ₽</label></div>
                     <div class="b-chk"><input type="radio" id="bbu4" name="b_bud" value="1M+"><label for="bbu4">Более 1 млн ₽</label></div>
                     <div class="b-chk"><input type="radio" id="bbu5" name="b_bud" value="Обсудим"><label for="bbu5">Обсудим</label></div>
-                </div></div>
+                </div><div class="b-err">Выберите бюджет</div></div>
                 <div class="b-field"><label>Сроки</label><div class="b-checks">
                     <div class="b-chk"><input type="radio" id="btm1" name="b_time" value="Срочно"><label for="btm1">Срочно</label></div>
                     <div class="b-chk"><input type="radio" id="btm2" name="b_time" value="1 мес"><label for="btm2">1 месяц</label></div>
@@ -1582,7 +1594,7 @@
         </div>
     </div>
 
-    <div class="modal-confirm-overlay" id="confirmLeave">
+    <div class="modal-confirm-overlay" id="confirmLeave" role="alertdialog" aria-modal="true" aria-label="Подтверждение выхода">
         <div class="modal-confirm">
             <h3>Вернуться на сайт?</h3>
             <p>Заполненные данные не сохранены и будут потеряны при закрытии брифа.</p>
@@ -1615,24 +1627,41 @@
             card.classList.toggle('open');
         }
 
-        function openBrief() { closeMenu(); document.getElementById('briefModal').classList.add('open'); document.body.style.overflow = 'hidden'; }
-        function closeBrief() { document.getElementById('briefModal').classList.remove('open'); document.body.style.overflow = ''; }
+        let briefTrigger = null;
+        function openBrief() {
+            closeMenu();
+            briefTrigger = document.activeElement;
+            document.getElementById('briefModal').classList.add('open');
+            document.body.style.overflow = 'hidden';
+            setTimeout(() => { const first = document.querySelector('#briefModal .b-input'); if (first) first.focus(); }, 100);
+        }
+        function closeBrief() {
+            document.getElementById('briefModal').classList.remove('open');
+            document.body.style.overflow = '';
+            if (briefTrigger) { briefTrigger.focus(); briefTrigger = null; }
+        }
 
         function briefHasData() {
             let has = false;
             document.querySelectorAll('#briefModal .b-input, #briefModal .b-textarea').forEach(e => { if (e.value && e.value.trim()) has = true; });
-            document.querySelectorAll('#briefModal input[type=radio]:checked, #briefModal input[type=checkbox]:checked').forEach(() => has = true);
+            document.querySelectorAll('#briefModal input[type=radio]:checked').forEach(() => has = true);
+            document.querySelectorAll('#briefModal input[type=checkbox]:checked:not(#bConsent)').forEach(() => has = true);
             return has;
         }
         function tryCloseBrief() {
             if (briefHasData()) {
                 document.getElementById('confirmLeave').classList.add('open');
+                setTimeout(() => { const stay = document.querySelector('#confirmLeave .btn-confirm-stay'); if (stay) stay.focus(); }, 50);
             } else {
                 closeBrief();
             }
         }
-        function hideConfirm() { document.getElementById('confirmLeave').classList.remove('open'); }
-        function forceCloseBrief() { hideConfirm(); closeBrief(); }
+        function hideConfirm() {
+            document.getElementById('confirmLeave').classList.remove('open');
+            const closeBtn = document.querySelector('#briefModal .b-close');
+            if (closeBtn) closeBtn.focus();
+        }
+        function forceCloseBrief() { document.getElementById('confirmLeave').classList.remove('open'); closeBrief(); }
 
         const bReq = {
             0: [
@@ -1727,6 +1756,7 @@
 
         let bCur = 0;
         function bGo(n) {
+            if (n > bCur) { for (let i = bCur; i < n; i++) { if (!bValidateStep(i)) return; bMarkDone(i); } }
             document.querySelectorAll('.b-section').forEach(s => s.classList.remove('active'));
             document.getElementById('bs' + n).classList.add('active');
             bCur = n;
@@ -1750,11 +1780,12 @@
         function bMarkDone(i) { const b = document.querySelectorAll('.b-step'); if (b[i]) b[i].classList.add('done'); }
 
         function bUpdProg() {
-            let c = 0;
-            document.querySelectorAll('#briefModal .b-input, #briefModal .b-select, #briefModal .b-textarea').forEach(e => { if (e.value && e.value.trim()) c++; });
-            document.querySelectorAll('#briefModal input[type=radio]:checked, #briefModal input[type=checkbox]:checked').forEach(() => c++);
-            const t = document.querySelectorAll('#briefModal .b-input, #briefModal .b-select, #briefModal .b-textarea, #briefModal input[type=radio], #briefModal input[type=checkbox]').length;
-            const p = Math.min(Math.round((c / t) * 100), 100);
+            let c = 0, t = 0;
+            document.querySelectorAll('#briefModal .b-input, #briefModal .b-select, #briefModal .b-textarea').forEach(e => { t++; if (e.value && e.value.trim()) c++; });
+            const radioGroups = new Set();
+            document.querySelectorAll('#briefModal input[type=radio]').forEach(e => radioGroups.add(e.name));
+            radioGroups.forEach(name => { t++; if (document.querySelector(`#briefModal input[name="${name}"]:checked`)) c++; });
+            const p = t ? Math.min(Math.round((c / t) * 100), 100) : 0;
             document.getElementById('bProg').style.width = p + '%';
             document.getElementById('bProgTxt').textContent = p + '%';
         }
@@ -1824,7 +1855,8 @@
             const btn = document.getElementById('bSendBtn');
             const status = document.getElementById('bSendStatus');
             btn.disabled = true;
-            btn.textContent = 'Отправка...';
+            btn.classList.add('loading');
+            btn.textContent = 'Отправка';
             status.innerHTML = '';
 
             const escHtml = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
@@ -1860,6 +1892,7 @@
             .then(r => r.json())
             .then(data => {
                 if (data.ok) {
+                    btn.classList.remove('loading');
                     status.innerHTML = '<div class="b-tip"><span class="b-tip-i">✓</span><span>Бриф отправлен! Мы свяжемся с вами в ближайшее время.</span></div>';
                     btn.textContent = 'Отправлено ✓';
                 } else {
@@ -1867,6 +1900,7 @@
                 }
             })
             .catch(() => {
+                btn.classList.remove('loading');
                 status.innerHTML = '<div class="b-warn"><span class="b-warn-i">!</span><span>Ошибка отправки. Напишите нам напрямую в Telegram: @myway_nikita</span></div>';
                 btn.disabled = false;
                 btn.textContent = 'Попробовать снова';
