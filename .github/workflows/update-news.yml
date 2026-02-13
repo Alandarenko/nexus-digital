@@ -1,0 +1,43 @@
+name: Update News
+
+on:
+  schedule:
+    # Каждый день в 08:00 МСК (05:00 UTC)
+    - cron: '0 5 * * *'
+  workflow_dispatch: # Ручной запуск
+
+permissions:
+  contents: write
+
+jobs:
+  update-news:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Fetch and rewrite news
+        env:
+          YANDEX_API_KEY: ${{ secrets.YANDEX_API_KEY }}
+          YANDEX_FOLDER_ID: ${{ secrets.YANDEX_FOLDER_ID }}
+        run: node scripts/fetch-news.js
+
+      - name: Check for changes
+        id: changes
+        run: |
+          git diff --quiet data/news.json && echo "changed=false" >> $GITHUB_OUTPUT || echo "changed=true" >> $GITHUB_OUTPUT
+
+      - name: Commit and push
+        if: steps.changes.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/news.json
+          git commit -m "chore: update news $(date +%Y-%m-%d)"
+          git push

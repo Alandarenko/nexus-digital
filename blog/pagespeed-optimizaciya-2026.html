@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Как ускорить сайт до идеального PageSpeed в 2026 — NEXUS Digital</title>
     <meta name="description" content="Технический гайд по оптимизации PageSpeed в 2026: Core Web Vitals, Critical CSS, оптимизация изображений, lazy loading, CDN, кеширование. Чеклист для идеального результата.">
+    <meta name="keywords" content="PageSpeed оптимизация, Core Web Vitals, ускорение сайта, LCP INP CLS, скорость загрузки сайта">
     <link rel="canonical" href="https://nexus-digital-lovat.vercel.app/blog/pagespeed-optimizaciya-2026.html">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="apple-touch-icon" href="/icon-192.png">
@@ -48,6 +49,17 @@
         "mainEntityOfPage": "https://nexus-digital-lovat.vercel.app/blog/pagespeed-optimizaciya-2026.html"
     }
     </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://nexus-digital-lovat.vercel.app/"},
+            {"@type": "ListItem", "position": 2, "name": "Блог", "item": "https://nexus-digital-lovat.vercel.app/blog/"},
+            {"@type": "ListItem", "position": 3, "name": "PageSpeed оптимизация 2026", "item": "https://nexus-digital-lovat.vercel.app/blog/pagespeed-optimizaciya-2026.html"}
+        ]
+    }
+    </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -73,8 +85,12 @@
         <a href="/" class="logo">NEXUS Digital</a>
         <ul class="nav-links">
             <li><a href="/">Главная</a></li>
-            <li><a href="/blog/stoimost-razrabotki-saita-2026.html">Стоимость сайтов</a></li>
+            <li><a href="/blog/stoimost-razrabotki-saita-2026.html">Стоимость</a></li>
             <li><a href="/blog/tilda-vs-custom.html">Tilda vs кастом</a></li>
+            <li><a href="/blog/pagespeed-optimizaciya-2026.html" class="active">PageSpeed</a></li>
+            <li><a href="/blog/market.html">Рынок</a></li>
+            <li><a href="/blog/trends.html">Тренды</a></li>
+            <li><a href="/blog/tech.html">Технологии</a></li>
             <li><a href="#" class="nav-cta" role="button" onclick="event.preventDefault();openBrief()">Оставить заявку</a></li>
         </ul>
         <button class="burger" onclick="toggleMenu()" aria-label="Меню">
@@ -98,9 +114,11 @@
         <h1>Как ускорить сайт до идеального PageSpeed в 2026</h1>
         <p class="article-meta">NEXUS Digital &middot; 13 февраля 2026</p>
 
-        <p>Скорость сайта напрямую влияет на конверсию, позиции в поиске и поведение пользователей. По данным Google, увеличение времени загрузки с 1 до 3 секунд повышает вероятность отказа на 32%. А при 5 секундах — на 90%.</p>
+        <img src="/blog/images/pagespeed.svg" alt="Спидометр производительности сайта" class="article-hero-svg">
 
-        <p>В 2026 году и Google, и Яндекс используют метрики скорости как фактор ранжирования. Разбираем, как добиться идеального результата PageSpeed Insights.</p>
+        <p>Скорость сайта напрямую влияет на конверсию, позиции в поиске и поведение пользователей — а значит, и на <a href="/blog/stoimost-razrabotki-saita-2026.html">окупаемость вложений в разработку</a>. По данным Google, увеличение времени загрузки с 1 до 3 секунд повышает вероятность отказа на 32%. А при 5 секундах — на 90%.</p>
+
+        <p>В 2026 году и Google, и Яндекс используют метрики скорости как фактор ранжирования — это один из ключевых <a href="/blog/trends.html">трендов веб-разработки</a>. Разбираем, как добиться идеального результата PageSpeed Insights.</p>
 
         <h2>Core Web Vitals в 2026 году</h2>
 
@@ -139,6 +157,7 @@
 
         <p><strong>INP (Interaction to Next Paint)</strong> заменил FID в 2024 году и стал главной проблемой для многих сайтов. В отличие от FID, который измерял только задержку первого взаимодействия, INP учитывает все взаимодействия за время сессии.</p>
 
+
         <h2>Техники оптимизации</h2>
 
         <h3>1. Critical CSS</h3>
@@ -173,7 +192,7 @@
             <li><strong>Defer и async</strong> — загружайте JS без блокировки рендеринга</li>
             <li><strong>Code splitting</strong> — разбивайте бандл на чанки, загружайте по требованию</li>
             <li><strong>Tree shaking</strong> — удаляйте неиспользуемый код при сборке</li>
-            <li><strong>Минификация</strong> — Terser, esbuild или SWC</li>
+            <li><strong>Минификация</strong> — Terser, esbuild или SWC (подробнее об инструментах — в описании <a href="/blog/tech.html">нашего технологического стека</a>)</li>
             <li>Избегайте тяжёлых библиотек — часто можно заменить на нативные API</li>
         </ul>
 
@@ -205,6 +224,7 @@
         <h2>Yandex Cloud CDN</h2>
 
         <p>Для сайтов с российской аудиторией Yandex Cloud CDN — оптимальное решение. Серверы расположены в Москве, Санкт-Петербурге, Владивостоке и других городах. Интеграция с Object Storage для статики. Поддержка HTTP/2 и Brotli-сжатия.</p>
+
 
         <h2>Чеклист оптимизации PageSpeed</h2>
 

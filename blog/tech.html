@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Технологии и стек — NEXUS Digital</title>
     <meta name="description" content="Технологический стек NEXUS Digital: React, Vue, Node.js, Python, Flutter, YandexGPT, Docker. Российские решения и импортозамещение.">
+    <meta name="keywords" content="технологический стек, React Next.js, Node.js Python, 1С-Битрикс, YandexGPT, Yandex Cloud">
     <link rel="canonical" href="https://nexus-digital-lovat.vercel.app/blog/tech.html">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="apple-touch-icon" href="/icon-192.png">
@@ -48,6 +49,17 @@
         "mainEntityOfPage": "https://nexus-digital-lovat.vercel.app/blog/tech.html"
     }
     </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://nexus-digital-lovat.vercel.app/"},
+            {"@type": "ListItem", "position": 2, "name": "Блог", "item": "https://nexus-digital-lovat.vercel.app/blog/"},
+            {"@type": "ListItem", "position": 3, "name": "Технологии и стек NEXUS Digital", "item": "https://nexus-digital-lovat.vercel.app/blog/tech.html"}
+        ]
+    }
+    </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -73,8 +85,12 @@
         <a href="/" class="logo">NEXUS Digital</a>
         <ul class="nav-links">
             <li><a href="/">Главная</a></li>
+            <li><a href="/blog/stoimost-razrabotki-saita-2026.html">Стоимость</a></li>
+            <li><a href="/blog/tilda-vs-custom.html">Tilda vs кастом</a></li>
+            <li><a href="/blog/pagespeed-optimizaciya-2026.html">PageSpeed</a></li>
             <li><a href="/blog/market.html">Рынок</a></li>
             <li><a href="/blog/trends.html">Тренды</a></li>
+            <li><a href="/blog/tech.html" class="active">Технологии</a></li>
             <li><a href="#" class="nav-cta" role="button" onclick="event.preventDefault();openBrief()">Оставить заявку</a></li>
         </ul>
         <button class="burger" onclick="toggleMenu()" aria-label="Меню">
@@ -98,7 +114,9 @@
         <h1>Технологии и стек NEXUS Digital</h1>
         <p class="article-meta">NEXUS Digital &middot; 13 февраля 2026</p>
 
-        <p>Работаем на современных технологиях с упором на российские решения и импортозамещение. Каждый инструмент выбран за надёжность, производительность и перспективы развития.</p>
+        <img src="/blog/images/tech.svg" alt="Слои технологического стека: frontend, backend, инфраструктура" class="article-hero-svg">
+
+        <p>Работаем на современных технологиях с упором на российские решения и импортозамещение. Каждый инструмент выбран за надёжность, <a href="/blog/pagespeed-optimizaciya-2026.html">высокую производительность</a> и перспективы развития.</p>
 
         <h2>Frontend</h2>
         <ul>
@@ -108,12 +126,13 @@
             <li><strong>Tailwind CSS</strong> — утилитарный CSS для быстрой вёрстки</li>
         </ul>
 
+
         <h2>Backend</h2>
         <ul>
             <li><strong>Node.js</strong> — высокопроизводительный серверный JavaScript</li>
             <li><strong>Python / Django</strong> — для ML-проектов, API и автоматизации</li>
             <li><strong>PHP / Laravel</strong> — корпоративные сайты и интеграции</li>
-            <li><strong>1С-Битрикс</strong> — российский стандарт для бизнеса и e-commerce</li>
+            <li><strong>1С-Битрикс</strong> — российский стандарт для бизнеса и e-commerce, в отличие от <a href="/blog/tilda-vs-custom.html">конструкторов типа Tilda</a> даёт полный контроль над кодом</li>
         </ul>
 
         <h2>Mobile и боты</h2>
@@ -124,11 +143,12 @@
             <li><strong>WhatsApp Business API</strong> — интеграция с мессенджерами</li>
         </ul>
 
+
         <h2>AI и инфраструктура</h2>
         <ul>
             <li><strong>YandexGPT / GigaChat</strong> — российские LLM для чат-ботов и генерации</li>
             <li><strong>LangChain / RAG</strong> — интеллектуальный поиск по базе знаний</li>
-            <li><strong>Yandex.Cloud</strong> — российское облако с CDN, Object Storage, Serverless</li>
+            <li><strong>Yandex.Cloud</strong> — российское облако с CDN, Object Storage, Serverless. Эти решения соответствуют <a href="/blog/trends.html">актуальным трендам импортозамещения</a></li>
             <li><strong>Docker / CI/CD</strong> — контейнеризация и автоматический деплой</li>
         </ul>
 

@@ -1,4 +1,19 @@
+# Rules for all bots
 User-agent: *
 Allow: /
+Disallow: /api/
 
+# Rules for Googlebot
+User-agent: Googlebot
+Allow: /
+
+# Rules for Yandex
+User-agent: Yandex
+Allow: /
+Crawl-delay: 1
+
+# Sitemap
 Sitemap: https://nexus-digital-lovat.vercel.app/sitemap.xml
+
+# Host directive (for Yandex)
+Host: https://nexus-digital-lovat.vercel.app
