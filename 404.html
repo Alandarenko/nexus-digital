@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>404 — Страница не найдена | NEXUS Digital</title>
     <meta name="robots" content="noindex">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap">
@@ -30,16 +31,159 @@
             justify-content: center;
             text-align: center;
             padding: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Stars background */
+        .stars {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .stars::before,
+        .stars::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 200%;
+            background: transparent;
+            animation: drift linear infinite;
+        }
+        .stars::before {
+            box-shadow:
+                42px 18px 0 0 rgba(255,255,255,0.4),
+                130px 60px 0 0 rgba(255,255,255,0.3),
+                280px 32px 0 0 rgba(255,255,255,0.5),
+                410px 90px 0 0 rgba(255,255,255,0.2),
+                520px 55px 0 0 rgba(255,255,255,0.4),
+                680px 120px 0 0 rgba(255,255,255,0.3),
+                810px 20px 0 0 rgba(255,255,255,0.5),
+                960px 80px 0 0 rgba(255,255,255,0.2),
+                1100px 45px 0 0 rgba(255,255,255,0.4),
+                1250px 110px 0 0 rgba(255,255,255,0.3),
+                75px 180px 0 0 rgba(255,255,255,0.3),
+                200px 250px 0 0 rgba(255,255,255,0.5),
+                350px 200px 0 0 rgba(255,255,255,0.2),
+                490px 310px 0 0 rgba(255,255,255,0.4),
+                620px 270px 0 0 rgba(255,255,255,0.3),
+                770px 340px 0 0 rgba(255,255,255,0.5),
+                900px 220px 0 0 rgba(255,255,255,0.2),
+                1050px 360px 0 0 rgba(255,255,255,0.4),
+                1180px 290px 0 0 rgba(255,255,255,0.3),
+                60px 420px 0 0 rgba(255,255,255,0.4),
+                190px 480px 0 0 rgba(255,255,255,0.2),
+                340px 450px 0 0 rgba(255,255,255,0.5),
+                470px 520px 0 0 rgba(255,255,255,0.3),
+                610px 490px 0 0 rgba(255,255,255,0.4),
+                750px 550px 0 0 rgba(255,255,255,0.2),
+                890px 470px 0 0 rgba(255,255,255,0.5),
+                1030px 530px 0 0 rgba(255,255,255,0.3),
+                1170px 500px 0 0 rgba(255,255,255,0.4),
+                110px 620px 0 0 rgba(255,255,255,0.3),
+                260px 680px 0 0 rgba(255,255,255,0.5),
+                400px 650px 0 0 rgba(255,255,255,0.2),
+                550px 720px 0 0 rgba(255,255,255,0.4),
+                700px 690px 0 0 rgba(255,255,255,0.3),
+                840px 750px 0 0 rgba(255,255,255,0.5),
+                990px 700px 0 0 rgba(255,255,255,0.2);
+            animation-duration: 120s;
+        }
+        .stars::after {
+            box-shadow:
+                90px 40px 0 0 rgba(255,255,255,0.25),
+                230px 100px 0 0 rgba(255,255,255,0.4),
+                370px 70px 0 0 rgba(255,255,255,0.15),
+                500px 140px 0 0 rgba(255,255,255,0.35),
+                650px 30px 0 0 rgba(255,255,255,0.25),
+                790px 160px 0 0 rgba(255,255,255,0.4),
+                940px 60px 0 0 rgba(255,255,255,0.15),
+                1080px 130px 0 0 rgba(255,255,255,0.35),
+                55px 260px 0 0 rgba(255,255,255,0.4),
+                180px 330px 0 0 rgba(255,255,255,0.15),
+                320px 290px 0 0 rgba(255,255,255,0.35),
+                460px 370px 0 0 rgba(255,255,255,0.25),
+                590px 320px 0 0 rgba(255,255,255,0.4),
+                730px 400px 0 0 rgba(255,255,255,0.15),
+                870px 350px 0 0 rgba(255,255,255,0.35),
+                1010px 420px 0 0 rgba(255,255,255,0.25),
+                1150px 380px 0 0 rgba(255,255,255,0.4),
+                120px 520px 0 0 rgba(255,255,255,0.15),
+                270px 580px 0 0 rgba(255,255,255,0.35),
+                420px 540px 0 0 rgba(255,255,255,0.25),
+                560px 610px 0 0 rgba(255,255,255,0.4),
+                710px 570px 0 0 rgba(255,255,255,0.15),
+                850px 640px 0 0 rgba(255,255,255,0.35),
+                1000px 600px 0 0 rgba(255,255,255,0.25);
+            animation-duration: 180s;
+        }
+        @keyframes drift {
+            from { transform: translateY(0); }
+            to { transform: translateY(-50%); }
+        }
+
+        /* Content */
+        .content {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Floating 404 */
+        @keyframes float404 {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-16px); }
         }
         .code {
-            font-size: clamp(80px, 15vw, 160px);
+            font-size: clamp(100px, 20vw, 200px);
             font-weight: 800;
+            line-height: 1;
+            margin-bottom: 24px;
+            position: relative;
+            display: inline-block;
+            animation: float404 4s ease-in-out infinite;
             background: var(--gradient-2);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            line-height: 1;
-            margin-bottom: 16px;
+            text-shadow: none;
         }
+
+        /* Glitch effect */
+        .code::before,
+        .code::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-primary);
+            overflow: hidden;
+            -webkit-text-fill-color: initial;
+        }
+        .code::before {
+            color: #06b6d4;
+            clip-path: inset(0 0 60% 0);
+            animation: glitch1 4s linear infinite;
+        }
+        .code::after {
+            color: #8b5cf6;
+            clip-path: inset(60% 0 0 0);
+            animation: glitch2 4s linear infinite;
+        }
+        @keyframes glitch1 {
+            0%, 12%, 18%, 100% { transform: translate(0); }
+            14% { transform: translate(-4px, -2px); }
+            16% { transform: translate(3px, 1px); }
+        }
+        @keyframes glitch2 {
+            0%, 22%, 28%, 100% { transform: translate(0); }
+            24% { transform: translate(4px, 2px); }
+            26% { transform: translate(-3px, -1px); }
+        }
+
         h1 {
             font-size: clamp(20px, 4vw, 32px);
             font-weight: 800;
@@ -51,7 +195,7 @@
             margin-bottom: 32px;
             max-width: 400px;
         }
-        a {
+        .btn {
             display: inline-block;
             padding: 14px 36px;
             background: var(--gradient-1);
@@ -62,7 +206,7 @@
             border-radius: 12px;
             transition: all 0.3s;
         }
-        a:hover {
+        .btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 32px rgba(99, 102, 241, 0.3);
         }
@@ -70,12 +214,23 @@
             outline: 2px solid var(--accent);
             outline-offset: 2px;
         }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="code">404</div>
-    <h1>Страница не найдена</h1>
-    <p>Возможно, она была перемещена или удалена. Вернитесь на главную.</p>
-    <a href="/">На главную</a>
+    <div class="stars"></div>
+    <div class="content">
+        <div class="code" data-text="404">404</div>
+        <h1>Потерялись в пространстве</h1>
+        <p>Эта страница не найдена или была перемещена. Вернитесь на главную.</p>
+        <a href="/" class="btn">Вернуться на главную</a>
+    </div>
 </body>
 </html>
