@@ -1,4 +1,4 @@
-const CACHE_NAME = 'nexus-v1';
+const CACHE_NAME = 'nexus-v2';
 const PRECACHE = [
   '/',
   '/styles.css',
@@ -24,6 +24,9 @@ self.addEventListener('activate', e => {
 
 self.addEventListener('fetch', e => {
   if (e.request.method !== 'GET') return;
+
+  // Skip cross-origin requests (Google Fonts, analytics, etc.)
+  if (!e.request.url.startsWith(self.location.origin)) return;
 
   // Network-first for HTML pages
   if (e.request.mode === 'navigate') {
