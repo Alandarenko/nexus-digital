@@ -1,4 +1,11 @@
 {
+  "redirects": [
+    {
+      "source": "/:file*.md",
+      "destination": "/404.html",
+      "statusCode": 404
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",

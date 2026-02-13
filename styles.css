@@ -209,12 +209,6 @@ footer {
     margin-bottom: 28px;
 }
 
-.hero-title .highlight {
-    background: var(--gradient-2);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
 .hero-subtitle {
     font-size: 20px;
     color: var(--text-secondary);
@@ -768,21 +762,15 @@ footer {
 .b-field .req { color: #ef4444; margin-left: 2px; }
 .b-field .opt { color: var(--text-muted); font-weight: 400; font-size: 13px; margin-left: 6px; }
 
-.b-input, .b-select, .b-textarea {
+.b-input, .b-textarea {
     width: 100%; padding: 16px 20px; background: var(--bg-secondary); border: 1px solid var(--border);
     border-radius: 12px; color: var(--text-primary); font-family: inherit; font-size: 16px;
     transition: all 0.2s; outline: none;
 }
-.b-input:focus, .b-select:focus, .b-textarea:focus {
+.b-input:focus, .b-textarea:focus {
     border-color: var(--accent); box-shadow: 0 0 0 3px rgba(99,102,241,0.12);
 }
 .b-input::placeholder, .b-textarea::placeholder { color: var(--text-muted); }
-.b-select {
-    cursor: pointer; appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%236b7280' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
-    background-repeat: no-repeat; background-position: right 16px center; padding-right: 40px;
-}
-.b-select option { background: var(--bg-secondary); color: var(--text-primary); }
 .b-textarea { min-height: 100px; resize: vertical; }
 .b-char-count { font-size: 12px; color: var(--text-muted); text-align: right; margin-top: 4px; }
 .b-char-count.near-limit { color: #f59e0b; }
@@ -1158,9 +1146,6 @@ footer {
     .hero-subtitle {
         font-size: 16px;
     }
-    .stat-item {
-        text-align: center;
-    }
     .hero-stats {
         flex-direction: column;
         gap: 0;
@@ -1169,6 +1154,7 @@ footer {
         border-top: none;
     }
     .stat-item {
+        text-align: center;
         padding: 20px 0;
         border-bottom: 1px solid var(--border);
     }
@@ -1180,6 +1166,8 @@ footer {
     }
     .services-grid {
         grid-template-columns: 1fr;
+        gap: 8px;
+        margin-top: 40px;
     }
     .materials-grid {
         grid-template-columns: 1fr;
@@ -1272,10 +1260,6 @@ footer {
     .advantage-card p {
         font-size: 13px;
     }
-    .services-grid {
-        gap: 8px;
-        margin-top: 40px;
-    }
     .service-card {
         padding: 20px;
         cursor: pointer;
@@ -1332,9 +1316,6 @@ footer {
     }
     .process-step:last-child {
         border-bottom: none;
-    }
-    .process-step::after {
-        display: none;
     }
     .step-number {
         width: 36px;

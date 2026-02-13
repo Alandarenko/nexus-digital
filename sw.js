@@ -1,4 +1,4 @@
-const CACHE_NAME = 'nexus-v3';
+const CACHE_NAME = 'nexus-v4';
 const PRECACHE = [
   '/',
   '/styles.css',

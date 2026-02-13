@@ -1033,7 +1033,7 @@
 
         function bUpdProg() {
             let c = 0, t = 0;
-            document.querySelectorAll('#briefModal .b-input, #briefModal .b-select, #briefModal .b-textarea').forEach(e => { t++; if (e.value && e.value.trim()) c++; });
+            document.querySelectorAll('#briefModal .b-input, #briefModal .b-textarea').forEach(e => { t++; if (e.value && e.value.trim()) c++; });
             const radioGroups = new Set();
             document.querySelectorAll('#briefModal input[type=radio]').forEach(e => radioGroups.add(e.name));
             radioGroups.forEach(name => { t++; if (document.querySelector(`#briefModal input[name="${name}"]:checked`)) c++; });
