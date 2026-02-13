@@ -1066,6 +1066,7 @@
         .cta-subtitle { margin: 0 auto 16px; }
         .cta-or { margin-top: 16px; font-size: 15px; color: var(--text-secondary); }
         .modal-header-left { display: flex; align-items: center; gap: 16px; }
+        .modal-logo-btn { border: none; background: none; padding: 0; }
         .b-send-status { margin-bottom: 16px; }
         .b-btn-ok.loading { pointer-events: none; opacity: 0.7; }
         .b-btn-ok.loading::after {
@@ -1518,13 +1519,13 @@
 
     <footer>
         <p>NEXUS Digital &copy; 2025-2026</p>
-        <p style="margin-top: 8px;"><a href="/privacy.html" style="color: var(--text-muted); font-size: 13px;">Политика конфиденциальности</a></p>
+        <p class="footer-privacy"><a href="/privacy.html">Политика конфиденциальности</a></p>
     </footer>
 
     <div class="modal-overlay" id="briefModal" role="dialog" aria-modal="true" aria-label="Форма заявки">
         <div class="modal-header">
             <div class="modal-header-left">
-                <div class="logo" onclick="tryCloseBrief()">NEXUS Digital</div>
+                <button class="logo modal-logo-btn" onclick="tryCloseBrief()">NEXUS Digital</button>
                 <button class="modal-back" onclick="tryCloseBrief()">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5m0 0l7 7m-7-7l7-7"/></svg>
                     На сайт
@@ -1665,7 +1666,7 @@
         }
         function hideConfirm() {
             document.getElementById('confirmLeave').classList.remove('open');
-            const closeBtn = document.querySelector('#briefModal .b-close');
+            const closeBtn = document.querySelector('#briefModal .modal-close');
             if (closeBtn) closeBtn.focus();
         }
         function forceCloseBrief() { document.getElementById('confirmLeave').classList.remove('open'); closeBrief(); }
