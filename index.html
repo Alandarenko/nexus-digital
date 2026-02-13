@@ -1809,6 +1809,7 @@
 
         function bV(n) { const e = document.querySelector(`#briefModal [name="${n}"]`); if (!e) return '—'; if (e.type === 'radio') { const c = document.querySelector(`#briefModal [name="${n}"]:checked`); return c ? c.value : '—'; } return e.value || '—'; }
         function bC(n) { const items = document.querySelectorAll(`#briefModal [name="${n}"]:checked`); return items.length ? Array.from(items).map(e => e.value).join(', ') : '—'; }
+        function escHtml(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
         function bShowResults() {
             if (!bValidateStep(bCur)) {
@@ -1874,8 +1875,7 @@
             btn.textContent = 'Отправка';
             status.innerHTML = '';
 
-            const escHtml = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-        const esc = s => s.replace(/([_*`\[])/g, '\\$1');
+            const esc = s => s.replace(/([_*`\[])/g, '\\$1');
             let msg = '📋 *Новая заявка с сайта NEXUS Digital*\n\n';
             const fields = [
                 ['👤 Имя', bV('b_name')], ['📞 Телефон', bV('b_phone')],
@@ -1933,6 +1933,16 @@
                 } else if (document.getElementById('briefModal').classList.contains('open')) {
                     tryCloseBrief();
                 }
+            }
+            if (e.key === 'Tab' && document.getElementById('briefModal').classList.contains('open')) {
+                const modal = document.getElementById('confirmLeave').classList.contains('open')
+                    ? document.getElementById('confirmLeave')
+                    : document.getElementById('briefModal');
+                const focusable = modal.querySelectorAll('button:not([disabled]),input:not([disabled]),textarea:not([disabled]),select:not([disabled]),a[href],[tabindex]:not([tabindex="-1"])');
+                if (focusable.length === 0) return;
+                const first = focusable[0], last = focusable[focusable.length - 1];
+                if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+                else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
             }
         });
     </script>
