@@ -689,6 +689,9 @@
         }
         .b-select option { background: var(--bg-secondary); color: var(--text-primary); }
         .b-textarea { min-height: 100px; resize: vertical; }
+        .b-char-count { font-size: 12px; color: var(--text-muted); text-align: right; margin-top: 4px; }
+        .b-char-count.near-limit { color: #f59e0b; }
+        .b-char-count.at-limit { color: #ef4444; }
 
         .b-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 
@@ -730,14 +733,16 @@
 
         .b-field.has-error .b-input,
         .b-field.has-error .b-select,
-        .b-field.has-error .b-textarea { border-color: #ef4444; box-shadow: 0 0 0 3px rgba(239,68,68,0.12); }
+        .b-field.has-error .b-textarea { border-color: #ef4444; box-shadow: 0 0 0 3px rgba(239,68,68,0.12); animation: shake 0.4s ease; }
+        @keyframes shake { 0%,100% { transform: translateX(0); } 20%,60% { transform: translateX(-4px); } 40%,80% { transform: translateX(4px); } }
         .b-field.has-error .b-checks { outline: 1px solid #ef4444; outline-offset: 4px; border-radius: 10px; }
         .b-field.has-error label { color: #ef4444; }
         .b-field .b-err { display: none; font-size: 12px; color: #ef4444; margin-top: 6px; }
-        .b-field.has-error .b-err { display: block; }
+        .b-field.has-error .b-err { display: block; animation: fadeUp 0.3s ease; }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
         .b-field.soft-warn .b-input { border-color: #eab308; box-shadow: 0 0 0 3px rgba(234,179,8,0.1); }
         .b-field.soft-warn .b-swarn { display: block; }
-        .b-field .b-swarn { display: none; font-size: 12px; color: #eab308; margin-top: 6px; }
+        .b-field .b-swarn { display: none; font-size: 12px; color: #eab308; margin-top: 6px; animation: fadeUp 0.3s ease; }
         .b-step.has-missing { border-color: #ef4444; color: #ef4444; }
         .b-val-summary { background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.2); border-radius: 12px; padding: 16px 20px; margin-bottom: 20px; }
         .b-val-summary p { font-size: 14px; font-weight: 600; color: #ef4444; margin-bottom: 10px; }
@@ -1546,12 +1551,12 @@
             <div class="b-section active" id="bs0">
                 <div class="b-head"><div class="b-num">Шаг 1 из 2</div><h3>Контактная информация</h3><p>Как с вами связаться</p></div>
                 <div class="b-row">
-                    <div class="b-field"><label for="b_name">Имя <span class="req">*</span></label><input class="b-input" id="b_name" name="b_name" placeholder="Иван Петров" aria-required="true"><div class="b-err">Укажите ваше имя</div></div>
-                    <div class="b-field"><label for="b_phone">Телефон <span class="req">*</span></label><input class="b-input" id="b_phone" name="b_phone" placeholder="+7 (999) 123-45-67" aria-required="true"><div class="b-err">Укажите номер телефона</div><div class="b-swarn">Проверьте номер — слишком короткий</div></div>
+                    <div class="b-field"><label for="b_name">Имя <span class="req">*</span></label><input class="b-input" id="b_name" name="b_name" placeholder="Иван Петров" autocomplete="name" maxlength="100" aria-required="true"><div class="b-err">Укажите ваше имя</div></div>
+                    <div class="b-field"><label for="b_phone">Телефон <span class="req">*</span></label><input class="b-input" id="b_phone" name="b_phone" type="tel" placeholder="+7 (999) 123-45-67" autocomplete="tel" maxlength="20" aria-required="true"><div class="b-err">Укажите номер телефона</div><div class="b-swarn">Проверьте номер — слишком короткий</div></div>
                 </div>
                 <div class="b-row">
-                    <div class="b-field"><label for="b_email">Email <span class="req">*</span></label><input class="b-input" id="b_email" name="b_email" placeholder="ivan@company.ru" aria-required="true"><div class="b-err">Укажите email</div><div class="b-swarn">Проверьте формат email</div></div>
-                    <div class="b-field"><label for="b_tg">Telegram <span class="opt">необязательно</span></label><input class="b-input" id="b_tg" name="b_tg" placeholder="@username"></div>
+                    <div class="b-field"><label for="b_email">Email <span class="req">*</span></label><input class="b-input" id="b_email" name="b_email" type="email" placeholder="ivan@company.ru" autocomplete="email" maxlength="100" aria-required="true"><div class="b-err">Укажите email</div><div class="b-swarn">Проверьте формат email</div></div>
+                    <div class="b-field"><label for="b_tg">Telegram <span class="opt">необязательно</span></label><input class="b-input" id="b_tg" name="b_tg" placeholder="@username" maxlength="50"></div>
                 </div>
                 <div class="b-nav"><div></div><button class="b-btn b-btn-pri" onclick="bNext()">Далее</button></div>
             </div>
@@ -1566,7 +1571,7 @@
                     <div class="b-chk"><input type="radio" id="bst5" name="b_stype" value="Telegram-бот"><label for="bst5">Telegram-бот</label></div>
                     <div class="b-chk"><input type="radio" id="bst6" name="b_stype" value="Другое"><label for="bst6">Другое</label></div>
                 </div><div class="b-err">Выберите тип проекта</div></div>
-                <div class="b-field"><label for="b_desc">Опишите задачу <span class="req">*</span></label><textarea class="b-textarea" id="b_desc" name="b_desc" placeholder="Что нужно сделать? Какую проблему решить?" aria-required="true"></textarea><div class="b-err">Опишите вашу задачу</div></div>
+                <div class="b-field"><label for="b_desc">Опишите задачу <span class="req">*</span></label><textarea class="b-textarea" id="b_desc" name="b_desc" placeholder="Что нужно сделать? Какую проблему решить?" maxlength="2000" aria-required="true"></textarea><div class="b-char-count" id="bDescCount">0 / 2000</div><div class="b-err">Опишите вашу задачу</div></div>
                 <div class="b-field"><label>Бюджет <span class="req">*</span></label><div class="b-checks" role="radiogroup" aria-label="Бюджет">
                     <div class="b-chk"><input type="radio" id="bbu1" name="b_bud" value="до 100K"><label for="bbu1">до 100 тыс. ₽</label></div>
                     <div class="b-chk"><input type="radio" id="bbu2" name="b_bud" value="100-300K"><label for="bbu2">100-300 тыс. ₽</label></div>
@@ -1574,12 +1579,12 @@
                     <div class="b-chk"><input type="radio" id="bbu4" name="b_bud" value="1M+"><label for="bbu4">Более 1 млн ₽</label></div>
                     <div class="b-chk"><input type="radio" id="bbu5" name="b_bud" value="Обсудим"><label for="bbu5">Обсудим</label></div>
                 </div><div class="b-err">Выберите бюджет</div></div>
-                <div class="b-field"><label>Сроки</label><div class="b-checks">
+                <div class="b-field"><label>Сроки</label><div class="b-checks" role="radiogroup" aria-label="Сроки">
                     <div class="b-chk"><input type="radio" id="btm1" name="b_time" value="Срочно"><label for="btm1">Срочно</label></div>
                     <div class="b-chk"><input type="radio" id="btm2" name="b_time" value="1 мес"><label for="btm2">1 месяц</label></div>
                     <div class="b-chk"><input type="radio" id="btm3" name="b_time" value="2-3 мес"><label for="btm3">2-3 месяца</label></div>
                 </div></div>
-                <div class="b-field"><label>Комментарии <span class="opt">необязательно</span></label><textarea class="b-textarea" name="b_comments" placeholder="Ссылки на примеры, пожелания, детали..."></textarea></div>
+                <div class="b-field"><label>Комментарии <span class="opt">необязательно</span></label><textarea class="b-textarea" name="b_comments" placeholder="Ссылки на примеры, пожелания, детали..." maxlength="2000"></textarea></div>
                 <div class="b-nav"><button class="b-btn b-btn-sec" onclick="bPrev()">Назад</button><button class="b-btn b-btn-ok" onclick="bShowResults()">Проверить и отправить</button></div>
             </div>
 
@@ -1628,6 +1633,7 @@
         }
 
         let briefTrigger = null;
+        let briefSent = false;
         function openBrief() {
             closeMenu();
             briefTrigger = document.activeElement;
@@ -1649,6 +1655,7 @@
             return has;
         }
         function tryCloseBrief() {
+            if (briefSent) { closeBrief(); return; }
             if (briefHasData()) {
                 document.getElementById('confirmLeave').classList.add('open');
                 setTimeout(() => { const stay = document.querySelector('#confirmLeave .btn-confirm-stay'); if (stay) stay.focus(); }, 50);
@@ -1779,6 +1786,14 @@
         function bPrev() { if (bCur > 0) bGo(bCur - 1); }
         function bMarkDone(i) { const b = document.querySelectorAll('.b-step'); if (b[i]) b[i].classList.add('done'); }
 
+        const descArea = document.getElementById('b_desc');
+        const descCount = document.getElementById('bDescCount');
+        descArea.addEventListener('input', () => {
+            const len = descArea.value.length;
+            descCount.textContent = len + ' / 2000';
+            descCount.className = 'b-char-count' + (len >= 2000 ? ' at-limit' : len >= 1800 ? ' near-limit' : '');
+        });
+
         function bUpdProg() {
             let c = 0, t = 0;
             document.querySelectorAll('#briefModal .b-input, #briefModal .b-select, #briefModal .b-textarea').forEach(e => { t++; if (e.value && e.value.trim()) c++; });
@@ -1895,6 +1910,10 @@
                     btn.classList.remove('loading');
                     status.innerHTML = '<div class="b-tip"><span class="b-tip-i">✓</span><span>Бриф отправлен! Мы свяжемся с вами в ближайшее время.</span></div>';
                     btn.textContent = 'Отправлено ✓';
+                    briefSent = true;
+                    const editBtn = document.querySelector('#bResults .b-btn-sec');
+                    if (editBtn) { editBtn.disabled = true; editBtn.style.opacity = '0.4'; editBtn.style.pointerEvents = 'none'; }
+                    document.querySelector('.b-consent').style.display = 'none';
                 } else {
                     throw new Error(data.description);
                 }
