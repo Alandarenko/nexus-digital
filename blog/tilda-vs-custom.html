@@ -75,7 +75,7 @@
             <li><a href="/">Главная</a></li>
             <li><a href="/blog/stoimost-razrabotki-saita-2026.html">Стоимость сайтов</a></li>
             <li><a href="/blog/pagespeed-optimizaciya-2026.html">PageSpeed</a></li>
-            <li><a href="/#contact" class="nav-cta" role="button">Оставить заявку</a></li>
+            <li><a href="#" class="nav-cta" role="button" onclick="event.preventDefault();openBrief()">Оставить заявку</a></li>
         </ul>
         <button class="burger" onclick="toggleMenu()" aria-label="Меню">
             <span></span><span></span><span></span>
@@ -251,7 +251,7 @@
         <div class="article-cta">
             <h3>Не уверены что выбрать? Проконсультируем бесплатно</h3>
             <p>Расскажите о вашем проекте — мы поможем выбрать оптимальное решение и сэкономить бюджет</p>
-            <button class="cta-button" onclick="window.location.href='/?brief'">Получить консультацию</button>
+            <button class="cta-button" onclick="openBrief()">Получить консультацию</button>
         </div>
     </article>
     </main>
@@ -274,5 +274,6 @@
         }
     </script>
 
+    <script src="/brief.js"></script>
 </body>
 </html>

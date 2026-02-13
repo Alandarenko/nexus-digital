@@ -75,7 +75,7 @@
             <li><a href="/">Главная</a></li>
             <li><a href="/blog/tilda-vs-custom.html">Tilda vs кастом</a></li>
             <li><a href="/blog/pagespeed-optimizaciya-2026.html">PageSpeed</a></li>
-            <li><a href="/#contact" class="nav-cta" role="button">Оставить заявку</a></li>
+            <li><a href="#" class="nav-cta" role="button" onclick="event.preventDefault();openBrief()">Оставить заявку</a></li>
         </ul>
         <button class="burger" onclick="toggleMenu()" aria-label="Меню">
             <span></span><span></span><span></span>
@@ -235,7 +235,7 @@
         <div class="article-cta">
             <h3>Рассчитайте стоимость вашего проекта</h3>
             <p>Оставьте заявку — мы подготовим детальную смету с фиксированной ценой за 24 часа</p>
-            <button class="cta-button" onclick="window.location.href='/?brief'">Оставить заявку</button>
+            <button class="cta-button" onclick="openBrief()">Оставить заявку</button>
         </div>
     </article>
     </main>
@@ -258,5 +258,6 @@
         }
     </script>
 
+    <script src="/brief.js"></script>
 </body>
 </html>

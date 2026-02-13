@@ -75,7 +75,7 @@
             <li><a href="/">Главная</a></li>
             <li><a href="/blog/trends.html">Тренды</a></li>
             <li><a href="/blog/tech.html">Технологии</a></li>
-            <li><a href="/#contact" class="nav-cta" role="button">Оставить заявку</a></li>
+            <li><a href="#" class="nav-cta" role="button" onclick="event.preventDefault();openBrief()">Оставить заявку</a></li>
         </ul>
         <button class="burger" onclick="toggleMenu()" aria-label="Меню">
             <span></span><span></span><span></span>
@@ -195,7 +195,7 @@
         <div class="article-cta">
             <h3>Хотите выйти на этот рынок?</h3>
             <p>Расскажите о вашем проекте — мы поможем выбрать стратегию и технологии</p>
-            <button class="cta-button" onclick="window.location.href='/?brief'">Оставить заявку</button>
+            <button class="cta-button" onclick="openBrief()">Оставить заявку</button>
         </div>
     </article>
     </main>
@@ -218,5 +218,6 @@
         }
     </script>
 
+    <script src="/brief.js"></script>
 </body>
 </html>
