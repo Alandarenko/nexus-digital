@@ -1336,12 +1336,59 @@
             text-transform: uppercase;
         }
 
+        .faq-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 40px;
+        }
+        .faq-filter {
+            padding: 8px 20px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--text-secondary);
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .faq-filter:hover {
+            border-color: var(--accent);
+            color: var(--accent-light);
+        }
+        .faq-filter.active {
+            background: var(--gradient-1);
+            color: white;
+            border-color: transparent;
+        }
         .faq-list {
             max-width: 800px;
-            margin-top: 60px;
+            margin-top: 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
         }
         .faq-item {
-            border-bottom: 1px solid var(--border);
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+        .faq-item:hover {
+            border-color: var(--border);
+            border-left-color: rgba(99, 102, 241, 0.3);
+            background: var(--bg-card-hover);
+        }
+        .faq-item.open {
+            border-left-color: var(--accent);
+            background: var(--bg-card-hover);
+        }
+        .faq-item.faq-hidden {
+            display: none;
         }
         .faq-question {
             width: 100%;
@@ -1349,7 +1396,7 @@
             align-items: center;
             justify-content: space-between;
             gap: 16px;
-            padding: 24px 0;
+            padding: 22px 28px;
             background: none;
             border: none;
             color: var(--text-primary);
@@ -1370,6 +1417,7 @@
         }
         .faq-item.open .faq-chevron {
             transform: rotate(180deg);
+            color: var(--accent-light);
         }
         .faq-answer {
             max-height: 0;
@@ -1380,20 +1428,28 @@
             max-height: 300px;
         }
         .faq-answer p {
-            padding-bottom: 24px;
+            padding: 0 28px 22px;
             font-size: 15px;
             color: var(--text-secondary);
             line-height: 1.7;
         }
 
         @media (max-width: 768px) {
+            .faq-filters {
+                gap: 8px;
+                margin-top: 32px;
+            }
+            .faq-filter {
+                padding: 6px 16px;
+                font-size: 13px;
+            }
             .faq-question {
                 font-size: 15px;
-                padding: 20px 0;
+                padding: 18px 20px;
             }
             .faq-answer p {
                 font-size: 14px;
-                padding-bottom: 20px;
+                padding: 0 20px 18px;
             }
         }
     </style>
@@ -1822,8 +1878,16 @@
         <h2 class="section-title">Частые вопросы</h2>
         <p class="section-subtitle">Ответы на популярные вопросы о работе с нами</p>
 
+        <div class="faq-filters">
+            <button class="faq-filter active" onclick="filterFaq('all', this)">Все</button>
+            <button class="faq-filter" onclick="filterFaq('process', this)">Процесс</button>
+            <button class="faq-filter" onclick="filterFaq('payment', this)">Оплата</button>
+            <button class="faq-filter" onclick="filterFaq('tech', this)">Технологии</button>
+            <button class="faq-filter" onclick="filterFaq('support', this)">Поддержка</button>
+        </div>
+
         <div class="faq-list">
-            <div class="faq-item">
+            <div class="faq-item" data-category="process">
                 <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
                     <span>Как начать работу с вами?</span>
                     <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
@@ -1832,7 +1896,7 @@
                     <p>Оставьте заявку или напишите в Telegram. Мы обсудим задачу, составим ТЗ и смету. Старт работы — от 3 дней после согласования.</p>
                 </div>
             </div>
-            <div class="faq-item">
+            <div class="faq-item" data-category="process">
                 <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
                     <span>Сколько времени занимает разработка сайта?</span>
                     <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
@@ -1841,7 +1905,7 @@
                     <p>Лендинг — 3–7 дней, корпоративный сайт — 2–6 недель, интернет-магазин — 1–3 месяца. Точные сроки после обсуждения проекта.</p>
                 </div>
             </div>
-            <div class="faq-item">
+            <div class="faq-item" data-category="process">
                 <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
                     <span>Что нужно от клиента для начала?</span>
                     <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
@@ -1850,7 +1914,7 @@
                     <p>Заполненный бриф (есть на сайте), доступ к домену и хостингу (если есть), контент (тексты, логотип). Если контента нет — поможем с копирайтингом.</p>
                 </div>
             </div>
-            <div class="faq-item">
+            <div class="faq-item" data-category="payment">
                 <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
                     <span>Как происходит оплата?</span>
                     <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
@@ -1859,7 +1923,7 @@
                     <p>Поэтапно: 50% предоплата, 50% после сдачи проекта. Для крупных проектов — оплата помесячно по спринтам. Работаем по договору.</p>
                 </div>
             </div>
-            <div class="faq-item">
+            <div class="faq-item" data-category="payment">
                 <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
                     <span>Что если результат не устроит?</span>
                     <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
@@ -1868,7 +1932,7 @@
                     <p>Каждый этап согласовывается. Правки включены в стоимость. Если не можем договориться — возвращаем предоплату за невыполненный объём.</p>
                 </div>
             </div>
-            <div class="faq-item">
+            <div class="faq-item" data-category="payment">
                 <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
                     <span>Есть ли скрытые доплаты?</span>
                     <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
@@ -1877,7 +1941,7 @@
                     <p>Нет. Фиксированная смета утверждается до начала работ. Дополнительные работы — только по вашему запросу с отдельным согласованием.</p>
                 </div>
             </div>
-            <div class="faq-item">
+            <div class="faq-item" data-category="tech">
                 <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
                     <span>Какие технологии вы используете?</span>
                     <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
@@ -1886,7 +1950,7 @@
                     <p>React, Vue, Node.js, Python, Flutter для мобильных. Для AI — YandexGPT, GigaChat. Российский стек: 1С-Битрикс, Yandex.Cloud. Подробнее на странице «Технологии».</p>
                 </div>
             </div>
-            <div class="faq-item">
+            <div class="faq-item" data-category="tech">
                 <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
                     <span>Кто владеет кодом и доменом?</span>
                     <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
@@ -1895,7 +1959,7 @@
                     <p>Вы. После сдачи проекта все исходники, доступы, домен и хостинг передаются клиенту. Никакой привязки к нам.</p>
                 </div>
             </div>
-            <div class="faq-item">
+            <div class="faq-item" data-category="support">
                 <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
                     <span>Что происходит после запуска?</span>
                     <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
@@ -1904,7 +1968,7 @@
                     <p>Гарантийная поддержка 1 месяц бесплатно. Далее — тариф на обслуживание от 5 000 ₽/мес: мониторинг, обновления, правки, бэкапы.</p>
                 </div>
             </div>
-            <div class="faq-item">
+            <div class="faq-item" data-category="support">
                 <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
                     <span>Как быстро вы реагируете на проблемы?</span>
                     <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
@@ -2057,6 +2121,20 @@
                 item.classList.add('open');
                 btn.setAttribute('aria-expanded', 'true');
             }
+        }
+
+        function filterFaq(category, btn) {
+            document.querySelectorAll('.faq-filter').forEach(f => f.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.faq-item').forEach(item => {
+                item.classList.remove('open');
+                item.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+                if (category === 'all' || item.dataset.category === category) {
+                    item.classList.remove('faq-hidden');
+                } else {
+                    item.classList.add('faq-hidden');
+                }
+            });
         }
 
         function toggleService(card) {
