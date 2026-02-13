@@ -1124,6 +1124,7 @@ footer {
 }
 .article-cta h3 { font-size: 24px; font-weight: 700; margin-bottom: 12px; color: var(--text-primary); }
 .article-cta p { color: var(--text-secondary); margin-bottom: 24px; }
+.article-cta .cta-button { color: #fff; }
 
 @media (max-width: 768px) {
     .article-content { padding: 100px 20px 60px; }
