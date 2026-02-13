@@ -66,6 +66,91 @@
                     "lowPrice": "15000",
                     "highPrice": "600000"
                 }
+            },
+            {
+                "@type": "FAQPage",
+                "mainEntity": [
+                    {
+                        "@type": "Question",
+                        "name": "Как начать работу с вами?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Оставьте заявку или напишите в Telegram. Мы обсудим задачу, составим ТЗ и смету. Старт работы — от 3 дней после согласования."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Сколько времени занимает разработка сайта?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Лендинг — 3–7 дней, корпоративный сайт — 2–6 недель, интернет-магазин — 1–3 месяца. Точные сроки после обсуждения проекта."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Что нужно от клиента для начала?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Заполненный бриф (есть на сайте), доступ к домену и хостингу (если есть), контент (тексты, логотип). Если контента нет — поможем с копирайтингом."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Как происходит оплата?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Поэтапно: 50% предоплата, 50% после сдачи проекта. Для крупных проектов — оплата помесячно по спринтам. Работаем по договору."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Что если результат не устроит?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Каждый этап согласовывается. Правки включены в стоимость. Если не можем договориться — возвращаем предоплату за невыполненный объём."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Есть ли скрытые доплаты?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Нет. Фиксированная смета утверждается до начала работ. Дополнительные работы — только по вашему запросу с отдельным согласованием."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Какие технологии вы используете?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "React, Vue, Node.js, Python, Flutter для мобильных. Для AI — YandexGPT, GigaChat. Российский стек: 1С-Битрикс, Yandex.Cloud."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Кто владеет кодом и доменом?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Вы. После сдачи проекта все исходники, доступы, домен и хостинг передаются клиенту. Никакой привязки к нам."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Что происходит после запуска?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Гарантийная поддержка 1 месяц бесплатно. Далее — тариф на обслуживание от 5 000 ₽/мес: мониторинг, обновления, правки, бэкапы."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Как быстро вы реагируете на проблемы?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "SLA от 1 часа для критических инцидентов. Мониторинг 24/7. Связь через Telegram — ответ в течение 30 минут в рабочее время."
+                        }
+                    }
+                ]
             }
         ]
     }
@@ -1250,6 +1335,67 @@
             letter-spacing: 2px;
             text-transform: uppercase;
         }
+
+        .faq-list {
+            max-width: 800px;
+            margin-top: 60px;
+        }
+        .faq-item {
+            border-bottom: 1px solid var(--border);
+        }
+        .faq-question {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 24px 0;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 17px;
+            font-weight: 600;
+            text-align: left;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        .faq-question:hover {
+            color: var(--accent-light);
+        }
+        .faq-chevron {
+            flex-shrink: 0;
+            color: var(--text-muted);
+            transition: transform 0.3s ease;
+        }
+        .faq-item.open .faq-chevron {
+            transform: rotate(180deg);
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        .faq-item.open .faq-answer {
+            max-height: 300px;
+        }
+        .faq-answer p {
+            padding-bottom: 24px;
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        @media (max-width: 768px) {
+            .faq-question {
+                font-size: 15px;
+                padding: 20px 0;
+            }
+            .faq-answer p {
+                font-size: 14px;
+                padding-bottom: 20px;
+            }
+        }
     </style>
 
     <!-- Yandex.Metrika counter -->
@@ -1282,6 +1428,7 @@
             <li><a href="#services">Услуги</a></li>
             <li><a href="#pricing">Цены</a></li>
             <li><a href="#advantages">Преимущества</a></li>
+            <li><a href="#faq">FAQ</a></li>
             <li><a href="#contact">Контакты</a></li>
             <li><a href="#contact" class="nav-cta" role="button" onclick="event.preventDefault();openBrief()">Оставить заявку</a></li>
         </ul>
@@ -1294,6 +1441,7 @@
         <a href="#services" onclick="closeMenu()">Услуги</a>
         <a href="#pricing" onclick="closeMenu()">Цены</a>
         <a href="#advantages" onclick="closeMenu()">Преимущества</a>
+        <a href="#faq" onclick="closeMenu()">FAQ</a>
         <a href="#contact" onclick="closeMenu()">Контакты</a>
         <button class="nav-cta" onclick="closeMenu();openBrief()">Оставить заявку</button>
     </div>
@@ -1669,6 +1817,107 @@
 
     <hr class="section-divider">
 
+    <section id="faq" class="fade-in">
+        <div class="section-label">FAQ</div>
+        <h2 class="section-title">Частые вопросы</h2>
+        <p class="section-subtitle">Ответы на популярные вопросы о работе с нами</p>
+
+        <div class="faq-list">
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+                    <span>Как начать работу с вами?</span>
+                    <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                </button>
+                <div class="faq-answer">
+                    <p>Оставьте заявку или напишите в Telegram. Мы обсудим задачу, составим ТЗ и смету. Старт работы — от 3 дней после согласования.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+                    <span>Сколько времени занимает разработка сайта?</span>
+                    <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                </button>
+                <div class="faq-answer">
+                    <p>Лендинг — 3–7 дней, корпоративный сайт — 2–6 недель, интернет-магазин — 1–3 месяца. Точные сроки после обсуждения проекта.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+                    <span>Что нужно от клиента для начала?</span>
+                    <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                </button>
+                <div class="faq-answer">
+                    <p>Заполненный бриф (есть на сайте), доступ к домену и хостингу (если есть), контент (тексты, логотип). Если контента нет — поможем с копирайтингом.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+                    <span>Как происходит оплата?</span>
+                    <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                </button>
+                <div class="faq-answer">
+                    <p>Поэтапно: 50% предоплата, 50% после сдачи проекта. Для крупных проектов — оплата помесячно по спринтам. Работаем по договору.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+                    <span>Что если результат не устроит?</span>
+                    <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                </button>
+                <div class="faq-answer">
+                    <p>Каждый этап согласовывается. Правки включены в стоимость. Если не можем договориться — возвращаем предоплату за невыполненный объём.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+                    <span>Есть ли скрытые доплаты?</span>
+                    <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                </button>
+                <div class="faq-answer">
+                    <p>Нет. Фиксированная смета утверждается до начала работ. Дополнительные работы — только по вашему запросу с отдельным согласованием.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+                    <span>Какие технологии вы используете?</span>
+                    <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                </button>
+                <div class="faq-answer">
+                    <p>React, Vue, Node.js, Python, Flutter для мобильных. Для AI — YandexGPT, GigaChat. Российский стек: 1С-Битрикс, Yandex.Cloud. Подробнее на странице «Технологии».</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+                    <span>Кто владеет кодом и доменом?</span>
+                    <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                </button>
+                <div class="faq-answer">
+                    <p>Вы. После сдачи проекта все исходники, доступы, домен и хостинг передаются клиенту. Никакой привязки к нам.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+                    <span>Что происходит после запуска?</span>
+                    <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                </button>
+                <div class="faq-answer">
+                    <p>Гарантийная поддержка 1 месяц бесплатно. Далее — тариф на обслуживание от 5 000 ₽/мес: мониторинг, обновления, правки, бэкапы.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+                    <span>Как быстро вы реагируете на проблемы?</span>
+                    <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                </button>
+                <div class="faq-answer">
+                    <p>SLA от 1 часа для критических инцидентов. Мониторинг 24/7. Связь через Telegram — ответ в течение 30 минут в рабочее время.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="section-divider">
+
     <section id="contact" class="cta-section fade-in">
         <div class="section-label">Начать проект</div>
         <h2 class="section-title">Готовы обсудить ваш проект?</h2>
@@ -1795,6 +2044,19 @@
             document.querySelector('.burger').classList.remove('open');
             document.getElementById('mobileMenu').classList.remove('open');
             document.getElementById('mobileOverlay').classList.remove('open');
+        }
+
+        function toggleFaq(btn) {
+            const item = btn.closest('.faq-item');
+            const wasOpen = item.classList.contains('open');
+            item.parentElement.querySelectorAll('.faq-item.open').forEach(el => {
+                el.classList.remove('open');
+                el.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+            });
+            if (!wasOpen) {
+                item.classList.add('open');
+                btn.setAttribute('aria-expanded', 'true');
+            }
         }
 
         function toggleService(card) {
