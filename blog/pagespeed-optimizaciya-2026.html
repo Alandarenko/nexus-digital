@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Как ускорить сайт до идеального PageSpeed в 2026 — NEXUS Digital</title>
+    <meta name="description" content="Технический гайд по оптимизации PageSpeed в 2026: Core Web Vitals, Critical CSS, оптимизация изображений, lazy loading, CDN, кеширование. Чеклист для идеального результата.">
+    <link rel="canonical" href="https://nexus-digital-lovat.vercel.app/blog/pagespeed-optimizaciya-2026.html">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="apple-touch-icon" href="/icon-192.png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#6366f1">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="NEXUS Digital">
+    <meta property="og:title" content="Как ускорить сайт до идеального PageSpeed в 2026">
+    <meta property="og:description" content="Технический гайд по оптимизации PageSpeed: Core Web Vitals, Critical CSS, lazy loading, CDN и полный чеклист.">
+    <meta property="og:url" content="https://nexus-digital-lovat.vercel.app/blog/pagespeed-optimizaciya-2026.html">
+    <meta property="og:image" content="https://nexus-digital-lovat.vercel.app/og-image.png">
+    <meta property="og:locale" content="ru_RU">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Как ускорить сайт до идеального PageSpeed в 2026">
+    <meta name="twitter:description" content="Технический гайд по оптимизации PageSpeed: Core Web Vitals, Critical CSS, lazy loading, CDN.">
+    <meta name="twitter:image" content="https://nexus-digital-lovat.vercel.app/og-image.png">
+
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Как ускорить сайт до идеального PageSpeed в 2026",
+        "description": "Технический гайд по оптимизации PageSpeed в 2026 году: Core Web Vitals, Critical CSS, оптимизация изображений, lazy loading, CDN, кеширование.",
+        "datePublished": "2026-02-13",
+        "dateModified": "2026-02-13",
+        "author": {
+            "@type": "Organization",
+            "name": "NEXUS Digital",
+            "url": "https://nexus-digital-lovat.vercel.app"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "NEXUS Digital",
+            "url": "https://nexus-digital-lovat.vercel.app"
+        },
+        "mainEntityOfPage": "https://nexus-digital-lovat.vercel.app/blog/pagespeed-optimizaciya-2026.html"
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <style>*{margin:0;padding:0;box-sizing:border-box}:root{--bg-primary:#0a0a0f;--bg-secondary:#12121a;--bg-card:#1a1a25;--accent:#6366f1;--accent-light:#818cf8;--text-primary:#f1f1f4;--text-secondary:#9ca3af;--text-muted:#7c8595;--border:#2a2a3a;--gradient-1:linear-gradient(135deg,#6366f1,#8b5cf6);--gradient-2:linear-gradient(135deg,#6366f1,#06b6d4)}html{scroll-behavior:smooth;overflow-x:hidden}body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg-primary);color:var(--text-primary);line-height:1.6;overflow-x:hidden}nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 40px;display:flex;justify-content:space-between;align-items:center;background:rgba(10,10,15,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}.logo{font-size:22px;font-weight:800;letter-spacing:-0.5px;background:var(--gradient-1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-decoration:none}</style>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=106813146', 'ym');
+    ym(106813146, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/106813146" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+</head>
+<body>
+
+    <nav>
+        <a href="/" class="logo">NEXUS Digital</a>
+        <a href="/" class="nav-back">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5m0 0l7 7m-7-7l7-7"/></svg>
+            <span>На главную</span>
+        </a>
+        <button class="burger" onclick="toggleMenu()" aria-label="Меню">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="/" onclick="closeMenu()">На главную</a>
+        <a href="/blog/stoimost-razrabotki-saita-2026.html" onclick="closeMenu()">Стоимость сайтов</a>
+        <a href="/blog/tilda-vs-custom.html" onclick="closeMenu()">Tilda vs кастом</a>
+    </div>
+    <div class="mobile-overlay" id="mobileOverlay" onclick="closeMenu()"></div>
+
+    <main>
+    <article class="article-content">
+        <h1>Как ускорить сайт до идеального PageSpeed в 2026</h1>
+        <p class="article-meta">NEXUS Digital &middot; 13 февраля 2026</p>
+
+        <p>Скорость сайта напрямую влияет на конверсию, позиции в поиске и поведение пользователей. По данным Google, увеличение времени загрузки с 1 до 3 секунд повышает вероятность отказа на 32%. А при 5 секундах — на 90%.</p>
+
+        <p>В 2026 году и Google, и Яндекс используют метрики скорости как фактор ранжирования. Разбираем, как добиться идеального результата PageSpeed Insights.</p>
+
+        <h2>Core Web Vitals в 2026 году</h2>
+
+        <p>Google оценивает пользовательский опыт по трём ключевым метрикам:</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Метрика</th>
+                    <th>Что измеряет</th>
+                    <th>Хорошо</th>
+                    <th>Плохо</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>LCP</strong></td>
+                    <td>Загрузка основного контента</td>
+                    <td>&le; 2.5 сек</td>
+                    <td>&gt; 4.0 сек</td>
+                </tr>
+                <tr>
+                    <td><strong>INP</strong></td>
+                    <td>Отзывчивость на действия</td>
+                    <td>&le; 200 мс</td>
+                    <td>&gt; 500 мс</td>
+                </tr>
+                <tr>
+                    <td><strong>CLS</strong></td>
+                    <td>Визуальная стабильность</td>
+                    <td>&le; 0.1</td>
+                    <td>&gt; 0.25</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p><strong>INP (Interaction to Next Paint)</strong> заменил FID в 2024 году и стал главной проблемой для многих сайтов. В отличие от FID, который измерял только задержку первого взаимодействия, INP учитывает все взаимодействия за время сессии.</p>
+
+        <h2>Техники оптимизации</h2>
+
+        <h3>1. Critical CSS</h3>
+        <p>Выделите CSS, необходимый для рендеринга первого экрана, и встройте его в <code>&lt;style&gt;</code> тега <code>&lt;head&gt;</code>. Остальные стили загружайте асинхронно. Это устраняет render-blocking и ускоряет LCP на 0.5–1.5 секунды.</p>
+
+        <h3>2. Оптимизация изображений</h3>
+        <ul>
+            <li>Используйте <strong>WebP/AVIF</strong> — экономия 30–50% размера по сравнению с JPEG</li>
+            <li>Задавайте <strong>width и height</strong> для всех <code>&lt;img&gt;</code> — предотвращает CLS</li>
+            <li>Используйте <strong>srcset</strong> для адаптивных изображений</li>
+            <li>Сжимайте через <strong>Squoosh, ImageOptim или Sharp</strong></li>
+            <li>Для hero-изображения используйте <code>&lt;link rel="preload"&gt;</code></li>
+        </ul>
+
+        <h3>3. Lazy Loading</h3>
+        <p>Все изображения и iframe ниже первого экрана — с атрибутом <code>loading="lazy"</code>. Для hero-изображения используйте <code>loading="eager"</code> и <code>fetchpriority="high"</code>.</p>
+
+        <h3>4. CDN (Content Delivery Network)</h3>
+        <p>CDN размещает копии статики на серверах по всему миру. Для российской аудитории — Yandex Cloud CDN или Selectel CDN. Для глобальной — Cloudflare (бесплатный план). Улучшает TTFB на 50–80%.</p>
+
+        <h3>5. Кеширование</h3>
+        <p>Настройте заголовки <code>Cache-Control</code> для статических ресурсов:</p>
+        <ul>
+            <li><strong>Шрифты, изображения:</strong> <code>max-age=31536000, immutable</code></li>
+            <li><strong>CSS, JS (с хешами):</strong> <code>max-age=31536000</code></li>
+            <li><strong>HTML:</strong> <code>no-cache</code> (всегда проверять актуальность)</li>
+        </ul>
+        <p>Service Worker — дополнительный уровень кеширования для PWA-сайтов. Стратегия network-first для HTML и cache-first для статики.</p>
+
+        <h3>6. Оптимизация JavaScript</h3>
+        <ul>
+            <li><strong>Defer и async</strong> — загружайте JS без блокировки рендеринга</li>
+            <li><strong>Code splitting</strong> — разбивайте бандл на чанки, загружайте по требованию</li>
+            <li><strong>Tree shaking</strong> — удаляйте неиспользуемый код при сборке</li>
+            <li><strong>Минификация</strong> — Terser, esbuild или SWC</li>
+            <li>Избегайте тяжёлых библиотек — часто можно заменить на нативные API</li>
+        </ul>
+
+        <h2>Оптимизация INP</h2>
+
+        <p>INP измеряет три компонента каждого взаимодействия:</p>
+
+        <ol>
+            <li><strong>Input Delay</strong> — задержка до начала обработки. Минимизируйте работу в main thread, разбивайте длинные задачи через <code>scheduler.yield()</code></li>
+            <li><strong>Processing Time</strong> — время выполнения обработчика. Оптимизируйте event listeners, избегайте forced reflow</li>
+            <li><strong>Presentation Delay</strong> — время до отрисовки. Минимизируйте DOM-мутации, используйте CSS-анимации вместо JS</li>
+        </ol>
+
+        <p>Главное правило: любая задача в main thread не должна превышать 50 мс. Используйте <code>requestAnimationFrame</code> для визуальных обновлений и <code>requestIdleCallback</code> для фоновых задач.</p>
+
+        <h2>Яндекс и скорость</h2>
+
+        <p>Яндекс не использует Core Web Vitals напрямую, но учитывает поведенческие факторы, которые напрямую зависят от скорости:</p>
+
+        <ul>
+            <li><strong>Показатель отказов</strong> — медленный сайт = больше отказов = снижение позиций</li>
+            <li><strong>Время на сайте</strong> — если страница не загрузилась, пользователь уходит</li>
+            <li><strong>Глубина просмотра</strong> — тормозящий сайт не мотивирует открывать другие страницы</li>
+            <li><strong>Возвращаемость</strong> — быстрый сайт запоминается и получает повторные визиты</li>
+        </ul>
+
+        <p>Яндекс.Метрика показывает скорость загрузки в отчёте «Время загрузки страниц» — используйте его для мониторинга.</p>
+
+        <h2>Yandex Cloud CDN</h2>
+
+        <p>Для сайтов с российской аудиторией Yandex Cloud CDN — оптимальное решение. Серверы расположены в Москве, Санкт-Петербурге, Владивостоке и других городах. Интеграция с Object Storage для статики. Поддержка HTTP/2 и Brotli-сжатия.</p>
+
+        <h2>Чеклист оптимизации PageSpeed</h2>
+
+        <ul>
+            <li>Critical CSS встроен в <code>&lt;head&gt;</code></li>
+            <li>Шрифты загружаются через <code>font-display: swap</code> и <code>preconnect</code></li>
+            <li>Изображения в WebP/AVIF с указанием размеров</li>
+            <li>Lazy loading для контента ниже fold</li>
+            <li>JavaScript с defer/async, минифицирован</li>
+            <li>Gzip или Brotli сжатие на сервере</li>
+            <li>HTTP/2 или HTTP/3 включён</li>
+            <li>CDN для статических ресурсов</li>
+            <li>Service Worker для PWA-кеширования</li>
+            <li>Cache-Control заголовки для всех ресурсов</li>
+            <li>Нет render-blocking CSS/JS</li>
+            <li>DOM-дерево менее 1500 элементов</li>
+            <li>Нет layout shifts (CLS &le; 0.1)</li>
+            <li>Все обработчики событий завершаются за &lt; 50 мс</li>
+            <li>Мониторинг через Яндекс.Метрику и CrUX</li>
+        </ul>
+
+        <div class="article-cta">
+            <h3>Проведём бесплатный аудит скорости вашего сайта</h3>
+            <p>Отправьте URL вашего сайта — мы проверим PageSpeed, Core Web Vitals и подготовим список рекомендаций</p>
+            <a href="/" class="cta-button">Заказать аудит</a>
+        </div>
+    </article>
+    </main>
+
+    <footer>
+        <p>NEXUS Digital &copy; 2025-2026</p>
+        <p class="footer-privacy"><a href="/privacy.html">Политика конфиденциальности</a></p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            document.querySelector('.burger').classList.toggle('open');
+            document.getElementById('mobileMenu').classList.toggle('open');
+            document.getElementById('mobileOverlay').classList.toggle('open');
+        }
+        function closeMenu() {
+            document.querySelector('.burger').classList.remove('open');
+            document.getElementById('mobileMenu').classList.remove('open');
+            document.getElementById('mobileOverlay').classList.remove('open');
+        }
+    </script>
+
+</body>
+</html>
