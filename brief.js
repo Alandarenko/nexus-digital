@@ -2,7 +2,7 @@
     // Inject brief modal HTML
     var html = '<div class="modal-overlay" id="briefModal" role="dialog" aria-modal="true" aria-label="Форма заявки">'
         + '<div class="modal-header"><div class="modal-header-left">'
-        + '<button class="logo modal-logo-btn" onclick="tryCloseBrief()">NEXUS Digital</button>'
+        + '<button class="logo modal-logo-btn" onclick="tryCloseBrief()">Devorra</button>'
         + '<button class="modal-back" onclick="tryCloseBrief()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5m0 0l7 7m-7-7l7-7"/></svg>На сайт</button>'
         + '</div><div class="modal-header-right">'
         + '<div class="modal-progress"><div class="modal-progress-fill" id="bProg"></div></div>'
@@ -287,7 +287,7 @@
         status.innerHTML = '';
 
         var esc = function(s) { return s.replace(/([_*`\[])/g, '\\$1'); };
-        var msg = '\u{1F4CB} *Новая заявка с сайта NEXUS Digital*\n\n';
+        var msg = '\u{1F4CB} *Новая заявка с сайта Devorra*\n\n';
         var fields = [
             ['\u{1F464} Имя', bV('b_name')], ['\u{1F4DE} Телефон', bV('b_phone')],
             ['\u{1F4E7} Email', bV('b_email')], ['\u2708\uFE0F Telegram', bV('b_tg')],

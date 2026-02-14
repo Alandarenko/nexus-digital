@@ -1,5 +1,5 @@
 /**
- * NEXUS Digital — автоматическое обновление новостей
+ * Devorra — автоматическое обновление новостей
  *
  * Парсит RSS-ленты IT-изданий, переписывает через YandexGPT
  * как уникальные экспертные заметки и сохраняет в data/news.json.
@@ -26,7 +26,7 @@ const RSS_FEEDS = [
 const MAX_NEWS = 5;
 const OUTPUT_PATH = path.join(__dirname, '..', 'data', 'news.json');
 
-const SYSTEM_PROMPT = `Ты — автор блога веб-студии NEXUS Digital, специализирующейся на веб-разработке, AI-интеграциях и импортозамещении.
+const SYSTEM_PROMPT = `Ты — автор блога веб-студии Devorra, специализирующейся на веб-разработке, AI-интеграциях и импортозамещении.
 
 На основе факта из новости напиши короткую экспертную заметку (2-3 предложения, максимум 300 символов).
 Полностью своими словами. НЕ ссылайся на источник и НЕ упоминай название СМИ.
@@ -41,7 +41,7 @@ const SYSTEM_PROMPT = `Ты — автор блога веб-студии NEXUS 
 function httpGet(url) {
   return new Promise((resolve, reject) => {
     const client = url.startsWith('https') ? https : require('http');
-    client.get(url, { headers: { 'User-Agent': 'NexusDigital-NewsBot/1.0' } }, res => {
+    client.get(url, { headers: { 'User-Agent': 'Devorra-NewsBot/1.0' } }, res => {
       if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
         return httpGet(res.headers.location).then(resolve).catch(reject);
       }

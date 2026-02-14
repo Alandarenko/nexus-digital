@@ -1,4 +1,4 @@
-# Полный аудит сайта NEXUS Digital
+# Полный аудит сайта Devorra
 
 **URL:** https://nexus-digital-lovat.vercel.app
 **Дата:** 2026-02-13

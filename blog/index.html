@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Блог NEXUS Digital — Статьи о веб-разработке, SEO и технологиях</title>
-    <meta name="description" content="Блог веб-студии NEXUS Digital: экспертные статьи о стоимости разработки, сравнение Tilda и кастома, PageSpeed оптимизация, тренды и технологии.">
+    <title>Блог Devorra — Статьи о веб-разработке, SEO и технологиях</title>
+    <meta name="description" content="Блог веб-студии Devorra: экспертные статьи о стоимости разработки, сравнение Tilda и кастома, PageSpeed оптимизация, тренды и технологии.">
     <meta name="keywords" content="блог веб-разработка, статьи о создании сайтов, SEO оптимизация, технологии разработки, тренды IT 2026">
     <link rel="canonical" href="https://nexus-digital-lovat.vercel.app/blog/">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -14,8 +14,8 @@
 
     <!-- Open Graph -->
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content="NEXUS Digital">
-    <meta property="og:title" content="Блог NEXUS Digital — Статьи о веб-разработке">
+    <meta property="og:site_name" content="Devorra">
+    <meta property="og:title" content="Блог Devorra — Статьи о веб-разработке">
     <meta property="og:description" content="Экспертные статьи о стоимости разработки, сравнение платформ, PageSpeed, тренды и технологии.">
     <meta property="og:url" content="https://nexus-digital-lovat.vercel.app/blog/">
     <meta property="og:image" content="https://nexus-digital-lovat.vercel.app/og-image.png">
@@ -23,7 +23,7 @@
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Блог NEXUS Digital — Статьи о веб-разработке">
+    <meta name="twitter:title" content="Блог Devorra — Статьи о веб-разработке">
     <meta name="twitter:description" content="Экспертные статьи о стоимости разработки, сравнение платформ, PageSpeed, тренды и технологии.">
     <meta name="twitter:image" content="https://nexus-digital-lovat.vercel.app/og-image.png">
 
@@ -32,12 +32,12 @@
     {
         "@context": "https://schema.org",
         "@type": "CollectionPage",
-        "name": "Блог NEXUS Digital",
+        "name": "Блог Devorra",
         "description": "Экспертные статьи о веб-разработке, SEO и технологиях",
         "url": "https://nexus-digital-lovat.vercel.app/blog/",
         "publisher": {
             "@type": "Organization",
-            "name": "NEXUS Digital",
+            "name": "Devorra",
             "url": "https://nexus-digital-lovat.vercel.app"
         }
     }
@@ -74,7 +74,7 @@
 <body>
 
     <nav>
-        <a href="/" class="logo">NEXUS Digital</a>
+        <a href="/" class="logo">Devorra</a>
         <ul class="nav-links">
             <li><a href="/">Главная</a></li>
             <li><a href="/blog/stoimost-razrabotki-saita-2026.html">Стоимость</a></li>
@@ -103,7 +103,7 @@
 
     <main>
     <div class="article-content">
-        <h1>Блог NEXUS Digital</h1>
+        <h1>Блог Devorra</h1>
         <p class="article-meta">Экспертные статьи о веб-разработке, SEO, производительности и технологиях</p>
 
         <div class="blog-grid">
@@ -144,7 +144,7 @@
 
             <a href="/blog/tech.html" class="blog-card">
                 <img src="/blog/images/tech.svg" alt="" class="blog-card-svg">
-                <h2>Технологии и стек NEXUS Digital</h2>
+                <h2>Технологии и стек Devorra</h2>
                 <p>React, Node.js, Python, 1С-Битрикс, YandexGPT, Flutter, Docker — наш полный стек.</p>
                 <span class="blog-card-date">13 февраля 2026</span>
             </a>
@@ -153,7 +153,7 @@
     </main>
 
     <footer>
-        <p>NEXUS Digital &copy; 2025-2026</p>
+        <p>Devorra &copy; 2025-2026</p>
         <p class="footer-privacy"><a href="/privacy.html">Политика конфиденциальности</a></p>
     </footer>
 
@@ -171,5 +171,15 @@
     </script>
 
     <script src="/brief.js"></script>
+
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Наверх">
+    <svg viewBox="0 0 24 24"><path d="M12 19V5m0 0l-7 7m7-7l7 7"/></svg>
+</button>
+<script>
+    const scrollBtn = document.getElementById('scrollTop');
+    window.addEventListener('scroll', () => {
+        scrollBtn.classList.toggle('visible', window.scrollY > 600);
+    }, { passive: true });
+</script>
 </body>
 </html>

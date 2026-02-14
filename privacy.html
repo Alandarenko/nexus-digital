@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Политика конфиденциальности — NEXUS Digital</title>
-    <meta name="description" content="Политика конфиденциальности и обработки персональных данных NEXUS Digital.">
+    <title>Политика конфиденциальности — Devorra</title>
+    <meta name="description" content="Политика конфиденциальности и обработки персональных данных Devorra.">
     <meta name="keywords" content="политика конфиденциальности, обработка персональных данных, 152-ФЗ">
     <link rel="canonical" href="https://nexus-digital-lovat.vercel.app/privacy.html">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -61,7 +61,7 @@
 <body>
 
     <nav>
-        <a href="/" class="logo">NEXUS Digital</a>
+        <a href="/" class="logo">Devorra</a>
         <a href="/" class="nav-back">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5m0 0l7 7m-7-7l7-7"/></svg>
             <span>На главную</span>
@@ -81,7 +81,7 @@
         <p class="updated">Дата обновления: 13 февраля 2026 г.</p>
 
         <h2>1. Общие положения</h2>
-        <p>Настоящая Политика конфиденциальности определяет порядок обработки и защиты персональных данных пользователей сайта nexus-digital-lovat.vercel.app (далее — «Сайт»), принадлежащего NEXUS Digital (далее — «Оператор»).</p>
+        <p>Настоящая Политика конфиденциальности определяет порядок обработки и защиты персональных данных пользователей сайта nexus-digital-lovat.vercel.app (далее — «Сайт»), принадлежащего Devorra (далее — «Оператор»).</p>
         <p>Отправляя свои данные через формы на Сайте, пользователь выражает согласие с условиями настоящей Политики.</p>
 
         <h2>2. Какие данные мы собираем</h2>
@@ -128,7 +128,7 @@
     </div>
 
     <footer>
-        <p>NEXUS Digital &copy; 2025-2026</p>
+        <p>Devorra &copy; 2025-2026</p>
     </footer>
 
     <script>
@@ -144,5 +144,14 @@
         }
     </script>
 
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Наверх">
+    <svg viewBox="0 0 24 24"><path d="M12 19V5m0 0l-7 7m7-7l7 7"/></svg>
+</button>
+<script>
+    const scrollBtn = document.getElementById('scrollTop');
+    window.addEventListener('scroll', () => {
+        scrollBtn.classList.toggle('visible', window.scrollY > 600);
+    }, { passive: true });
+</script>
 </body>
 </html>
