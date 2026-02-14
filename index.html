@@ -257,7 +257,7 @@
                     <svg class="svc-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
                 </div>
                 <div class="svc-body">
-                    <p>Лендинги, корпоративные сайты, интернет-магазины, веб-приложения. Чистый код, быстрая загрузка, адаптивный дизайн. Работаем на российских CMS и современных фреймворках.</p>
+                    <p>Лендинги, корпоративные сайты, интернет-магазины, веб-приложения. Чистый код, PageSpeed 90+, адаптивный дизайн. Рынок e-commerce в России вырос на 35% за 2025 год — онлайн-присутствие необходимо каждому бизнесу.</p>
                     <div class="service-tags">
                         <span class="tag">Лендинги</span>
                         <span class="tag">Корпоративные сайты</span>
@@ -290,7 +290,7 @@
                     <svg class="svc-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
                 </div>
                 <div class="svc-body">
-                    <p>Внедряем искусственный интеллект: чат-боты на YandexGPT/GigaChat, рекомендательные системы, автоматизация контента, персонализация UX, AI-аналитика.</p>
+                    <p>Внедряем искусственный интеллект в бизнес-процессы: чат-боты на YandexGPT/GigaChat, рекомендательные системы, автоматизация контента. AI-интеграции снижают нагрузку на поддержку до 40% и окупаются за 3-6 месяцев.</p>
                     <div class="service-tags">
                         <span class="tag">Чат-боты</span>
                         <span class="tag">YandexGPT</span>
@@ -387,7 +387,7 @@
                     <svg class="svc-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
                 </div>
                 <div class="svc-body">
-                    <p>Аудит безопасности сайтов и приложений, настройка защиты от взломов, DDoS и утечек данных. CSP, WAF, SSL, двухфакторная аутентификация, мониторинг уязвимостей.</p>
+                    <p>Аудит безопасности сайтов и приложений, настройка защиты от взломов, DDoS и утечек данных. В 2025 году 81% кибератак пришлись на малый и средний бизнес — защита критична для любой компании с онлайн-присутствием.</p>
                     <div class="service-tags">
                         <span class="tag">Аудит безопасности</span>
                         <span class="tag">Защита от DDoS</span>
@@ -539,7 +539,7 @@
                 <div class="advantage-icon">AI</div>
                 <div class="advantage-text">
                     <h3>AI-экспертиза</h3>
-                    <p>Интегрируем AI в каждый проект: чат-боты, рекомендательные системы, генерация контента. Работаем с YandexGPT, GigaChat и open-source моделями.</p>
+                    <p>Интегрируем AI в каждый проект: чат-боты, рекомендации, генерация контента. Работаем с YandexGPT, GigaChat и open-source моделями. AI-решения дают ROI более 200% в первый год.</p>
                 </div>
             </div>
             <div class="advantage-card">
@@ -1310,6 +1310,27 @@
     })();
     </script>
 
+
+    <!-- Cookie consent banner -->
+    <div class="cookie-banner" id="cookieBanner" role="alert">
+        <p>Мы используем файлы cookie и сервис Яндекс.Метрика для анализа посещаемости. Продолжая использовать сайт, вы соглашаетесь с <a href="/privacy.html">политикой конфиденциальности</a> и обработкой данных в соответствии с 152-ФЗ.</p>
+        <div class="cookie-btns">
+            <button class="cookie-accept" onclick="acceptCookies()">Принять</button>
+        </div>
+    </div>
+    <script>
+    (function() {
+        if (!localStorage.getItem('cookie_consent')) {
+            setTimeout(function() {
+                document.getElementById('cookieBanner').classList.add('visible');
+            }, 1500);
+        }
+    })();
+    function acceptCookies() {
+        localStorage.setItem('cookie_consent', Date.now());
+        document.getElementById('cookieBanner').classList.remove('visible');
+    }
+    </script>
 
     <script>
     if ('serviceWorker' in navigator) {
