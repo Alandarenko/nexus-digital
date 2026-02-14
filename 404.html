@@ -219,6 +219,13 @@
             outline-offset: 2px;
         }
 
+        @media print {
+            body { background: #fff; color: #000; }
+            .stars { display: none; }
+            .code { -webkit-text-fill-color: #000; background: none; animation: none; }
+            .code::before, .code::after { display: none; }
+            .btn { color: #000; background: none; border: 1px solid #000; }
+        }
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after {
                 animation-duration: 0.01ms !important;

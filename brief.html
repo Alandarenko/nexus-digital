@@ -589,17 +589,17 @@
 </head>
 <body>
 
-    <div class="header">
-        <div class="logo">Devorra</div>
+    <nav class="header">
+        <a href="/" class="logo" style="text-decoration:none;background:linear-gradient(135deg,#6366f1,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent">Devorra</a>
         <div class="header-right">
             <div class="progress-bar">
                 <div class="progress-fill" id="progressFill"></div>
             </div>
             <span class="progress-text" id="progressText">0 / 8</span>
         </div>
-    </div>
+    </nav>
 
-    <div class="container">
+    <main class="container">
 
         <div class="brief-hero">
             <div class="label">Бриф на разработку</div>
@@ -627,34 +627,34 @@
 
             <div class="fields-row">
                 <div class="field">
-                    <label>Имя и фамилия <span class="required">*</span></label>
-                    <input type="text" name="name" placeholder="Иван Петров">
+                    <label for="brief-name">Имя и фамилия <span class="required">*</span></label>
+                    <input id="brief-name" type="text" name="name" placeholder="Иван Петров">
                 </div>
                 <div class="field">
-                    <label>Компания <span class="required">*</span></label>
-                    <input type="text" name="company" placeholder="ООО «Ромашка»">
-                </div>
-            </div>
-
-            <div class="fields-row">
-                <div class="field">
-                    <label>Должность</label>
-                    <input type="text" name="position" placeholder="Директор по маркетингу">
-                </div>
-                <div class="field">
-                    <label>Телефон <span class="required">*</span></label>
-                    <input type="tel" name="phone" placeholder="+7 (999) 123-45-67">
+                    <label for="brief-company">Компания <span class="required">*</span></label>
+                    <input id="brief-company" type="text" name="company" placeholder="ООО «Ромашка»">
                 </div>
             </div>
 
             <div class="fields-row">
                 <div class="field">
-                    <label>Email <span class="required">*</span></label>
-                    <input type="email" name="email" placeholder="ivan@company.ru">
+                    <label for="brief-position">Должность</label>
+                    <input id="brief-position" type="text" name="position" placeholder="Директор по маркетингу">
                 </div>
                 <div class="field">
-                    <label>Telegram <span class="optional">необязательно</span></label>
-                    <input type="text" name="telegram" placeholder="@username">
+                    <label for="brief-phone">Телефон <span class="required">*</span></label>
+                    <input id="brief-phone" type="tel" name="phone" placeholder="+7 (999) 123-45-67">
+                </div>
+            </div>
+
+            <div class="fields-row">
+                <div class="field">
+                    <label for="brief-email">Email <span class="required">*</span></label>
+                    <input id="brief-email" type="email" name="email" placeholder="ivan@company.ru">
+                </div>
+                <div class="field">
+                    <label for="brief-telegram">Telegram <span class="optional">необязательно</span></label>
+                    <input id="brief-telegram" type="text" name="telegram" placeholder="@username">
                 </div>
             </div>
 
@@ -1540,7 +1540,7 @@
             </div>
         </div>
 
-    </div>
+    </main>
 
     <script>
         let currentStep = 0;
@@ -1556,6 +1556,13 @@
 
         function nextStep() {
             if (currentStep < totalSteps - 1) {
+                // Validate required fields on step 0 (contacts)
+                if (currentStep === 0) {
+                    var name = document.querySelector('[name="name"]');
+                    var phone = document.querySelector('[name="phone"]');
+                    if (name && !name.value.trim()) { name.focus(); return; }
+                    if (phone && !phone.value.trim()) { phone.focus(); return; }
+                }
                 goToStep(currentStep + 1);
                 markCompleted(currentStep - 1);
             }
@@ -1708,11 +1715,12 @@
                 ]},
             ];
 
+            function escH(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML;}
             let html = '';
             sections.forEach(sec => {
                 html += `<div class="result-card"><h3>${sec.title}</h3>`;
                 sec.rows.forEach(([label, value]) => {
-                    html += `<div class="result-row"><span class="result-label">${label}</span><span class="result-value">${value}</span></div>`;
+                    html += `<div class="result-row"><span class="result-label">${escH(label)}</span><span class="result-value">${escH(value)}</span></div>`;
                 });
                 html += '</div>';
             });

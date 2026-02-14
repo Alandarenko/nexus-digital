@@ -44,7 +44,13 @@
         "publisher": {
             "@type": "Organization",
             "name": "Devorra",
-            "url": "https://nexus-digital-lovat.vercel.app"
+            "url": "https://nexus-digital-lovat.vercel.app",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://nexus-digital-lovat.vercel.app/icon-192.png",
+                "width": 192,
+                "height": 192
+            }
         },
         "mainEntityOfPage": "https://nexus-digital-lovat.vercel.app/blog/tilda-vs-custom.html"
     }
@@ -63,7 +69,9 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <style>*{margin:0;padding:0;box-sizing:border-box}:root{--bg-primary:#0a0a0f;--bg-secondary:#12121a;--bg-card:#1a1a25;--accent:#6366f1;--accent-light:#818cf8;--text-primary:#f1f1f4;--text-secondary:#9ca3af;--text-muted:#7c8595;--border:#2a2a3a;--gradient-1:linear-gradient(135deg,#6366f1,#8b5cf6);--gradient-2:linear-gradient(135deg,#6366f1,#06b6d4)}html{scroll-behavior:smooth;overflow-x:hidden}body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg-primary);color:var(--text-primary);line-height:1.6;overflow-x:hidden}nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 40px;display:flex;justify-content:space-between;align-items:center;background:rgba(10,10,15,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}.logo{font-size:22px;font-weight:800;letter-spacing:-0.5px;background:var(--gradient-1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-decoration:none}</style>
+    <link rel="preload" href="https://fonts.gstatic.com/s/inter/v18/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfMZhrib2Bg-4.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preconnect" href="https://mc.yandex.ru">
+    <style>*{margin:0;padding:0;box-sizing:border-box}:root{--bg-primary:#0a0a0f;--bg-secondary:#12121a;--bg-card:#1a1a25;--accent:#6366f1;--accent-light:#818cf8;--text-primary:#f1f1f4;--text-secondary:#9ca3af;--text-muted:#8a919d;--border:#2a2a3a;--gradient-1:linear-gradient(135deg,#6366f1,#8b5cf6);--gradient-2:linear-gradient(135deg,#6366f1,#06b6d4)}html{scroll-behavior:smooth;overflow-x:hidden}body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg-primary);color:var(--text-primary);line-height:1.6;overflow-x:hidden}nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 40px;display:flex;justify-content:space-between;align-items:center;background:rgba(10,10,15,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}.logo{font-size:22px;font-weight:800;letter-spacing:-0.5px;background:var(--gradient-1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-decoration:none}</style>
     <link rel="stylesheet" href="/styles.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
 
@@ -114,7 +122,7 @@
         <h1>Tilda vs кастомная разработка — что выбрать в 2026</h1>
         <p class="article-meta">Devorra &middot; 13 февраля 2026</p>
 
-        <img src="/blog/images/tilda-vs-custom.svg" alt="Сравнение конструктора и кастомной разработки" class="article-hero-svg">
+        <img src="/blog/images/tilda-vs-custom.svg" alt="Сравнение конструктора и кастомной разработки" class="article-hero-svg" width="720" height="300">
 
         <p>Tilda стала стандартом для быстрого запуска сайтов в России — это подтверждает и <a href="/blog/market.html">анализ рынка веб-разработки</a>. Более 1.5 миллиона сайтов созданы на этой платформе. Но по мере роста бизнеса многие сталкиваются с ограничениями конструктора — и задумываются о кастомной разработке.</p>
 
@@ -294,7 +302,7 @@
         }
     </script>
 
-    <script src="/brief.js"></script>
+    <script src="/brief.js" defer></script>
 
 <button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Наверх">
     <svg viewBox="0 0 24 24"><path d="M12 19V5m0 0l-7 7m7-7l7 7"/></svg>

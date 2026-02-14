@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Devorra — Технологичная веб-студия | Разработка сайтов, AI-интеграции</title>
-    <meta name="description" content="Devorra — веб-студия полного цикла. Разработка сайтов, мобильных приложений, Telegram-ботов, AI-интеграции. Современный стек, прозрачные цены, запуск от 3 дней.">
+    <title>Devorra — Веб-студия | Разработка сайтов и AI-интеграции</title>
+    <meta name="description" content="Devorra — веб-студия полного цикла. Разработка сайтов, приложений, Telegram-ботов, AI-интеграции. Прозрачные цены, запуск от 3 дней.">
     <meta name="keywords" content="веб-разработка, создание сайтов, веб-студия, разработка сайтов Москва, AI интеграции, Telegram боты, мобильные приложения, Devorra">
     <link rel="canonical" href="https://nexus-digital-lovat.vercel.app/">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -64,8 +64,8 @@
                 "offers": {
                     "@type": "AggregateOffer",
                     "priceCurrency": "RUB",
-                    "lowPrice": "15000",
-                    "highPrice": "600000"
+                    "lowPrice": "5000",
+                    "highPrice": "5000000"
                 }
             },
             {
@@ -160,7 +160,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" href="https://fonts.gstatic.com/s/inter/v18/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfMZhrib2Bg-4.woff2" as="font" type="font/woff2" crossorigin>
-    <style>*{margin:0;padding:0;box-sizing:border-box}:root{--bg-primary:#0a0a0f;--bg-secondary:#12121a;--bg-card:#1a1a25;--accent:#6366f1;--accent-light:#818cf8;--text-primary:#f1f1f4;--text-secondary:#9ca3af;--text-muted:#7c8595;--border:#2a2a3a;--gradient-1:linear-gradient(135deg,#6366f1,#8b5cf6);--gradient-2:linear-gradient(135deg,#6366f1,#06b6d4)}html{scroll-behavior:smooth;overflow-x:hidden}body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg-primary);color:var(--text-primary);line-height:1.6;overflow-x:hidden}nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 40px;display:flex;justify-content:space-between;align-items:center;background:rgba(10,10,15,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}.logo{font-size:28px;font-weight:800;letter-spacing:-0.5px;background:var(--gradient-1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-decoration:none}.preloader{position:fixed;inset:0;z-index:9999;background:var(--bg-primary);display:flex;align-items:center;justify-content:center}</style>
+    <link rel="preconnect" href="https://mc.yandex.ru">
+    <style>*{margin:0;padding:0;box-sizing:border-box}:root{--bg-primary:#0a0a0f;--bg-secondary:#12121a;--bg-card:#1a1a25;--accent:#6366f1;--accent-light:#818cf8;--text-primary:#f1f1f4;--text-secondary:#9ca3af;--text-muted:#8a919d;--border:#2a2a3a;--gradient-1:linear-gradient(135deg,#6366f1,#8b5cf6);--gradient-2:linear-gradient(135deg,#6366f1,#06b6d4)}html{scroll-behavior:smooth;overflow-x:hidden}body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg-primary);color:var(--text-primary);line-height:1.6;overflow-x:hidden}nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 40px;display:flex;justify-content:space-between;align-items:center;background:rgba(10,10,15,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}.logo{font-size:28px;font-weight:800;letter-spacing:-0.5px;background:var(--gradient-1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-decoration:none}.preloader{position:fixed;inset:0;z-index:9999;background:var(--bg-primary);display:flex;align-items:center;justify-content:center}</style>
     <link rel="stylesheet" href="/styles.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
 
@@ -1347,14 +1348,15 @@
                     var dateStr = parts.length === 3 ? (+parts[2] + ' ' + months[+parts[1]-1]) : d;
                     var cls = i === 0 ? 'news-item news-featured' : 'news-item';
 
+                    function esc(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML;}
                     html += '<article class="' + cls + '">' +
                         '<div class="news-item-head">' +
-                            '<span class="news-tag">' + (item.tag || 'IT') + '</span>' +
+                            '<span class="news-tag">' + esc(item.tag || 'IT') + '</span>' +
                             '<span class="news-dot"></span>' +
                             '<span class="news-date">' + dateStr + '</span>' +
                         '</div>' +
-                        '<h3 class="news-title">' + item.title + '</h3>' +
-                        '<p class="news-summary">' + item.summary + '</p>' +
+                        '<h3 class="news-title">' + esc(item.title) + '</h3>' +
+                        '<p class="news-summary">' + esc(item.summary) + '</p>' +
                     '</article>';
                 });
                 feed.innerHTML = html;

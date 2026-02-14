@@ -13,9 +13,11 @@
     <meta name="theme-color" content="#6366f1">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.gstatic.com/s/inter/v18/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfMZhrib2Bg-4.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preconnect" href="https://mc.yandex.ru">
     <link rel="stylesheet" href="/styles.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
-    <style>*{margin:0;padding:0;box-sizing:border-box}:root{--bg-primary:#0a0a0f;--bg-secondary:#12121a;--bg-card:#1a1a25;--accent:#6366f1;--accent-light:#818cf8;--text-primary:#f1f1f4;--text-secondary:#9ca3af;--text-muted:#7c8595;--border:#2a2a3a;--gradient-1:linear-gradient(135deg,#6366f1,#8b5cf6);--gradient-2:linear-gradient(135deg,#6366f1,#06b6d4)}html{scroll-behavior:smooth;overflow-x:hidden}body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg-primary);color:var(--text-primary);line-height:1.6;overflow-x:hidden}nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 40px;display:flex;justify-content:space-between;align-items:center;background:rgba(10,10,15,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}.logo{font-size:22px;font-weight:800;letter-spacing:-0.5px;background:var(--gradient-1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-decoration:none}
+    <style>*{margin:0;padding:0;box-sizing:border-box}:root{--bg-primary:#0a0a0f;--bg-secondary:#12121a;--bg-card:#1a1a25;--accent:#6366f1;--accent-light:#818cf8;--text-primary:#f1f1f4;--text-secondary:#9ca3af;--text-muted:#8a919d;--border:#2a2a3a;--gradient-1:linear-gradient(135deg,#6366f1,#8b5cf6);--gradient-2:linear-gradient(135deg,#6366f1,#06b6d4)}html{scroll-behavior:smooth;overflow-x:hidden}body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg-primary);color:var(--text-primary);line-height:1.6;overflow-x:hidden}nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 40px;display:flex;justify-content:space-between;align-items:center;background:rgba(10,10,15,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}.logo{font-size:22px;font-weight:800;letter-spacing:-0.5px;background:var(--gradient-1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-decoration:none}
         body { line-height: 1.7; }
         .content {
             max-width: 800px; margin: 0 auto; padding: 140px 40px 80px;
@@ -76,7 +78,9 @@
     </div>
     <div class="mobile-overlay" id="mobileOverlay" onclick="closeMenu()"></div>
 
-    <div class="content">
+    <a href="#main-content" class="skip-nav">Перейти к содержимому</a>
+
+    <main id="main-content" class="content">
         <h1>Политика конфиденциальности</h1>
         <p class="updated">Дата обновления: 13 февраля 2026 г.</p>
 
@@ -115,8 +119,17 @@
         </ul>
         <p>Для реализации указанных прав обратитесь по адресу: <a href="mailto:nikita.alandarenko@gmail.com">nikita.alandarenko@gmail.com</a></p>
 
-        <h2>6. Использование cookies</h2>
-        <p>Сайт не использует cookies и не отслеживает поведение пользователей.</p>
+        <h2>6. Использование cookies и аналитики</h2>
+        <p>Сайт использует сервис веб-аналитики Яндекс.Метрика (оператор — ООО «Яндекс», 119021, Россия, Москва, ул. Льва Толстого, 16). Яндекс.Метрика использует технологию cookies — небольших текстовых файлов, размещаемых на устройстве пользователя, для анализа посещаемости сайта.</p>
+        <p>Собираемые данные:</p>
+        <ul>
+            <li>Страницы посещений и время на сайте</li>
+            <li>Источник перехода (откуда пришёл пользователь)</li>
+            <li>Тип устройства, браузер, разрешение экрана</li>
+            <li>Действия на сайте (клики, прокрутка) через технологию WebVisor</li>
+        </ul>
+        <p>Данные собираются в обезличенном виде и не позволяют идентифицировать конкретного пользователя. Информация обрабатывается Яндексом в соответствии с <a href="https://yandex.ru/legal/confidential/">Политикой конфиденциальности Яндекса</a>.</p>
+        <p>Вы можете отключить cookies в настройках браузера, однако это может повлиять на работу некоторых функций сайта.</p>
 
         <h2>7. Изменения политики</h2>
         <p>Оператор оставляет за собой право вносить изменения в настоящую Политику. Актуальная версия размещена на данной странице.</p>
@@ -125,7 +138,7 @@
         <p>По вопросам обработки персональных данных:<br>
         Email: <a href="mailto:nikita.alandarenko@gmail.com">nikita.alandarenko@gmail.com</a><br>
         Telegram: <a href="https://t.me/myway_nikita">@myway_nikita</a></p>
-    </div>
+    </main>
 
     <footer>
         <p>Devorra &copy; 2025-2026</p>

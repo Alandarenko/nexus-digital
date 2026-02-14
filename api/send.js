@@ -26,7 +26,8 @@ export default async function handler(req, res) {
     // CSRF: check Origin header
     const origin = req.headers.origin || req.headers.referer || '';
     const allowed = process.env.ALLOWED_ORIGIN || 'https://nexus-digital-lovat.vercel.app';
-    if (!origin.startsWith(allowed) && !origin.startsWith('http://localhost')) {
+    try { var o = new URL(origin); } catch(e) { return res.status(403).json({ error: 'Forbidden' }); }
+    if (o.origin !== allowed && !origin.startsWith('http://localhost')) {
         return res.status(403).json({ error: 'Forbidden' });
     }
 

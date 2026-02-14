@@ -126,7 +126,7 @@
     </style>
 </head>
 <body>
-    <div class="deck" id="deck">
+    <main class="deck" id="deck">
 
         <div class="slide active" data-n="0">
             <div class="s-label">Презентация услуг</div>
@@ -457,17 +457,19 @@
             </div>
         </div>
 
-    </div>
+    </main>
 
     <div class="progress-bar"><div class="progress-fill" id="progFill"></div></div>
-    <div class="nav-bar">
+    <nav class="nav-bar">
         <div class="logo">Devorra</div>
         <div class="nav-controls">
             <button class="nav-btn" onclick="go(-1)">&larr;</button>
             <span class="nav-counter" id="counter">1 / 12</span>
             <button class="nav-btn" onclick="go(1)">&rarr;</button>
         </div>
-    </div>
+    </nav>
+
+    <footer style="display:none;"></footer>
 
     <script>
         let cur = 0;
