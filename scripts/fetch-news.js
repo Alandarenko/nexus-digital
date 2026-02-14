@@ -20,10 +20,14 @@ const path = require('path');
 const RSS_FEEDS = [
   'https://habr.com/ru/rss/hub/webdev/',
   'https://habr.com/ru/rss/hub/programming/',
+  'https://habr.com/ru/rss/hub/ui/',
+  'https://habr.com/ru/rss/hub/ecommerce/',
+  'https://habr.com/ru/rss/hub/seo/',
+  'https://habr.com/ru/rss/hub/startup/',
   'https://www.cnews.ru/inc/rss/news.xml',
 ];
 
-const MAX_NEWS = 5;
+const MAX_NEWS = 8;
 const OUTPUT_PATH = path.join(__dirname, '..', 'data', 'news.json');
 
 const SYSTEM_PROMPT = `Ты — автор блога веб-студии Devorra, специализирующейся на веб-разработке, AI-интеграциях и импортозамещении.
@@ -204,7 +208,7 @@ async function main() {
       const result = await callYandexGPT(item.title, item.description);
 
       newsItems.push({
-        title: item.title.slice(0, 100),
+        title: item.title.replace(/^\[Перевод\]\s*/i, '').slice(0, 100),
         summary: result.summary || '',
         date: item.date,
         tag: result.tag || 'Технологии'
@@ -222,8 +226,18 @@ async function main() {
     return;
   }
 
-  // 5. Генерируем свой заголовок (без упоминания источника)
+  // 5. Лимит по тегам (макс 2 новости одного тега) для разнообразия
+  const tagCount = {};
+  const diverse = [];
   for (const item of newsItems) {
+    const t = item.tag || 'Технологии';
+    tagCount[t] = (tagCount[t] || 0) + 1;
+    if (tagCount[t] <= 2) diverse.push(item);
+  }
+  const finalItems = diverse.length >= 4 ? diverse : newsItems;
+
+  // 6. Генерируем свой заголовок (без упоминания источника)
+  for (const item of finalItems) {
     // Обрезаем оригинальный заголовок и делаем его более нейтральным
     if (item.summary && item.summary.length > 10) {
       // Берём первое предложение summary как заголовок, если он информативнее
@@ -234,10 +248,10 @@ async function main() {
     }
   }
 
-  // 6. Сохраняем
+  // 7. Сохраняем
   const output = {
     updated: new Date().toISOString(),
-    items: newsItems
+    items: finalItems
   };
 
   fs.writeFileSync(OUTPUT_PATH, JSON.stringify(output, null, 2), 'utf-8');
