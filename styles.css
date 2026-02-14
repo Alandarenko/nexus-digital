@@ -87,13 +87,15 @@ section { padding: 120px 40px; max-width: 1280px; margin: 0 auto; }
 .section-label {
     font-size: 12px; font-weight: 600; text-transform: uppercase;
     letter-spacing: 3px; color: var(--accent-light); margin-bottom: 16px;
+    text-align: center;
 }
 .section-title {
     font-size: 42px; font-weight: 800; letter-spacing: -1px;
     line-height: 1.15; margin-bottom: 24px;
+    text-align: center; text-wrap: balance;
 }
 .section-subtitle {
-    font-size: 18px; color: var(--text-secondary); max-width: 640px; line-height: 1.7;
+    font-size: 18px; color: var(--text-secondary); max-width: 640px; line-height: 1.7; margin-left: auto; margin-right: auto; text-align: center; text-wrap: balance;
 }
 
 /* Footer */
@@ -858,11 +860,13 @@ footer {
 }
 
 /* FAQ */
+#faq { text-align: center; }
 .faq-filters {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
     margin-top: 40px;
+    justify-content: center;
 }
 .faq-filter {
     padding: 8px 20px;
@@ -887,7 +891,8 @@ footer {
 }
 .faq-list {
     max-width: 800px;
-    margin-top: 32px;
+    margin: 32px auto 0;
+    text-align: center;
     display: flex;
     flex-direction: column;
     gap: 12px;
