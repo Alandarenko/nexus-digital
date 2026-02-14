@@ -1355,7 +1355,7 @@
                             '<span class="news-dot"></span>' +
                             '<span class="news-date">' + dateStr + '</span>' +
                         '</div>' +
-                        '<h3 class="news-title">' + esc(item.title) + '</h3>' +
+                        '<h3 class="news-title">' + esc(item.title.replace(/^\[Перевод\]\s*/,'')) + '</h3>' +
                         '<p class="news-summary">' + esc(item.summary) + '</p>' +
                     '</article>';
                 });
