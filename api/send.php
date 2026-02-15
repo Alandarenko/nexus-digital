@@ -22,7 +22,7 @@ $CHAT_ID = $env['TG_CHAT_ID'] ?? '';
 // Rate limiting (file-based, 5 req/min per IP)
 $ip = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR'] ?? '')[0] ?? $_SERVER['REMOTE_ADDR'] ?? 'unknown';
 $ip = trim($ip);
-$rateDir = sys_get_temp_dir() . '/devorra_rate';
+$rateDir = __DIR__ . '/../.ratelimit';
 if (!is_dir($rateDir)) mkdir($rateDir, 0700, true);
 $rateFile = $rateDir . '/' . md5('send_' . $ip) . '.json';
 

@@ -28,7 +28,7 @@ if (!$FOLDER_ID || !$API_KEY) {
 // Rate limiting (file-based, 20 req/hour per IP)
 $ip = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR'] ?? '')[0] ?? $_SERVER['REMOTE_ADDR'] ?? 'unknown';
 $ip = trim($ip);
-$rateDir = sys_get_temp_dir() . '/devorra_rate';
+$rateDir = __DIR__ . '/../.ratelimit';
 if (!is_dir($rateDir)) mkdir($rateDir, 0700, true);
 $rateFile = $rateDir . '/' . md5('chat_' . $ip) . '.json';
 
@@ -82,12 +82,12 @@ $systemPrompt = 'Ты — AI-консультант веб-студии Devorra.
 
 Услуги и цены:
 - Лендинг: от 40 000 ₽, 2-3 недели
-- Корпоративный сайт: от 80 000 ₽, 3-5 недель
+- Корпоративный сайт: от 100 000 ₽, 3-5 недель
 - Интернет-магазин: от 150 000 ₽, 5-8 недель
-- SEO-продвижение: от 30 000 ₽/мес
+- SEO-продвижение: от 20 000 ₽/мес
 - AI-интеграции (чат-боты, автоматизация): от 25 000 ₽
 - Импортозамещение (миграция с WordPress на 1С-Битрикс, с AWS на Yandex Cloud): от 50 000 ₽
-- Техподдержка: от 15 000 ₽/мес
+- Техподдержка: от 5 000 ₽/мес
 
 Стек: Next.js, React, Node.js, 1С-Битрикс, YandexGPT, Yandex Cloud.
 

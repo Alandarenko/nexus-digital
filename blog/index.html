@@ -53,11 +53,9 @@
     }
     </script>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="/fonts/inter-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
     <style>*{margin:0;padding:0;box-sizing:border-box}:root{--bg-primary:#0a0a0f;--bg-secondary:#12121a;--bg-card:#1a1a25;--accent:#6366f1;--accent-light:#818cf8;--text-primary:#f1f1f4;--text-secondary:#9ca3af;--text-muted:#8a919d;--border:#2a2a3a;--gradient-1:linear-gradient(135deg,#6366f1,#8b5cf6);--gradient-2:linear-gradient(135deg,#6366f1,#06b6d4)}html{scroll-behavior:smooth;overflow-x:hidden}body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg-primary);color:var(--text-primary);line-height:1.6;overflow-x:hidden}nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 40px;display:flex;justify-content:space-between;align-items:center;background:rgba(10,10,15,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}.logo{font-size:22px;font-weight:800;letter-spacing:-0.5px;background:var(--gradient-1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-decoration:none}</style>
     <link rel="stylesheet" href="/styles.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
 
     <!-- Yandex.Metrika counter -->
     <script type="text/javascript">
@@ -72,6 +70,7 @@
     <noscript><div><img src="https://mc.yandex.ru/watch/106813146" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 </head>
 <body>
+    <a href="#main-content" class="skip-nav">Перейти к содержимому</a>
 
     <nav>
         <a href="/" class="logo">Devorra</a>
@@ -101,49 +100,49 @@
     </div>
     <div class="mobile-overlay" id="mobileOverlay" onclick="closeMenu()"></div>
 
-    <main>
+    <main id="main-content">
     <div class="article-content">
         <h1>Блог Devorra</h1>
         <p class="article-meta">Экспертные статьи о веб-разработке, SEO, производительности и технологиях</p>
 
         <div class="blog-grid">
             <a href="/blog/stoimost-razrabotki-saita-2026.html" class="blog-card">
-                <img src="/blog/images/stoimost.svg" alt="Стоимость разработки сайта" class="blog-card-svg">
+                <img src="/blog/images/stoimost.svg" alt="Стоимость разработки сайта" class="blog-card-svg" width="800" height="400">
                 <h2>Сколько стоит разработка сайта в 2026 году</h2>
                 <p>Подробный обзор цен: лендинги, корпоративные сайты, интернет-магазины. Сравнение фрилансеров, студий и агентств.</p>
                 <span class="blog-card-date">13 февраля 2026</span>
             </a>
 
             <a href="/blog/tilda-vs-custom.html" class="blog-card">
-                <img src="/blog/images/tilda-vs-custom.svg" alt="Сравнение Tilda и кастомной разработки" class="blog-card-svg">
+                <img src="/blog/images/tilda-vs-custom.svg" alt="Сравнение Tilda и кастомной разработки" class="blog-card-svg" width="800" height="400">
                 <h2>Tilda vs кастомная разработка — что выбрать</h2>
                 <p>Когда конструктор — отличный выбор, а когда лучше инвестировать в разработку с нуля. Тарифы, плюсы, ограничения.</p>
                 <span class="blog-card-date">13 февраля 2026</span>
             </a>
 
             <a href="/blog/pagespeed-optimizaciya-2026.html" class="blog-card">
-                <img src="/blog/images/pagespeed.svg" alt="Оптимизация PageSpeed" class="blog-card-svg">
+                <img src="/blog/images/pagespeed.svg" alt="Оптимизация PageSpeed" class="blog-card-svg" width="800" height="400">
                 <h2>Как ускорить сайт до идеального PageSpeed</h2>
                 <p>Core Web Vitals, Critical CSS, оптимизация изображений, INP, Yandex Cloud CDN — полный гайд.</p>
                 <span class="blog-card-date">13 февраля 2026</span>
             </a>
 
             <a href="/blog/market.html" class="blog-card">
-                <img src="/blog/images/market.svg" alt="Рынок веб-разработки в России" class="blog-card-svg" loading="lazy">
+                <img src="/blog/images/market.svg" alt="Рынок веб-разработки в России" class="blog-card-svg" width="800" height="400" loading="lazy">
                 <h2>Рынок веб-разработки в России 2025</h2>
                 <p>Ключевые цифры: объём рынка, рост e-commerce, импортозамещение, зарплаты, конкуренция.</p>
                 <span class="blog-card-date">13 февраля 2026</span>
             </a>
 
             <a href="/blog/trends.html" class="blog-card">
-                <img src="/blog/images/trends.svg" alt="Тренды веб-разработки 2025-2026" class="blog-card-svg" loading="lazy">
+                <img src="/blog/images/trends.svg" alt="Тренды веб-разработки 2025-2026" class="blog-card-svg" width="800" height="400" loading="lazy">
                 <h2>Тренды веб-разработки 2025-2026</h2>
                 <p>AI в каждом проекте, импортозамещение, e-commerce взрыв, no-code, облачная миграция, кибербезопасность.</p>
                 <span class="blog-card-date">13 февраля 2026</span>
             </a>
 
             <a href="/blog/tech.html" class="blog-card">
-                <img src="/blog/images/tech.svg" alt="Технологический стек Devorra" class="blog-card-svg" loading="lazy">
+                <img src="/blog/images/tech.svg" alt="Технологический стек Devorra" class="blog-card-svg" width="800" height="400" loading="lazy">
                 <h2>Технологии и стек Devorra</h2>
                 <p>React, Node.js, Python, 1С-Битрикс, YandexGPT, Flutter, Docker — наш полный стек.</p>
                 <span class="blog-card-date">13 февраля 2026</span>
@@ -172,14 +171,6 @@
 
     <script src="/brief.js"></script>
 
-<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Наверх">
-    <svg viewBox="0 0 24 24"><path d="M12 19V5m0 0l-7 7m7-7l7 7"/></svg>
-</button>
-<script>
-    const scrollBtn = document.getElementById('scrollTop');
-    window.addEventListener('scroll', () => {
-        scrollBtn.classList.toggle('visible', window.scrollY > 600);
-    }, { passive: true });
-</script>
+<script src="/cookie.js"></script>
 </body>
 </html>

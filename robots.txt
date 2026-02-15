@@ -10,7 +10,6 @@ Allow: /
 # Rules for Yandex
 User-agent: Yandex
 Allow: /
-Crawl-delay: 1
 
 # Sitemap
 Sitemap: https://devorra.ru/sitemap.xml

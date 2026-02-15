@@ -1,7 +1,13 @@
-const CACHE_NAME = 'devorra-v9';
+const CACHE_NAME = 'devorra-v10';
 const PRECACHE = [
   '/',
   '/styles.css',
+  '/brief.js',
+  '/chat.js',
+  '/cookie.js',
+  '/fonts/inter-cyrillic.woff2',
+  '/fonts/inter-cyrillic-ext.woff2',
+  '/fonts/inter-latin.woff2',
   '/favicon.svg',
   '/manifest.json'
 ];
@@ -25,7 +31,7 @@ self.addEventListener('activate', e => {
 self.addEventListener('fetch', e => {
   if (e.request.method !== 'GET') return;
 
-  // Skip cross-origin requests (Google Fonts, analytics, etc.)
+  // Skip cross-origin requests (analytics, etc.)
   if (!e.request.url.startsWith(self.location.origin)) return;
 
   // Network-first for HTML pages

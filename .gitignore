@@ -2,6 +2,7 @@
 .env.*
 .vercel
 node_modules/
+.ratelimit/
 
 # Внутренние документы и исследования
 *.md
