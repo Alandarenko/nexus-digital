@@ -13,7 +13,7 @@ Allow: /
 Crawl-delay: 1
 
 # Sitemap
-Sitemap: https://nexus-digital-lovat.vercel.app/sitemap.xml
+Sitemap: https://devorra.ru/sitemap.xml
 
 # Host directive (for Yandex)
-Host: https://nexus-digital-lovat.vercel.app
+Host: https://devorra.ru
