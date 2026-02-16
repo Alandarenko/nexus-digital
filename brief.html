@@ -1211,11 +1211,23 @@
 
   // ── Navigation ────────────────────────────────────
 
+  function stepHasData(stepIndex) {
+    var step = steps[stepIndex];
+    if (!step) return false;
+    var inputs = step.querySelectorAll('.bf-input, .bf-textarea, .bf-select');
+    for (var i = 0; i < inputs.length; i++) {
+      if (inputs[i].value && inputs[i].value.trim()) return true;
+    }
+    var checked = step.querySelectorAll('input[type="radio"]:checked, input[type="checkbox"]:checked');
+    if (checked.length > 0) return true;
+    return false;
+  }
+
   function goToStep(n) {
     if (n < 0 || n >= TOTAL_STEPS) return;
 
-    // Mark completed (if all required fields filled)
-    if (n > currentStep && validateStep(currentStep, true)) dots[currentStep].classList.add('completed');
+    // Mark completed only if at least one field has data
+    if (n > currentStep && stepHasData(currentStep)) dots[currentStep].classList.add('completed');
 
     currentStep = n;
     saveToStorage();
