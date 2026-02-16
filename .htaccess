@@ -1,7 +1,8 @@
 RewriteEngine On
 
-# HTTP → HTTPS redirect
+# HTTP → HTTPS redirect (Timeweb: SSL terminates on nginx proxy)
 RewriteCond %{HTTPS} off
+RewriteCond %{HTTP:X-Forwarded-Proto} !https
 RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
 
 # API rewrites: /api/chat → /api/chat.php, /api/send → /api/send.php
