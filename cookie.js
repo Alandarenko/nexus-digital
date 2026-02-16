@@ -1,4 +1,7 @@
 (function() {
+    // Prevent browser from restoring scroll position on navigation
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+
     if (localStorage.getItem('cookie_consent')) return;
 
     var html = '<div class="cookie-banner" id="cookieBanner" role="alert">'
