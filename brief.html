@@ -1,1769 +1,1503 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Devorra — Бриф на разработку</title>
-    <link rel="preload" href="/fonts/inter-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <link rel="apple-touch-icon" href="/icon-192.png">
-    <link rel="manifest" href="/manifest.json">
-    <meta name="theme-color" content="#6366f1">
-    <style>
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        :root {
-            --bg: #0a0a0f;
-            --bg2: #12121a;
-            --bg-card: #1a1a25;
-            --bg-input: #14141e;
-            --accent: #6366f1;
-            --accent-light: #818cf8;
-            --accent-glow: rgba(99, 102, 241, 0.12);
-            --text: #f1f1f4;
-            --text2: #9ca3af;
-            --text3: #6b7280;
-            --border: #2a2a3a;
-            --border-focus: #6366f1;
-            --green: #22c55e;
-            --red: #ef4444;
-            --orange: #f59e0b;
-            --gradient: linear-gradient(135deg, #6366f1, #8b5cf6);
-            --gradient2: linear-gradient(135deg, #6366f1, #06b6d4);
-        }
-
-        html { scroll-behavior: smooth; }
-
-        body {
-            font-family: 'Inter', -apple-system, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-        }
-
-        .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 100;
-            padding: 16px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(10, 10, 15, 0.9);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
-        }
-
-        .logo {
-            font-size: 20px;
-            font-weight: 800;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .header-right {
-            display: flex;
-            align-items: center;
-            gap: 24px;
-        }
-
-        .progress-bar {
-            width: 200px;
-            height: 6px;
-            background: var(--border);
-            border-radius: 3px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: var(--gradient);
-            border-radius: 3px;
-            transition: width 0.4s ease;
-            width: 0%;
-        }
-
-        .progress-text {
-            font-size: 13px;
-            color: var(--text3);
-            font-weight: 500;
-        }
-
-        .container {
-            max-width: 860px;
-            margin: 0 auto;
-            padding: 100px 24px 80px;
-        }
-
-        .brief-hero {
-            text-align: center;
-            padding: 60px 0 80px;
-        }
-
-        .brief-hero .label {
-            font-size: 12px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: var(--accent-light);
-            margin-bottom: 16px;
-        }
-
-        .brief-hero h1 {
-            font-size: 42px;
-            font-weight: 800;
-            letter-spacing: -1px;
-            margin-bottom: 16px;
-        }
-
-        .brief-hero h1 span {
-            background: var(--gradient2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .brief-hero p {
-            font-size: 17px;
-            color: var(--text2);
-            max-width: 560px;
-            margin: 0 auto;
-            line-height: 1.7;
-        }
-
-        .steps-nav {
-            display: grid;
-            grid-template-columns: repeat(8, 1fr);
-            gap: 4px;
-            margin-bottom: 48px;
-        }
-
-        .step-btn {
-            padding: 10px 4px;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            color: var(--text3);
-            font-size: 12px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-family: inherit;
-            white-space: nowrap;
-            text-align: center;
-        }
-
-        .step-btn:hover {
-            border-color: var(--accent);
-            color: var(--text2);
-        }
-
-        .step-btn.active {
-            background: var(--accent-glow);
-            border-color: var(--accent);
-            color: var(--accent-light);
-        }
-
-        .step-btn.completed {
-            border-color: var(--green);
-            color: var(--green);
-        }
-
-        .brief-section {
-            display: none;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .brief-section.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(16px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .section-header {
-            margin-bottom: 40px;
-        }
-
-        .section-header .num {
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--accent);
-            margin-bottom: 8px;
-        }
-
-        .section-header h2 {
-            font-size: 28px;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-            margin-bottom: 8px;
-        }
-
-        .section-header p {
-            font-size: 15px;
-            color: var(--text3);
-        }
-
-        .field {
-            margin-bottom: 28px;
-        }
-
-        .field label {
-            display: block;
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: var(--text);
-        }
-
-        .field label .required {
-            color: var(--red);
-            margin-left: 2px;
-        }
-
-        .field label .optional {
-            color: var(--text3);
-            font-weight: 400;
-            font-size: 13px;
-            margin-left: 6px;
-        }
-
-        input[type="text"],
-        input[type="email"],
-        input[type="tel"],
-        input[type="url"],
-        input[type="number"],
-        select,
-        textarea {
-            width: 100%;
-            padding: 14px 16px;
-            background: var(--bg-input);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            color: var(--text);
-            font-family: inherit;
-            font-size: 15px;
-            transition: all 0.2s;
-            outline: none;
-        }
-
-        input:focus,
-        select:focus,
-        textarea:focus {
-            border-color: var(--accent);
-            box-shadow: 0 0 0 3px var(--accent-glow);
-        }
-
-        input::placeholder,
-        textarea::placeholder {
-            color: var(--text3);
-        }
-
-        select {
-            cursor: pointer;
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%236b7280' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 16px center;
-            padding-right: 40px;
-        }
-
-        select option {
-            background: var(--bg2);
-            color: var(--text);
-        }
-
-        textarea {
-            min-height: 100px;
-            resize: vertical;
-        }
-
-        .check-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .check-item {
-            position: relative;
-        }
-
-        .check-item input {
-            position: absolute;
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
-        .check-item label {
-            display: block;
-            padding: 10px 20px;
-            background: var(--bg-input);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 500;
-            color: var(--text2);
-            transition: all 0.2s;
-            user-select: none;
-            margin-bottom: 0;
-        }
-
-        .check-item input:checked + label {
-            background: var(--accent-glow);
-            border-color: var(--accent);
-            color: var(--accent-light);
-        }
-
-        .check-item label:hover {
-            border-color: var(--accent);
-        }
-
-        .fields-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        @media (max-width: 640px) {
-            .fields-row { grid-template-columns: 1fr; }
-        }
-
-        .url-group {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .url-row {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
-
-        .url-row input {
-            flex: 1;
-        }
-
-        .btn-add {
-            padding: 8px 16px;
-            background: var(--bg-card);
-            border: 1px dashed var(--border);
-            border-radius: 8px;
-            color: var(--text3);
-            font-size: 13px;
-            cursor: pointer;
-            font-family: inherit;
-            transition: all 0.2s;
-        }
-
-        .btn-add:hover {
-            border-color: var(--accent);
-            color: var(--accent-light);
-        }
-
-        .btn-remove {
-            width: 36px;
-            height: 36px;
-            background: transparent;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            color: var(--text3);
-            font-size: 18px;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .btn-remove:hover {
-            border-color: var(--red);
-            color: var(--red);
-        }
-
-        .range-display {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
-        }
-
-        .range-value {
-            font-size: 20px;
-            font-weight: 700;
-            background: var(--gradient2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        input[type="range"] {
-            -webkit-appearance: none;
-            width: 100%;
-            height: 6px;
-            background: var(--border);
-            border-radius: 3px;
-            outline: none;
-            border: none;
-            padding: 0;
-        }
-
-        input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            width: 20px;
-            height: 20px;
-            background: var(--accent);
-            border-radius: 50%;
-            cursor: pointer;
-        }
-
-        .nav-buttons {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 48px;
-            padding-top: 32px;
-            border-top: 1px solid var(--border);
-        }
-
-        .btn {
-            padding: 14px 32px;
-            border: none;
-            border-radius: 10px;
-            font-family: inherit;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .btn-secondary {
-            background: var(--bg-card);
-            color: var(--text2);
-            border: 1px solid var(--border);
-        }
-
-        .btn-secondary:hover {
-            border-color: var(--accent);
-            color: var(--text);
-        }
-
-        .btn-primary {
-            background: var(--gradient);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3);
-        }
-
-        .btn-success {
-            background: linear-gradient(135deg, #22c55e, #16a34a);
-            color: white;
-        }
-
-        .btn-success:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(34, 197, 94, 0.3);
-        }
-
-        .result-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 32px;
-            margin-bottom: 24px;
-        }
-
-        .result-card h3 {
-            font-size: 16px;
-            font-weight: 700;
-            color: var(--accent-light);
-            margin-bottom: 16px;
-            padding-bottom: 12px;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .result-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 8px 0;
-            font-size: 14px;
-            border-bottom: 1px solid rgba(42, 42, 58, 0.4);
-        }
-
-        .result-row:last-child {
-            border-bottom: none;
-        }
-
-        .result-label {
-            color: var(--text3);
-        }
-
-        .result-value {
-            color: var(--text);
-            font-weight: 500;
-            text-align: right;
-            max-width: 60%;
-        }
-
-        .warnings {
-            margin-top: 32px;
-        }
-
-        .warning-item {
-            display: flex;
-            gap: 12px;
-            padding: 12px 16px;
-            background: rgba(239, 68, 68, 0.08);
-            border: 1px solid rgba(239, 68, 68, 0.2);
-            border-radius: 10px;
-            margin-bottom: 8px;
-            font-size: 14px;
-            color: var(--text2);
-            align-items: flex-start;
-        }
-
-        .warning-icon {
-            color: var(--red);
-            font-size: 16px;
-            flex-shrink: 0;
-            margin-top: 2px;
-        }
-
-        .tip-item {
-            display: flex;
-            gap: 12px;
-            padding: 12px 16px;
-            background: rgba(34, 197, 94, 0.08);
-            border: 1px solid rgba(34, 197, 94, 0.2);
-            border-radius: 10px;
-            margin-bottom: 8px;
-            font-size: 14px;
-            color: var(--text2);
-        }
-
-        .tip-icon {
-            color: var(--green);
-            font-size: 16px;
-            flex-shrink: 0;
-            margin-top: 2px;
-        }
-
-        @media print {
-            .header, .steps-nav, .nav-buttons, .btn { display: none !important; }
-            body { background: white; color: #111; }
-            .container { padding: 0; }
-            .brief-section { display: block !important; }
-            .result-card { border: 1px solid #ddd; break-inside: avoid; }
-        }
-
-        @media (max-width: 640px) {
-            .header { padding: 12px 16px; }
-            .progress-bar { width: 120px; }
-            .brief-hero h1 { font-size: 28px; }
-            .steps-nav { gap: 6px; }
-            .step-btn { padding: 8px 14px; font-size: 12px; }
-        }
-    </style>
-
-    <!-- Yandex.Metrika counter -->
-    <script type="text/javascript">
-    (function(m,e,t,r,i,k,a){
-        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-        m[i].l=1*new Date();
-        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=106813146', 'ym');
-    ym(106813146, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
-    </script>
-    <noscript><div><img src="https://mc.yandex.ru/watch/106813146" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Подробный бриф на разработку — Devorra</title>
+  <meta name="description" content="Заполните подробный бриф на разработку сайта. 8 шагов — и мы подготовим точное коммерческое предложение.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://devorra.ru/brief.html">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/icon-192.png">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#6366f1">
+  <link rel="preload" href="/fonts/inter-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    /* Brief-specific styles (supplement main styles.css) */
+    .brief-wrap {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 24px 20px 80px;
+    }
+
+    .brief-hero {
+      text-align: center;
+      padding: 40px 0 32px;
+    }
+    .brief-hero .label {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: var(--accent-light, #818cf8);
+      margin-bottom: 12px;
+    }
+    .brief-hero h1 {
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 12px;
+    }
+    .brief-hero h1 span {
+      background: linear-gradient(135deg, #6366f1, #06b6d4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .brief-hero p {
+      font-size: 16px;
+      color: #9ca3af;
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* Progress bar */
+    .bf-progress-wrap {
+      background: rgba(255,255,255,0.05);
+      height: 3px;
+      position: sticky;
+      top: 60px;
+      z-index: 90;
+    }
+    .bf-progress-bar {
+      height: 100%;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      transition: width 0.3s ease;
+      border-radius: 0 2px 2px 0;
+    }
+
+    /* Save indicator */
+    .bf-save {
+      position: fixed;
+      top: 16px;
+      right: 20px;
+      font-size: 12px;
+      color: #6b7280;
+      opacity: 0;
+      transition: opacity 0.3s;
+      z-index: 101;
+      pointer-events: none;
+    }
+    .bf-save.visible { opacity: 1; }
+
+    /* Steps nav */
+    .bf-steps-nav {
+      display: flex;
+      gap: 4px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding: 16px 0 0;
+      margin-bottom: 8px;
+    }
+    .bf-steps-nav::-webkit-scrollbar { display: none; }
+
+    .bf-dot {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.08);
+      background: transparent;
+      color: #6b7280;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: inherit;
+    }
+    .bf-dot:hover { border-color: #6366f1; color: #9ca3af; }
+    .bf-dot.active { background: linear-gradient(135deg, #6366f1, #8b5cf6); border-color: transparent; color: #fff; }
+    .bf-dot.completed { border-color: #22c55e; color: #22c55e; }
+    .bf-dot.completed span { display: none; }
+    .bf-dot.completed::after { content: '\2713'; }
+
+    /* Steps */
+    .bf-step {
+      display: none;
+      animation: bfFadeIn 0.4s ease;
+    }
+    .bf-step.active { display: block; }
+
+    @keyframes bfFadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .bf-step-header { margin-bottom: 28px; }
+    .bf-step-num { font-size: 13px; color: #818cf8; font-weight: 600; margin-bottom: 4px; }
+    .bf-step-title { font-size: 24px; font-weight: 700; line-height: 1.3; color: #f1f1f4; }
+    .bf-step-desc { color: #9ca3af; font-size: 14px; margin-top: 6px; }
+
+    /* Card (glass) */
+    .bf-card {
+      background: rgba(26, 26, 37, 0.6);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 16px;
+    }
+
+    /* Fields */
+    .bf-field { margin-bottom: 20px; }
+    .bf-field:last-child { margin-bottom: 0; }
+
+    .bf-field > label {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 6px;
+      color: #f1f1f4;
+    }
+    .bf-field .req { color: #ef4444; margin-left: 2px; }
+    .bf-field .opt { color: #6b7280; font-weight: 400; font-size: 13px; margin-left: 4px; }
+
+    .bf-input,
+    .bf-textarea,
+    .bf-select {
+      width: 100%;
+      padding: 12px 14px;
+      background: #14141e;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      color: #f1f1f4;
+      font-size: 16px;
+      font-family: inherit;
+      transition: border-color 0.3s, box-shadow 0.3s;
+      outline: none;
+    }
+    .bf-input:focus, .bf-textarea:focus, .bf-select:focus {
+      border-color: #6366f1;
+      box-shadow: 0 0 0 3px rgba(99,102,241,0.15);
+    }
+    .bf-input::placeholder, .bf-textarea::placeholder { color: #6b7280; }
+    .bf-textarea { resize: vertical; min-height: 80px; }
+    .bf-select {
+      appearance: none;
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236b7280' d='M2 4l4 4 4-4'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 36px;
+    }
+    .bf-select option { background: #12121a; color: #f1f1f4; }
+
+    .bf-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 540px) {
+      .bf-row { grid-template-columns: 1fr; }
+    }
+
+    /* Options grid (radio/checkbox) */
+    .bf-opts {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    @media (max-width: 480px) {
+      .bf-opts { grid-template-columns: 1fr; }
+    }
+
+    .bf-opt { position: relative; }
+    .bf-opt input { position: absolute; opacity: 0; width: 0; height: 0; }
+    .bf-opt label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      background: #14141e;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-weight: 400;
+      font-size: 14px;
+      min-height: 44px;
+      user-select: none;
+      color: #9ca3af;
+      margin-bottom: 0;
+    }
+    .bf-opt label:hover { border-color: rgba(99,102,241,0.3); }
+    .bf-opt input:checked + label {
+      border-color: #6366f1;
+      background: rgba(99,102,241,0.15);
+      color: #818cf8;
+    }
+    .bf-opt label::before {
+      content: '';
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      border: 2px solid #6b7280;
+      flex-shrink: 0;
+      transition: all 0.3s;
+    }
+    .bf-opt input[type="radio"] + label::before { border-radius: 50%; }
+    .bf-opt input:checked + label::before {
+      border-color: #6366f1;
+      background: #6366f1;
+    }
+
+    /* URL lists */
+    .bf-url-list { display: flex; flex-direction: column; gap: 8px; }
+    .bf-url-row { display: flex; gap: 8px; }
+    .bf-url-row input { flex: 1; }
+    .bf-url-add, .bf-url-rm {
+      flex-shrink: 0;
+      width: 40px;
+      height: 44px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: #14141e;
+      color: #9ca3af;
+      font-size: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+      font-family: inherit;
+    }
+    .bf-url-add:hover { border-color: #6366f1; color: #6366f1; }
+    .bf-url-rm:hover { border-color: #ef4444; color: #ef4444; }
+
+    /* Nav buttons */
+    .bf-nav {
+      display: flex;
+      gap: 12px;
+      margin-top: 32px;
+    }
+    .bf-btn {
+      padding: 12px 28px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all 0.3s;
+      border: none;
+      min-height: 44px;
+    }
+    .bf-btn-pri {
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      color: #fff;
+      flex: 1;
+    }
+    .bf-btn-pri:hover { opacity: 0.9; transform: translateY(-1px); }
+    .bf-btn-sec {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.08);
+      color: #9ca3af;
+    }
+    .bf-btn-sec:hover { border-color: #6b7280; color: #f1f1f4; }
+    .bf-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+    .bf-btn.loading { pointer-events: none; }
+
+    /* Field errors */
+    .bf-err {
+      font-size: 12px;
+      color: #ef4444;
+      margin-top: 4px;
+      display: none;
+    }
+    .bf-field.has-error .bf-input,
+    .bf-field.has-error .bf-textarea,
+    .bf-field.has-error .bf-select { border-color: #ef4444; }
+    .bf-field.has-error .bf-err { display: block; }
+    .bf-field.has-error .bf-opts .bf-opt label { border-color: rgba(239,68,68,0.3); }
+
+    /* Summary */
+    .bf-summary-sec { margin-bottom: 20px; }
+    .bf-summary-sec h3 {
+      font-size: 15px;
+      font-weight: 600;
+      color: #818cf8;
+      margin-bottom: 10px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .bf-summary-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 6px 0;
+      font-size: 14px;
+    }
+    .bf-summary-lbl { color: #9ca3af; flex-shrink: 0; }
+    .bf-summary-val { color: #f1f1f4; text-align: right; word-break: break-word; }
+
+    /* Consent */
+    .bf-consent {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-top: 20px;
+      font-size: 13px;
+      color: #9ca3af;
+    }
+    .bf-consent input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      margin-top: 2px;
+      flex-shrink: 0;
+      accent-color: #6366f1;
+    }
+    .bf-consent a { color: #818cf8; text-decoration: none; }
+
+    /* Submit error */
+    .bf-submit-err {
+      background: rgba(239,68,68,0.1);
+      border: 1px solid rgba(239,68,68,0.3);
+      border-radius: 8px;
+      padding: 12px 16px;
+      color: #ef4444;
+      font-size: 14px;
+      margin-top: 16px;
+      display: none;
+    }
+    .bf-submit-err.visible { display: block; }
+
+    /* Success screen */
+    .bf-success {
+      display: none;
+      text-align: center;
+      padding: 60px 20px;
+      animation: bfFadeIn 0.5s ease;
+    }
+    .bf-success.active { display: block; }
+    .bf-success-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: rgba(34,197,94,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      font-size: 36px;
+      color: #22c55e;
+    }
+    .bf-success h2 {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: #f1f1f4;
+    }
+    .bf-success p {
+      color: #9ca3af;
+      font-size: 16px;
+      max-width: 400px;
+      margin: 0 auto 32px;
+      line-height: 1.6;
+    }
+    .bf-success a {
+      display: inline-block;
+      padding: 12px 32px;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      color: #fff;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: opacity 0.2s;
+    }
+    .bf-success a:hover { opacity: 0.9; }
+
+    /* Spinner */
+    .bf-spinner {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: bfSpin 0.6s linear infinite;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+    @keyframes bfSpin { to { transform: rotate(360deg); } }
+
+    /* Honeypot */
+    .bf-hp { position: absolute; left: -9999px; opacity: 0; height: 0; }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      .brief-hero h1 { font-size: 26px; }
+      .bf-card { padding: 18px; }
+      .bf-dot { width: 32px; height: 32px; font-size: 12px; }
+      .bf-step-title { font-size: 20px; }
+    }
+
+    @media print {
+      nav, footer, .bf-steps-nav, .bf-nav, .bf-progress-wrap, .bf-save { display: none !important; }
+      body { background: white; color: #111; }
+      .bf-step { display: block !important; }
+      .bf-card { border: 1px solid #ddd; break-inside: avoid; backdrop-filter: none; background: #f9f9f9; }
+    }
+  </style>
+
+  <!-- Yandex.Metrika counter -->
+  <script type="text/javascript">
+  (function(m,e,t,r,i,k,a){
+    m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+    m[i].l=1*new Date();
+    for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+    k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+  })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=106813146', 'ym');
+  ym(106813146, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+  </script>
+  <noscript><div><img src="https://mc.yandex.ru/watch/106813146" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 </head>
 <body>
 
-    <nav class="header">
-        <a href="/" class="logo" style="text-decoration:none;background:linear-gradient(135deg,#6366f1,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent">Devorra</a>
-        <div class="header-right">
-            <div class="progress-bar">
-                <div class="progress-fill" id="progressFill"></div>
-            </div>
-            <span class="progress-text" id="progressText">0 / 8</span>
+<!-- Header from main site -->
+<nav>
+  <a href="/" class="logo">Devorra</a>
+  <ul class="nav-links">
+    <li><a href="/#services">Услуги</a></li>
+    <li><a href="/#pricing">Цены</a></li>
+    <li><a href="/#materials">Полезное</a></li>
+    <li><a href="/#faq">FAQ</a></li>
+    <li><a href="/#contact">Контакты</a></li>
+    <li><a href="#" class="nav-cta" role="button" onclick="event.preventDefault();openBrief()">Быстрая заявка</a></li>
+  </ul>
+  <button class="burger" onclick="toggleMenu()" aria-label="Меню">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="/#services" onclick="closeMenu()">Услуги</a>
+  <a href="/#pricing" onclick="closeMenu()">Цены</a>
+  <a href="/#materials" onclick="closeMenu()">Полезное</a>
+  <a href="/#faq" onclick="closeMenu()">FAQ</a>
+  <a href="/#contact" onclick="closeMenu()">Контакты</a>
+  <button class="nav-cta" onclick="closeMenu();openBrief()">Быстрая заявка</button>
+</div>
+<div class="mobile-overlay" id="mobileOverlay" onclick="closeMenu()"></div>
+
+<div class="bf-progress-wrap">
+  <div class="bf-progress-bar" id="bfProgressBar" style="width: 11.1%"></div>
+</div>
+<span class="bf-save" id="bfSaveIndicator">Сохранено</span>
+
+<main class="brief-wrap">
+
+  <div class="brief-hero">
+    <div class="label">Подробный бриф</div>
+    <h1>Расскажите о <span>вашем проекте</span></h1>
+    <p>Заполните 8 шагов — и мы подготовим точное коммерческое предложение по срокам, стоимости и решению.</p>
+  </div>
+
+  <div class="bf-steps-nav" id="bfStepsNav">
+    <button class="bf-dot active" data-step="0"><span>1</span></button>
+    <button class="bf-dot" data-step="1"><span>2</span></button>
+    <button class="bf-dot" data-step="2"><span>3</span></button>
+    <button class="bf-dot" data-step="3"><span>4</span></button>
+    <button class="bf-dot" data-step="4"><span>5</span></button>
+    <button class="bf-dot" data-step="5"><span>6</span></button>
+    <button class="bf-dot" data-step="6"><span>7</span></button>
+    <button class="bf-dot" data-step="7"><span>8</span></button>
+    <button class="bf-dot" data-step="8"><span>&#10022;</span></button>
+  </div>
+
+  <form id="bfForm" novalidate>
+
+    <!-- Honeypot -->
+    <div class="bf-hp" aria-hidden="true">
+      <input type="text" name="website" tabindex="-1" autocomplete="off">
+    </div>
+    <input type="hidden" name="_loadTime" id="bfLoadTime">
+
+    <!-- Step 0: Контакты -->
+    <section class="bf-step active" data-step="0">
+      <div class="bf-step-header">
+        <div class="bf-step-num">Шаг 1 из 8</div>
+        <h2 class="bf-step-title">Контактная информация</h2>
+        <p class="bf-step-desc">Как с вами связаться для обсуждения проекта</p>
+      </div>
+      <div class="bf-card">
+        <div class="bf-row">
+          <div class="bf-field">
+            <label for="bf_name">Имя и фамилия <span class="req">*</span></label>
+            <input class="bf-input" type="text" id="bf_name" name="name" placeholder="Иван Петров" required>
+            <div class="bf-err">Укажите ваше имя</div>
+          </div>
+          <div class="bf-field">
+            <label for="bf_company">Компания <span class="req">*</span></label>
+            <input class="bf-input" type="text" id="bf_company" name="company" placeholder="ООО «Ромашка»" required>
+            <div class="bf-err">Укажите название компании</div>
+          </div>
         </div>
-    </nav>
-
-    <main class="container">
-
-        <div class="brief-hero">
-            <div class="label">Бриф на разработку</div>
-            <h1>Расскажите о <span>вашем проекте</span></h1>
-            <p>Заполните бриф, чтобы мы могли точно оценить сроки, стоимость и предложить оптимальное решение — сайт, приложение или бот.</p>
+        <div class="bf-row">
+          <div class="bf-field">
+            <label for="bf_position">Должность</label>
+            <input class="bf-input" type="text" id="bf_position" name="position" placeholder="Директор по маркетингу">
+          </div>
+          <div class="bf-field">
+            <label for="bf_phone">Телефон <span class="req">*</span></label>
+            <input class="bf-input" type="tel" id="bf_phone" name="phone" placeholder="+7 (999) 123-45-67" required>
+            <div class="bf-err">Укажите номер телефона</div>
+          </div>
         </div>
-
-        <div class="steps-nav" id="stepsNav">
-            <button class="step-btn active" onclick="goToStep(0)">1. Контакты</button>
-            <button class="step-btn" onclick="goToStep(1)">2. Бизнес</button>
-            <button class="step-btn" onclick="goToStep(2)">3. Аудитория</button>
-            <button class="step-btn" onclick="goToStep(3)">4. Цели</button>
-            <button class="step-btn" onclick="goToStep(4)">5. Функционал</button>
-            <button class="step-btn" onclick="goToStep(5)">6. Дизайн</button>
-            <button class="step-btn" onclick="goToStep(6)">7. Контент</button>
-            <button class="step-btn" onclick="goToStep(7)">8. Бюджет</button>
+        <div class="bf-row">
+          <div class="bf-field">
+            <label for="bf_email">Email <span class="req">*</span></label>
+            <input class="bf-input" type="email" id="bf_email" name="email" placeholder="ivan@company.ru" required>
+            <div class="bf-err">Укажите корректный email</div>
+          </div>
+          <div class="bf-field">
+            <label for="bf_telegram">Telegram <span class="opt">необязательно</span></label>
+            <input class="bf-input" type="text" id="bf_telegram" name="telegram" placeholder="@username">
+          </div>
         </div>
-
-        <div class="brief-section active" id="step0">
-            <div class="section-header">
-                <div class="num">Шаг 1 из 8</div>
-                <h2>Контактная информация</h2>
-                <p>Как с вами связаться и кто принимает решения по проекту</p>
-            </div>
-
-            <div class="fields-row">
-                <div class="field">
-                    <label for="brief-name">Имя и фамилия <span class="required">*</span></label>
-                    <input id="brief-name" type="text" name="name" placeholder="Иван Петров">
-                </div>
-                <div class="field">
-                    <label for="brief-company">Компания <span class="required">*</span></label>
-                    <input id="brief-company" type="text" name="company" placeholder="ООО «Ромашка»">
-                </div>
-            </div>
-
-            <div class="fields-row">
-                <div class="field">
-                    <label for="brief-position">Должность</label>
-                    <input id="brief-position" type="text" name="position" placeholder="Директор по маркетингу">
-                </div>
-                <div class="field">
-                    <label for="brief-phone">Телефон <span class="required">*</span></label>
-                    <input id="brief-phone" type="tel" name="phone" placeholder="+7 (999) 123-45-67">
-                </div>
-            </div>
-
-            <div class="fields-row">
-                <div class="field">
-                    <label for="brief-email">Email <span class="required">*</span></label>
-                    <input id="brief-email" type="email" name="email" placeholder="ivan@company.ru">
-                </div>
-                <div class="field">
-                    <label for="brief-telegram">Telegram <span class="optional">необязательно</span></label>
-                    <input id="brief-telegram" type="text" name="telegram" placeholder="@username">
-                </div>
-            </div>
-
-            <div class="field">
-                <label>Кто принимает финальное решение по проекту?</label>
-                <select name="decision_maker">
-                    <option value="">Выберите вариант</option>
-                    <option value="me">Я сам(а)</option>
-                    <option value="director">Генеральный директор</option>
-                    <option value="team">Коллегиальное решение (несколько человек)</option>
-                    <option value="other">Другой человек (укажу позже)</option>
-                </select>
-            </div>
-
-            <div class="nav-buttons">
-                <div></div>
-                <button class="btn btn-primary" onclick="nextStep()">Далее</button>
-            </div>
+        <div class="bf-field">
+          <label for="bf_decision">Кто принимает финальное решение?</label>
+          <select class="bf-select" id="bf_decision" name="decision_maker">
+            <option value="">Выберите...</option>
+            <option>Я сам(а)</option>
+            <option>Генеральный директор</option>
+            <option>Коллегиальное решение</option>
+            <option>Другой человек</option>
+          </select>
         </div>
+      </div>
+      <div class="bf-nav">
+        <button type="button" class="bf-btn bf-btn-pri bf-next">Далее</button>
+      </div>
+    </section>
 
-        <div class="brief-section" id="step1">
-            <div class="section-header">
-                <div class="num">Шаг 2 из 8</div>
-                <h2>О вашем бизнесе</h2>
-                <p>Поможет нам погрузиться в вашу специфику и предложить точное решение</p>
-            </div>
-
-            <div class="field">
-                <label>Чем занимается компания? <span class="required">*</span></label>
-                <textarea name="business_desc" placeholder="Опишите основной вид деятельности, продукты или услуги..."></textarea>
-            </div>
-
-            <div class="fields-row">
-                <div class="field">
-                    <label>Сфера деятельности <span class="required">*</span></label>
-                    <select name="industry">
-                        <option value="">Выберите отрасль</option>
-                        <option value="ecommerce">Интернет-торговля</option>
-                        <option value="services">Услуги (B2C)</option>
-                        <option value="b2b">B2B / Промышленность</option>
-                        <option value="it">IT / SaaS</option>
-                        <option value="medical">Медицина / Фарма</option>
-                        <option value="education">Образование</option>
-                        <option value="realestate">Недвижимость</option>
-                        <option value="food">HoReCa / Еда</option>
-                        <option value="finance">Финансы / Страхование</option>
-                        <option value="construction">Строительство / Ремонт</option>
-                        <option value="beauty">Красота / Здоровье</option>
-                        <option value="auto">Авто</option>
-                        <option value="travel">Туризм / Путешествия</option>
-                        <option value="government">Госсектор</option>
-                        <option value="other">Другое</option>
-                    </select>
-                </div>
-                <div class="field">
-                    <label>Сколько лет на рынке?</label>
-                    <select name="years">
-                        <option value="">Выберите</option>
-                        <option value="new">Стартап / ещё не запустились</option>
-                        <option value="1-3">1-3 года</option>
-                        <option value="3-10">3-10 лет</option>
-                        <option value="10+">Более 10 лет</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="field">
-                <label>География работы <span class="required">*</span></label>
-                <div class="check-group">
-                    <div class="check-item">
-                        <input type="checkbox" id="geo_city" name="geo" value="city">
-                        <label for="geo_city">Один город</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="checkbox" id="geo_region" name="geo" value="region">
-                        <label for="geo_region">Регион</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="checkbox" id="geo_russia" name="geo" value="russia">
-                        <label for="geo_russia">Вся Россия</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="checkbox" id="geo_cis" name="geo" value="cis">
-                        <label for="geo_cis">СНГ</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="checkbox" id="geo_world" name="geo" value="world">
-                        <label for="geo_world">Весь мир</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="field">
-                <label>Чем вы отличаетесь от конкурентов? (ваше УТП)</label>
-                <textarea name="utp" placeholder="Что выделяет вас на фоне конкурентов? Почему клиенты выбирают именно вас?"></textarea>
-            </div>
-
-            <div class="field">
-                <label>Сайты конкурентов</label>
-                <div class="url-group" id="competitorUrls">
-                    <div class="url-row">
-                        <input type="url" placeholder="https://competitor1.ru">
-                    </div>
-                    <div class="url-row">
-                        <input type="url" placeholder="https://competitor2.ru">
-                    </div>
-                    <div class="url-row">
-                        <input type="url" placeholder="https://competitor3.ru">
-                    </div>
-                </div>
-                <button class="btn-add" onclick="addUrlField('competitorUrls')" style="margin-top: 8px;">+ Добавить ещё</button>
-            </div>
-
-            <div class="field">
-                <label>Текущий сайт <span class="optional">если есть</span></label>
-                <input type="url" name="current_site" placeholder="https://yoursite.ru">
-            </div>
-
-            <div class="field">
-                <label>Что не устраивает в текущем сайте?</label>
-                <div class="check-group">
-                    <div class="check-item">
-                        <input type="checkbox" id="prob_design" name="problems" value="design">
-                        <label for="prob_design">Устаревший дизайн</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="checkbox" id="prob_mobile" name="problems" value="mobile">
-                        <label for="prob_mobile">Не адаптивный</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="checkbox" id="prob_speed" name="problems" value="speed">
-                        <label for="prob_speed">Медленный</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="checkbox" id="prob_seo" name="problems" value="seo">
-                        <label for="prob_seo">Плохо в поиске</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="checkbox" id="prob_edit" name="problems" value="edit">
-                        <label for="prob_edit">Сложно редактировать</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="checkbox" id="prob_conv" name="problems" value="conversion">
-                        <label for="prob_conv">Мало заявок</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="checkbox" id="prob_none" name="problems" value="none">
-                        <label for="prob_none">Сайта нет</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="nav-buttons">
-                <button class="btn btn-secondary" onclick="prevStep()">Назад</button>
-                <button class="btn btn-primary" onclick="nextStep()">Далее</button>
-            </div>
+    <!-- Step 1: Бизнес -->
+    <section class="bf-step" data-step="1">
+      <div class="bf-step-header">
+        <div class="bf-step-num">Шаг 2 из 8</div>
+        <h2 class="bf-step-title">О вашем бизнесе</h2>
+        <p class="bf-step-desc">Расскажите о компании, чтобы мы лучше поняли контекст</p>
+      </div>
+      <div class="bf-card">
+        <div class="bf-field">
+          <label for="bf_business">Чем занимается компания? <span class="req">*</span></label>
+          <textarea class="bf-textarea" id="bf_business" name="business_desc" placeholder="Опишите основной вид деятельности, продукты или услуги..." required></textarea>
+          <div class="bf-err">Опишите деятельность компании</div>
         </div>
-
-        <div class="brief-section" id="step2">
-            <div class="section-header">
-                <div class="num">Шаг 3 из 8</div>
-                <h2>Целевая аудитория</h2>
-                <p>Для кого делаем сайт — это определит дизайн, структуру и тон</p>
-            </div>
-
-            <div class="field">
-                <label>Тип клиентов <span class="required">*</span></label>
-                <div class="check-group">
-                    <div class="check-item">
-                        <input type="radio" id="b2c" name="client_type" value="b2c">
-                        <label for="b2c">B2C (физлица)</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="radio" id="b2b" name="client_type" value="b2b">
-                        <label for="b2b">B2B (компании)</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="radio" id="both_type" name="client_type" value="both">
-                        <label for="both_type">Оба типа</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="fields-row">
-                <div class="field">
-                    <label>Возраст аудитории</label>
-                    <div class="check-group">
-                        <div class="check-item">
-                            <input type="checkbox" id="age_18" name="age" value="18-25">
-                            <label for="age_18">18-25</label>
-                        </div>
-                        <div class="check-item">
-                            <input type="checkbox" id="age_25" name="age" value="25-35">
-                            <label for="age_25">25-35</label>
-                        </div>
-                        <div class="check-item">
-                            <input type="checkbox" id="age_35" name="age" value="35-50">
-                            <label for="age_35">35-50</label>
-                        </div>
-                        <div class="check-item">
-                            <input type="checkbox" id="age_50" name="age" value="50+">
-                            <label for="age_50">50+</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="field">
-                    <label>Уровень дохода</label>
-                    <select name="income">
-                        <option value="">Выберите</option>
-                        <option value="low">Эконом-сегмент</option>
-                        <option value="mid">Средний</option>
-                        <option value="high">Выше среднего</option>
-                        <option value="premium">Премиум</option>
-                        <option value="mixed">Смешанный</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="field">
-                <label>Откуда сейчас приходят клиенты?</label>
-                <div class="check-group">
-                    <div class="check-item">
-                        <input type="checkbox" id="src_search" name="source" value="search">
-                        <label for="src_search">Поиск (Яндекс/Google)</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="checkbox" id="src_social" name="source" value="social">
-                        <label for="src_social">Соцсети</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="checkbox" id="src_ads" name="source" value="ads">
-                        <label for="src_ads">Реклама</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="checkbox" id="src_word" name="source" value="word">
-                        <label for="src_word">Сарафанное радио</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="checkbox" id="src_offline" name="source" value="offline">
-                        <label for="src_offline">Офлайн</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="checkbox" id="src_market" name="source" value="marketplace">
-                        <label for="src_market">Маркетплейсы</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="field">
-                <label>С каких устройств заходят на сайт?</label>
-                <div class="check-group">
-                    <div class="check-item">
-                        <input type="radio" id="dev_mobile" name="device" value="mobile">
-                        <label for="dev_mobile">В основном телефон</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="radio" id="dev_desktop" name="device" value="desktop">
-                        <label for="dev_desktop">В основном десктоп</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="radio" id="dev_equal" name="device" value="equal">
-                        <label for="dev_equal">Примерно поровну</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="radio" id="dev_unknown" name="device" value="unknown">
-                        <label for="dev_unknown">Не знаю</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="field">
-                <label>Какие боли / возражения у клиентов перед покупкой?</label>
-                <textarea name="pains" placeholder="Что останавливает клиентов? Какие вопросы задают чаще всего? Какие сомнения?"></textarea>
-            </div>
-
-            <div class="nav-buttons">
-                <button class="btn btn-secondary" onclick="prevStep()">Назад</button>
-                <button class="btn btn-primary" onclick="nextStep()">Далее</button>
-            </div>
+        <div class="bf-row">
+          <div class="bf-field">
+            <label for="bf_industry">Сфера деятельности <span class="req">*</span></label>
+            <select class="bf-select" id="bf_industry" name="industry" required>
+              <option value="">Выберите сферу...</option>
+              <option>Интернет-торговля</option>
+              <option>Услуги (B2C)</option>
+              <option>B2B / Промышленность</option>
+              <option>IT / SaaS</option>
+              <option>Медицина / Здоровье</option>
+              <option>Образование</option>
+              <option>Недвижимость</option>
+              <option>HoReCa (рестораны, отели)</option>
+              <option>Финансы / Страхование</option>
+              <option>Строительство / Ремонт</option>
+              <option>Красота / Wellness</option>
+              <option>Авто</option>
+              <option>Туризм / Путешествия</option>
+              <option>Госсектор</option>
+              <option>Другое</option>
+            </select>
+            <div class="bf-err">Выберите сферу деятельности</div>
+          </div>
+          <div class="bf-field">
+            <label for="bf_years">Сколько лет на рынке?</label>
+            <select class="bf-select" id="bf_years" name="years">
+              <option value="">Выберите...</option>
+              <option>Стартап (менее года)</option>
+              <option>1–3 года</option>
+              <option>3–10 лет</option>
+              <option>Более 10 лет</option>
+            </select>
+          </div>
         </div>
-
-        <div class="brief-section" id="step3">
-            <div class="section-header">
-                <div class="num">Шаг 4 из 8</div>
-                <h2>Цели и задачи сайта</h2>
-                <p>Что сайт должен делать для вашего бизнеса</p>
-            </div>
-
-            <div class="field">
-                <label>Главная цель сайта <span class="required">*</span></label>
-                <div class="check-group">
-                    <div class="check-item">
-                        <input type="radio" id="goal_leads" name="main_goal" value="leads">
-                        <label for="goal_leads">Сбор заявок / лидогенерация</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="radio" id="goal_sales" name="main_goal" value="sales">
-                        <label for="goal_sales">Онлайн-продажи</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="radio" id="goal_image" name="main_goal" value="image">
-                        <label for="goal_image">Имидж / представительство</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="radio" id="goal_info" name="main_goal" value="info">
-                        <label for="goal_info">Информирование</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="field">
-                <label>Целевое действие пользователя на сайте <span class="required">*</span></label>
-                <div class="check-group">
-                    <div class="check-item">
-                        <input type="checkbox" id="act_form" name="action" value="form">
-                        <label for="act_form">Оставить заявку</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="checkbox" id="act_call" name="action" value="call">
-                        <label for="act_call">Позвонить</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="checkbox" id="act_buy" name="action" value="buy">
-                        <label for="act_buy">Купить онлайн</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="checkbox" id="act_reg" name="action" value="register">
-                        <label for="act_reg">Зарегистрироваться</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="checkbox" id="act_chat" name="action" value="chat">
-                        <label for="act_chat">Написать в чат</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="checkbox" id="act_download" name="action" value="download">
-                        <label for="act_download">Скачать материал</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="fields-row">
-                <div class="field">
-                    <label>Сколько заявок/продаж в месяц хотите с сайта?</label>
-                    <input type="text" name="target_leads" placeholder="Например: 50 заявок или 200 заказов">
-                </div>
-                <div class="field">
-                    <label>Средний чек / стоимость услуги</label>
-                    <input type="text" name="avg_check" placeholder="Например: 15 000 ₽">
-                </div>
-            </div>
-
-            <div class="field">
-                <label>Планируете ли продвижение после запуска?</label>
-                <div class="check-group">
-                    <div class="check-item">
-                        <input type="checkbox" id="promo_seo" name="promo" value="seo">
-                        <label for="promo_seo">SEO</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="checkbox" id="promo_context" name="promo" value="context">
-                        <label for="promo_context">Яндекс.Директ</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="checkbox" id="promo_social" name="promo" value="social">
-                        <label for="promo_social">Соцсети / SMM</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="checkbox" id="promo_no" name="promo" value="none">
-                        <label for="promo_no">Пока не планирую</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="nav-buttons">
-                <button class="btn btn-secondary" onclick="prevStep()">Назад</button>
-                <button class="btn btn-primary" onclick="nextStep()">Далее</button>
-            </div>
+        <div class="bf-field">
+          <label>География работы <span class="req">*</span></label>
+          <div class="bf-opts">
+            <div class="bf-opt"><input type="checkbox" name="geo" id="bf_geo1" value="Один город"><label for="bf_geo1">Один город</label></div>
+            <div class="bf-opt"><input type="checkbox" name="geo" id="bf_geo2" value="Регион"><label for="bf_geo2">Регион</label></div>
+            <div class="bf-opt"><input type="checkbox" name="geo" id="bf_geo3" value="Вся Россия"><label for="bf_geo3">Вся Россия</label></div>
+            <div class="bf-opt"><input type="checkbox" name="geo" id="bf_geo4" value="СНГ"><label for="bf_geo4">СНГ</label></div>
+            <div class="bf-opt"><input type="checkbox" name="geo" id="bf_geo5" value="Весь мир"><label for="bf_geo5">Весь мир</label></div>
+          </div>
+          <div class="bf-err">Выберите хотя бы один вариант</div>
         </div>
-
-        <div class="brief-section" id="step4">
-            <div class="section-header">
-                <div class="num">Шаг 5 из 8</div>
-                <h2>Функциональность</h2>
-                <p>Какие возможности должны быть в проекте</p>
-            </div>
-
-            <div class="field">
-                <label>Тип проекта <span class="required">*</span></label>
-                <div class="check-group">
-                    <div class="check-item">
-                        <input type="radio" id="type_landing" name="site_type" value="landing">
-                        <label for="type_landing">Лендинг (1 страница)</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="radio" id="type_corp" name="site_type" value="corporate">
-                        <label for="type_corp">Корпоративный сайт</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="radio" id="type_shop" name="site_type" value="shop">
-                        <label for="type_shop">Интернет-магазин</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="radio" id="type_portal" name="site_type" value="portal">
-                        <label for="type_portal">Портал / Сервис</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="radio" id="type_mobile" name="site_type" value="mobile_app">
-                        <label for="type_mobile">Мобильное приложение</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="radio" id="type_bot" name="site_type" value="bot">
-                        <label for="type_bot">Telegram / чат-бот</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="field">
-                <label>Какие разделы нужны?</label>
-                <div class="check-group">
-                    <div class="check-item">
-                        <input type="checkbox" id="sec_about" name="sections" value="about">
-                        <label for="sec_about">О компании</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="checkbox" id="sec_services" name="sections" value="services">
-                        <label for="sec_services">Услуги / Продукция</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="checkbox" id="sec_catalog" name="sections" value="catalog">
-                        <label for="sec_catalog">Каталог</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="checkbox" id="sec_portfolio" name="sections" value="portfolio">
-                        <label for="sec_portfolio">Портфолио / Кейсы</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="checkbox" id="sec_blog" name="sections" value="blog">
-                        <label for="sec_blog">Блог / Новости</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="checkbox" id="sec_contacts" name="sections" value="contacts">
-                        <label for="sec_contacts">Контакты</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="checkbox" id="sec_faq" name="sections" value="faq">
-                        <label for="sec_faq">FAQ</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="checkbox" id="sec_reviews" name="sections" value="reviews">
-                        <label for="sec_reviews">Отзывы</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="field">
-                <label>Нужные функции</label>
-                <div class="check-group">
-                    <div class="check-item">
-                        <input type="checkbox" id="fn_cart" name="features" value="cart">
-                        <label for="fn_cart">Корзина / оплата</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="checkbox" id="fn_account" name="features" value="account">
-                        <label for="fn_account">Личный кабинет</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="checkbox" id="fn_calc" name="features" value="calculator">
-                        <label for="fn_calc">Калькулятор</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="checkbox" id="fn_chat" name="features" value="chatbot">
-                        <label for="fn_chat">Чат-бот / AI-ассистент</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="checkbox" id="fn_filter" name="features" value="filter">
-                        <label for="fn_filter">Фильтры / поиск</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="checkbox" id="fn_map" name="features" value="map">
-                        <label for="fn_map">Карта</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="checkbox" id="fn_multilang" name="features" value="multilang">
-                        <label for="fn_multilang">Мультиязычность</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="checkbox" id="fn_booking" name="features" value="booking">
-                        <label for="fn_booking">Бронирование / запись</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="field">
-                <label>Интеграции</label>
-                <div class="check-group">
-                    <div class="check-item">
-                        <input type="checkbox" id="int_crm" name="integrations" value="crm">
-                        <label for="int_crm">CRM (Битрикс24 / AmoCRM)</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="checkbox" id="int_1c" name="integrations" value="1c">
-                        <label for="int_1c">1С Бухгалтерия</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="checkbox" id="int_pay" name="integrations" value="payment">
-                        <label for="int_pay">Онлайн-оплата</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="checkbox" id="int_delivery" name="integrations" value="delivery">
-                        <label for="int_delivery">Доставка (СДЭК / ПЭК)</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="checkbox" id="int_phone" name="integrations" value="telephony">
-                        <label for="int_phone">Телефония</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="checkbox" id="int_analytics" name="integrations" value="analytics">
-                        <label for="int_analytics">Аналитика (Метрика)</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="checkbox" id="int_email" name="integrations" value="email">
-                        <label for="int_email">Email-рассылки</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="field">
-                <label>Количество товаров / услуг в каталоге <span class="optional">если применимо</span></label>
-                <select name="catalog_size">
-                    <option value="">Выберите</option>
-                    <option value="0">Нет каталога</option>
-                    <option value="1-50">До 50</option>
-                    <option value="50-500">50-500</option>
-                    <option value="500-5000">500-5 000</option>
-                    <option value="5000+">Более 5 000</option>
-                </select>
-            </div>
-
-            <div class="field">
-                <label>Предпочтения по платформе / CMS</label>
-                <div class="check-group">
-                    <div class="check-item">
-                        <input type="radio" id="cms_bitrix" name="cms" value="bitrix">
-                        <label for="cms_bitrix">1С-Битрикс</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="radio" id="cms_tilda" name="cms" value="tilda">
-                        <label for="cms_tilda">Tilda</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="radio" id="cms_wp" name="cms" value="wordpress">
-                        <label for="cms_wp">WordPress</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="radio" id="cms_custom" name="cms" value="custom">
-                        <label for="cms_custom">Кастомная разработка</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="radio" id="cms_any" name="cms" value="any">
-                        <label for="cms_any">На ваше усмотрение</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="nav-buttons">
-                <button class="btn btn-secondary" onclick="prevStep()">Назад</button>
-                <button class="btn btn-primary" onclick="nextStep()">Далее</button>
-            </div>
+        <div class="bf-field">
+          <label for="bf_utp">Чем вы отличаетесь от конкурентов?</label>
+          <textarea class="bf-textarea" id="bf_utp" name="utp" placeholder="Что выделяет вас на фоне конкурентов..."></textarea>
         </div>
-
-        <div class="brief-section" id="step5">
-            <div class="section-header">
-                <div class="num">Шаг 6 из 8</div>
-                <h2>Дизайн и визуал</h2>
-                <p>Какое впечатление должен производить сайт</p>
+        <div class="bf-field">
+          <label>Сайты конкурентов</label>
+          <div class="bf-url-list" id="bfCompUrls">
+            <div class="bf-url-row">
+              <input class="bf-input" type="url" name="competitorUrls" placeholder="https://competitor.ru">
+              <button type="button" class="bf-url-add" onclick="bfAddUrl(this)">+</button>
             </div>
-
-            <div class="field">
-                <label>Есть ли фирменный стиль / брендбук?</label>
-                <div class="check-group">
-                    <div class="check-item">
-                        <input type="radio" id="brand_full" name="brand" value="full">
-                        <label for="brand_full">Да, полный брендбук</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="radio" id="brand_logo" name="brand" value="logo">
-                        <label for="brand_logo">Только логотип и цвета</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="radio" id="brand_no" name="brand" value="none">
-                        <label for="brand_no">Нет, нужно разработать</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="field">
-                <label>Какой стиль вам ближе? <span class="required">*</span></label>
-                <div class="check-group">
-                    <div class="check-item">
-                        <input type="radio" id="style_minimal" name="style" value="minimal">
-                        <label for="style_minimal">Минимализм</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="radio" id="style_corporate" name="style" value="corporate">
-                        <label for="style_corporate">Деловой / строгий</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="radio" id="style_modern" name="style" value="modern">
-                        <label for="style_modern">Современный / яркий</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="radio" id="style_premium" name="style" value="premium">
-                        <label for="style_premium">Премиальный</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="radio" id="style_creative" name="style" value="creative">
-                        <label for="style_creative">Креативный / нестандартный</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="field">
-                <label>Сайты, которые нравятся (покажите 2-5 примеров)</label>
-                <div class="url-group" id="likeUrls">
-                    <div class="url-row">
-                        <input type="url" placeholder="https://example.com">
-                    </div>
-                    <div class="url-row">
-                        <input type="url" placeholder="https://example2.com">
-                    </div>
-                </div>
-                <button class="btn-add" onclick="addUrlField('likeUrls')" style="margin-top: 8px;">+ Добавить ещё</button>
-            </div>
-
-            <div class="field">
-                <label>Что именно нравится в этих сайтах?</label>
-                <textarea name="like_why" placeholder="Дизайн, анимации, структура, подача информации..."></textarea>
-            </div>
-
-            <div class="field">
-                <label>Сайты, которые НЕ нравятся <span class="optional">необязательно</span></label>
-                <div class="url-group" id="dislikeUrls">
-                    <div class="url-row">
-                        <input type="url" placeholder="https://bad-example.com">
-                    </div>
-                </div>
-                <button class="btn-add" onclick="addUrlField('dislikeUrls')" style="margin-top: 8px;">+ Добавить ещё</button>
-            </div>
-
-            <div class="field">
-                <label>Что не нравится?</label>
-                <textarea name="dislike_why" placeholder="Что раздражает или отталкивает в этих сайтах?"></textarea>
-            </div>
-
-            <div class="nav-buttons">
-                <button class="btn btn-secondary" onclick="prevStep()">Назад</button>
-                <button class="btn btn-primary" onclick="nextStep()">Далее</button>
-            </div>
+          </div>
         </div>
-
-        <div class="brief-section" id="step6">
-            <div class="section-header">
-                <div class="num">Шаг 7 из 8</div>
-                <h2>Контент</h2>
-                <p>Тексты, фото, видео — что есть и что нужно создать</p>
-            </div>
-
-            <div class="field">
-                <label>Кто будет готовить тексты для сайта? <span class="required">*</span></label>
-                <div class="check-group">
-                    <div class="check-item">
-                        <input type="radio" id="txt_us" name="texts" value="client">
-                        <label for="txt_us">Мы сами предоставим</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="radio" id="txt_you" name="texts" value="studio">
-                        <label for="txt_you">Поручим студии</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="radio" id="txt_together" name="texts" value="together">
-                        <label for="txt_together">Совместно</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="field">
-                <label>Есть ли готовые материалы?</label>
-                <div class="check-group">
-                    <div class="check-item">
-                        <input type="checkbox" id="mat_photo" name="materials" value="photo">
-                        <label for="mat_photo">Фото продукции</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="checkbox" id="mat_team" name="materials" value="team_photo">
-                        <label for="mat_team">Фото команды</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="checkbox" id="mat_video" name="materials" value="video">
-                        <label for="mat_video">Видео</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="checkbox" id="mat_texts" name="materials" value="texts">
-                        <label for="mat_texts">Готовые тексты</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="checkbox" id="mat_catalog" name="materials" value="catalog_data">
-                        <label for="mat_catalog">Данные каталога (Excel/1С)</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="checkbox" id="mat_none" name="materials" value="none">
-                        <label for="mat_none">Ничего нет</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="field">
-                <label>Кто будет обновлять сайт после запуска?</label>
-                <div class="check-group">
-                    <div class="check-item">
-                        <input type="radio" id="upd_client" name="updater" value="client">
-                        <label for="upd_client">Наш сотрудник</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="radio" id="upd_studio" name="updater" value="studio">
-                        <label for="upd_studio">Студия (поддержка)</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="radio" id="upd_both" name="updater" value="both">
-                        <label for="upd_both">Совместно</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="field">
-                <label>Нужна ли фото/видеосъёмка?</label>
-                <div class="check-group">
-                    <div class="check-item">
-                        <input type="radio" id="shoot_yes" name="photoshoot" value="yes">
-                        <label for="shoot_yes">Да, нужна</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="radio" id="shoot_no" name="photoshoot" value="no">
-                        <label for="shoot_no">Нет, есть свои материалы</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="radio" id="shoot_stock" name="photoshoot" value="stock">
-                        <label for="shoot_stock">Используйте стоковые фото</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="nav-buttons">
-                <button class="btn btn-secondary" onclick="prevStep()">Назад</button>
-                <button class="btn btn-primary" onclick="nextStep()">Далее</button>
-            </div>
+        <div class="bf-field">
+          <label for="bf_cursite">Текущий сайт (если есть)</label>
+          <input class="bf-input" type="url" id="bf_cursite" name="current_site" placeholder="https://yoursite.ru">
         </div>
-
-        <div class="brief-section" id="step7">
-            <div class="section-header">
-                <div class="num">Шаг 8 из 8</div>
-                <h2>Бюджет и сроки</h2>
-                <p>Поможет подобрать оптимальное решение под ваши возможности</p>
-            </div>
-
-            <div class="field">
-                <label>Бюджет на разработку сайта <span class="required">*</span></label>
-                <div class="check-group">
-                    <div class="check-item">
-                        <input type="radio" id="bud_50" name="budget" value="50-150k">
-                        <label for="bud_50">50 000 - 150 000 ₽</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="radio" id="bud_150" name="budget" value="150-500k">
-                        <label for="bud_150">150 000 - 500 000 ₽</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="radio" id="bud_500" name="budget" value="500k-1.5m">
-                        <label for="bud_500">500 000 - 1 500 000 ₽</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="radio" id="bud_1500" name="budget" value="1.5m+">
-                        <label for="bud_1500">Более 1 500 000 ₽</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="radio" id="bud_discuss" name="budget" value="discuss">
-                        <label for="bud_discuss">Обсудим после оценки</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="field">
-                <label>Желаемые сроки запуска</label>
-                <div class="check-group">
-                    <div class="check-item">
-                        <input type="radio" id="time_asap" name="timeline" value="asap">
-                        <label for="time_asap">Как можно скорее</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="radio" id="time_1m" name="timeline" value="1month">
-                        <label for="time_1m">1 месяц</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="radio" id="time_2m" name="timeline" value="2-3months">
-                        <label for="time_2m">2-3 месяца</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="radio" id="time_flex" name="timeline" value="flexible">
-                        <label for="time_flex">Без жёстких сроков</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="field">
-                <label>Есть ли жёсткий дедлайн? <span class="optional">если да — укажите дату и причину</span></label>
-                <input type="text" name="deadline" placeholder="Например: 1 сентября — к началу сезона">
-            </div>
-
-            <div class="field">
-                <label>Удобная форма оплаты</label>
-                <div class="check-group">
-                    <div class="check-item">
-                        <input type="radio" id="pay_stages" name="payment" value="stages">
-                        <label for="pay_stages">Поэтапно (50/25/25)</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="radio" id="pay_monthly" name="payment" value="monthly">
-                        <label for="pay_monthly">Ежемесячно</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="radio" id="pay_full" name="payment" value="full">
-                        <label for="pay_full">100% предоплата</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="radio" id="pay_discuss" name="payment" value="discuss">
-                        <label for="pay_discuss">Обсудим</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="field">
-                <label>Нужна ли ежемесячная поддержка после запуска?</label>
-                <div class="check-group">
-                    <div class="check-item">
-                        <input type="radio" id="sup_yes" name="support" value="yes">
-                        <label for="sup_yes">Да</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="radio" id="sup_maybe" name="support" value="maybe">
-                        <label for="sup_maybe">Возможно</label>
-                    </div>
-                    <div class="check-item">
-                        <input type="radio" id="sup_no" name="support" value="no">
-                        <label for="sup_no">Нет, справимся сами</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="field">
-                <label>Дополнительные комментарии <span class="optional">необязательно</span></label>
-                <textarea name="comments" placeholder="Что ещё важно учесть? Любые пожелания или вопросы..."></textarea>
-            </div>
-
-            <div class="nav-buttons">
-                <button class="btn btn-secondary" onclick="prevStep()">Назад</button>
-                <button class="btn btn-success" onclick="showResults()">Сформировать сводку</button>
-            </div>
+        <div class="bf-field">
+          <label>Что не устраивает в текущем сайте?</label>
+          <div class="bf-opts">
+            <div class="bf-opt"><input type="checkbox" name="problems" id="bf_pr1" value="Устаревший дизайн"><label for="bf_pr1">Устаревший дизайн</label></div>
+            <div class="bf-opt"><input type="checkbox" name="problems" id="bf_pr2" value="Не адаптивный"><label for="bf_pr2">Не адаптивный</label></div>
+            <div class="bf-opt"><input type="checkbox" name="problems" id="bf_pr3" value="Медленный"><label for="bf_pr3">Медленный</label></div>
+            <div class="bf-opt"><input type="checkbox" name="problems" id="bf_pr4" value="Плохо в поиске"><label for="bf_pr4">Плохо в поиске</label></div>
+            <div class="bf-opt"><input type="checkbox" name="problems" id="bf_pr5" value="Сложно редактировать"><label for="bf_pr5">Сложно редактировать</label></div>
+            <div class="bf-opt"><input type="checkbox" name="problems" id="bf_pr6" value="Мало заявок"><label for="bf_pr6">Мало заявок</label></div>
+            <div class="bf-opt"><input type="checkbox" name="problems" id="bf_pr7" value="Сайта нет"><label for="bf_pr7">Сайта нет</label></div>
+          </div>
         </div>
+      </div>
+      <div class="bf-nav">
+        <button type="button" class="bf-btn bf-btn-sec bf-prev">Назад</button>
+        <button type="button" class="bf-btn bf-btn-pri bf-next">Далее</button>
+      </div>
+    </section>
 
-        <div class="brief-section" id="results">
-            <div class="section-header">
-                <div class="num">Итоги</div>
-                <h2>Сводка по брифу</h2>
-                <p>Проверьте данные и отправьте нам</p>
-            </div>
-
-            <div id="resultsContent"></div>
-
-            <div id="warningsBlock" class="warnings"></div>
-
-            <div class="nav-buttons">
-                <button class="btn btn-secondary" onclick="goToStep(0)">Редактировать</button>
-                <button class="btn btn-primary" onclick="printBrief()">Распечатать / PDF</button>
-            </div>
+    <!-- Step 2: Аудитория -->
+    <section class="bf-step" data-step="2">
+      <div class="bf-step-header">
+        <div class="bf-step-num">Шаг 3 из 8</div>
+        <h2 class="bf-step-title">Целевая аудитория</h2>
+        <p class="bf-step-desc">Кто ваши клиенты? Это поможет нам продумать UX</p>
+      </div>
+      <div class="bf-card">
+        <div class="bf-field">
+          <label>Тип клиентов <span class="req">*</span></label>
+          <div class="bf-opts">
+            <div class="bf-opt"><input type="radio" name="client_type" id="bf_ct1" value="B2C (физлица)" required><label for="bf_ct1">B2C (физлица)</label></div>
+            <div class="bf-opt"><input type="radio" name="client_type" id="bf_ct2" value="B2B (компании)"><label for="bf_ct2">B2B (компании)</label></div>
+            <div class="bf-opt"><input type="radio" name="client_type" id="bf_ct3" value="Оба типа"><label for="bf_ct3">Оба типа</label></div>
+          </div>
+          <div class="bf-err">Выберите тип клиентов</div>
         </div>
+        <div class="bf-field">
+          <label>Возраст аудитории</label>
+          <div class="bf-opts">
+            <div class="bf-opt"><input type="checkbox" name="age" id="bf_age1" value="18-25"><label for="bf_age1">18–25</label></div>
+            <div class="bf-opt"><input type="checkbox" name="age" id="bf_age2" value="25-35"><label for="bf_age2">25–35</label></div>
+            <div class="bf-opt"><input type="checkbox" name="age" id="bf_age3" value="35-50"><label for="bf_age3">35–50</label></div>
+            <div class="bf-opt"><input type="checkbox" name="age" id="bf_age4" value="50+"><label for="bf_age4">50+</label></div>
+          </div>
+        </div>
+        <div class="bf-field">
+          <label for="bf_income">Уровень дохода</label>
+          <select class="bf-select" id="bf_income" name="income">
+            <option value="">Выберите...</option>
+            <option>Эконом-сегмент</option>
+            <option>Средний</option>
+            <option>Выше среднего</option>
+            <option>Премиум</option>
+            <option>Смешанный</option>
+          </select>
+        </div>
+        <div class="bf-field">
+          <label>Откуда приходят клиенты?</label>
+          <div class="bf-opts">
+            <div class="bf-opt"><input type="checkbox" name="source" id="bf_src1" value="Поиск (Яндекс/Google)"><label for="bf_src1">Поиск</label></div>
+            <div class="bf-opt"><input type="checkbox" name="source" id="bf_src2" value="Соцсети"><label for="bf_src2">Соцсети</label></div>
+            <div class="bf-opt"><input type="checkbox" name="source" id="bf_src3" value="Реклама"><label for="bf_src3">Реклама</label></div>
+            <div class="bf-opt"><input type="checkbox" name="source" id="bf_src4" value="Сарафанное радио"><label for="bf_src4">Сарафанное радио</label></div>
+            <div class="bf-opt"><input type="checkbox" name="source" id="bf_src5" value="Офлайн"><label for="bf_src5">Офлайн</label></div>
+            <div class="bf-opt"><input type="checkbox" name="source" id="bf_src6" value="Маркетплейсы"><label for="bf_src6">Маркетплейсы</label></div>
+          </div>
+        </div>
+        <div class="bf-field">
+          <label>С каких устройств заходят?</label>
+          <div class="bf-opts">
+            <div class="bf-opt"><input type="radio" name="device" id="bf_dev1" value="В основном телефон"><label for="bf_dev1">Телефон</label></div>
+            <div class="bf-opt"><input type="radio" name="device" id="bf_dev2" value="В основном десктоп"><label for="bf_dev2">Десктоп</label></div>
+            <div class="bf-opt"><input type="radio" name="device" id="bf_dev3" value="Примерно поровну"><label for="bf_dev3">Поровну</label></div>
+            <div class="bf-opt"><input type="radio" name="device" id="bf_dev4" value="Не знаю"><label for="bf_dev4">Не знаю</label></div>
+          </div>
+        </div>
+        <div class="bf-field">
+          <label for="bf_pains">Какие боли/возражения у клиентов?</label>
+          <textarea class="bf-textarea" id="bf_pains" name="pains" placeholder="Что останавливает клиентов от покупки или заявки..."></textarea>
+        </div>
+      </div>
+      <div class="bf-nav">
+        <button type="button" class="bf-btn bf-btn-sec bf-prev">Назад</button>
+        <button type="button" class="bf-btn bf-btn-pri bf-next">Далее</button>
+      </div>
+    </section>
 
-    </main>
+    <!-- Step 3: Цели -->
+    <section class="bf-step" data-step="3">
+      <div class="bf-step-header">
+        <div class="bf-step-num">Шаг 4 из 8</div>
+        <h2 class="bf-step-title">Цели и задачи</h2>
+        <p class="bf-step-desc">Что вы хотите получить от нового сайта?</p>
+      </div>
+      <div class="bf-card">
+        <div class="bf-field">
+          <label>Главная цель сайта <span class="req">*</span></label>
+          <div class="bf-opts">
+            <div class="bf-opt"><input type="radio" name="main_goal" id="bf_mg1" value="Сбор заявок" required><label for="bf_mg1">Сбор заявок</label></div>
+            <div class="bf-opt"><input type="radio" name="main_goal" id="bf_mg2" value="Онлайн-продажи"><label for="bf_mg2">Онлайн-продажи</label></div>
+            <div class="bf-opt"><input type="radio" name="main_goal" id="bf_mg3" value="Имидж / представительство"><label for="bf_mg3">Имидж</label></div>
+            <div class="bf-opt"><input type="radio" name="main_goal" id="bf_mg4" value="Информирование"><label for="bf_mg4">Информирование</label></div>
+          </div>
+          <div class="bf-err">Выберите главную цель</div>
+        </div>
+        <div class="bf-field">
+          <label>Целевое действие пользователя <span class="req">*</span></label>
+          <div class="bf-opts">
+            <div class="bf-opt"><input type="checkbox" name="action" id="bf_act1" value="Оставить заявку"><label for="bf_act1">Оставить заявку</label></div>
+            <div class="bf-opt"><input type="checkbox" name="action" id="bf_act2" value="Позвонить"><label for="bf_act2">Позвонить</label></div>
+            <div class="bf-opt"><input type="checkbox" name="action" id="bf_act3" value="Купить онлайн"><label for="bf_act3">Купить онлайн</label></div>
+            <div class="bf-opt"><input type="checkbox" name="action" id="bf_act4" value="Зарегистрироваться"><label for="bf_act4">Зарегистрироваться</label></div>
+            <div class="bf-opt"><input type="checkbox" name="action" id="bf_act5" value="Написать в чат"><label for="bf_act5">Написать в чат</label></div>
+            <div class="bf-opt"><input type="checkbox" name="action" id="bf_act6" value="Скачать материал"><label for="bf_act6">Скачать материал</label></div>
+          </div>
+          <div class="bf-err">Выберите хотя бы одно действие</div>
+        </div>
+        <div class="bf-row">
+          <div class="bf-field">
+            <label for="bf_leads">Сколько заявок/продаж в месяц хотите?</label>
+            <input class="bf-input" type="text" id="bf_leads" name="target_leads" placeholder="Например: 50 заявок">
+          </div>
+          <div class="bf-field">
+            <label for="bf_check">Средний чек / стоимость услуги</label>
+            <input class="bf-input" type="text" id="bf_check" name="avg_check" placeholder="Например: 15 000 руб.">
+          </div>
+        </div>
+        <div class="bf-field">
+          <label>Планируете продвижение?</label>
+          <div class="bf-opts">
+            <div class="bf-opt"><input type="checkbox" name="promo" id="bf_pm1" value="SEO"><label for="bf_pm1">SEO</label></div>
+            <div class="bf-opt"><input type="checkbox" name="promo" id="bf_pm2" value="Яндекс.Директ"><label for="bf_pm2">Яндекс.Директ</label></div>
+            <div class="bf-opt"><input type="checkbox" name="promo" id="bf_pm3" value="Соцсети / SMM"><label for="bf_pm3">Соцсети / SMM</label></div>
+            <div class="bf-opt"><input type="checkbox" name="promo" id="bf_pm4" value="Пока не планирую"><label for="bf_pm4">Пока не планирую</label></div>
+          </div>
+        </div>
+      </div>
+      <div class="bf-nav">
+        <button type="button" class="bf-btn bf-btn-sec bf-prev">Назад</button>
+        <button type="button" class="bf-btn bf-btn-pri bf-next">Далее</button>
+      </div>
+    </section>
 
-    <script>
-        let currentStep = 0;
-        const totalSteps = 8;
+    <!-- Step 4: Функционал -->
+    <section class="bf-step" data-step="4">
+      <div class="bf-step-header">
+        <div class="bf-step-num">Шаг 5 из 8</div>
+        <h2 class="bf-step-title">Функциональность</h2>
+        <p class="bf-step-desc">Какой тип проекта и какие функции нужны</p>
+      </div>
+      <div class="bf-card">
+        <div class="bf-field">
+          <label>Тип проекта <span class="req">*</span></label>
+          <div class="bf-opts">
+            <div class="bf-opt"><input type="radio" name="site_type" id="bf_st1" value="Лендинг" required><label for="bf_st1">Лендинг</label></div>
+            <div class="bf-opt"><input type="radio" name="site_type" id="bf_st2" value="Корпоративный сайт"><label for="bf_st2">Корпоративный сайт</label></div>
+            <div class="bf-opt"><input type="radio" name="site_type" id="bf_st3" value="Интернет-магазин"><label for="bf_st3">Интернет-магазин</label></div>
+            <div class="bf-opt"><input type="radio" name="site_type" id="bf_st4" value="Портал / Сервис"><label for="bf_st4">Портал / Сервис</label></div>
+            <div class="bf-opt"><input type="radio" name="site_type" id="bf_st5" value="Мобильное приложение"><label for="bf_st5">Моб. приложение</label></div>
+            <div class="bf-opt"><input type="radio" name="site_type" id="bf_st6" value="Telegram-бот"><label for="bf_st6">Telegram-бот</label></div>
+          </div>
+          <div class="bf-err">Выберите тип проекта</div>
+        </div>
+        <div class="bf-field">
+          <label>Какие разделы нужны?</label>
+          <div class="bf-opts">
+            <div class="bf-opt"><input type="checkbox" name="sections" id="bf_sec1" value="О компании"><label for="bf_sec1">О компании</label></div>
+            <div class="bf-opt"><input type="checkbox" name="sections" id="bf_sec2" value="Услуги / Продукция"><label for="bf_sec2">Услуги</label></div>
+            <div class="bf-opt"><input type="checkbox" name="sections" id="bf_sec3" value="Каталог"><label for="bf_sec3">Каталог</label></div>
+            <div class="bf-opt"><input type="checkbox" name="sections" id="bf_sec4" value="Портфолио / Кейсы"><label for="bf_sec4">Портфолио</label></div>
+            <div class="bf-opt"><input type="checkbox" name="sections" id="bf_sec5" value="Блог / Новости"><label for="bf_sec5">Блог</label></div>
+            <div class="bf-opt"><input type="checkbox" name="sections" id="bf_sec6" value="Контакты"><label for="bf_sec6">Контакты</label></div>
+            <div class="bf-opt"><input type="checkbox" name="sections" id="bf_sec7" value="FAQ"><label for="bf_sec7">FAQ</label></div>
+            <div class="bf-opt"><input type="checkbox" name="sections" id="bf_sec8" value="Отзывы"><label for="bf_sec8">Отзывы</label></div>
+          </div>
+        </div>
+        <div class="bf-field">
+          <label>Нужные функции</label>
+          <div class="bf-opts">
+            <div class="bf-opt"><input type="checkbox" name="features" id="bf_ft1" value="Корзина / оплата"><label for="bf_ft1">Корзина / оплата</label></div>
+            <div class="bf-opt"><input type="checkbox" name="features" id="bf_ft2" value="Личный кабинет"><label for="bf_ft2">Личный кабинет</label></div>
+            <div class="bf-opt"><input type="checkbox" name="features" id="bf_ft3" value="Калькулятор"><label for="bf_ft3">Калькулятор</label></div>
+            <div class="bf-opt"><input type="checkbox" name="features" id="bf_ft4" value="Чат-бот / AI-ассистент"><label for="bf_ft4">Чат-бот / AI</label></div>
+            <div class="bf-opt"><input type="checkbox" name="features" id="bf_ft5" value="Фильтры / поиск"><label for="bf_ft5">Фильтры / поиск</label></div>
+            <div class="bf-opt"><input type="checkbox" name="features" id="bf_ft6" value="Карта"><label for="bf_ft6">Карта</label></div>
+            <div class="bf-opt"><input type="checkbox" name="features" id="bf_ft7" value="Мультиязычность"><label for="bf_ft7">Мультиязычность</label></div>
+            <div class="bf-opt"><input type="checkbox" name="features" id="bf_ft8" value="Бронирование / запись"><label for="bf_ft8">Бронирование</label></div>
+          </div>
+        </div>
+        <div class="bf-field">
+          <label>Интеграции</label>
+          <div class="bf-opts">
+            <div class="bf-opt"><input type="checkbox" name="integrations" id="bf_int1" value="CRM (Битрикс24/AmoCRM)"><label for="bf_int1">CRM</label></div>
+            <div class="bf-opt"><input type="checkbox" name="integrations" id="bf_int2" value="1С Бухгалтерия"><label for="bf_int2">1С</label></div>
+            <div class="bf-opt"><input type="checkbox" name="integrations" id="bf_int3" value="Онлайн-оплата"><label for="bf_int3">Онлайн-оплата</label></div>
+            <div class="bf-opt"><input type="checkbox" name="integrations" id="bf_int4" value="Доставка (СДЭК/ПЭК)"><label for="bf_int4">Доставка</label></div>
+            <div class="bf-opt"><input type="checkbox" name="integrations" id="bf_int5" value="Телефония"><label for="bf_int5">Телефония</label></div>
+            <div class="bf-opt"><input type="checkbox" name="integrations" id="bf_int6" value="Аналитика (Метрика)"><label for="bf_int6">Аналитика</label></div>
+            <div class="bf-opt"><input type="checkbox" name="integrations" id="bf_int7" value="Email-рассылки"><label for="bf_int7">Email-рассылки</label></div>
+          </div>
+        </div>
+        <div class="bf-row">
+          <div class="bf-field">
+            <label for="bf_catsize">Количество товаров/услуг</label>
+            <select class="bf-select" id="bf_catsize" name="catalog_size">
+              <option value="">Выберите...</option>
+              <option>Нет каталога</option>
+              <option>До 50</option>
+              <option>50–500</option>
+              <option>500–5000</option>
+              <option>Более 5000</option>
+            </select>
+          </div>
+          <div class="bf-field">
+            <label>Предпочтения по CMS</label>
+            <div class="bf-opts">
+              <div class="bf-opt"><input type="radio" name="cms" id="bf_cms1" value="1С-Битрикс"><label for="bf_cms1">1С-Битрикс</label></div>
+              <div class="bf-opt"><input type="radio" name="cms" id="bf_cms2" value="Tilda"><label for="bf_cms2">Tilda</label></div>
+              <div class="bf-opt"><input type="radio" name="cms" id="bf_cms3" value="WordPress"><label for="bf_cms3">WordPress</label></div>
+              <div class="bf-opt"><input type="radio" name="cms" id="bf_cms4" value="Кастомная разработка"><label for="bf_cms4">Кастом</label></div>
+              <div class="bf-opt"><input type="radio" name="cms" id="bf_cms5" value="На ваше усмотрение"><label for="bf_cms5">На ваше усмотрение</label></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bf-nav">
+        <button type="button" class="bf-btn bf-btn-sec bf-prev">Назад</button>
+        <button type="button" class="bf-btn bf-btn-pri bf-next">Далее</button>
+      </div>
+    </section>
 
-        function goToStep(n) {
-            document.querySelectorAll('.brief-section').forEach(s => s.classList.remove('active'));
-            document.getElementById('step' + n).classList.add('active');
-            currentStep = n;
-            updateNav();
-            window.scrollTo({ top: 200, behavior: 'smooth' });
-        }
+    <!-- Step 5: Дизайн -->
+    <section class="bf-step" data-step="5">
+      <div class="bf-step-header">
+        <div class="bf-step-num">Шаг 6 из 8</div>
+        <h2 class="bf-step-title">Дизайн и визуал</h2>
+        <p class="bf-step-desc">Какой стиль вам близок и есть ли примеры</p>
+      </div>
+      <div class="bf-card">
+        <div class="bf-field">
+          <label>Есть ли фирменный стиль/брендбук?</label>
+          <div class="bf-opts">
+            <div class="bf-opt"><input type="radio" name="brand" id="bf_br1" value="Да, полный брендбук"><label for="bf_br1">Полный брендбук</label></div>
+            <div class="bf-opt"><input type="radio" name="brand" id="bf_br2" value="Только логотип и цвета"><label for="bf_br2">Лого и цвета</label></div>
+            <div class="bf-opt"><input type="radio" name="brand" id="bf_br3" value="Нет, нужно разработать"><label for="bf_br3">Нужно разработать</label></div>
+          </div>
+        </div>
+        <div class="bf-field">
+          <label>Какой стиль вам ближе? <span class="req">*</span></label>
+          <div class="bf-opts">
+            <div class="bf-opt"><input type="radio" name="style" id="bf_sty1" value="Минимализм" required><label for="bf_sty1">Минимализм</label></div>
+            <div class="bf-opt"><input type="radio" name="style" id="bf_sty2" value="Деловой / строгий"><label for="bf_sty2">Деловой</label></div>
+            <div class="bf-opt"><input type="radio" name="style" id="bf_sty3" value="Современный / яркий"><label for="bf_sty3">Современный</label></div>
+            <div class="bf-opt"><input type="radio" name="style" id="bf_sty4" value="Премиальный"><label for="bf_sty4">Премиальный</label></div>
+            <div class="bf-opt"><input type="radio" name="style" id="bf_sty5" value="Креативный / нестандартный"><label for="bf_sty5">Креативный</label></div>
+          </div>
+          <div class="bf-err">Выберите стиль</div>
+        </div>
+        <div class="bf-field">
+          <label>Сайты, которые нравятся (2–5 примеров)</label>
+          <div class="bf-url-list" id="bfLikeUrls">
+            <div class="bf-url-row">
+              <input class="bf-input" type="url" name="likeUrls" placeholder="https://example.com">
+              <button type="button" class="bf-url-add" onclick="bfAddUrl(this)">+</button>
+            </div>
+          </div>
+        </div>
+        <div class="bf-field">
+          <label for="bf_likewhy">Что именно нравится в этих сайтах?</label>
+          <textarea class="bf-textarea" id="bf_likewhy" name="like_why" placeholder="Дизайн, анимации, структура, подача контента..."></textarea>
+        </div>
+        <div class="bf-field">
+          <label>Сайты, которые НЕ нравятся</label>
+          <div class="bf-url-list" id="bfDislikeUrls">
+            <div class="bf-url-row">
+              <input class="bf-input" type="url" name="dislikeUrls" placeholder="https://example.com">
+              <button type="button" class="bf-url-add" onclick="bfAddUrl(this)">+</button>
+            </div>
+          </div>
+        </div>
+        <div class="bf-field">
+          <label for="bf_dislikewhy">Что не нравится?</label>
+          <textarea class="bf-textarea" id="bf_dislikewhy" name="dislike_why" placeholder="Что раздражает или отталкивает..."></textarea>
+        </div>
+      </div>
+      <div class="bf-nav">
+        <button type="button" class="bf-btn bf-btn-sec bf-prev">Назад</button>
+        <button type="button" class="bf-btn bf-btn-pri bf-next">Далее</button>
+      </div>
+    </section>
 
-        function nextStep() {
-            if (currentStep < totalSteps - 1) {
-                // Validate required fields on step 0 (contacts)
-                if (currentStep === 0) {
-                    var name = document.querySelector('[name="name"]');
-                    var phone = document.querySelector('[name="phone"]');
-                    if (name && !name.value.trim()) { name.focus(); return; }
-                    if (phone && !phone.value.trim()) { phone.focus(); return; }
-                }
-                goToStep(currentStep + 1);
-                markCompleted(currentStep - 1);
+    <!-- Step 6: Контент -->
+    <section class="bf-step" data-step="6">
+      <div class="bf-step-header">
+        <div class="bf-step-num">Шаг 7 из 8</div>
+        <h2 class="bf-step-title">Контент</h2>
+        <p class="bf-step-desc">Тексты, фото, видео — что уже есть и что нужно</p>
+      </div>
+      <div class="bf-card">
+        <div class="bf-field">
+          <label>Кто будет готовить тексты? <span class="req">*</span></label>
+          <div class="bf-opts">
+            <div class="bf-opt"><input type="radio" name="texts" id="bf_tx1" value="Мы сами предоставим" required><label for="bf_tx1">Мы сами</label></div>
+            <div class="bf-opt"><input type="radio" name="texts" id="bf_tx2" value="Поручим студии"><label for="bf_tx2">Студия напишет</label></div>
+            <div class="bf-opt"><input type="radio" name="texts" id="bf_tx3" value="Совместно"><label for="bf_tx3">Совместно</label></div>
+          </div>
+          <div class="bf-err">Выберите вариант</div>
+        </div>
+        <div class="bf-field">
+          <label>Есть ли готовые материалы?</label>
+          <div class="bf-opts">
+            <div class="bf-opt"><input type="checkbox" name="materials" id="bf_mat1" value="Фото продукции"><label for="bf_mat1">Фото продукции</label></div>
+            <div class="bf-opt"><input type="checkbox" name="materials" id="bf_mat2" value="Фото команды"><label for="bf_mat2">Фото команды</label></div>
+            <div class="bf-opt"><input type="checkbox" name="materials" id="bf_mat3" value="Видео"><label for="bf_mat3">Видео</label></div>
+            <div class="bf-opt"><input type="checkbox" name="materials" id="bf_mat4" value="Готовые тексты"><label for="bf_mat4">Готовые тексты</label></div>
+            <div class="bf-opt"><input type="checkbox" name="materials" id="bf_mat5" value="Данные каталога (Excel/1С)"><label for="bf_mat5">Каталог (Excel/1С)</label></div>
+            <div class="bf-opt"><input type="checkbox" name="materials" id="bf_mat6" value="Ничего нет"><label for="bf_mat6">Ничего нет</label></div>
+          </div>
+        </div>
+        <div class="bf-field">
+          <label>Кто будет обновлять сайт?</label>
+          <div class="bf-opts">
+            <div class="bf-opt"><input type="radio" name="updater" id="bf_upd1" value="Наш сотрудник"><label for="bf_upd1">Наш сотрудник</label></div>
+            <div class="bf-opt"><input type="radio" name="updater" id="bf_upd2" value="Студия (поддержка)"><label for="bf_upd2">Студия</label></div>
+            <div class="bf-opt"><input type="radio" name="updater" id="bf_upd3" value="Совместно"><label for="bf_upd3">Совместно</label></div>
+          </div>
+        </div>
+        <div class="bf-field">
+          <label>Нужна ли фото/видеосъёмка?</label>
+          <div class="bf-opts">
+            <div class="bf-opt"><input type="radio" name="photoshoot" id="bf_ph1" value="Да, нужна"><label for="bf_ph1">Да, нужна</label></div>
+            <div class="bf-opt"><input type="radio" name="photoshoot" id="bf_ph2" value="Нет, есть свои"><label for="bf_ph2">Есть свои</label></div>
+            <div class="bf-opt"><input type="radio" name="photoshoot" id="bf_ph3" value="Стоковые фото"><label for="bf_ph3">Стоковые фото</label></div>
+          </div>
+        </div>
+      </div>
+      <div class="bf-nav">
+        <button type="button" class="bf-btn bf-btn-sec bf-prev">Назад</button>
+        <button type="button" class="bf-btn bf-btn-pri bf-next">Далее</button>
+      </div>
+    </section>
+
+    <!-- Step 7: Бюджет -->
+    <section class="bf-step" data-step="7">
+      <div class="bf-step-header">
+        <div class="bf-step-num">Шаг 8 из 8</div>
+        <h2 class="bf-step-title">Бюджет и сроки</h2>
+        <p class="bf-step-desc">Финансовые рамки и желаемые сроки запуска</p>
+      </div>
+      <div class="bf-card">
+        <div class="bf-field">
+          <label>Бюджет на разработку <span class="req">*</span></label>
+          <div class="bf-opts">
+            <div class="bf-opt"><input type="radio" name="budget" id="bf_bud1" value="50–150 тыс. руб." required><label for="bf_bud1">50–150 тыс. руб.</label></div>
+            <div class="bf-opt"><input type="radio" name="budget" id="bf_bud2" value="150–500 тыс. руб."><label for="bf_bud2">150–500 тыс. руб.</label></div>
+            <div class="bf-opt"><input type="radio" name="budget" id="bf_bud3" value="500 тыс. — 1.5 млн руб."><label for="bf_bud3">500 тыс. — 1.5 млн</label></div>
+            <div class="bf-opt"><input type="radio" name="budget" id="bf_bud4" value="Более 1.5 млн руб."><label for="bf_bud4">Более 1.5 млн руб.</label></div>
+            <div class="bf-opt"><input type="radio" name="budget" id="bf_bud5" value="Обсудим после оценки"><label for="bf_bud5">Обсудим</label></div>
+          </div>
+          <div class="bf-err">Укажите примерный бюджет</div>
+        </div>
+        <div class="bf-field">
+          <label>Желаемые сроки запуска</label>
+          <div class="bf-opts">
+            <div class="bf-opt"><input type="radio" name="timeline" id="bf_tl1" value="Как можно скорее"><label for="bf_tl1">Скорее</label></div>
+            <div class="bf-opt"><input type="radio" name="timeline" id="bf_tl2" value="1 месяц"><label for="bf_tl2">1 месяц</label></div>
+            <div class="bf-opt"><input type="radio" name="timeline" id="bf_tl3" value="2–3 месяца"><label for="bf_tl3">2–3 месяца</label></div>
+            <div class="bf-opt"><input type="radio" name="timeline" id="bf_tl4" value="Без жёстких сроков"><label for="bf_tl4">Без сроков</label></div>
+          </div>
+        </div>
+        <div class="bf-field">
+          <label for="bf_deadline">Есть ли жёсткий дедлайн?</label>
+          <input class="bf-input" type="text" id="bf_deadline" name="deadline" placeholder="Например: 1 сентября — к началу сезона">
+        </div>
+        <div class="bf-field">
+          <label>Удобная форма оплаты</label>
+          <div class="bf-opts">
+            <div class="bf-opt"><input type="radio" name="payment" id="bf_pay1" value="Поэтапно (50/25/25)"><label for="bf_pay1">Поэтапно</label></div>
+            <div class="bf-opt"><input type="radio" name="payment" id="bf_pay2" value="Ежемесячно"><label for="bf_pay2">Ежемесячно</label></div>
+            <div class="bf-opt"><input type="radio" name="payment" id="bf_pay3" value="100% предоплата"><label for="bf_pay3">100% предоплата</label></div>
+            <div class="bf-opt"><input type="radio" name="payment" id="bf_pay4" value="Обсудим"><label for="bf_pay4">Обсудим</label></div>
+          </div>
+        </div>
+        <div class="bf-field">
+          <label>Нужна ли ежемесячная поддержка?</label>
+          <div class="bf-opts">
+            <div class="bf-opt"><input type="radio" name="support" id="bf_sup1" value="Да"><label for="bf_sup1">Да</label></div>
+            <div class="bf-opt"><input type="radio" name="support" id="bf_sup2" value="Возможно"><label for="bf_sup2">Возможно</label></div>
+            <div class="bf-opt"><input type="radio" name="support" id="bf_sup3" value="Нет, справимся"><label for="bf_sup3">Нет</label></div>
+          </div>
+        </div>
+        <div class="bf-field">
+          <label for="bf_comments">Дополнительные комментарии</label>
+          <textarea class="bf-textarea" id="bf_comments" name="comments" placeholder="Что ещё важно учесть при разработке..."></textarea>
+        </div>
+      </div>
+      <div class="bf-nav">
+        <button type="button" class="bf-btn bf-btn-sec bf-prev">Назад</button>
+        <button type="button" class="bf-btn bf-btn-pri bf-next">К сводке</button>
+      </div>
+    </section>
+
+    <!-- Step 8: Сводка -->
+    <section class="bf-step" data-step="8">
+      <div class="bf-step-header">
+        <div class="bf-step-num">Проверьте данные</div>
+        <h2 class="bf-step-title">Сводка брифа</h2>
+        <p class="bf-step-desc">Убедитесь, что всё верно, и отправьте</p>
+      </div>
+      <div class="bf-card" id="bfSummary"></div>
+
+      <div class="bf-consent">
+        <input type="checkbox" id="bfConsent" required>
+        <span>Я соглашаюсь на обработку персональных данных в соответствии с <a href="/privacy.html" target="_blank">политикой конфиденциальности</a></span>
+      </div>
+
+      <div class="bf-submit-err" id="bfSubmitErr"></div>
+
+      <div class="bf-nav">
+        <button type="button" class="bf-btn bf-btn-sec bf-prev">Назад</button>
+        <button type="submit" class="bf-btn bf-btn-pri" id="bfSubmitBtn">Отправить бриф</button>
+      </div>
+    </section>
+
+  </form>
+
+  <!-- Success screen (inline, no redirect) -->
+  <div class="bf-success" id="bfSuccess">
+    <div class="bf-success-icon">&#10003;</div>
+    <h2>Бриф отправлен!</h2>
+    <p>Мы получили ваш бриф и свяжемся с вами в ближайшее время для обсуждения деталей.</p>
+    <a href="/">Вернуться на сайт</a>
+  </div>
+
+</main>
+
+<!-- Footer from main site -->
+<footer>
+  <p>Devorra &copy; 2025-2026 &middot; Эпоха разработки</p>
+  <p class="footer-privacy"><a href="/privacy.html">Политика конфиденциальности</a></p>
+  <p class="footer-sources">ИП Аландаренко Н.В. &middot; ОГРНИП 323237500263053</p>
+</footer>
+
+<script>
+(function() {
+  'use strict';
+
+  var STORAGE_KEY = 'devorra_full_brief';
+  var TOTAL_STEPS = 9; // 0..8
+  var currentStep = 0;
+
+  var form = document.getElementById('bfForm');
+  var steps = form.querySelectorAll('.bf-step');
+  var dots = document.querySelectorAll('.bf-dot');
+  var progressBar = document.getElementById('bfProgressBar');
+  var saveIndicator = document.getElementById('bfSaveIndicator');
+  var submitBtn = document.getElementById('bfSubmitBtn');
+  var submitError = document.getElementById('bfSubmitErr');
+
+  // Record load time for bot detection
+  document.getElementById('bfLoadTime').value = Date.now();
+
+  // ── localStorage ──────────────────────────────────
+
+  function saveToStorage() {
+    var data = collectAllFields();
+    data._step = currentStep;
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch(e) {}
+    showSave();
+  }
+
+  function loadFromStorage() {
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      var data = JSON.parse(raw);
+
+      if (typeof data._step === 'number' && data._step >= 0 && data._step < TOTAL_STEPS) {
+        currentStep = data._step;
+      }
+
+      var keys = Object.keys(data);
+      for (var k = 0; k < keys.length; k++) {
+        var key = keys[k];
+        if (key.charAt(0) === '_') continue;
+        var value = data[key];
+
+        if (Array.isArray(value)) {
+          var inputs = form.querySelectorAll('[name="' + key + '"]');
+          if (inputs.length && inputs[0].type === 'checkbox') {
+            for (var i = 0; i < inputs.length; i++) {
+              inputs[i].checked = value.indexOf(inputs[i].value) !== -1;
             }
-        }
-
-        function prevStep() {
-            if (currentStep > 0) goToStep(currentStep - 1);
-        }
-
-        function updateNav() {
-            const btns = document.querySelectorAll('.step-btn');
-            btns.forEach((btn, i) => {
-                btn.classList.remove('active');
-                if (i === currentStep) btn.classList.add('active');
-            });
-            updateProgress();
-        }
-
-        function markCompleted(stepIndex) {
-            const btns = document.querySelectorAll('.step-btn');
-            if (btns[stepIndex]) btns[stepIndex].classList.add('completed');
-        }
-
-        function updateProgress() {
-            const filled = countFilledFields();
-            const total = document.querySelectorAll('input:not([type=hidden]), select, textarea').length;
-            const pct = Math.min(Math.round((filled / total) * 100), 100);
-            document.getElementById('progressFill').style.width = pct + '%';
-            document.getElementById('progressText').textContent = pct + '%';
-        }
-
-        function countFilledFields() {
-            let count = 0;
-            document.querySelectorAll('input[type=text], input[type=email], input[type=tel], input[type=url], input[type=number]').forEach(el => {
-                if (el.value.trim()) count++;
-            });
-            document.querySelectorAll('select').forEach(el => {
-                if (el.value) count++;
-            });
-            document.querySelectorAll('textarea').forEach(el => {
-                if (el.value.trim()) count++;
-            });
-            document.querySelectorAll('input[type=radio]:checked, input[type=checkbox]:checked').forEach(() => count++);
-            return count;
-        }
-
-        document.addEventListener('input', updateProgress);
-        document.addEventListener('change', updateProgress);
-
-        function addUrlField(containerId) {
-            const container = document.getElementById(containerId);
-            const row = document.createElement('div');
-            row.className = 'url-row';
-            row.innerHTML = '<input type="url" placeholder="https://...">' +
-                '<button class="btn-remove" onclick="this.parentElement.remove()">&times;</button>';
-            container.appendChild(row);
-        }
-
-        function getVal(name) {
-            const el = document.querySelector(`[name="${name}"]`);
-            if (!el) return '';
-            if (el.type === 'radio') {
-                const checked = document.querySelector(`[name="${name}"]:checked`);
-                return checked ? checked.parentElement.querySelector('label').textContent : '—';
+          } else if (inputs.length && inputs[0].type === 'url') {
+            var list = inputs[0].closest('.bf-url-list');
+            if (list) {
+              while (list.querySelectorAll('.bf-url-row').length < value.length) {
+                bfAddUrl(list.querySelector('.bf-url-add'));
+              }
+              var urlInputs = list.querySelectorAll('input[type="url"]');
+              for (var j = 0; j < value.length; j++) {
+                if (urlInputs[j]) urlInputs[j].value = value[j];
+              }
             }
-            return el.value || '—';
+          }
+        } else {
+          var el = form.querySelector('[name="' + key + '"]');
+          if (!el) continue;
+          if (el.type === 'radio') {
+            var radio = form.querySelector('[name="' + key + '"][value="' + value + '"]');
+            if (radio) radio.checked = true;
+          } else {
+            el.value = value;
+          }
         }
+      }
+    } catch(e) {}
+  }
 
-        function getChecked(name) {
-            const items = document.querySelectorAll(`[name="${name}"]:checked`);
-            if (items.length === 0) return '—';
-            return Array.from(items).map(el => el.parentElement.querySelector('label').textContent).join(', ');
+  var saveTimer2;
+  function showSave() {
+    saveIndicator.classList.add('visible');
+    clearTimeout(saveTimer2);
+    saveTimer2 = setTimeout(function() { saveIndicator.classList.remove('visible'); }, 1500);
+  }
+
+  // ── Field collection ──────────────────────────────
+
+  function collectAllFields() {
+    var data = {};
+    var inputs = form.querySelectorAll('input, textarea, select');
+
+    for (var i = 0; i < inputs.length; i++) {
+      var el = inputs[i];
+      var name = el.name;
+      if (!name || name === 'website' || name === '_loadTime') continue;
+
+      if (el.type === 'checkbox') {
+        if (!data[name]) data[name] = [];
+        if (el.checked) data[name].push(el.value);
+      } else if (el.type === 'radio') {
+        if (el.checked) data[name] = el.value;
+      } else {
+        var existing = form.querySelectorAll('[name="' + name + '"]');
+        if (existing.length > 1 && el.type === 'url') {
+          if (!data[name]) {
+            data[name] = [];
+            for (var j = 0; j < existing.length; j++) {
+              if (existing[j].value.trim()) data[name].push(existing[j].value.trim());
+            }
+          }
+        } else {
+          data[name] = el.value;
         }
+      }
+    }
+    return data;
+  }
 
-        function getUrls(containerId) {
-            const inputs = document.querySelectorAll(`#${containerId} input`);
-            const urls = Array.from(inputs).map(i => i.value.trim()).filter(Boolean);
-            return urls.length ? urls.join(', ') : '—';
+  // ── Navigation ────────────────────────────────────
+
+  function goToStep(n) {
+    if (n < 0 || n >= TOTAL_STEPS) return;
+
+    // Validate when going forward
+    if (n > currentStep && !validateStep(currentStep)) return;
+
+    // Mark completed
+    if (n > currentStep) dots[currentStep].classList.add('completed');
+
+    currentStep = n;
+    saveToStorage();
+
+    // Update UI
+    for (var i = 0; i < steps.length; i++) steps[i].classList.remove('active');
+    for (var j = 0; j < dots.length; j++) dots[j].classList.remove('active');
+    steps[currentStep].classList.add('active');
+    dots[currentStep].classList.add('active');
+
+    // Progress
+    progressBar.style.width = ((currentStep + 1) / TOTAL_STEPS * 100) + '%';
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Build summary on last step
+    if (currentStep === 8) buildSummary();
+
+    // Scroll dot into view
+    dots[currentStep].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+  }
+
+  // ── Validation ────────────────────────────────────
+
+  var stepReqs = {
+    0: ['name', 'company', 'phone', 'email'],
+    1: ['business_desc', 'industry', 'geo'],
+    2: ['client_type'],
+    3: ['main_goal', 'action'],
+    4: ['site_type'],
+    5: ['style'],
+    6: ['texts'],
+    7: ['budget'],
+    8: []
+  };
+
+  function validateStep(stepIndex) {
+    var required = stepReqs[stepIndex] || [];
+    var valid = true;
+
+    // Clear old errors
+    var errFields = steps[stepIndex].querySelectorAll('.bf-field.has-error');
+    for (var i = 0; i < errFields.length; i++) errFields[i].classList.remove('has-error');
+
+    for (var r = 0; r < required.length; r++) {
+      var name = required[r];
+      var els = form.querySelectorAll('[name="' + name + '"]');
+      if (!els.length) continue;
+
+      var first = els[0];
+      var fieldValid = false;
+
+      if (first.type === 'checkbox') {
+        for (var c = 0; c < els.length; c++) { if (els[c].checked) { fieldValid = true; break; } }
+      } else if (first.type === 'radio') {
+        for (var d = 0; d < els.length; d++) { if (els[d].checked) { fieldValid = true; break; } }
+      } else {
+        fieldValid = first.value.trim() !== '';
+        if (fieldValid && first.type === 'email') {
+          fieldValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(first.value.trim());
         }
+      }
 
-        function showResults() {
-            document.querySelectorAll('.brief-section').forEach(s => s.classList.remove('active'));
-            document.getElementById('results').classList.add('active');
-            markCompleted(totalSteps - 1);
+      if (!fieldValid) {
+        valid = false;
+        var field = first.closest('.bf-field');
+        if (field) field.classList.add('has-error');
+      }
+    }
+    return valid;
+  }
 
-            const sections = [
-                { title: 'Контактная информация', rows: [
-                    ['Имя', getVal('name')],
-                    ['Компания', getVal('company')],
-                    ['Должность', getVal('position')],
-                    ['Телефон', getVal('phone')],
-                    ['Email', getVal('email')],
-                    ['Telegram', getVal('telegram')],
-                    ['ЛПР', getVal('decision_maker')],
-                ]},
-                { title: 'О бизнесе', rows: [
-                    ['Описание', getVal('business_desc')],
-                    ['Отрасль', getVal('industry')],
-                    ['Лет на рынке', getVal('years')],
-                    ['География', getChecked('geo')],
-                    ['УТП', getVal('utp')],
-                    ['Конкуренты', getUrls('competitorUrls')],
-                    ['Текущий сайт', getVal('current_site')],
-                    ['Проблемы', getChecked('problems')],
-                ]},
-                { title: 'Целевая аудитория', rows: [
-                    ['Тип клиентов', getChecked('client_type')],
-                    ['Возраст', getChecked('age')],
-                    ['Доход', getVal('income')],
-                    ['Источники трафика', getChecked('source')],
-                    ['Устройства', getChecked('device')],
-                    ['Боли клиентов', getVal('pains')],
-                ]},
-                { title: 'Цели', rows: [
-                    ['Главная цель', getChecked('main_goal')],
-                    ['Целевое действие', getChecked('action')],
-                    ['План заявок', getVal('target_leads')],
-                    ['Средний чек', getVal('avg_check')],
-                    ['Продвижение', getChecked('promo')],
-                ]},
-                { title: 'Функциональность', rows: [
-                    ['Тип сайта', getChecked('site_type')],
-                    ['Разделы', getChecked('sections')],
-                    ['Функции', getChecked('features')],
-                    ['Интеграции', getChecked('integrations')],
-                    ['Размер каталога', getVal('catalog_size')],
-                    ['Платформа / CMS', getChecked('cms')],
-                ]},
-                { title: 'Дизайн', rows: [
-                    ['Фирменный стиль', getChecked('brand')],
-                    ['Стиль дизайна', getChecked('style')],
-                    ['Нравятся', getUrls('likeUrls')],
-                    ['Что нравится', getVal('like_why')],
-                    ['Не нравятся', getUrls('dislikeUrls')],
-                    ['Что не нравится', getVal('dislike_why')],
-                ]},
-                { title: 'Контент', rows: [
-                    ['Тексты', getChecked('texts')],
-                    ['Готовые материалы', getChecked('materials')],
-                    ['Обновление', getChecked('updater')],
-                    ['Фотосъёмка', getChecked('photoshoot')],
-                ]},
-                { title: 'Бюджет и сроки', rows: [
-                    ['Бюджет', getChecked('budget')],
-                    ['Сроки', getChecked('timeline')],
-                    ['Дедлайн', getVal('deadline')],
-                    ['Оплата', getChecked('payment')],
-                    ['Поддержка', getChecked('support')],
-                    ['Комментарии', getVal('comments')],
-                ]},
-            ];
+  // ── Summary ───────────────────────────────────────
 
-            function escH(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML;}
-            let html = '';
-            sections.forEach(sec => {
-                html += `<div class="result-card"><h3>${sec.title}</h3>`;
-                sec.rows.forEach(([label, value]) => {
-                    html += `<div class="result-row"><span class="result-label">${escH(label)}</span><span class="result-value">${escH(value)}</span></div>`;
-                });
-                html += '</div>';
-            });
+  var labels = {
+    name:'Имя', company:'Компания', position:'Должность', phone:'Телефон',
+    email:'Email', telegram:'Telegram', decision_maker:'Решение',
+    business_desc:'Деятельность', industry:'Сфера', years:'На рынке', geo:'География',
+    utp:'УТП', competitorUrls:'Конкуренты', current_site:'Текущий сайт', problems:'Проблемы',
+    client_type:'Клиенты', age:'Возраст', income:'Доход', source:'Источники',
+    device:'Устройства', pains:'Боли',
+    main_goal:'Цель', action:'Целевое действие', target_leads:'Заявок/мес', avg_check:'Средний чек', promo:'Продвижение',
+    site_type:'Тип проекта', sections:'Разделы', features:'Функции', integrations:'Интеграции',
+    catalog_size:'Товаров', cms:'CMS',
+    brand:'Брендбук', style:'Стиль', likeUrls:'Нравятся', like_why:'Почему нравятся',
+    dislikeUrls:'Не нравятся', dislike_why:'Почему не нравятся',
+    texts:'Тексты', materials:'Материалы', updater:'Обновление', photoshoot:'Фотосъёмка',
+    budget:'Бюджет', timeline:'Сроки', deadline:'Дедлайн', payment:'Оплата', support:'Поддержка', comments:'Комментарии'
+  };
 
-            document.getElementById('resultsContent').innerHTML = html;
+  var sectionNames = [
+    'Контактная информация', 'О бизнесе', 'Целевая аудитория', 'Цели и задачи',
+    'Функциональность', 'Дизайн', 'Контент', 'Бюджет и сроки'
+  ];
 
-            let warnings = [];
-            let tips = [];
+  var sectionFields = [
+    ['name','company','position','phone','email','telegram','decision_maker'],
+    ['business_desc','industry','years','geo','utp','competitorUrls','current_site','problems'],
+    ['client_type','age','income','source','device','pains'],
+    ['main_goal','action','target_leads','avg_check','promo'],
+    ['site_type','sections','features','integrations','catalog_size','cms'],
+    ['brand','style','likeUrls','like_why','dislikeUrls','dislike_why'],
+    ['texts','materials','updater','photoshoot'],
+    ['budget','timeline','deadline','payment','support','comments']
+  ];
 
-            if (!getVal('name') || getVal('name') === '—') warnings.push('Не указано имя контактного лица');
-            if (!getVal('phone') || getVal('phone') === '—') warnings.push('Не указан телефон');
-            if (getChecked('main_goal') === '—') warnings.push('Не выбрана главная цель сайта — сложно оценить проект');
-            if (getChecked('action') === '—') warnings.push('Не указано целевое действие пользователя');
-            if (getChecked('budget') === '—') warnings.push('Не указан бюджет — невозможно подобрать решение');
-            if (getChecked('budget') === '50 000 - 150 000 ₽' && getChecked('site_type') === 'Интернет-магазин')
-                warnings.push('Бюджет 50-150K может быть недостаточен для интернет-магазина');
-            if (getChecked('features').includes('Личный кабинет') && getChecked('budget') === '50 000 - 150 000 ₽')
-                warnings.push('Личный кабинет при бюджете до 150K — потребуется компромисс по функционалу');
-            if (getChecked('timeline') === 'Как можно скорее' && getChecked('site_type') === 'Портал / Сервис')
-                warnings.push('Портал/сервис «как можно скорее» — сроки требуют уточнения');
-            if (getChecked('materials') === 'Ничего нет' && getChecked('texts') === 'Мы сами предоставим')
-                warnings.push('Контент не готов, но клиент планирует предоставить сам — уточнить сроки');
+  function buildSummary() {
+    var data = collectAllFields();
+    var container = document.getElementById('bfSummary');
+    var html = '';
 
-            if (getChecked('support') === 'Да') tips.push('Клиент заинтересован в постоянной поддержке — потенциал для долгосрочного контракта');
-            if (getChecked('features').includes('Чат-бот / AI-ассистент')) tips.push('Запрос на AI-интеграцию — предложить расширенное решение');
-            if (getChecked('promo').includes('SEO')) tips.push('Клиент планирует SEO — учесть техтребования при разработке');
+    for (var s = 0; s < sectionFields.length; s++) {
+      var fields = sectionFields[s];
+      var rows = '';
+      for (var f = 0; f < fields.length; f++) {
+        var key = fields[f];
+        var val = data[key];
+        if (!val || (Array.isArray(val) && val.length === 0)) continue;
+        if (Array.isArray(val)) val = val.join(', ');
+        rows += '<div class="bf-summary-row"><span class="bf-summary-lbl">' + (labels[key] || key) + '</span><span class="bf-summary-val">' + escHtml(val) + '</span></div>';
+      }
+      if (rows) {
+        html += '<div class="bf-summary-sec"><h3>' + sectionNames[s] + '</h3>' + rows + '</div>';
+      }
+    }
 
-            let warnHtml = '';
-            warnings.forEach(w => {
-                warnHtml += `<div class="warning-item"><span class="warning-icon">!</span><span>${w}</span></div>`;
-            });
-            tips.forEach(t => {
-                warnHtml += `<div class="tip-item"><span class="tip-icon">+</span><span>${t}</span></div>`;
-            });
+    if (!html) html = '<p style="color:#9ca3af">Данные не заполнены</p>';
+    container.innerHTML = html;
+  }
 
-            document.getElementById('warningsBlock').innerHTML = warnHtml;
+  function escHtml(s) {
+    var d = document.createElement('div');
+    d.textContent = s;
+    return d.innerHTML;
+  }
 
-            window.scrollTo({ top: 200, behavior: 'smooth' });
-        }
+  // ── Submit ────────────────────────────────────────
 
-        function printBrief() {
-            window.print();
-        }
-    </script>
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
 
+    // Honeypot
+    if (form.querySelector('[name="website"]').value) return;
+
+    // Bot timing
+    var loadTime = parseInt(document.getElementById('bfLoadTime').value, 10);
+    if (Date.now() - loadTime < 5000) return;
+
+    // Consent
+    if (!document.getElementById('bfConsent').checked) {
+      submitError.textContent = 'Необходимо согласие на обработку персональных данных';
+      submitError.classList.add('visible');
+      return;
+    }
+
+    submitError.classList.remove('visible');
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<span class="bf-spinner"></span>Отправка...';
+
+    var fields = collectAllFields();
+    fields.brief_type = 'full';
+
+    fetch('/api/send', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ fields: fields })
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      if (data.ok) {
+        try { localStorage.removeItem(STORAGE_KEY); } catch(e) {}
+        form.style.display = 'none';
+        document.querySelector('.bf-steps-nav').style.display = 'none';
+        document.getElementById('bfSuccess').classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        throw new Error(data.error || 'Ошибка отправки');
+      }
+    })
+    .catch(function(err) {
+      submitError.textContent = (err.message || 'Ошибка отправки') + '. Попробуйте снова или напишите @myway_nikita';
+      submitError.classList.add('visible');
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Отправить бриф';
+    });
+  });
+
+  // ── Event listeners ───────────────────────────────
+
+  form.addEventListener('click', function(e) {
+    if (e.target.classList.contains('bf-next')) {
+      goToStep(currentStep + 1);
+    } else if (e.target.classList.contains('bf-prev')) {
+      goToStep(currentStep - 1);
+    }
+  });
+
+  document.getElementById('bfStepsNav').addEventListener('click', function(e) {
+    var dot = e.target.closest('.bf-dot');
+    if (!dot) return;
+    var target = parseInt(dot.getAttribute('data-step'), 10);
+    if (target < currentStep) {
+      currentStep = target;
+      goToStep(target);
+    } else if (target > currentStep) {
+      for (var i = currentStep; i < target; i++) {
+        if (!validateStep(i)) { goToStep(i); return; }
+        dots[i].classList.add('completed');
+      }
+      currentStep = target - 1;
+      goToStep(target);
+    }
+  });
+
+  // Auto-save
+  var saveTimer;
+  form.addEventListener('input', function(e) {
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(saveToStorage, 500);
+    var field = e.target.closest('.bf-field');
+    if (field) field.classList.remove('has-error');
+  });
+  form.addEventListener('change', function(e) {
+    saveToStorage();
+    var field = e.target.closest('.bf-field');
+    if (field) field.classList.remove('has-error');
+  });
+
+  // ── URL lists ─────────────────────────────────────
+
+  window.bfAddUrl = function(btn) {
+    var list = btn.closest('.bf-url-list');
+    var rows = list.querySelectorAll('.bf-url-row');
+    if (rows.length >= 5) return;
+    var name = list.querySelector('input[type="url"]').name;
+    var row = document.createElement('div');
+    row.className = 'bf-url-row';
+    row.innerHTML = '<input class="bf-input" type="url" name="' + name + '" placeholder="https://example.com"><button type="button" class="bf-url-rm" onclick="bfRemoveUrl(this)">&times;</button>';
+    list.appendChild(row);
+  };
+
+  window.bfRemoveUrl = function(btn) {
+    btn.closest('.bf-url-row').remove();
+    saveToStorage();
+  };
+
+  // ── Init ──────────────────────────────────────────
+
+  loadFromStorage();
+  goToStep(currentStep);
+
+})();
+</script>
+
+<!-- Mobile menu toggle (for nav) -->
+<script>
+function toggleMenu() {
+  var menu = document.getElementById('mobileMenu');
+  var overlay = document.getElementById('mobileOverlay');
+  var burger = document.querySelector('.burger');
+  if (menu && overlay) {
+    menu.classList.toggle('open');
+    overlay.classList.toggle('open');
+    if (burger) burger.classList.toggle('open');
+    document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+  }
+}
+function closeMenu() {
+  var menu = document.getElementById('mobileMenu');
+  var overlay = document.getElementById('mobileOverlay');
+  var burger = document.querySelector('.burger');
+  if (menu) menu.classList.remove('open');
+  if (overlay) overlay.classList.remove('open');
+  if (burger) burger.classList.remove('open');
+  document.body.style.overflow = '';
+}
+</script>
+
+<script src="/brief.js"></script>
+<script src="/chat.js" defer></script>
 <script src="/cookie.js"></script>
 </body>
 </html>

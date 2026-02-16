@@ -60,6 +60,21 @@ $input = json_decode(file_get_contents('php://input'), true);
 $text = $input['text'] ?? '';
 $fields = $input['fields'] ?? null;
 
+// For full brief, generate text from fields (no text sent from client)
+$briefType = ($fields && is_array($fields)) ? ($fields['brief_type'] ?? 'short') : 'short';
+if ($briefType === 'full' && $fields && !$text) {
+    $text = "\xF0\x9F\x93\x8B *Полный бриф с сайта Devorra*\n\n";
+    $text .= "\xF0\x9F\x91\xA4 " . sanitize($fields['name'] ?? '', 100) . "\n";
+    $text .= "\xF0\x9F\x8F\xA2 " . sanitize($fields['company'] ?? '', 100) . "\n";
+    $text .= "\xF0\x9F\x93\x9E " . sanitize($fields['phone'] ?? '', 30) . "\n";
+    $text .= "\xF0\x9F\x93\xA7 " . sanitize($fields['email'] ?? '', 100) . "\n";
+    if (!empty($fields['telegram'])) $text .= "TG: " . sanitize($fields['telegram'], 100) . "\n";
+    $text .= "\n\xF0\x9F\x94\xA7 " . sanitize($fields['site_type'] ?? '', 200) . "\n";
+    $text .= "\xF0\x9F\x92\xB3 " . sanitize($fields['budget'] ?? '', 100) . "\n";
+    $text .= "\xE2\x8F\xB0 " . sanitize($fields['timeline'] ?? '', 100) . "\n";
+    $text .= "\n_Подробности в .md файле_";
+}
+
 if (!$text || !is_string($text)) {
     http_response_code(400);
     echo json_encode(['error' => 'Missing text']);
@@ -103,27 +118,112 @@ if (!($data['ok'] ?? false)) {
 // Send .md file if fields provided
 if ($fields && is_array($fields)) {
     $dash = function($v, $max = 500) { return sanitize($v, $max) ?: '—'; };
+    $arrJoin = function($v) {
+        if (is_array($v)) return implode(', ', array_map('sanitize', $v)) ?: '—';
+        return sanitize($v) ?: '—';
+    };
 
     $date = date('Y-m-d');
-    $md = "# Бриф — {$dash($fields['name'] ?? '', 100)}\n\n";
-    $md .= "## Контакты\n";
-    $md .= "- **Имя:** {$dash($fields['name'] ?? '', 100)}\n";
-    $md .= "- **Телефон:** {$dash($fields['phone'] ?? '', 30)}\n";
-    $md .= "- **Email:** {$dash($fields['email'] ?? '', 100)}\n";
-    $md .= "- **Telegram:** {$dash($fields['tg'] ?? '', 100)}\n\n";
-    $md .= "## Проект\n";
-    $md .= "- **Тип:** {$dash($fields['type'] ?? '', 200)}\n";
-    $md .= "- **Бюджет:** {$dash($fields['budget'] ?? '', 100)}\n";
-    $md .= "- **Сроки:** {$dash($fields['timeline'] ?? '', 100)}\n\n";
-    $md .= "## Задача\n{$dash($fields['desc'] ?? '', 5000)}\n\n";
-    $md .= "## Комментарии\n{$dash($fields['comments'] ?? '', 5000)}\n";
+
+    if ($briefType === 'full') {
+        // Full brief: 8 sections
+        $md = "# Полный бриф — {$dash($fields['name'] ?? '', 100)}\n";
+        $md .= "_Дата: {$date}_\n\n";
+
+        // 1. Contacts
+        $md .= "## 1. Контактная информация\n";
+        $md .= "- **Имя:** {$dash($fields['name'] ?? '', 100)}\n";
+        $md .= "- **Компания:** {$dash($fields['company'] ?? '', 200)}\n";
+        $md .= "- **Должность:** {$dash($fields['position'] ?? '', 100)}\n";
+        $md .= "- **Телефон:** {$dash($fields['phone'] ?? '', 30)}\n";
+        $md .= "- **Email:** {$dash($fields['email'] ?? '', 100)}\n";
+        $md .= "- **Telegram:** {$dash($fields['telegram'] ?? '', 100)}\n";
+        $md .= "- **ЛПР:** {$dash($fields['decision_maker'] ?? '', 200)}\n\n";
+
+        // 2. Business
+        $md .= "## 2. О бизнесе\n";
+        $md .= "- **Деятельность:** {$dash($fields['business_desc'] ?? '', 5000)}\n";
+        $md .= "- **Сфера:** {$dash($fields['industry'] ?? '', 200)}\n";
+        $md .= "- **Лет на рынке:** {$dash($fields['years'] ?? '', 100)}\n";
+        $md .= "- **География:** {$arrJoin($fields['geo'] ?? '')}\n";
+        $md .= "- **УТП:** {$dash($fields['utp'] ?? '', 5000)}\n";
+        $md .= "- **Конкуренты:** {$arrJoin($fields['competitorUrls'] ?? '')}\n";
+        $md .= "- **Текущий сайт:** {$dash($fields['current_site'] ?? '', 500)}\n";
+        $md .= "- **Проблемы:** {$arrJoin($fields['problems'] ?? '')}\n\n";
+
+        // 3. Audience
+        $md .= "## 3. Целевая аудитория\n";
+        $md .= "- **Тип клиентов:** {$dash($fields['client_type'] ?? '', 200)}\n";
+        $md .= "- **Возраст:** {$arrJoin($fields['age'] ?? '')}\n";
+        $md .= "- **Доход:** {$dash($fields['income'] ?? '', 200)}\n";
+        $md .= "- **Источники трафика:** {$arrJoin($fields['source'] ?? '')}\n";
+        $md .= "- **Устройства:** {$dash($fields['device'] ?? '', 200)}\n";
+        $md .= "- **Боли клиентов:** {$dash($fields['pains'] ?? '', 5000)}\n\n";
+
+        // 4. Goals
+        $md .= "## 4. Цели и задачи\n";
+        $md .= "- **Главная цель:** {$dash($fields['main_goal'] ?? '', 200)}\n";
+        $md .= "- **Целевое действие:** {$arrJoin($fields['action'] ?? '')}\n";
+        $md .= "- **Заявок/мес:** {$dash($fields['target_leads'] ?? '', 200)}\n";
+        $md .= "- **Средний чек:** {$dash($fields['avg_check'] ?? '', 200)}\n";
+        $md .= "- **Продвижение:** {$arrJoin($fields['promo'] ?? '')}\n\n";
+
+        // 5. Functionality
+        $md .= "## 5. Функциональность\n";
+        $md .= "- **Тип проекта:** {$dash($fields['site_type'] ?? '', 200)}\n";
+        $md .= "- **Разделы:** {$arrJoin($fields['sections'] ?? '')}\n";
+        $md .= "- **Функции:** {$arrJoin($fields['features'] ?? '')}\n";
+        $md .= "- **Интеграции:** {$arrJoin($fields['integrations'] ?? '')}\n";
+        $md .= "- **Размер каталога:** {$dash($fields['catalog_size'] ?? '', 100)}\n";
+        $md .= "- **CMS:** {$dash($fields['cms'] ?? '', 200)}\n\n";
+
+        // 6. Design
+        $md .= "## 6. Дизайн\n";
+        $md .= "- **Фирменный стиль:** {$dash($fields['brand'] ?? '', 200)}\n";
+        $md .= "- **Стиль дизайна:** {$dash($fields['style'] ?? '', 200)}\n";
+        $md .= "- **Нравятся:** {$arrJoin($fields['likeUrls'] ?? '')}\n";
+        $md .= "- **Почему нравятся:** {$dash($fields['like_why'] ?? '', 5000)}\n";
+        $md .= "- **Не нравятся:** {$arrJoin($fields['dislikeUrls'] ?? '')}\n";
+        $md .= "- **Почему не нравятся:** {$dash($fields['dislike_why'] ?? '', 5000)}\n\n";
+
+        // 7. Content
+        $md .= "## 7. Контент\n";
+        $md .= "- **Тексты:** {$dash($fields['texts'] ?? '', 200)}\n";
+        $md .= "- **Готовые материалы:** {$arrJoin($fields['materials'] ?? '')}\n";
+        $md .= "- **Обновление сайта:** {$dash($fields['updater'] ?? '', 200)}\n";
+        $md .= "- **Фотосъёмка:** {$dash($fields['photoshoot'] ?? '', 200)}\n\n";
+
+        // 8. Budget
+        $md .= "## 8. Бюджет и сроки\n";
+        $md .= "- **Бюджет:** {$dash($fields['budget'] ?? '', 200)}\n";
+        $md .= "- **Сроки:** {$dash($fields['timeline'] ?? '', 200)}\n";
+        $md .= "- **Дедлайн:** {$dash($fields['deadline'] ?? '', 500)}\n";
+        $md .= "- **Оплата:** {$dash($fields['payment'] ?? '', 200)}\n";
+        $md .= "- **Поддержка:** {$dash($fields['support'] ?? '', 200)}\n";
+        $md .= "- **Комментарии:** {$dash($fields['comments'] ?? '', 5000)}\n";
+    } else {
+        // Short brief (from modal)
+        $md = "# Бриф — {$dash($fields['name'] ?? '', 100)}\n\n";
+        $md .= "## Контакты\n";
+        $md .= "- **Имя:** {$dash($fields['name'] ?? '', 100)}\n";
+        $md .= "- **Телефон:** {$dash($fields['phone'] ?? '', 30)}\n";
+        $md .= "- **Email:** {$dash($fields['email'] ?? '', 100)}\n";
+        $md .= "- **Telegram:** {$dash($fields['tg'] ?? '', 100)}\n\n";
+        $md .= "## Проект\n";
+        $md .= "- **Тип:** {$dash($fields['type'] ?? '', 200)}\n";
+        $md .= "- **Бюджет:** {$dash($fields['budget'] ?? '', 100)}\n";
+        $md .= "- **Сроки:** {$dash($fields['timeline'] ?? '', 100)}\n\n";
+        $md .= "## Задача\n{$dash($fields['desc'] ?? '', 5000)}\n\n";
+        $md .= "## Комментарии\n{$dash($fields['comments'] ?? '', 5000)}\n";
+    }
 
     $name = sanitize($fields['name'] ?? '', 100);
     $slug = '';
     if ($name && $name !== '—') {
         $slug = '-' . preg_replace('/\s+/u', '-', preg_replace('/[^a-zA-Zа-яА-ЯёЁ0-9\s\-]/u', '', trim($name)));
     }
-    $filename = "brief-{$date}{$slug}.md";
+    $prefix = $briefType === 'full' ? 'full-brief' : 'brief';
+    $filename = "{$prefix}-{$date}{$slug}.md";
 
     // Write temp file
     $tmpFile = tempnam(sys_get_temp_dir(), 'brief_');
