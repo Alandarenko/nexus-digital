@@ -24,13 +24,7 @@
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
-    <url>
-        <loc>https://devorra.ru/brief.html</loc>
-        <lastmod>2026-02-13</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.5</priority>
-    </url>
-    <url>
+<url>
         <loc>https://devorra.ru/privacy.html</loc>
         <lastmod>2026-02-13</lastmod>
         <changefreq>yearly</changefreq>

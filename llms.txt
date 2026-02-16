@@ -1,0 +1,34 @@
+# Devorra — Веб-студия
+
+> Devorra — технологичная веб-студия полного цикла. Разработка сайтов, веб-приложений, Telegram-ботов и AI-интеграций.
+
+## Услуги
+- Разработка лендингов и корпоративных сайтов
+- Интернет-магазины (1С-Битрикс)
+- Веб-приложения (Next.js, React)
+- Telegram-боты и чат-боты с AI
+- AI-интеграции (YandexGPT, GPT)
+- SEO-оптимизация и техническая поддержка
+
+## Стек технологий
+- Frontend: HTML, CSS, JavaScript, React, Next.js
+- Backend: Node.js, PHP, Python
+- CMS: 1С-Битрикс
+- AI: YandexGPT, OpenAI API
+- Хостинг: Timeweb, Yandex Cloud
+
+## Контакты
+- Сайт: https://devorra.ru
+- Почта: DevorraDigital@yandex.ru
+- Блог: https://devorra.ru/blog/
+
+## Полезные ссылки
+- Главная: https://devorra.ru/
+- Блог: https://devorra.ru/blog/
+- Сколько стоит сайт: https://devorra.ru/blog/stoimost-razrabotki-saita-2026.html
+- Tilda vs кастом: https://devorra.ru/blog/tilda-vs-custom.html
+- PageSpeed оптимизация: https://devorra.ru/blog/pagespeed-optimizaciya-2026.html
+- Рынок веб-разработки: https://devorra.ru/blog/market.html
+- Тренды разработки: https://devorra.ru/blog/trends.html
+- Технологический стек: https://devorra.ru/blog/tech.html
+- Политика конфиденциальности: https://devorra.ru/privacy.html
