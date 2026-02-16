@@ -1134,13 +1134,25 @@ footer {
 .chat-send:hover { background: var(--accent-light); }
 .chat-send:disabled { opacity: 0.5; cursor: default; }
 
+/* Chat overlay — closes chat when clicking outside */
+.chat-overlay {
+    position: fixed; inset: 0; z-index: 98;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0; visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+}
+.chat-overlay.active {
+    opacity: 1; visibility: visible;
+}
+
 @media (max-width: 480px) {
     .chat-panel {
-        inset: 0; width: 100%; height: 100%;
-        border-radius: 0; bottom: 0; right: 0;
+        bottom: 16px; right: 16px; left: 16px;
+        width: auto; height: auto;
+        max-height: 75vh;
+        border-radius: 16px;
     }
     .chat-toggle { bottom: 20px; right: 20px; }
-    .chat-toggle-active { display: none; }
 }
 
 /* Microanimations */

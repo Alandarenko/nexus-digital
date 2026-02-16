@@ -34,6 +34,10 @@
             '</button>' +
         '</div>';
 
+    var overlay = document.createElement('div');
+    overlay.className = 'chat-overlay';
+
+    document.body.appendChild(overlay);
     document.body.appendChild(toggle);
     document.body.appendChild(panel);
 
@@ -178,6 +182,7 @@
         isOpen = true;
         panel.classList.add('chat-panel-open');
         toggle.classList.add('chat-toggle-active');
+        overlay.classList.add('active');
         toggle.setAttribute('aria-label', 'Закрыть чат');
         inputEl.focus();
     }
@@ -186,6 +191,7 @@
         isOpen = false;
         panel.classList.remove('chat-panel-open');
         toggle.classList.remove('chat-toggle-active');
+        overlay.classList.remove('active');
         toggle.setAttribute('aria-label', 'Открыть чат');
     }
 
@@ -195,6 +201,7 @@
     });
 
     closeBtn.addEventListener('click', closeChat);
+    overlay.addEventListener('click', closeChat);
 
     sendBtn.addEventListener('click', send);
 
