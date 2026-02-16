@@ -1797,6 +1797,12 @@ footer {
     cursor: pointer; transition: all 0.2s; font-family: inherit;
 }
 .cookie-accept:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(99,102,241,0.3); }
+.cookie-decline {
+    padding: 8px 24px; background: transparent; color: var(--text-secondary);
+    border: 1px solid var(--border); border-radius: 8px; font-size: 13px; font-weight: 600;
+    cursor: pointer; transition: all 0.2s; font-family: inherit;
+}
+.cookie-decline:hover { border-color: var(--text-secondary); color: var(--text-primary); }
 @media (max-width: 768px) {
     .cookie-banner { flex-direction: column; gap: 12px; padding: 16px 20px; text-align: center; }
     .cookie-banner p { font-size: 12px; }
