@@ -93,7 +93,7 @@ $systemPrompt = 'Ты — AI-консультант веб-студии Devorra.
 
 Контакты:
 - Telegram: @myway_nikita
-- Email: nikita.alandarenko@gmail.com
+- Email: DevorraDigital@yandex.ru
 - Сайт: devorra.ru
 
 Если вопрос сложный или клиент хочет обсудить проект — предложи оставить заявку на сайте или написать в Telegram @myway_nikita.
