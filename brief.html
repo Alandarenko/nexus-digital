@@ -23,7 +23,7 @@
 
     .brief-hero {
       text-align: center;
-      padding: 40px 0 32px;
+      padding: 80px 0 32px;
     }
     .brief-hero .label {
       font-size: 12px;
@@ -1213,11 +1213,8 @@
   function goToStep(n) {
     if (n < 0 || n >= TOTAL_STEPS) return;
 
-    // Validate when going forward
-    if (n > currentStep && !validateStep(currentStep)) return;
-
-    // Mark completed
-    if (n > currentStep) dots[currentStep].classList.add('completed');
+    // Mark completed (if all required fields filled)
+    if (n > currentStep && validateStep(currentStep, true)) dots[currentStep].classList.add('completed');
 
     currentStep = n;
     saveToStorage();
@@ -1254,7 +1251,7 @@
     8: []
   };
 
-  function validateStep(stepIndex) {
+  function validateStep(stepIndex, silent) {
     var required = stepReqs[stepIndex] || [];
     var valid = true;
 
@@ -1283,8 +1280,10 @@
 
       if (!fieldValid) {
         valid = false;
-        var field = first.closest('.bf-field');
-        if (field) field.classList.add('has-error');
+        if (!silent) {
+          var field = first.closest('.bf-field');
+          if (field) field.classList.add('has-error');
+        }
       }
     }
     return valid;
@@ -1366,6 +1365,16 @@
     var loadTime = parseInt(document.getElementById('bfLoadTime').value, 10);
     if (Date.now() - loadTime < 5000) return;
 
+    // Validate all steps
+    for (var i = 0; i < 8; i++) {
+      if (!validateStep(i)) {
+        goToStep(i);
+        submitError.textContent = 'Заполните обязательные поля на шаге ' + (i + 1);
+        submitError.classList.add('visible');
+        return;
+      }
+    }
+
     // Consent
     if (!document.getElementById('bfConsent').checked) {
       submitError.textContent = 'Необходимо согласие на обработку персональных данных';
@@ -1419,17 +1428,8 @@
     var dot = e.target.closest('.bf-dot');
     if (!dot) return;
     var target = parseInt(dot.getAttribute('data-step'), 10);
-    if (target < currentStep) {
-      currentStep = target;
-      goToStep(target);
-    } else if (target > currentStep) {
-      for (var i = currentStep; i < target; i++) {
-        if (!validateStep(i)) { goToStep(i); return; }
-        dots[i].classList.add('completed');
-      }
-      currentStep = target - 1;
-      goToStep(target);
-    }
+    currentStep = target > 0 ? target - 1 : 0;
+    goToStep(target);
   });
 
   // Auto-save
