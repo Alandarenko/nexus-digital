@@ -1051,7 +1051,9 @@ footer {
 .chat-tg-link:hover { opacity: 0.7; }
 .chat-close {
     background: none; border: none; color: var(--text-secondary);
-    font-size: 24px; cursor: pointer; line-height: 1; padding: 0 2px;
+    font-size: 24px; cursor: pointer; line-height: 1; padding: 10px;
+    min-width: 44px; min-height: 44px;
+    display: flex; align-items: center; justify-content: center;
     transition: color 0.2s;
 }
 .chat-close:hover { color: var(--text-primary); }
@@ -1149,9 +1151,11 @@ footer {
     .chat-panel {
         bottom: 16px; right: 16px; left: 16px;
         width: auto; height: auto;
-        max-height: 75vh;
+        max-height: 70vh;
         border-radius: 16px;
     }
+    .chat-messages { min-height: 120px; }
+    .chat-input { max-height: 60px; }
     .chat-toggle { bottom: 20px; right: 20px; }
     .chat-toggle-active { display: none; }
 }
