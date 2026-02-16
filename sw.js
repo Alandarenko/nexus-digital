@@ -1,4 +1,4 @@
-const CACHE_NAME = 'devorra-v10';
+const CACHE_NAME = 'devorra-v11';
 const PRECACHE = [
   '/',
   '/styles.css',
@@ -9,7 +9,8 @@ const PRECACHE = [
   '/fonts/inter-cyrillic-ext.woff2',
   '/fonts/inter-latin.woff2',
   '/favicon.svg',
-  '/manifest.json'
+  '/manifest.json',
+  '/404.html'
 ];
 
 self.addEventListener('install', e => {
@@ -43,7 +44,7 @@ self.addEventListener('fetch', e => {
           caches.open(CACHE_NAME).then(cache => cache.put(e.request, clone));
           return res;
         })
-        .catch(() => caches.match(e.request))
+        .catch(() => caches.match(e.request).then(r => r || caches.match('/404.html')))
     );
     return;
   }
