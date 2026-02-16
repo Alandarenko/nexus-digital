@@ -5,8 +5,6 @@
         + '<button class="logo modal-logo-btn" onclick="tryCloseBrief()">Devorra</button>'
         + '<button class="modal-back" onclick="tryCloseBrief()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5m0 0l7 7m-7-7l7-7"/></svg>На сайт</button>'
         + '</div><div class="modal-header-right">'
-        + '<div class="modal-progress"><div class="modal-progress-fill" id="bProg"></div></div>'
-        + '<span class="modal-progress-text" id="bProgTxt">0%</span>'
         + '<button class="modal-close" onclick="tryCloseBrief()" aria-label="Закрыть">&times;</button>'
         + '</div></div>'
         + '<div class="modal-body"><div class="modal-hero"><div class="m-label">Заявка</div>'
@@ -208,18 +206,6 @@
         descCount.className = 'b-char-count' + (len >= 2000 ? ' at-limit' : len >= 1800 ? ' near-limit' : '');
     });
 
-    function bUpdProg() {
-        var c = 0, t = 0;
-        document.querySelectorAll('#briefModal .b-input, #briefModal .b-textarea').forEach(function(e) { t++; if (e.value && e.value.trim()) c++; });
-        var radioGroups = {};
-        document.querySelectorAll('#briefModal input[type=radio]').forEach(function(e) { radioGroups[e.name] = true; });
-        Object.keys(radioGroups).forEach(function(name) { t++; if (document.querySelector('#briefModal input[name="' + name + '"]:checked')) c++; });
-        var p = t ? Math.min(Math.round((c / t) * 100), 100) : 0;
-        document.getElementById('bProg').style.width = p + '%';
-        document.getElementById('bProgTxt').textContent = p + '%';
-    }
-    document.getElementById('briefModal').addEventListener('input', bUpdProg);
-    document.getElementById('briefModal').addEventListener('change', bUpdProg);
 
     function bV(n) { var e = document.querySelector('#briefModal [name="' + n + '"]'); if (!e) return '—'; if (e.type === 'radio') { var c = document.querySelector('#briefModal [name="' + n + '"]:checked'); return c ? c.value : '—'; } return e.value || '—'; }
     function bC(n) { var items = document.querySelectorAll('#briefModal [name="' + n + '"]:checked'); return items.length ? Array.from(items).map(function(e) { return e.value; }).join(', ') : '—'; }
