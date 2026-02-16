@@ -75,7 +75,9 @@
     window.openBrief = function() {
         if (typeof closeMenu === 'function') closeMenu();
         briefTrigger = document.activeElement;
-        document.getElementById('briefModal').classList.add('open');
+        var modal = document.getElementById('briefModal');
+        modal.classList.add('open');
+        modal.scrollTo(0, 0);
         document.body.style.overflow = 'hidden';
         setTimeout(function() { var first = document.querySelector('#briefModal .b-input'); if (first) first.focus(); }, 100);
     };
