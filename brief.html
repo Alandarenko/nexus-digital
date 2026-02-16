@@ -54,18 +54,6 @@
     }
 
     /* Progress bar */
-    .bf-progress-wrap {
-      height: 3px;
-      position: sticky;
-      top: 56px;
-      z-index: 101;
-    }
-    .bf-progress-bar {
-      height: 100%;
-      background: linear-gradient(135deg, #6366f1, #8b5cf6);
-      transition: width 0.3s ease;
-      border-radius: 0 2px 2px 0;
-    }
 
     /* Save indicator */
     .bf-save {
@@ -472,9 +460,6 @@
 </div>
 <div class="mobile-overlay" id="mobileOverlay" onclick="closeMenu()"></div>
 
-<div class="bf-progress-wrap">
-  <div class="bf-progress-bar" id="bfProgressBar" style="width: 11.1%"></div>
-</div>
 <span class="bf-save" id="bfSaveIndicator">Сохранено</span>
 
 <main class="brief-wrap">
@@ -1092,7 +1077,6 @@
   var form = document.getElementById('bfForm');
   var steps = form.querySelectorAll('.bf-step');
   var dots = document.querySelectorAll('.bf-dot');
-  var progressBar = document.getElementById('bfProgressBar');
   var saveIndicator = document.getElementById('bfSaveIndicator');
   var submitBtn = document.getElementById('bfSubmitBtn');
   var submitError = document.getElementById('bfSubmitErr');
@@ -1227,7 +1211,6 @@
     dots[currentStep].classList.add('active');
 
     // Progress
-    progressBar.style.width = ((currentStep + 1) / TOTAL_STEPS * 100) + '%';
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
