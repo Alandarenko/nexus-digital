@@ -1153,6 +1153,7 @@ footer {
         border-radius: 16px;
     }
     .chat-toggle { bottom: 20px; right: 20px; }
+    .chat-toggle-active { display: none; }
 }
 
 /* Microanimations */
