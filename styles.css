@@ -794,7 +794,7 @@ footer {
 .b-section { display: none; animation: modalIn 0.3s ease; }
 .b-section.active { display: block; }
 
-.b-head { margin-bottom: 40px; }
+.b-head { margin-bottom: 40px; text-align: center; }
 .b-head .b-num { font-size: 14px; font-weight: 600; color: var(--accent); margin-bottom: 8px; }
 .b-head h3 { font-size: 36px; font-weight: 800; letter-spacing: -1px; margin-bottom: 8px; }
 .b-head p { font-size: 17px; color: var(--text-muted); }
