@@ -931,6 +931,20 @@
     </script>
 
     <script>
+    document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+        a.addEventListener('click', function(e) {
+            var id = this.getAttribute('href').slice(1);
+            var el = document.getElementById(id);
+            if (el) {
+                e.preventDefault();
+                el.scrollIntoView({ behavior: 'smooth' });
+                history.replaceState(null, '', location.pathname);
+            }
+        });
+    });
+    </script>
+
+    <script>
     (function() {
         var feed = document.getElementById('newsFeed');
         var updatedEl = document.getElementById('newsUpdated');
