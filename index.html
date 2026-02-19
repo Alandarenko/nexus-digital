@@ -587,6 +587,182 @@
         </div>
     </section>
 
+    <hr class="section-divider">
+
+    <section id="audit" class="fade-in">
+        <div class="section-label">Бесплатный аудит</div>
+        <h2 class="section-title">Аудит вашего сайта за <span class="highlight">24 часа</span></h2>
+        <p class="section-subtitle" style="max-width:580px;margin-left:auto;margin-right:auto">Отправьте ссылку — проверим скорость, SEO, безопасность и юзабилити. Получите отчёт с конкретными рекомендациями.</p>
+
+        <div class="audit-layout">
+            <div class="audit-features">
+                <div class="audit-feature-item">
+                    <span class="audit-feature-icon">&#9889;</span>
+                    <div>
+                        <strong>Скорость и Core Web Vitals</strong>
+                        <p>PageSpeed, LCP, CLS, INP — мобайл и десктоп</p>
+                    </div>
+                </div>
+                <div class="audit-feature-item">
+                    <span class="audit-feature-icon">&#128269;</span>
+                    <div>
+                        <strong>SEO и индексация</strong>
+                        <p>Мета-теги, структура, Schema.org, ошибки сканирования</p>
+                    </div>
+                </div>
+                <div class="audit-feature-item">
+                    <span class="audit-feature-icon">&#128274;</span>
+                    <div>
+                        <strong>Безопасность</strong>
+                        <p>SSL, заголовки, уязвимости, соответствие 152-ФЗ</p>
+                    </div>
+                </div>
+                <div class="audit-feature-item">
+                    <span class="audit-feature-icon">&#128241;</span>
+                    <div>
+                        <strong>Мобильная версия и UX</strong>
+                        <p>Адаптивность, навигация, конверсионные элементы</p>
+                    </div>
+                </div>
+            </div>
+
+            <form class="audit-form" id="auditForm" novalidate>
+                <div class="b-field">
+                    <label for="a_url">URL сайта <span class="req">*</span></label>
+                    <input class="b-input" id="a_url" name="a_url" type="url" placeholder="https://example.ru" autocomplete="url" maxlength="500" aria-required="true">
+                    <div class="b-err">Укажите адрес сайта</div>
+                </div>
+                <div class="audit-form-row">
+                    <div class="b-field">
+                        <label for="a_name">Имя <span class="req">*</span></label>
+                        <input class="b-input" id="a_name" name="a_name" placeholder="Иван" autocomplete="given-name" maxlength="100" aria-required="true">
+                        <div class="b-err">Укажите ваше имя</div>
+                    </div>
+                    <div class="b-field">
+                        <label for="a_contact">Telegram или телефон <span class="req">*</span></label>
+                        <input class="b-input" id="a_contact" name="a_contact" placeholder="@username или +7 999 123-45-67" maxlength="100" aria-required="true">
+                        <div class="b-err">Укажите контакт для связи</div>
+                    </div>
+                </div>
+                <div class="b-field" style="margin-bottom:16px">
+                    <label for="a_comment">Комментарий <span class="opt">необязательно</span></label>
+                    <textarea class="b-textarea" id="a_comment" name="a_comment" placeholder="На что обратить внимание? Какие проблемы замечали?" maxlength="1000" rows="3"></textarea>
+                </div>
+                <!-- Honeypot -->
+                <div style="position:absolute;left:-9999px;opacity:0;height:0" aria-hidden="true">
+                    <input type="text" name="company_website" tabindex="-1" autocomplete="off">
+                </div>
+                <label class="b-consent" style="margin-bottom:16px">
+                    <input type="checkbox" id="aConsent">
+                    <span>Я соглашаюсь с <a href="/privacy.html" target="_blank">политикой конфиденциальности</a> и даю согласие на обработку персональных данных</span>
+                </label>
+                <div id="auditStatus"></div>
+                <button type="submit" class="cta-button" id="auditSubmit" style="width:100%">Получить бесплатный аудит</button>
+            </form>
+        </div>
+    </section>
+
+    <script>
+    (function() {
+        var form = document.getElementById('auditForm');
+        var statusEl = document.getElementById('auditStatus');
+        var submitBtn = document.getElementById('auditSubmit');
+        var sent = false;
+        var loadTime = Date.now();
+
+        form.addEventListener('input', function(e) {
+            var field = e.target.closest('.b-field');
+            if (field) field.classList.remove('has-error');
+        });
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (sent) return;
+
+            // Honeypot check
+            var hp = form.querySelector('[name="company_website"]');
+            if (hp && hp.value) return;
+
+            // Time-based bot check
+            if (Date.now() - loadTime < 3000) return;
+
+            // Validate
+            var url = form.querySelector('#a_url');
+            var name = form.querySelector('#a_name');
+            var contact = form.querySelector('#a_contact');
+            var consent = document.getElementById('aConsent');
+            var ok = true;
+
+            form.querySelectorAll('.b-field').forEach(function(f) { f.classList.remove('has-error'); });
+
+            if (!url.value.trim() || !/^https?:\/\/.+\..+/.test(url.value.trim())) {
+                url.closest('.b-field').classList.add('has-error'); ok = false;
+            }
+            if (!name.value.trim()) {
+                name.closest('.b-field').classList.add('has-error'); ok = false;
+            }
+            if (!contact.value.trim()) {
+                contact.closest('.b-field').classList.add('has-error'); ok = false;
+            }
+            if (!consent.checked) {
+                statusEl.innerHTML = '<div class="b-val-summary"><p>Необходимо согласие на обработку персональных данных</p></div>';
+                return;
+            }
+            if (!ok) {
+                var firstErr = form.querySelector('.has-error');
+                if (firstErr) firstErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Отправка...';
+            statusEl.innerHTML = '';
+
+            var esc = function(s) { return s.replace(/([_*`\[])/g, '\\$1'); };
+            var msg = '\uD83D\uDD0D *Заявка на аудит сайта*\n\n';
+            msg += '\uD83C\uDF10 Сайт: ' + esc(url.value.trim()) + '\n';
+            msg += '\uD83D\uDC64 Имя: ' + esc(name.value.trim()) + '\n';
+            msg += '\uD83D\uDCDE Контакт: ' + esc(contact.value.trim()) + '\n';
+            var comment = form.querySelector('#a_comment').value.trim();
+            if (comment) msg += '\uD83D\uDCAC Комментарий: ' + esc(comment) + '\n';
+
+            fetch('/api/send', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    text: msg,
+                    fields: {
+                        brief_type: 'audit',
+                        url: url.value.trim(),
+                        name: name.value.trim(),
+                        contact: contact.value.trim(),
+                        comment: comment
+                    }
+                })
+            })
+            .then(function(r) { return r.json(); })
+            .then(function(data) {
+                if (data.ok) {
+                    sent = true;
+                    statusEl.innerHTML = '<div class="b-tip" style="margin-bottom:12px"><span class="b-tip-i">\u2713</span><span>Заявка отправлена! Аудит будет готов в течение 24 часов.</span></div>';
+                    submitBtn.textContent = 'Отправлено \u2713';
+                    form.querySelectorAll('input:not([type=checkbox]):not([type=hidden]),textarea').forEach(function(el) { el.disabled = true; });
+                    document.getElementById('aConsent').disabled = true;
+                } else {
+                    throw new Error(data.error || 'error');
+                }
+            })
+            .catch(function() {
+                statusEl.innerHTML = '<div class="b-warn"><span class="b-warn-i">!</span><span>Ошибка отправки. Напишите нам в Telegram: @myway\\_nikita</span></div>';
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Попробовать снова';
+            });
+        });
+    })();
+    </script>
+
+    <hr class="section-divider">
+
     <section class="fade-in" style="text-align:center;padding-top:40px;padding-bottom:40px">
         <div class="section-label">Начать проект</div>
         <h2 class="section-title">Есть идея? Обсудим <span class="highlight">бесплатно</span></h2>

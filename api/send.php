@@ -201,6 +201,16 @@ if ($fields && is_array($fields)) {
         $md .= "- **Оплата:** {$dash($fields['payment'] ?? '', 200)}\n";
         $md .= "- **Поддержка:** {$dash($fields['support'] ?? '', 200)}\n";
         $md .= "- **Комментарии:** {$dash($fields['comments'] ?? '', 5000)}\n";
+    } elseif ($briefType === 'audit') {
+        // Audit request
+        $md = "# Заявка на аудит — {$dash($fields['name'] ?? '', 100)}\n";
+        $md .= "_Дата: {$date}_\n\n";
+        $md .= "## Сайт\n";
+        $md .= "- **URL:** {$dash($fields['url'] ?? '', 500)}\n\n";
+        $md .= "## Контакт\n";
+        $md .= "- **Имя:** {$dash($fields['name'] ?? '', 100)}\n";
+        $md .= "- **Telegram/Телефон:** {$dash($fields['contact'] ?? '', 100)}\n\n";
+        $md .= "## Комментарий\n{$dash($fields['comment'] ?? '', 1000)}\n";
     } else {
         // Short brief (from modal)
         $md = "# Бриф — {$dash($fields['name'] ?? '', 100)}\n\n";
@@ -222,7 +232,13 @@ if ($fields && is_array($fields)) {
     if ($name && $name !== '—') {
         $slug = '-' . preg_replace('/\s+/u', '-', preg_replace('/[^a-zA-Zа-яА-ЯёЁ0-9\s\-]/u', '', trim($name)));
     }
-    $prefix = $briefType === 'full' ? 'full-brief' : 'brief';
+    if ($briefType === 'audit') {
+        $prefix = 'audit';
+    } elseif ($briefType === 'full') {
+        $prefix = 'full-brief';
+    } else {
+        $prefix = 'brief';
+    }
     $filename = "{$prefix}-{$date}{$slug}.md";
 
     // Write temp file
