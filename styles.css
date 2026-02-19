@@ -1456,17 +1456,17 @@ footer {
 /* Audit form */
 .audit-layout {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1.1fr;
     gap: 48px;
-    max-width: 960px;
+    max-width: 1000px;
     margin: 48px auto 0;
-    align-items: start;
+    align-items: center;
 }
 
 .audit-features {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 24px;
 }
 
 .audit-feature-item {
@@ -1522,14 +1522,19 @@ footer {
     gap: 16px;
 }
 
+@media (max-width: 1024px) {
+    .audit-layout { gap: 32px; }
+    .audit-form-row { grid-template-columns: 1fr; }
+}
+
 @media (max-width: 768px) {
     .audit-layout {
         grid-template-columns: 1fr;
         gap: 32px;
         margin-top: 32px;
+        max-width: 520px;
     }
     .audit-form { padding: 24px; }
-    .audit-form-row { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 480px) {
