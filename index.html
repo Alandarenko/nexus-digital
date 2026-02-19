@@ -630,7 +630,8 @@
                 <div class="b-field">
                     <label for="a_url">URL сайта <span class="req">*</span></label>
                     <input class="b-input" id="a_url" name="a_url" type="url" placeholder="https://example.ru" autocomplete="url" maxlength="500" aria-required="true">
-                    <div class="b-err">Укажите адрес сайта</div>
+                    <div class="b-err">Укажите адрес сайта (например, https://example.ru)</div>
+                    <div class="b-swarn">Адрес должен начинаться с https://</div>
                 </div>
                 <div class="audit-form-row">
                     <div class="b-field">
@@ -642,6 +643,7 @@
                         <label for="a_contact">Telegram или телефон <span class="req">*</span></label>
                         <input class="b-input" id="a_contact" name="a_contact" placeholder="@username или телефон" maxlength="100" aria-required="true">
                         <div class="b-err">Укажите контакт для связи</div>
+                        <div class="b-swarn">Введите @username или номер телефона</div>
                     </div>
                 </div>
                 <div class="b-field" style="margin-bottom:16px">
@@ -693,16 +695,31 @@
             var consent = document.getElementById('aConsent');
             var ok = true;
 
-            form.querySelectorAll('.b-field').forEach(function(f) { f.classList.remove('has-error'); });
+            form.querySelectorAll('.b-field').forEach(function(f) { f.classList.remove('has-error', 'soft-warn'); });
 
-            if (!url.value.trim() || !/^https?:\/\/.+\..+/.test(url.value.trim())) {
+            var urlVal = url.value.trim();
+            if (!urlVal) {
                 url.closest('.b-field').classList.add('has-error'); ok = false;
+            } else if (!/^https?:\/\/[^\s]+\.[^\s]{2,}$/.test(urlVal)) {
+                url.closest('.b-field').classList.add('has-error'); ok = false;
+            } else if (/^http:\/\//.test(urlVal)) {
+                url.closest('.b-field').classList.add('soft-warn');
             }
-            if (!name.value.trim()) {
+
+            var nameVal = name.value.trim();
+            if (!nameVal) {
+                name.closest('.b-field').classList.add('has-error'); ok = false;
+            } else if (nameVal.length < 2) {
                 name.closest('.b-field').classList.add('has-error'); ok = false;
             }
-            if (!contact.value.trim()) {
+
+            var contactVal = contact.value.trim();
+            var isPhone = /^\+?\d[\d\s\-()]{5,}$/.test(contactVal);
+            var isTg = /^@[a-zA-Z0-9_]{3,}$/.test(contactVal);
+            if (!contactVal) {
                 contact.closest('.b-field').classList.add('has-error'); ok = false;
+            } else if (!isPhone && !isTg) {
+                contact.closest('.b-field').classList.add('soft-warn');
             }
             if (!consent.checked) {
                 statusEl.innerHTML = '<div class="b-val-summary"><p>Необходимо согласие на обработку персональных данных</p></div>';
