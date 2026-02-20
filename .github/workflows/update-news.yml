@@ -41,3 +41,21 @@ jobs:
           git add data/news.json
           git commit -m "chore: update news $(date +%Y-%m-%d)"
           git push
+
+      - name: Deploy to Timeweb
+        if: steps.changes.outputs.changed == 'true'
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts 2>/dev/null
+          rsync -avz --delete \
+            --exclude='.git' \
+            --exclude='.github' \
+            --exclude='.env' \
+            --exclude='.ratelimit' \
+            --exclude='node_modules' \
+            --exclude='.gitignore' \
+            --exclude='package*.json' \
+            --exclude='.vscode' \
+            ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:~/public_html/
