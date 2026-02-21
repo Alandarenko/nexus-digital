@@ -2,8 +2,8 @@ name: Update News
 
 on:
   schedule:
-    # Каждый день в 08:00 МСК (05:00 UTC)
-    - cron: '0 5 * * *'
+    # Каждый день в 12:00 МСК (09:00 UTC)
+    - cron: '0 9 * * *'
   workflow_dispatch: # Ручной запуск
 
 permissions:
