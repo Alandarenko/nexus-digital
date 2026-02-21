@@ -43,7 +43,7 @@
 
         .card {
             background: var(--card); border: 1px solid var(--border); border-radius: 14px;
-            padding: 28px; transition: all 0.3s;
+            padding: 28px; transition: border-color 0.3s, transform 0.3s;
         }
         .card:hover { border-color: var(--accent); transform: translateY(-3px); }
         .card .c-icon { font-size: 28px; margin-bottom: 14px; width: 48px; height: 48px; border-radius: 12px; background: var(--glow); display: flex; align-items: center; justify-content: center; font-weight: 800; }
@@ -115,6 +115,41 @@
         .nav-counter { font-size: 13px; color: var(--muted); font-weight: 500; min-width: 50px; text-align: center; }
         .progress-bar { position: fixed; bottom: 62px; left: 0; right: 0; height: 2px; background: var(--border); z-index: 101; }
         .progress-fill { height: 100%; background: var(--g1); transition: width 0.4s; width: 0%; }
+
+        /* — Tablet — */
+        @media (max-width: 1024px) {
+            .slide { padding: 40px 48px; }
+            .grid4, .tech-cols { grid-template-columns: 1fr 1fr; }
+        }
+
+        /* — Mobile — */
+        @media (max-width: 768px) {
+            .slide { padding: 32px 24px; overflow-y: auto; }
+            .s-title { font-size: clamp(24px, 6vw, 36px); letter-spacing: -1px; }
+            .s-sub { font-size: 15px; }
+            .grid2, .grid3, .adv-grid { grid-template-columns: 1fr; }
+            .grid4, .tech-cols { grid-template-columns: 1fr; }
+            .stat-row { flex-direction: column; gap: 20px; }
+            .steps { flex-wrap: wrap; gap: 12px; }
+            .steps .step { flex: 1 1 calc(50% - 12px); }
+            .case-box { grid-template-columns: 1fr; gap: 24px; }
+            .price-table { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .price-header, .price-row { min-width: 520px; }
+            .nav-bar { padding: 10px 16px; }
+            .nav-counter { font-size: 12px; }
+        }
+
+        /* — Small mobile — */
+        @media (max-width: 480px) {
+            .slide { padding: 24px 16px; }
+            .s-title { font-size: clamp(20px, 5.5vw, 28px); }
+            .s-sub { font-size: 14px; }
+            .stat-num { font-size: 28px; }
+            .steps .step { flex: 1 1 100%; }
+            .card { padding: 20px; }
+            .card h3 { font-size: 15px; }
+            .card p { font-size: 12px; }
+        }
 
         @media print {
             .nav-bar, .progress-bar { display: none !important; }
@@ -497,6 +532,13 @@
             if (e.target.closest('.nav-bar') || e.target.closest('a') || e.target.closest('button')) return;
             const x = e.clientX / window.innerWidth;
             x > 0.5 ? go(1) : go(-1);
+        });
+
+        let touchX = 0;
+        document.addEventListener('touchstart', e => { touchX = e.changedTouches[0].clientX; }, { passive: true });
+        document.addEventListener('touchend', e => {
+            const dx = e.changedTouches[0].clientX - touchX;
+            if (Math.abs(dx) > 50) go(dx < 0 ? 1 : -1);
         });
 
         show(0);
