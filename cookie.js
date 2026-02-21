@@ -5,7 +5,70 @@
     var METRIKA_ID = 106813146;
     var consent = localStorage.getItem('cookie_consent');
 
-    // If already consented — load Metrika immediately, no banner
+    // Banner HTML
+    function bannerHTML(isRevoke) {
+        var text = isRevoke
+            ? '<p>Вы ранее ' + (consent === 'accepted' ? 'приняли' : 'отклонили')
+              + ' cookie. Вы можете изменить своё решение.</p>'
+            : '<p>Мы используем файлы cookie и сервис Яндекс.Метрика для анализа посещаемости. '
+              + 'Продолжая использовать сайт, вы соглашаетесь с <a href="/privacy.html">политикой конфиденциальности</a> '
+              + 'и обработкой данных в соответствии с 152-ФЗ.</p>';
+        return '<div class="cookie-banner" id="cookieBanner" role="alert">'
+            + text
+            + '<div class="cookie-btns">'
+            + '<button class="cookie-decline" onclick="declineCookies()">Отклонить</button>'
+            + '<button class="cookie-accept" onclick="acceptCookies()">Принять</button>'
+            + '</div></div>';
+    }
+
+    function showBanner(isRevoke) {
+        var existing = document.getElementById('cookieBanner');
+        if (existing) existing.remove();
+        document.body.insertAdjacentHTML('beforeend', bannerHTML(isRevoke));
+        // Force reflow for transition
+        document.getElementById('cookieBanner').offsetHeight;
+        document.getElementById('cookieBanner').classList.add('visible');
+    }
+
+    function clearMetrikaCookies() {
+        var cookies = ['_ym_uid', '_ym_d', '_ym_isad', '_ym_visorc'];
+        var domain = location.hostname;
+        cookies.forEach(function(name) {
+            document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
+            document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain=' + domain;
+            document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain=.' + domain;
+        });
+    }
+
+    window.acceptCookies = function() {
+        var wasDeclined = localStorage.getItem('cookie_consent') === 'declined';
+        localStorage.setItem('cookie_consent', 'accepted');
+        document.getElementById('cookieBanner').classList.remove('visible');
+        if (wasDeclined) {
+            location.reload();
+        } else {
+            loadMetrika();
+        }
+    };
+
+    window.declineCookies = function() {
+        var wasAccepted = localStorage.getItem('cookie_consent') === 'accepted';
+        localStorage.setItem('cookie_consent', 'declined');
+        document.getElementById('cookieBanner').classList.remove('visible');
+        if (wasAccepted) {
+            clearMetrikaCookies();
+            location.reload();
+        }
+    };
+
+    // Footer link: open cookie settings
+    window.openCookieSettings = function(e) {
+        if (e) e.preventDefault();
+        consent = localStorage.getItem('cookie_consent');
+        showBanner(true);
+    };
+
+    // If already consented — load Metrika, bind footer link
     if (consent === 'accepted') {
         loadMetrika();
         return;
@@ -14,32 +77,13 @@
     // If already declined — no Metrika, no banner
     if (consent === 'declined') return;
 
-    // First visit — show banner
-    var html = '<div class="cookie-banner" id="cookieBanner" role="alert">'
-        + '<p>Мы используем файлы cookie и сервис Яндекс.Метрика для анализа посещаемости. '
-        + 'Продолжая использовать сайт, вы соглашаетесь с <a href="/privacy.html">политикой конфиденциальности</a> '
-        + 'и обработкой данных в соответствии с 152-ФЗ.</p>'
-        + '<div class="cookie-btns">'
-        + '<button class="cookie-decline" onclick="declineCookies()">Отклонить</button>'
-        + '<button class="cookie-accept" onclick="acceptCookies()">Принять</button>'
-        + '</div></div>';
-
-    document.body.insertAdjacentHTML('beforeend', html);
-
+    // First visit — show banner with delay
+    showBanner(false);
+    // Hide initially, show after delay
+    document.getElementById('cookieBanner').classList.remove('visible');
     setTimeout(function() {
         document.getElementById('cookieBanner').classList.add('visible');
     }, 1500);
-
-    window.acceptCookies = function() {
-        localStorage.setItem('cookie_consent', 'accepted');
-        document.getElementById('cookieBanner').classList.remove('visible');
-        loadMetrika();
-    };
-
-    window.declineCookies = function() {
-        localStorage.setItem('cookie_consent', 'declined');
-        document.getElementById('cookieBanner').classList.remove('visible');
-    };
 
     function loadMetrika() {
         // Preconnect
