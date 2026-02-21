@@ -1,4 +1,4 @@
-const CACHE_NAME = 'devorra-v14';
+const CACHE_NAME = 'devorra-v15';
 const PRECACHE = [
   '/',
   '/styles.css',
