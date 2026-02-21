@@ -1453,6 +1453,11 @@ footer {
     .news-summary { font-size: 13px; }
 }
 
+/* Audit section */
+#audit {
+    content-visibility: visible;
+}
+
 /* Audit form */
 .audit-layout {
     display: grid;
@@ -1460,7 +1465,7 @@ footer {
     gap: 48px;
     max-width: 1000px;
     margin: 48px auto 0;
-    align-items: center;
+    align-items: start;
 }
 
 .audit-features {
@@ -1477,20 +1482,28 @@ footer {
 }
 
 .audit-feature-icon {
-    flex-shrink: 0;
+    flex: 0 0 48px;
     width: 48px;
     height: 48px;
+    max-width: 48px;
+    max-height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
     background: var(--accent-glow);
     border-radius: 12px;
     color: var(--accent-light);
+    overflow: hidden;
+    position: relative;
 }
 
 .audit-feature-icon svg {
     width: 22px;
     height: 22px;
+    max-width: 22px;
+    max-height: 22px;
+    flex-shrink: 0;
+    display: block;
 }
 
 .audit-feature-item strong {
